@@ -6,6 +6,4 @@ import router from './router'
 
 const app = createApp(App)
 
-app.provide(injectionKeys.AuthenticationServiceKey, new AuthenticationService())
-
 app.use(router).mount('#app')
