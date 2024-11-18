@@ -34,7 +34,7 @@ const routes = [
 
 // Create the router instance
 const router = createRouter({
-  history: createWebHistory('/bluegembot.github.io/'),  // Set base path
+  history: createWebHistory('/'),  // Set base path
   routes
 });
 
