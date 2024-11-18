@@ -34,9 +34,9 @@ const routes = [
 
 // Create the router instance
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/bluegembot.github.io/'),  // Set base path
   routes
-})
+});
 
 router.beforeEach(async (to, from, next) => {
   console.log('Navigating to', to.path);  // This should log on every navigation attempt
