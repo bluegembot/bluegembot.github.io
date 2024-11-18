@@ -12,7 +12,7 @@ export const useRegistrationForm = () => {
 
     const fetchCsrfToken = async () => {
         try {
-            const response = await fetch('http://localhost:3002/csrf-token', {
+            const response = await fetch('https://localhost:3002/csrf-token', {
                 credentials: 'include',
             });
             const data = await response.json();
@@ -31,7 +31,7 @@ export const useRegistrationForm = () => {
                 OTL: form.value.OTL,
             };
 
-            const response = await fetch('http://localhost:3002/loginUser', {
+            const response = await fetch('https://localhost:3002/loginUser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
