@@ -1,6 +1,8 @@
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export const useRegistrationForm = () => {
+  const router = useRouter(); // Use the Composition API's useRouter hook
   const form = ref({
     userName: '',
     OTP: '',
@@ -42,7 +44,7 @@ export const useRegistrationForm = () => {
       });
 
       if (response.status === 201) {
-        this.$router.push('/dashboard'); // Navigate properly using Vue Router
+        router.push('/dashboard'); // Navigate using the Composition API's router
       } else {
         errorMessage.value = 'Registration failed. Please try again.';
       }
