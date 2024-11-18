@@ -11,7 +11,7 @@ export const useRegistrationForm = () => {
 
   const fetchCsrfToken = async () => {
     try {
-      const response = await fetch('https://localhost:3002/csrf-token', {
+      const response = await fetch('https://bluegembot.duckdns.org:3002/csrf-token', {
         credentials: 'include',
       });
       const data = await response.json();
@@ -31,7 +31,7 @@ export const useRegistrationForm = () => {
         OTP: form.value.OTP,
       };
 
-      const response = await fetch('https://localhost:3002/addUser', {
+      const response = await fetch('https://bluegembot.duckdns.org:3002/addUser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

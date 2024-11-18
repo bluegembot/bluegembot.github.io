@@ -8,7 +8,7 @@ import UserLoginPage from "@/pages/userLoginPage/loginPage.vue"
 // Async function to check if the session token is valid by making an API call
 async function isAuthenticated() {
   try {
-    const response = await fetch('https://localhost:3002/authenticateToken', {
+    const response = await fetch('https://bluegembot.duckdns.org:3002/authenticateToken', {
       method: 'GET',
       credentials: 'include'
     });
