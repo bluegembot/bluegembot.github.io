@@ -1,16 +1,16 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router';
 
-import UserDashboard from './pages/userDashboardPage/UserDashboardPage.vue'
-import MedicalProfessionalRegisterPage from '@/pages/userRegisterPage/RegisterPage.vue'
-import SkinSelector from "@/pages/skinSelectionPage/SkinSelector.vue"
-import UserLoginPage from "@/pages/userLoginPage/loginPage.vue"
+import UserDashboard from './pages/userDashboardPage/UserDashboardPage.vue';
+import MedicalProfessionalRegisterPage from '@/pages/userRegisterPage/RegisterPage.vue';
+import SkinSelector from "@/pages/skinSelectionPage/SkinSelector.vue";
+import UserLoginPage from "@/pages/userLoginPage/loginPage.vue";
 
 // Async function to check if the session token is valid by making an API call
 async function isAuthenticated() {
   try {
     const response = await fetch('https://bluegembot.duckdns.org/authenticateToken', {
       method: 'GET',
-      credentials: 'include'
+      credentials: 'include',
     });
 
     if (response.ok) {
@@ -28,18 +28,18 @@ const routes = [
   { path: '/', component: MedicalProfessionalRegisterPage, pathToRegexpOptions: { strict: true } },
   { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true } },
   { path: '/register', component: MedicalProfessionalRegisterPage },
-  { path: '/skinSelector', component: SkinSelector, meta:{requiresAuth: true} },
-  { path: '/login', component: UserLoginPage}
-]
+  { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
+  { path: '/login', component: UserLoginPage },
+];
 
-// Create the router instance
+// Create the router instance using hash mode
 const router = createRouter({
-  history: createWebHistory('/'),  // Set base path
-  routes
+  history: createWebHashHistory('/'), // Switch to hash mode
+  routes,
 });
 
 router.beforeEach(async (to, from, next) => {
-  console.log('Navigating to', to.path);  // This should log on every navigation attempt
+  console.log('Navigating to', to.path); // Log on every navigation attempt
 
   const authenticated = await isAuthenticated();
 
@@ -51,4 +51,5 @@ router.beforeEach(async (to, from, next) => {
     next(); // Proceed to the requested route
   }
 });
-export default router
+
+export default router;
