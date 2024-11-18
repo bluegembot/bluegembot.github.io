@@ -1,54 +1,49 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import UserDashboard from './pages/userDashboardPage/UserDashboardPage.vue'
-import MedicalProfessionalRegisterPage from '@/pages/userRegisterPage/RegisterPage.vue'
-import SkinSelector from "@/pages/skinSelectionPage/SkinSelector.vue"
-import UserLoginPage from "@/pages/userLoginPage/loginPage.vue"
-
-// Async function to check if the session token is valid by making an API call
+// Async function to check if the session token is valid
 async function isAuthenticated() {
   try {
     const response = await fetch('https://bluegembot.duckdns.org/authenticateToken', {
       method: 'GET',
-      credentials: 'include'
+      credentials: 'include', // Include cookies for session handling
     });
 
-    if (response.ok) {
-      return true; // Token is valid
-    } else {
-      return false; // Token is invalid or expired
-    }
+    return response.ok; // Return true if token is valid, false otherwise
   } catch (error) {
-    return false; // Consider it invalid if there's an error
+    console.error('Error validating token:', error);
+    return false;
   }
 }
 
-// Define your routes
+// Define routes
 const routes = [
-  { path: '/', component: MedicalProfessionalRegisterPage, pathToRegexpOptions: { strict: true } },
-  { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true } },
-  { path: '/register', component: MedicalProfessionalRegisterPage },
-  { path: '/skinSelector', component: SkinSelector, meta:{requiresAuth: true} },
-  { path: '/login', component: UserLoginPage}
-]
+  { path: '/', component: () => import('./pages/userRegisterPage/RegisterPage.vue') },
+  { path: '/dashboard', component: () => import('./pages/userDashboardPage/UserDashboardPage.vue'), meta: { requiresAuth: true } },
+  { path: '/register', component: () => import('./pages/userRegisterPage/RegisterPage.vue') },
+  { path: '/skinSelector', component: () => import('./pages/skinSelectionPage/SkinSelector.vue'), meta: { requiresAuth: true } },
+  { path: '/login', component: () => import('./pages/userLoginPage/LoginPage.vue') },
+  { path: '/:catchAll(.*)', component: () => import('./pages/NotFoundPage.vue') }, // Replace with a proper 404 component
+];
 
 // Create the router instance
 const router = createRouter({
-  history: createWebHistory('/'),  // Set base path
-  routes
+  history: createWebHistory('/'), // Base path for deployment (adjust if necessary)
+  routes,
 });
 
+// Global navigation guard
 router.beforeEach(async (to, from, next) => {
-  console.log('Navigating to', to.path);  // This should log on every navigation attempt
+  console.log('Navigating to:', to.path);
 
   const authenticated = await isAuthenticated();
 
-  if (authenticated && (to.path === '/register' || to.path === '/login' || to.path === '/')) {
-    next('/dashboard'); // Redirect if logged in but trying to access /register, /login, or /
+  if (authenticated && ['/register', '/login', '/'].includes(to.path)) {
+    next('/dashboard'); // Redirect logged-in users to the dashboard
   } else if (to.meta.requiresAuth && !authenticated) {
-    next('/login'); // Redirect to /login if authentication is required
+    next('/login'); // Redirect to login if authentication is required
   } else {
     next(); // Proceed to the requested route
   }
 });
-export default router
+
+export default router;
