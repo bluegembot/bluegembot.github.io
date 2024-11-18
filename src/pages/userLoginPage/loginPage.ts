@@ -41,7 +41,7 @@ export const useRegistrationForm = () => {
             });
 
             if (response.status === 201) {
-                this.$router.push('#/dashboard'); // Navigate properly using Vue Router
+                this.$router.push('/dashboard'); // Navigate properly using Vue Router
             } else {
                 errorMessage.value = 'Registration failed. Please try again.';
             }
