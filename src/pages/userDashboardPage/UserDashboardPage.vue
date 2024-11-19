@@ -7,10 +7,15 @@
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
         </div>
       </div>
+
       <!-- Section with Upcoming and Announcements -->
       <div class="upcoming-announcements">
+        <!-- Display error message -->
+
         <!-- Upcoming list -->
         <div class="upcoming">
+          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+
           <h2>Tracked skins</h2>
           <ul class="upcoming-list">
             <template v-if="trackedSkins.length > 0">
@@ -22,7 +27,9 @@
               </li>
             </template>
             <template v-else>
-              <li class="no-tracking-message">Not tracking any skins at this time, add a skin to start tracking.</li>
+              <li class="no-tracking-message">
+                Not tracking any skins at this time, add a skin to start tracking.
+              </li>
             </template>
           </ul>
         </div>
@@ -37,8 +44,6 @@
   </div>
 </template>
 
-
-
 <style src="./UserDashboardPage.css"></style>
 
 <script>
@@ -47,6 +52,7 @@ import { ref, onMounted } from "vue";
 export default {
   setup() {
     const trackedSkins = ref([]);
+    const errorMessage = ref(""); // Reactive variable for error messages
 
     const fetchCsrfTokenAndUserConfig = async () => {
       try {
@@ -85,7 +91,7 @@ export default {
         }));
       } catch (error) {
         console.error("Error fetching user config:", error);
-        alert("Failed to load tracked skins.");
+        errorMessage.value = "Failed to load tracked skins. Please try again later.";
       }
     };
 
@@ -128,7 +134,7 @@ export default {
         alert(`Stopped tracking skin: ${skin.name}`);
       } catch (error) {
         console.error("Error stopping tracking for skin:", error);
-        alert("Failed to stop tracking the skin.");
+        errorMessage.value = "Failed to stop tracking the skin. Please try again.";
       }
     };
 
@@ -136,11 +142,22 @@ export default {
 
     return {
       trackedSkins,
+      errorMessage, // Return errorMessage for use in the template
       stopTracking,
     };
   },
 };
 </script>
 
+<style>
+.error-message {
+  display:flex;
+  color: red;
+  font-weight: bold;
+  margin: 10px 0;
+}
+</style>
 
+
+<style src="./UserDashboardPage.css"></style>
 
