@@ -31,15 +31,16 @@
                 id="OTP"
                 v-model="form.OTL"
                 required
-                placeholder="Enter OTP"
+                placeholder="Enter login token"
                 minlength="7"
                 maxlength="7"
             />
           </div>
 
           <button type="submit" class="register-button">Login</button>
-          <p>Dont have an account?</p>
-          <a><router-link to="/register">Register</router-link></a>
+          <p>/login to my bot for your login token </p>
+          <p>Dont have an account?  <a><router-link to="/register">Register</router-link></a></p>
+
 
           <!-- Alert message for password mismatch -->
           <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>

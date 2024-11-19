@@ -37,7 +37,8 @@
           </div>
 
           <button type="submit" class="register-button">Register</button>
-          <p><router-link to="/howToRegister" >How to register</router-link></p>
+          <p>/register to my bot for your OTP</p>
+          <p>Already have an account? <router-link to="/login">Login</router-link></p>
 
           <!-- Alert message for password mismatch -->
           <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>

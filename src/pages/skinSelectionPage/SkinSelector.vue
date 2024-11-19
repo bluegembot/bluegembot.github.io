@@ -1,12 +1,24 @@
 <template>
   <div>
-    <!-- Search Bar -->
-    <input
-        type="text"
-        v-model="searchQuery"
-        placeholder="Search skins by name"
-        class="search-bar"
-    />
+
+    <div class="logo-container">
+      <div class="logo-circle">
+        <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
+      </div>
+    </div>
+    <h2 class="main-title">Skin search</h2>
+
+    <!-- Search Bar with Dashboard Button -->
+    <div class="search-container">
+
+      <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search skins by name"
+          class="search-bar"
+      />
+      <a class="dashboard-button"> <router-link to="/dashboard">Dashboard</router-link></a>
+    </div>
 
     <!-- Table -->
     <table v-if="displayedSkins.length > 0">
@@ -66,7 +78,6 @@
               @blur="validateFloatInput(skin, 'maxFloat')"
           />
         </td>
-
         <td>
           <button @click="addSkin(index)">Add Skin</button>
         </td>
@@ -76,7 +87,6 @@
     <p v-else class="no-results">Start typing to search for skins.</p>
   </div>
 </template>
-
 <script>
 import skinsJson from "@/assets/skins.json";
 
