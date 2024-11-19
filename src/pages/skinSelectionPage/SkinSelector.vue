@@ -10,7 +10,7 @@
     <!-- Search Bar with Dashboard Button -->
     <div class="search-container">
       <button class="dashboard-button">
-        <router-link to="/dashboard">Dashboard</router-link>
+        <router-link to="#/dashboard">Dashboard</router-link>
       </button>
       <input
           type="text"
