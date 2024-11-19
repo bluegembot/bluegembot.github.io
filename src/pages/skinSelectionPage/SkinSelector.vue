@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="logo-container">
       <div class="logo-circle">
         <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
@@ -10,15 +9,22 @@
 
     <!-- Search Bar with Dashboard Button -->
     <div class="search-container">
-
+      <button class="dashboard-button">
+        <router-link to="/dashboard">Dashboard</router-link>
+      </button>
       <input
           type="text"
           v-model="searchQuery"
           placeholder="Search skins by name"
           class="search-bar"
       />
-      <a class="dashboard-button"> <router-link to="/dashboard">Dashboard</router-link></a>
     </div>
+
+    <!-- Error/Success Message -->
+    <p v-if="errorMessage" :class="[messageType === 'success' ? 'success-message' : 'error-message']">
+      {{ errorMessage }}
+    </p>
+
 
     <!-- Table -->
     <table v-if="displayedSkins.length > 0">
@@ -41,7 +47,7 @@
               class="skin-image"
           />
         </td>
-        <td>{{ formattedSkinName(skin) }}</td> <!-- Render the formatted name here -->
+        <td>{{ formattedSkinName(skin) }}</td>
         <td>
           <select
               v-model="skin.condition"
@@ -96,6 +102,7 @@ export default {
       searchQuery: "",
       skins: [], // Full dataset
       displayedSkins: [], // Currently displayed skins based on search
+      errorMessage: "", // Error message to display
     };
   },
   watch: {
@@ -176,7 +183,6 @@ export default {
           .replace('battle-scarred', skin.condition.toLowerCase().replace(' ', '-'))
           .replace('well-worn', skin.condition.toLowerCase().replace(' ', '-'));
 
-
       const payload = {
         skinName: updatedSkinName, // Updated skin name
         minFloat: skin.minFloat,
@@ -204,16 +210,19 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                  alert(`Skin added successfully: ${data.message}`);
+                  this.errorMessage = data.message; // Set the success message
+                  this.messageType = "success"; // Set the message type to success
                 })
                 .catch((error) => {
                   console.error("Error adding skin:", error);
-                  alert("Failed to add skin.");
+                  this.errorMessage = "Failed to add skin, please try again.";
+                  this.messageType = "error"; // Set the message type to error
                 });
           })
           .catch((error) => {
             console.error("Error fetching CSRF token:", error);
-            alert("Failed to fetch CSRF token.");
+            this.errorMessage = "Internal server error, please try again.";
+            this.messageType = "error"; // Set the message type to error
           });
     },
 

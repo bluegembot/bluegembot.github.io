@@ -45,11 +45,11 @@ export const useRegistrationForm = () => {
             if (response.status === 201) {
                 router.push('/dashboard'); // Navigate using the Composition API's router
             } else {
-                errorMessage.value = 'Registration failed. Please try again.';
+                errorMessage.value = 'Login failed. Please try again.';
             }
         } catch (error) {
             console.error(error);
-            errorMessage.value = 'An error occurred while registering. Please try again.';
+            errorMessage.value = 'An error occurred while logging you in. Please try again.';
         }
     };
 

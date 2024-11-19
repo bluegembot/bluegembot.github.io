@@ -115,3 +115,12 @@ button:hover {
     text-decoration: none; /* Prevent underline on hover */
 }
 
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
