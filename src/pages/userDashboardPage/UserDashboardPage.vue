@@ -7,16 +7,11 @@
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
         </div>
       </div>
-
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
       <!-- Section with Upcoming and Announcements -->
       <div class="upcoming-announcements">
-        <!-- Display error message -->
-
         <!-- Upcoming list -->
         <div class="upcoming">
-
-          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-
           <h2>Tracked skins</h2>
           <ul class="upcoming-list">
             <template v-if="trackedSkins.length > 0">

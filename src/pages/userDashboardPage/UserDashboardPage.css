@@ -48,7 +48,6 @@ nav ul li a {
 
 .main-title {
   text-align: center;
-  margin-top: 50px;
   font-size: 36px;
   color: #333;
 }
@@ -74,7 +73,7 @@ nav ul li a {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* Allow vertical scrolling */
-  max-height: 265px; /* Set a max height to enable scrolling */
+  max-height: 325px; /* Set a max height to enable scrolling */
   border: 5px solid #2ed1e1;
 }
 
@@ -154,7 +153,6 @@ li {
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Optional: add some margin from the title */
 }
 
 /* Logo circle styles (as you already have) */
@@ -210,5 +208,10 @@ li {
   border-radius: 5px; /* Round corners */
   margin-bottom: 10px; /* Add space between rows */
   font-size: 1rem; /* Set a readable font size */
+}
+
+.error-message{
+  display: flex;
+  justify-content: center;
 }
 
