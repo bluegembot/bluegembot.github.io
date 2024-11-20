@@ -38,18 +38,18 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from, next) => {
-//   console.log('Navigating to', to.path); // Log on every navigation attempt
-//
-//   const authenticated = await isAuthenticated();
-//
-//   if (authenticated && (to.path === '/register' || to.path === '/login' || to.path === '/') || to.path === 'skinSelector') {
-//     next('/dashboard'); // Redirect if logged in but trying to access /register, /login, or /
-//   } else if (to.meta.requiresAuth && !authenticated) {
-//     next('/login'); // Redirect to /login if authentication is required
-//   } else {
-//     next(); // Proceed to the requested route
-//   }
-// });
+router.beforeEach(async (to, from, next) => {
+  console.log('Navigating to', to.path); // Log on every navigation attempt
+
+  const authenticated = await isAuthenticated();
+
+  if (authenticated && (to.path === '/register' || to.path === '/login' || to.path === '/') || to.path === 'skinSelector') {
+    next('/dashboard'); // Redirect if logged in but trying to access /register, /login, or /
+  } else if (to.meta.requiresAuth && !authenticated) {
+    next('/login'); // Redirect to /login if authentication is required
+  } else {
+    next(); // Proceed to the requested route
+  }
+});
 
 export default router;

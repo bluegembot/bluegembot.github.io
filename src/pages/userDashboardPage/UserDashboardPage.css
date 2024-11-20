@@ -80,6 +80,16 @@ nav ul li a {
 
 .upcoming {
   width: 66%;
+  position: relative; /* Ensures child elements' positioning is relative to this container */
+}
+
+.upcoming h2 {
+  position: sticky; /* Keeps the element static within its container */
+  top: 0; /* Position it at the top of the scrolling area */
+  background-color: #f4f4f4; /* Match the background to avoid visual glitches */
+  z-index: 10; /* Ensure it stays above list items */
+  padding: 10px; /* Add padding to the heading for a clean look */
+  border-bottom: 2px solid #ccc; /* Optional: Add a border for separation */
 }
 
 .announcements {
