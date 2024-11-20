@@ -14,6 +14,7 @@
 
         <!-- Upcoming list -->
         <div class="upcoming">
+
           <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
           <h2>Tracked skins</h2>
@@ -33,12 +34,15 @@
             </template>
           </ul>
         </div>
+
       </div>
 
       <!-- Grid section -->
       <div class="grid-container">
+
         <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
-        <router-link to="/settings" class="grid-item">account</router-link>
+<!--        <router-link to="/settings" class="grid-item">account</router-link>-->
+        <div class="grid-item">Account</div>
       </div>
     </main>
   </div>

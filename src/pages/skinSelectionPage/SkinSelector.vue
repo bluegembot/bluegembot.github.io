@@ -9,15 +9,13 @@
 
     <!-- Search Bar with Dashboard Button -->
     <div class="search-container">
-      <button class="dashboard-button">
-        <router-link to="#/dashboard">Dashboard</router-link>
-      </button>
       <input
           type="text"
           v-model="searchQuery"
           placeholder="Search skins by name"
           class="search-bar"
       />
+      <router-link to="/dashboard"><button class="dashboard-button">Dashboard</button></router-link>
     </div>
 
     <!-- Error/Success Message -->
