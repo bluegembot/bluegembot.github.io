@@ -3200,6 +3200,102 @@
         "itemName": "five-seven-heat-treated-factory-new"
     },
     {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/520107289/256x128",
+        "itemName": "butterfly-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6262958325/256x128",
+        "itemName": "huntsman-knife-case-hardened-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/472413103/256x128",
+        "itemName": "huntsman-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6245974999/256x128",
+        "itemName": "bayonet-case-hardened-field-tested"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6251720725/256x128",
+        "itemName": "bayonet-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2972860484/256x128",
+        "itemName": "talon-knife-case-hardened-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2966964498/256x128",
+        "itemName": "talon-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/312307362/256x128",
+        "itemName": "m9-bayonet-crimson-web-field-tested"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/334123542/256x128",
+        "itemName": "m9-bayonet-case-hardened-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1560609365/256x128",
+        "itemName": "bowie-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1562742751/256x128",
+        "itemName": "bowie-knife-case-hardened-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1014235216/256x128",
+        "itemName": "falchion-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1017781913/256x128",
+        "itemName": "falchion-knife-case-hardened-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/311367487/256x128",
+        "itemName": "gut-knife-case-hardened-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6229929355/256x128",
+        "itemName": "gut-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2973370703/256x128",
+        "itemName": "stiletto-knife-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5576483230/256x128",
+        "itemName": "stiletto-knife-case-hardened-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1322524675/256x128",
+        "itemName": "shadow-daggers-case-hardened-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1312448563/256x128",
+        "itemName": "shadow-daggers-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/523743248/256x128",
+        "itemName": "butterfly-knife-case-hardened-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6237246362/256x128",
+        "itemName": "kukri-knife-case-hardened-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6142166631/256x128",
+        "itemName": "karambit-case-hardened-field-tested"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/349327336/256x128",
+        "itemName": "karambit-crimson-web-minimal-wear"
+    },
+    {
+        "imageUrl": "",
+        "itemName": ""
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
