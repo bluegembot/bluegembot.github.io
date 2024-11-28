@@ -15,12 +15,17 @@
           <h2>Tracked skins</h2>
           <ul class="upcoming-list">
             <template v-if="trackedSkins.length > 0">
-              <li v-for="skin in trackedSkins" :key="skin.name" class="tracked-skin-item">
-                {{ skin.name }} | Min Float: {{ skin.minWear }} | Max Float: {{ skin.maxWear }}
-                <button class="stop-tracking-button" @click="stopTracking(skin)">
-                  Stop Tracking
-                </button>
-              </li>
+                <li v-for="(skin, index) in trackedSkins" :key="skin.name" class="tracked-skin-item">
+    {{ index + 1 }}. {{ skin.name }} | Min Float: {{ skin.minWear }} | Max Float: {{ skin.maxWear }}
+    <button class="stop-tracking-button" @click="stopTracking(skin)">
+      Stop Tracking
+    </button>
+  </li>
+</template>
+<template v-else>
+  <li class="no-tracking-message">
+    Not tracking any skins at this time, add a skin to start tracking.
+  </li>
             </template>
             <template v-else>
               <li class="no-tracking-message">
