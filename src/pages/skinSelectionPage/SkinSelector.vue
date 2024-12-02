@@ -126,11 +126,11 @@ export default {
     updateFloats(skin) {
       // Update minFloat and maxFloat based on the selected condition
       const floatRanges = {
-        "Factory new": { minFloat: 0, maxFloat: 0.06 },
+        "Factory new": { minFloat: 0, maxFloat: 0.07 },
         "Minimal wear": { minFloat: 0.07, maxFloat: 0.15 },
-        "Field tested": { minFloat: 0.15, maxFloat: 0.37 },
-        "Well worn": { minFloat: 0.37, maxFloat: 0.44 },
-        "Battle scarred": { minFloat: 0.44, maxFloat: 1 },
+        "Field tested": { minFloat: 0.15, maxFloat: 0.38 },
+        "Well worn": { minFloat: 0.38, maxFloat: 0.45 },
+        "Battle scarred": { minFloat: 0.45, maxFloat: 1 },
       };
 
       const selectedCondition = floatRanges[skin.condition];
