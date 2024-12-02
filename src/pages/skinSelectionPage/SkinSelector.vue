@@ -244,7 +244,7 @@ export default {
       minFloat: 0,
       maxFloat: 0.06,
       allowedMinFloat: 0, // Initial allowed min
-      allowedMaxFloat: 0.06, // Initial allowed max
+      allowedMaxFloat: 0.07, // Initial allowed max
     }));
   },
 };
