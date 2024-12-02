@@ -242,7 +242,7 @@ export default {
       ...skin,
       condition: "Factory new",
       minFloat: 0,
-      maxFloat: 0.06,
+      maxFloat: 0.07,
       allowedMinFloat: 0, // Initial allowed min
       allowedMaxFloat: 0.07, // Initial allowed max
     }));
