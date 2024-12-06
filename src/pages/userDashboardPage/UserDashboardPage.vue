@@ -42,7 +42,7 @@
 
         <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
 <!--        <router-link to="/settings" class="grid-item">account</router-link>-->
-        <div class="grid-item">Account</div>
+        <div class="grid-item">Account (COMING SOON)</div>
       </div>
     </main>
   </div>
