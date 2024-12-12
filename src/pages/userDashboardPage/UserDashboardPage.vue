@@ -1,7 +1,7 @@
 <template>
   <div>
     <main>
-      <h1 class="main-title">Welcome to BGB</h1>
+      <h1 class="main-title">Welcome to BGB, {{ username }}!</h1>
       <div class="logo-container">
         <div class="logo-circle">
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img"/>
@@ -42,7 +42,7 @@
 
         <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
         <!--        <router-link to="/settings" class="grid-item">account</router-link>-->
-        <div class="grid-item">Account (COMING SOON)</div>
+        <router-link to="/account"><div class="grid-item">Account</div></router-link>
       </div>
     </main>
   </div>
@@ -57,6 +57,12 @@ export default {
   setup() {
     const trackedSkins = ref([]);
     const errorMessage = ref(""); // Reactive variable for error messages
+    const username = ref("")
+
+    onMounted(() => {
+      username.value = localStorage.getItem('username'); // Get the stored username
+      console.log(username.value)
+    });
 
     const fetchCsrfTokenAndUserConfig = async () => {
       try {
@@ -148,6 +154,7 @@ export default {
       trackedSkins,
       errorMessage, // Return errorMessage for use in the template
       stopTracking,
+      username
     };
   },
 };
@@ -164,4 +171,3 @@ export default {
 
 
 <style src="./UserDashboardPage.css"></style>
-
