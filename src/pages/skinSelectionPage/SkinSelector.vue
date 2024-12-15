@@ -190,7 +190,7 @@ export default {
       };
 
       // First, fetch the CSRF token
-      fetch("http://localhost:3002/csrf-token", {
+      fetch("https://bluegembot.duckdns.org/csrf-token", {
         method: "GET",
         credentials: "include", // Include credentials (cookies) in the request
       })
@@ -199,7 +199,7 @@ export default {
             const csrfToken = data.csrfToken; // Get the CSRF token
 
             // Now send the request to add the skin
-            fetch("http://localhost:3002/addSkin", {
+            fetch("https://bluegembot.duckdns.org/addSkin", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

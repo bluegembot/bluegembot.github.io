@@ -66,7 +66,7 @@ export default {
 
     const fetchCsrfTokenAndUserConfig = async () => {
       try {
-        const csrfResponse = await fetch("http://localhost:3002/csrf-token", {
+        const csrfResponse = await fetch("https://bluegembot.duckdns.org/csrf-token", {
           method: "GET",
           credentials: "include",
         });
@@ -79,7 +79,7 @@ export default {
         const csrfToken = csrfData.csrfToken;
 
         const configResponse = await fetch(
-            `http://localhost:3002/getUserConfig`,
+            `https://bluegembot.duckdns.org/getUserConfig`,
             {
               method: "GET",
               headers: {
@@ -107,7 +107,7 @@ export default {
 
     const stopTracking = async (skin) => {
       try {
-        const csrfResponse = await fetch("http://localhost:3002/csrf-token", {
+        const csrfResponse = await fetch("https://bluegembot.duckdns.org/csrf-token", {
           method: "GET",
           credentials: "include",
         });
@@ -119,7 +119,7 @@ export default {
         const csrfData = await csrfResponse.json();
         const csrfToken = csrfData.csrfToken;
 
-        const deleteResponse = await fetch("http://localhost:3002/deleteSkin", {
+        const deleteResponse = await fetch("https://bluegembot.duckdns.org/deleteSkin", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

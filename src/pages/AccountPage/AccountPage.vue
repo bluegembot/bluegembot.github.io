@@ -26,28 +26,30 @@
 
       <!-- Subscription Grid -->
       <div class="subscription-grid-container">
-        <div class="grid-item" style="border: 2px solid #2ed1e1;box-shadow: 0 0 15px #2ed1e1;">
+        <div class="grid-item basicBorder">
           <img class="subscription-image" src="@/assets/BGBLogo.jpg" alt="BGB Basic subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Basic</h3>
             <p>Access essential features with basic filtering to track skins efficiently.</p>
-            <p><strong>Tracking Limit:</strong> 25</p>
+            <p><strong>Tracking limit:</strong> 25</p>
+            <div class="price-tag basicText">&euro;10/month</div>
           </div>
         </div>
-        <div class="grid-item" style="border: 2px solid #e1be18; box-shadow: 0 0 15px #e1be18;">
+        <div class="grid-item goldBorder">
           <img class="subscription-image" src="@/assets/BGBGold.jpg" alt="BGB Gold subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Gold</h3>
             <p>Access everything from BlueGemBot Basic. Enjoy less restrictive skin tracking capabilities and priority support.</p>
-            <p><strong>Tracking Limit:</strong> 50</p>
+            <p><strong>Tracking limit:</strong> 50</p>
+            <div class="price-tag goldText">&euro;15/month</div>
           </div>
         </div>
-        <div class="grid-item" style="border: 2px solid #dd2524; box-shadow: 0 0 15px #dd2524;">
+        <div class="grid-item eliteBorder">
           <img class="subscription-image" src="@/assets/BGBElite.jpg" alt="BGB Elite subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Elite</h3>
             <p>Unlock premium filtering capabilities, Discord server integration, and personalized support.</p>
-            <p class="coming-soon"><strong>COMING SOON</strong></p>
+            <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
           </div>
         </div>
       </div>
@@ -93,7 +95,7 @@ export default {
   gap: 20px;
   max-width: 1200px;
   margin: 50px auto;
-  padding: 20px;
+  //padding: 5px;
 }
 
 .grid-item {
@@ -142,6 +144,41 @@ export default {
   font-size: 18px;
   margin-top: 10px;
   font-weight: bold;
+}
+
+.price-tag {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2ed1e1;
+  margin-top: 10px;
+}
+
+.basicText{
+  color: #2ed1e1;
+}
+
+.basicBorder{
+  border: 2px solid #2ed1e1;
+  box-shadow: 0 0 15px #2ed1e1;
+
+}
+
+.goldText{
+  color: #e1be18;
+}
+
+.goldBorder{
+  border: 2px solid #e1be18;
+  box-shadow: 0 0 15px #e1be18;
+}
+
+.eliteText{
+  color: #dd2524
+}
+
+.eliteBorder{
+  border: 2px solid #dd2524;
+  box-shadow: 0 0 15px #dd2524;
 }
 
 body {
@@ -206,6 +243,4 @@ main {
   color: #333;
   margin-top: 10px; /* Reduced from default value */
 }
-
-
 </style>
