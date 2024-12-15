@@ -28,7 +28,6 @@ export const useRegistrationForm = () => {
             await fetchCsrfToken();  // Ensure CSRF token is loaded
 
             const requestBody = {
-                username: form.value.userName,
                 OTL: form.value.OTL,
             };
 

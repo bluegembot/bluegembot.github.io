@@ -2,7 +2,7 @@
   <div>
     <div class="logo-container">
       <div class="logo-circle">
-        <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
+        <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img"/>
       </div>
     </div>
     <h2 class="main-title">Skin search</h2>
@@ -15,7 +15,9 @@
           placeholder="Search skins by name"
           class="search-bar"
       />
-      <router-link to="/dashboard"><button class="dashboard-button">Dashboard</button></router-link>
+      <router-link to="/dashboard">
+        <button class="dashboard-button">Dashboard</button>
+      </router-link>
     </div>
 
     <!-- Error/Success Message -->
@@ -126,11 +128,11 @@ export default {
     updateFloats(skin) {
       // Update minFloat and maxFloat based on the selected condition
       const floatRanges = {
-        "Factory new": { minFloat: 0, maxFloat: 0.07 },
-        "Minimal wear": { minFloat: 0.07, maxFloat: 0.15 },
-        "Field tested": { minFloat: 0.15, maxFloat: 0.38 },
-        "Well worn": { minFloat: 0.38, maxFloat: 0.45 },
-        "Battle scarred": { minFloat: 0.45, maxFloat: 1 },
+        "Factory new": {minFloat: 0, maxFloat: 0.07},
+        "Minimal wear": {minFloat: 0.07, maxFloat: 0.15},
+        "Field tested": {minFloat: 0.15, maxFloat: 0.38},
+        "Well worn": {minFloat: 0.38, maxFloat: 0.45},
+        "Battle scarred": {minFloat: 0.45, maxFloat: 1},
       };
 
       const selectedCondition = floatRanges[skin.condition];

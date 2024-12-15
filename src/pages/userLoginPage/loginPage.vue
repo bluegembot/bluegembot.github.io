@@ -13,17 +13,6 @@
         <fieldset>
 
           <div class="form-group">
-            <label for="userName">Username</label>
-            <input
-                type="text"
-                id="userName"
-                v-model="form.userName"
-                required
-                placeholder="Enter username"
-            />
-          </div>
-
-          <div class="form-group">
 
             <label for="OTP">Your login token</label>
             <input
