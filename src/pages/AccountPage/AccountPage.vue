@@ -177,10 +177,8 @@ export default {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  //max-height: fit-content;
+  max-height: fit-content;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 325px;
-  max-height: 325px;
 }
 
 .grid-item:hover {
