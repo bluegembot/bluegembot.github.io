@@ -23,34 +23,51 @@
 
       <!-- Subscription Tiers Title -->
       <h2 class="subscription-tiers-title">SUBSCRIPTION TIERS</h2>
-
       <!-- Subscription Grid -->
       <div class="subscription-grid-container">
-        <div class="grid-item basicBorder">
+        <div
+            class="grid-item basicBorder"
+            @click="openPopup('basic')"
+        >
           <img class="subscription-image" src="@/assets/BGBLogo.jpg" alt="BGB Basic subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Basic</h3>
             <p>Access essential features with basic filtering to track skins efficiently.</p>
-            <p><strong>Tracking limit:</strong> 25</p>
             <div class="price-tag basicText">&euro;10/month</div>
           </div>
         </div>
-        <div class="grid-item goldBorder">
+        <div
+            class="grid-item goldBorder"
+            @click="openPopup('gold')"
+        >
           <img class="subscription-image" src="@/assets/BGBGold.jpg" alt="BGB Gold subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Gold</h3>
-            <p>Access everything from BlueGemBot Basic. Enjoy less restrictive skin tracking capabilities and priority support.</p>
-            <p><strong>Tracking limit:</strong> 50</p>
+            <p>Access everything from BlueGemBot Basic. Enjoy less restrictive skin tracking capabilities.</p>
             <div class="price-tag goldText">&euro;15/month</div>
           </div>
         </div>
-        <div class="grid-item eliteBorder">
+        <div
+            class="grid-item eliteBorder"
+            @click="openPopup('elite')"
+        >
           <img class="subscription-image" src="@/assets/BGBElite.jpg" alt="BGB Elite subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Elite</h3>
             <p>Unlock premium filtering capabilities, Discord server integration, and personalized support.</p>
             <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
           </div>
+        </div>
+      </div>
+
+      <!-- Popup for In-depth Information -->
+      <div v-if="popupVisible" class="popup-overlay" @click.self="closePopup">
+        <div class="popup-content">
+          <h2>{{ selectedSubscriptionTitle }}</h2>
+          <ul class="subscription-perks">
+            <li v-for="perk in selectedSubscriptionPerks" :key="perk">{{ perk }}</li>
+          </ul>
+          <button class="close-btn" @click="closePopup">Close</button>
         </div>
       </div>
     </main>
@@ -77,6 +94,60 @@ export default {
       chatId,
       subscriptionStatus,
     };
+  },
+  data() {
+    return {
+      popupVisible: false,
+      selectedSubscription: '',
+      subscriptions: {
+        basic: {
+          title: 'BlueGemBot Basic',
+          perks: [
+            '- Track up to 25 skins.',
+            '- Filter on min and max float for each skin.',
+            '- Get instant notifications from BlueGemBot.',
+          ],
+        },
+        gold: {
+          title: 'BlueGemBot Gold',
+          perks: [
+            '- All Basic features.',
+            '- Track up to 50 skins.',
+            '- Priority support.',
+          ],
+        },
+        elite: {
+          title: 'BlueGemBot Elite',
+          perks: [
+            '- All Gold features.',
+            '- Track up to 100 skins.',
+            '- Allows Discord server integration.',
+            '- Bluegem only mode.',
+            '- Discount filter.',
+            '- Fade percentage filter.',
+            '- Personalized support.',
+          ],
+        },
+      },
+    };
+  },
+  computed: {
+    selectedSubscriptionTitle() {
+      return this.subscriptions[this.selectedSubscription]?.title || '';
+    },
+    selectedSubscriptionPerks() {
+      return this.subscriptions[this.selectedSubscription]?.perks || [];
+    },
+  },
+  methods: {
+    openPopup(subscription) {
+      this.selectedSubscription = subscription;
+      this.popupVisible = true;
+    },
+    closePopup() {
+      this.popupVisible = false;
+      this.selectedSubscription = '';
+    },
   },
 };
 </script>
@@ -106,12 +177,16 @@ export default {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  //max-height: fit-content;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 325px;
+  max-height: 325px;
 }
 
 .grid-item:hover {
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .subscription-image {
@@ -123,16 +198,19 @@ export default {
 }
 
 .subscription-info h3 {
+  text-align: center;
   font-size: 22px;
   margin-bottom: 10px;
   color: #333;
 }
 
-.subscription-info p {
+.subscription-info  {
   font-size: 16px;
   color: #666;
   line-height: 1.5;
   margin-bottom: 10px;
+  text-align: center;
+  width: 250px;
 }
 
 .subscription-info p.strong {
@@ -151,6 +229,7 @@ export default {
   font-weight: bold;
   color: #2ed1e1;
   margin-top: 10px;
+  text-align: center;
 }
 
 .basicText{
@@ -242,5 +321,42 @@ main {
   font-size: 36px;
   color: #333;
   margin-top: 10px; /* Reduced from default value */
+}
+
+/* Add styling for the popup overlay and content */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.close-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #555;
 }
 </style>
