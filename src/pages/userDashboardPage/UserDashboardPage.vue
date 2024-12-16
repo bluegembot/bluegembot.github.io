@@ -38,7 +38,7 @@
       </div>
 
       <!-- Grid section -->
-      <div class="grid-container">
+      <div class="grid-container-dashboard">
 
         <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
         <!--        <router-link to="/settings" class="grid-item">account</router-link>-->
