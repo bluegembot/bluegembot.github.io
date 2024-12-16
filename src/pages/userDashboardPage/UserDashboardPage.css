@@ -126,7 +126,7 @@ li {
 }
 
 /* Grid styles */
-.grid-container {
+.grid-container-dashboard {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
