@@ -54,7 +54,7 @@
           <img class="subscription-image" src="@/assets/BGBElite.jpg" alt="BGB Elite subscription logo" />
           <div class="subscription-info">
             <h3>BlueGemBot Elite</h3>
-            <p>Unlock premium filtering capabilities, Discord server integration, and personalized support.</p>
+            <p>Everything from Gold, premium filtering capabilities and Discord server integration.</p>
             <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
           </div>
         </div>
@@ -177,10 +177,8 @@ export default {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  //max-height: fit-content;
+  max-height: fit-content;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 325px;
-  max-height: 325px;
 }
 
 .grid-item:hover {

@@ -1,9 +1,5 @@
 [
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6276299256/256x128",
-        "itemName": "souvenir-p250-drought-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/506854340/256x128",
         "itemName": "p90-module-factory-new"
     },
@@ -122,10 +118,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6257379284/256x128",
         "itemName": "usp-s-printstream-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3493961063/256x128",
-        "itemName": "souvenir-ssg-08-detour-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6214235904/256x128",
@@ -520,10 +512,6 @@
         "itemName": "falchion-knife-fade-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4860244089/256x128",
-        "itemName": "souvenir-aug-sweeper-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1820851543/256x128",
         "itemName": "flip-knife-bright-water-factory-new"
     },
@@ -552,10 +540,6 @@
         "itemName": "awp-fade-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6217505093/256x128",
-        "itemName": "souvenir-usp-s-ancient-visions-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3220798815/256x128",
         "itemName": "awp-atheris-factory-new"
     },
@@ -568,10 +552,6 @@
         "itemName": "glock-18-reactor-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6245625603/256x128",
-        "itemName": "souvenir-m4a4-red-ddpat-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4726077460/256x128",
         "itemName": "scar-20-poultrygeist-factory-new"
     },
@@ -582,10 +562,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4578724236/256x128",
         "itemName": "m4a4-spider-lily-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3513237853/256x128",
-        "itemName": "souvenir-scar-20-carbon-fiber-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3513803626/256x128",
@@ -856,10 +832,6 @@
         "itemName": "desert-eagle-meteorite-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4636298481/256x128",
-        "itemName": "souvenir-ssg-08-carbon-fiber-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6255487575/256x128",
         "itemName": "p250-steel-disruption-factory-new"
     },
@@ -874,14 +846,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6244485978/256x128",
         "itemName": "shadow-daggers-doppler-factory-new+ruby"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6256996144/256x128",
-        "itemName": "souvenir-m4a1-s-mud-spec-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6233378990/256x128",
-        "itemName": "souvenir-glock-18-high-beam-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6227609380/256x128",
@@ -958,10 +922,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5199668889/256x128",
         "itemName": "glock-18-umbral-rabbit-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4635498247/256x128",
-        "itemName": "souvenir-p90-verdant-growth-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6200175311/256x128",
@@ -1052,10 +1012,6 @@
         "itemName": "ak-47-safari-mesh-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5827929529/256x128",
-        "itemName": "souvenir-ssg-08-azure-glyph-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6247592865/256x128",
         "itemName": "m4a1-s-boreal-forest-factory-new"
     },
@@ -1114,10 +1070,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6214272201/256x128",
         "itemName": "m4a1-s-blood-tiger-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4628324650/256x128",
-        "itemName": "souvenir-xm1014-blue-tire-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2227331090/256x128",
@@ -1528,10 +1480,6 @@
         "itemName": "xm1014-ziggy-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4749137155/256x128",
-        "itemName": "souvenir-p250-metallic-ddpat-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4141779200/256x128",
         "itemName": "sg-553-hypnotic-factory-new"
     },
@@ -1598,10 +1546,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6257386922/256x128",
         "itemName": "m4a1-s-mecha-industries-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5081153349/256x128",
-        "itemName": "souvenir-cz75-auto-midnight-palm-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6245995577/256x128",
@@ -1703,10 +1647,7 @@
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4856734363/256x128",
         "itemName": "usp-s-cyrex-factory-new"
     },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5858534036/256x128",
-        "itemName": "souvenir-famas-calicamo-factory-new"
-    },
+
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6259139790/256x128",
         "itemName": "awp-chrome-cannon-factory-new"
@@ -1971,10 +1912,7 @@
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/311041731/256x128",
         "itemName": "usp-s-forest-leaves-factory-new"
     },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3106108745/256x128",
-        "itemName": "souvenir-mp5-sd-lab-rats-factory-new"
-    },
+
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4141779997/256x128",
         "itemName": "g3sg1-digital-mesh-factory-new"
@@ -1983,10 +1921,7 @@
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5312943116/256x128",
         "itemName": "famas-waters-of-nephthys-factory-new"
     },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5334148189/256x128",
-        "itemName": "souvenir-nova-army-sheen-factory-new"
-    },
+
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6260958515/256x128",
         "itemName": "huntsman-knife-fade-factory-new"
@@ -2016,10 +1951,6 @@
         "itemName": "ursus-knife-marble-fade-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5778242733/256x128",
-        "itemName": "souvenir-awp-black-nile-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6260958587/256x128",
         "itemName": "bayonet-gamma-doppler-factory-new+phase-4"
     },
@@ -2034,10 +1965,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6217393736/256x128",
         "itemName": "desert-eagle-starcade-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6276305804/256x128",
-        "itemName": "souvenir-usp-s-purple-ddpat-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6238971255/256x128",
@@ -2136,10 +2063,6 @@
         "itemName": "famas-zx-spectron-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6261813750/256x128",
-        "itemName": "souvenir-aug-snake-pit-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5199661939/256x128",
         "itemName": "mp9-featherweight-factory-new"
     },
@@ -2196,10 +2119,6 @@
         "itemName": "paracord-knife-fade-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5858512422/256x128",
-        "itemName": "souvenir-mag-7-navy-sheen-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1703108423/256x128",
         "itemName": "mp9-bioleak-factory-new"
     },
@@ -2214,18 +2133,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4141778932/256x128",
         "itemName": "sawed-off-clay-ambush-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5852376972/256x128",
-        "itemName": "souvenir-mac-10-sienna-damask-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5852392671/256x128",
-        "itemName": "souvenir-ssg-08-prey-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4708868831/256x128",
-        "itemName": "souvenir-awp-desert-hydra-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/520101595/256x128",
@@ -2318,10 +2225,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/4317288597/256x128",
         "itemName": "aug-carved-jade-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3510760426/256x128",
-        "itemName": "souvenir-pp-bizon-carbon-fiber-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1703079354/256x128",
@@ -2452,10 +2355,6 @@
         "itemName": "awp-containment-breach-factory-new"
     },
     {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6276309803/256x128",
-        "itemName": "souvenir-negev-nuclear-waste-factory-new"
-    },
-    {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/350637300/256x128",
         "itemName": "glock-18-blue-fissure-factory-new"
     },
@@ -2474,10 +2373,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2961007929/256x128",
         "itemName": "p90-traction-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5081889360/256x128",
-        "itemName": "souvenir-aug-carved-jade-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6259139064/256x128",
@@ -2546,10 +2441,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5259482368/256x128",
         "itemName": "ssg-08-threat-detected-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3126167107/256x128",
-        "itemName": "souvenir-mac-10-candy-apple-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/310776751/256x128",
@@ -2794,10 +2685,6 @@
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/520420246/256x128",
         "itemName": "awp-pink-ddpat-factory-new"
-    },
-    {
-        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6080384927/256x128",
-        "itemName": "souvenir-awp-pink-ddpat-factory-new"
     },
     {
         "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5841225844/256x128",

@@ -5,6 +5,7 @@ import MedicalProfessionalRegisterPage from '@/pages/userRegisterPage/RegisterPa
 import SkinSelector from "@/pages/skinSelectionPage/SkinSelector.vue";
 import UserLoginPage from "@/pages/userLoginPage/loginPage.vue";
 import AccountPage from "@/pages/AccountPage/AccountPage.vue";
+import AutoOpenPage from "@/pages/AutoOpenPage/AutoOpenPage.vue";
 
 // Async function to check if the session token is valid by making an API call
 async function isAuthenticated() {
@@ -33,7 +34,8 @@ const routes = [
   { path: '/register', component: MedicalProfessionalRegisterPage },
   { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
   { path: '/login', component: UserLoginPage },
-  { path: '/account', component: AccountPage, meta:{requiresAuth: true}}
+  { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
+  // {path: '/autoOpen', component: AutoOpenPage}
 ];
 
 // Create the router instance using hash mode
