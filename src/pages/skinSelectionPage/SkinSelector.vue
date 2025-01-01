@@ -227,7 +227,7 @@ export default {
           this.selectedSkin.itemName.toLowerCase().includes(keyword)
       );
 
-      const restrictedStatTrakKeywords = ["heat-treated", "gloves", "dragon-lore", "medusa", "m4a1-s-fade"]
+      const restrictedStatTrakKeywords = ["heat-treated", "gloves", "dragon-lore", "medusa", "m4a1-s-fade", "hand-wraps"]
       const containsRestrictedStatTrakKeyword = restrictedStatTrakKeywords.some(keyword =>
           this.selectedSkin.itemName.toLowerCase().includes(keyword)
       );
