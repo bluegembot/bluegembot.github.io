@@ -277,7 +277,7 @@ export default {
       };
 
       // First, fetch the CSRF token
-      fetch("https://bluegembot.duckdns.org//csrf-token", {
+      fetch("https://bluegembot.duckdns.org/csrf-token", {
         method: "GET",
         credentials: "include", // Include credentials (cookies) in the request
       })
