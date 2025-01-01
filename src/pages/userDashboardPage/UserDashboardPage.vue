@@ -7,7 +7,14 @@
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img"/>
         </div>
       </div>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <!-- Error/Success Message -->
+      <p v-if="errorMessage"
+         :class="[
+     messageType === 'success' ? 'success-message' : 'error-message',
+     'fixed-top-message'
+   ]">
+        {{ errorMessage }}
+      </p>
       <!-- Section with Upcoming and Announcements -->
       <div class="upcoming-announcements">
         <!-- Upcoming list -->
@@ -41,14 +48,17 @@
       <div class="grid-container-dashboard">
 
         <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
-        <!--        <router-link to="/settings" class="grid-item">account</router-link>-->
+
         <router-link to="/account" class="grid-item">Account</router-link>
+
+        <router-link to="/dashboard" class="grid-item">Auto Opener (Coming soon)</router-link>
       </div>
     </main>
   </div>
 </template>
 
 <style src="./UserDashboardPage.css"></style>
+
 
 <script>
 import {onMounted, ref} from "vue";
@@ -141,11 +151,20 @@ export default {
         trackedSkins.value = trackedSkins.value.filter(
             (trackedSkin) => trackedSkin.name !== skin.name
         );
-        alert(`Stopped tracking skin: ${skin.name}`);
+        errorMessage.value = `Stopped tracking skin: ${skin.name}`;
+        clearErrorMessages(); // Clear error message after a delay
       } catch (error) {
         console.error("Error stopping tracking for skin:", error);
         errorMessage.value = "Failed to stop tracking the skin. Please try again.";
+        clearErrorMessages(); // Clear error message after a delay
       }
+    };
+
+    const clearErrorMessages = () => {
+      // After 1 second, fade out the message
+      setTimeout(() => {
+        errorMessage.value = ''; // Clear the message
+      }, 2500); // Fade away after 1 second
     };
 
     onMounted(fetchCsrfTokenAndUserConfig);

@@ -1,19 +1,18 @@
 <template>
   <div>
+    <!-- Existing UI -->
     <div class="logo-container">
       <div class="logo-circle">
-        <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img"/>
+        <img alt="BGB Logo" class="logo-img" src="@/assets/BGBLogo.jpg"/>
       </div>
     </div>
     <h2 class="main-title">Skin search</h2>
-
-    <!-- Search Bar with Dashboard Button -->
     <div class="search-container">
       <input
-          type="text"
           v-model="searchQuery"
-          placeholder="Search skins by name"
           class="search-bar"
+          placeholder="Search skins by name"
+          type="text"
       />
       <router-link to="/dashboard">
         <button class="dashboard-button">Dashboard</button>
@@ -21,9 +20,14 @@
     </div>
 
     <!-- Error/Success Message -->
-    <p v-if="errorMessage" :class="[messageType === 'success' ? 'success-message' : 'error-message']">
+    <p v-if="errorMessage"
+       :class="[
+     messageType === 'success' ? 'success-message' : 'error-message',
+     'fixed-top-message'
+   ]">
       {{ errorMessage }}
     </p>
+
 
 
     <!-- Table -->
@@ -35,24 +39,18 @@
         <th>Select condition</th>
         <th>Minimum float</th>
         <th>Maximum float</th>
+        <th>Advanced options</th>
         <th></th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="(skin, index) in displayedSkins" :key="index">
         <td>
-          <img
-              :src="skin.imageUrl"
-              alt="Skin image"
-              class="skin-image"
-          />
+          <img :src="skin.imageUrl" alt="Skin image" class="skin-image"/>
         </td>
         <td>{{ formattedSkinName(skin) }}</td>
         <td>
-          <select
-              v-model="skin.condition"
-              @change="updateFloats(skin)"
-          >
+          <select v-model="skin.condition" @change="updateFloats(skin)">
             <option value="Factory new">Factory new</option>
             <option value="Minimal wear">Minimal wear</option>
             <option value="Field tested">Field tested</option>
@@ -63,34 +61,62 @@
         <td>
           <input
               v-model.number="skin.minFloat"
-              :min="Math.max(0, skin.allowedMinFloat)"
               :max="Math.min(1, skin.allowedMaxFloat)"
-              type="number"
-              step="0.01"
-              placeholder="Min Float"
+              :min="Math.max(0, skin.allowedMinFloat)"
               class="float-input"
+              placeholder="Min Float"
+              step="0.01"
+              type="number"
               @blur="validateFloatInput(skin, 'minFloat')"
           />
         </td>
         <td>
           <input
               v-model.number="skin.maxFloat"
-              :min="Math.max(0, skin.allowedMinFloat)"
               :max="Math.min(1, skin.allowedMaxFloat)"
-              type="number"
-              step="0.01"
-              placeholder="Max Float"
+              :min="Math.max(0, skin.allowedMinFloat)"
               class="float-input"
+              placeholder="Max Float"
+              step="0.01"
+              type="number"
               @blur="validateFloatInput(skin, 'maxFloat')"
           />
         </td>
         <td>
-          <button @click="addSkin(index)">Add Skin</button>
+          <button @click="openMenu(skin)">Advanced options</button>
         </td>
+        <td>
+          <button @click="addSkin(skin)">Add Skin</button>
+        </td>
+
+        <!-- Modal -->
+        <div v-if="showAdvancedMenu" class="modal">
+          <div class="modal-content">
+            <p v-if="modalErrorMessage" :class="[messageType === 'success' ? 'success-message' : 'error-message']">
+              {{ modalErrorMessage }}
+            </p>
+            <h3>Advanced Options</h3>
+            <div class="modal-checkbox-container">
+              <div class="modal-checkbox">
+                <label for="option1">StatTrak</label>
+                <input id="StatTrak" v-model="advancedOptions.statTrak" type="checkbox"/>
+              </div>
+              <div class="modal-checkbox">
+                <label for="option2">Souvenir</label>
+                <input id="Souvenir" v-model="advancedOptions.souvenir" type="checkbox"/>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button @click="closeMenu">Close</button>
+              <button @click="applyAdvancedOptions(index)">Add skin with options</button>
+            </div>
+          </div>
+        </div>
       </tr>
       </tbody>
     </table>
-    <p v-else class="no-results">Start typing to search for skins.</p>
+
+
   </div>
 </template>
 <script>
@@ -103,6 +129,12 @@ export default {
       skins: [], // Full dataset
       displayedSkins: [], // Currently displayed skins based on search
       errorMessage: "", // Error message to display
+      modalErrorMessage: "",
+      showAdvancedMenu: false, // Controls visibility of the modal
+      advancedOptions: {
+        statTrak: false,
+        souvenir: false,
+      },
     };
   },
   watch: {
@@ -172,25 +204,80 @@ export default {
         }
       }
     },
-    addSkin(index) {
-      const skin = this.displayedSkins[index];
+    openMenu(skin) {
+      this.selectedSkin = skin;  // Store the selected skin object
+      this.showAdvancedMenu = true;
+      console.log(skin)
+    },
+    closeMenu() {
+      this.selectedSkin = null;
+      this.showAdvancedMenu = false;
+      this.modalErrorMessage = ""
+    },
+    applyAdvancedOptions() {
+      if (this.advancedOptions.statTrak && this.advancedOptions.souvenir) {
+        this.modalErrorMessage = "Cannot apply both Souvenir and StatTrak.";
+        this.clearErrorMessages()
+        return;
+      }
 
+      // Check if the item name contains "gloves", "hand-wraps", or "knife"
+      const restrictedSouvenirKeywords = ["gloves", "hand-wraps", "knife", "karambit", "bayonet", "m9-bayonet", "shadow-daggers", "m4a1-s-fade"];
+      const containsRestrictedSouvenirKeyword = restrictedSouvenirKeywords.some(keyword =>
+          this.selectedSkin.itemName.toLowerCase().includes(keyword)
+      );
+
+      const restrictedStatTrakKeywords = ["heat-treated", "gloves", "dragon-lore", "medusa", "m4a1-s-fade"]
+      const containsRestrictedStatTrakKeyword = restrictedStatTrakKeywords.some(keyword =>
+          this.selectedSkin.itemName.toLowerCase().includes(keyword)
+      );
+
+      if (this.advancedOptions.souvenir && containsRestrictedSouvenirKeyword) {
+        this.modalErrorMessage = "Souvenir cannot be applied to gloves, hand-wraps, or knives.";
+        this.clearErrorMessages()
+        return;
+      }
+
+      if (this.advancedOptions.statTrak && containsRestrictedStatTrakKeyword) {
+        this.modalErrorMessage = "Stat trak cannot be applied to your selected skin";
+        this.clearErrorMessages()
+        return;
+      }
+
+      // Determine the advanced option (if any)
+      let advancedOption = "";
+      if (this.advancedOptions.souvenir) {
+        advancedOption = "souvenir";
+      } else if (this.advancedOptions.statTrak) {
+        advancedOption = "stattrak";
+      }
+
+      // Pass the selected skin directly to addSkin
+      this.addSkin(this.selectedSkin, advancedOption);
+
+      this.closeMenu(); // Close the modal after applying options
+    },
+    addSkin(skin, advancedOption = "") {
       // Modify the itemName to include the selected condition
-      const updatedSkinName = skin.itemName
+      let finalSkinName = skin.itemName
           .replace('factory-new', skin.condition.toLowerCase().replace(' ', '-'))
           .replace('minimal-wear', skin.condition.toLowerCase().replace(' ', '-'))
           .replace('field-tested', skin.condition.toLowerCase().replace(' ', '-'))
           .replace('battle-scarred', skin.condition.toLowerCase().replace(' ', '-'))
           .replace('well-worn', skin.condition.toLowerCase().replace(' ', '-'));
 
+      if (advancedOption) {
+        finalSkinName = `${advancedOption}-${finalSkinName}`
+      }
+
       const payload = {
-        skinName: updatedSkinName, // Updated skin name
+        skinName: finalSkinName, // Updated skin name
         minFloat: skin.minFloat,
         maxFloat: skin.maxFloat,
       };
 
       // First, fetch the CSRF token
-      fetch("https://bluegembot.duckdns.org/csrf-token", {
+      fetch("https://bluegembot.duckdns.org//csrf-token", {
         method: "GET",
         credentials: "include", // Include credentials (cookies) in the request
       })
@@ -199,7 +286,7 @@ export default {
             const csrfToken = data.csrfToken; // Get the CSRF token
 
             // Now send the request to add the skin
-            fetch("https://bluegembot.duckdns.org/addSkin", {
+            fetch("https://bluegembot.duckdns.org//addSkin", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -212,18 +299,29 @@ export default {
                 .then((data) => {
                   this.errorMessage = data.message; // Set the success message
                   this.messageType = "success"; // Set the message type to success
+                  this.clearErrorMessages()
                 })
                 .catch((error) => {
                   console.error("Error adding skin:", error);
                   this.errorMessage = "Failed to add skin, please try again.";
                   this.messageType = "error"; // Set the message type to error
+                  this.clearErrorMessages()
                 });
           })
           .catch((error) => {
             console.error("Error fetching CSRF token:", error);
             this.errorMessage = "Internal server error, please try again.";
             this.messageType = "error"; // Set the message type to error
+            this.clearErrorMessages()
           });
+    },
+
+    clearErrorMessages(){
+      // After 1 second, fade out the message
+      setTimeout(() => {
+        this.errorMessage = ''; // Clear the message
+        this.modalErrorMessage = '';
+      }, 2500); // Fade away after 1 second
     },
 
     // New method to format the skin name for display

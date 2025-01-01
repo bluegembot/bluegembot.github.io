@@ -128,7 +128,7 @@ li {
 /* Grid styles */
 .grid-container-dashboard {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 800px;
   margin: 50px auto; /* Center the grid and add margin */
@@ -216,4 +216,3 @@ li {
   display: flex;
   justify-content: center;
 }
-
