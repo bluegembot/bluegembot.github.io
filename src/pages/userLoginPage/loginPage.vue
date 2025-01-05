@@ -27,7 +27,7 @@
           </div>
 
           <button type="submit" class="register-button">Login</button>
-          <p>/login to my bot for your login token </p>
+          <p>/login to <a href="https://discord.gg/kWGfK6St4m">my discord bot</a> for your login token.</p>
           <p>Dont have an account?  <a><router-link to="/register">Register</router-link></a></p>
 
 

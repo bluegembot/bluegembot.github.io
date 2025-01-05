@@ -37,7 +37,7 @@
           </div>
 
           <button type="submit" class="register-button">Register</button>
-          <p>/register to my bot for your OTP</p>
+          <p>/register to <a href="https://discord.gg/kWGfK6St4m">my discord bot</a> for your one time password.</p>
           <p>Already have an account? <router-link to="/login">Login</router-link></p>
 
           <!-- Alert message for password mismatch -->
