@@ -50,7 +50,7 @@ function connectToWebSocket() {
   }
 
   // Use secure WebSocket for production
-  const wsUrl = "ws://bluegembot.duckdns.org:3002"  // Production secure WebSocket URL
+  const wsUrl = "wss://bluegembot.duckdns.org:3002"  // Production secure WebSocket URL
 
   socket = new WebSocket(wsUrl);
 
