@@ -49,9 +49,7 @@ function connectToWebSocket() {
     return;
   }
 
-// Use relative WebSocket URL
-  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const wsUrl = `${wsProtocol}//${window.location.host}`;
+  const wsUrl = "wss://bluegembot.duckdns.org";
 
   console.log('Attempting to connect to:', wsUrl);
   socket = new WebSocket(wsUrl);
