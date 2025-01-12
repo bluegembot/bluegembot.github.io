@@ -49,9 +49,11 @@ function connectToWebSocket() {
     return;
   }
 
-  // Use secure WebSocket for production
-  const wsUrl = "wss://bluegembot.duckdns.org:3002"  // Production secure WebSocket URL
+// Use relative WebSocket URL
+  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const wsUrl = `${wsProtocol}//${window.location.host}`;
 
+  console.log('Attempting to connect to:', wsUrl);
   socket = new WebSocket(wsUrl);
 
   // When the connection is established
@@ -93,7 +95,12 @@ function connectToWebSocket() {
 
   // When there's an error with the WebSocket connection
   socket.onerror = (error) => {
-    console.error("WebSocket error:", error);
+    console.error("WebSocket error details:", {
+      readyState: socket?.readyState,
+      url: socket?.url,
+      protocol: socket?.protocol,
+      error: error
+    });
     errorMessage.value = "Connection error. Attempting to reconnect...";
 
     if (!isManualDisconnect) {
