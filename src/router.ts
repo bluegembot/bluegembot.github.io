@@ -35,7 +35,7 @@ const routes = [
   { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
   { path: '/login', component: UserLoginPage },
   { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
-  // {path: '/autoOpen', component: AutoOpenPage}
+  {path: '/autoOpen', component: AutoOpenPage}
 ];
 
 // Create the router instance using hash mode
