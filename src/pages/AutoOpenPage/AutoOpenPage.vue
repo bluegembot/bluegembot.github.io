@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
 
-
 const socket = ref<WebSocket | null>(null);
 const reconnectTimeout = ref<number | null>(null);
 const isManualDisconnect = ref<boolean>(false);
@@ -42,70 +41,93 @@ const toggleAutoOpener = () => {
   }
 };
 
-
 function connectToWebSocket() {
   if (socket.value && socket.value.readyState !== WebSocket.CLOSED) {
     console.log("WebSocket is already connected or connecting.");
     return;
   }
 
+  console.log("Starting WebSocket connection...");
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
-  // Create new WebSocket connection
-  socket.value = new WebSocket(wsUrl);
+  try {
+    // Create new WebSocket connection
+    socket.value = new WebSocket(wsUrl);
 
-  // When the connection is established
-  socket.value.onopen = () => {
-    console.log("Connected to WebSocket server");
-    console.log("WebSocket connection established at:", new Date().toISOString());
-    console.log("WebSocket state:", socket.value?.readyState);
+    // Log initial connection attempt
+    console.log("WebSocket initial state:", {
+      readyState: socket.value.readyState,
+      url: socket.value.url,
+      protocol: socket.value.protocol,
+    });
 
-    socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
+    // When the connection is established
+    socket.value.onopen = () => {
+      console.log("Connected to WebSocket server");
+      console.log("WebSocket connection established at:", new Date().toISOString());
+      console.log("WebSocket state:", socket.value?.readyState);
+      console.log("WebSocket details:", {
+        url: socket.value?.url,
+        protocol: socket.value?.protocol,
+        readyState: socket.value?.readyState
+      });
 
-    if (reconnectTimeout.value) {
-      clearTimeout(reconnectTimeout.value);
-      reconnectTimeout.value = null;
-    }
+      socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
-    isManualDisconnect.value = false;
-  };
+      if (reconnectTimeout.value) {
+        clearTimeout(reconnectTimeout.value);
+        reconnectTimeout.value = null;
+      }
 
-  // When a message is received from the server
-  socket.value.onmessage = (event) => {
-    const data = event.data;
-    console.log("Received message:", data);
-    openUrlInNewTab(data);
-  };
+      isManualDisconnect.value = false;
+    };
 
-  // When the connection is closed
-  socket.value.onclose = (event) => {
-    if (event.code === 4001) {
-      console.error("Unauthorized: No session token provided.");
-      errorMessage.value = "Authentication failed. Please log in again.";
-      isAutoOpenerActive.value = false;
-    } else {
-      console.log("WebSocket connection closed by server");
+    // When a message is received from the server
+    socket.value.onmessage = (event) => {
+      const data = event.data;
+      console.log("Received message:", data);
+      openUrlInNewTab(data);
+    };
+
+    // When the connection is closed
+    socket.value.onclose = (event) => {
+      console.log("WebSocket close event:", {
+        code: event.code,
+        reason: event.reason,
+        wasClean: event.wasClean
+      });
+
+      if (event.code === 4001) {
+        console.error("Unauthorized: No session token provided.");
+        errorMessage.value = "Authentication failed. Please log in again.";
+        isAutoOpenerActive.value = false;
+      } else {
+        console.log("WebSocket connection closed by server");
+
+        if (!isManualDisconnect.value) {
+          attemptReconnect();
+        }
+      }
+    };
+
+    // When there's an error with the WebSocket connection
+    socket.value.onerror = (error) => {
+      console.error("WebSocket error details:", {
+        readyState: socket.value?.readyState,
+        url: socket.value?.url,
+        protocol: socket.value?.protocol,
+        error: error
+      });
+      errorMessage.value = "Connection error. Attempting to reconnect...";
 
       if (!isManualDisconnect.value) {
         attemptReconnect();
       }
-    }
-  };
-
-  // When there's an error with the WebSocket connection
-  socket.value.onerror = (error) => {
-    console.error("WebSocket error details:", {
-      readyState: socket.value?.readyState,
-      url: socket.value?.url,
-      protocol: socket.value?.protocol,
-      error: error
-    });
-    errorMessage.value = "Connection error. Attempting to reconnect...";
-
-    if (!isManualDisconnect.value) {
-      attemptReconnect();
-    }
-  };
+    };
+  } catch (error) {
+    console.error("Error creating WebSocket:", error);
+    errorMessage.value = "Failed to create WebSocket connection";
+  }
 }
 
 function attemptReconnect() {
