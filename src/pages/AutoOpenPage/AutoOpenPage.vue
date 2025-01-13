@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
 
+// Global socket variable
 let socket: WebSocket | null = null;
 let reconnectTimeout: number | null = null;
 const reconnectDelay = 5000;
@@ -50,7 +51,7 @@ function connectToWebSocket() {
   }
 
   // Helper function to get a specific cookie by name
-  function getCookie(name) {
+  function getCookie(name: string): string | null {
     const cookies = document.cookie.split("; ");
     for (let cookie of cookies) {
       const [key, value] = cookie.split("=");
@@ -71,7 +72,7 @@ function connectToWebSocket() {
 
   console.log("Attempting to connect to:", wsUrl);
 
-  const socket = new WebSocket(wsUrl);
+  socket = new WebSocket(wsUrl); // Updated to use global 'socket'
 
   socket.onopen = () => {
     console.log("Connected to WebSocket server");
@@ -141,7 +142,5 @@ onUnmounted(() => {
   }
 });
 </script>
-
-
 
 <style src="./AutoOpenPage.css"></style>
