@@ -49,65 +49,44 @@ function connectToWebSocket() {
     return;
   }
 
-  const wsUrl = "wss://bluegembot.duckdns.org/ws";
-  console.log('Attempting to connect to:', wsUrl);
+  // Helper function to get a specific cookie by name
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+      const [key, value] = cookie.split("=");
+      if (key === name) {
+        return decodeURIComponent(value);
+      }
+    }
+    return null; // Return null if the cookie is not found
+  }
 
-  // Create socket with options
-  socket = new WebSocket(wsUrl);
+  const sessionToken = getCookie("session_token");
+  if (!sessionToken) {
+    console.error("Session token not found in cookies. Please log in.");
+    return;
+  }
 
-  // Add connection state logging
-  console.log("Initial socket state:", socket.readyState);
+  const wsUrl = `wss://bluegembot.duckdns.org/ws?session_token=${sessionToken}`;
+
+  console.log("Attempting to connect to:", wsUrl);
+
+  const socket = new WebSocket(wsUrl);
 
   socket.onopen = () => {
-    console.log("WebSocket connection established at:", new Date().toISOString());
-    console.log("Socket state after open:", socket.readyState);
-
-    socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
-
-    if (reconnectTimeout) {
-      clearTimeout(reconnectTimeout);
-      reconnectTimeout = null;
-    }
-
-    isManualDisconnect = false;
+    console.log("Connected to WebSocket server");
   };
 
   socket.onmessage = (event) => {
-    const data = event.data;
-    console.log("Received message:", data);
-    openUrlInNewTab(data);
+    console.log("Received message:", event.data);
   };
 
   socket.onclose = (event) => {
-    console.log("WebSocket closed:", {
-      code: event.code,
-      reason: event.reason,
-      wasClean: event.wasClean,
-      timestamp: new Date().toISOString()
-    });
-
-    if (event.code === 4001) {
-      console.error("Unauthorized: No session token provided.");
-      errorMessage.value = "Authentication failed. Please log in again.";
-      isAutoOpenerActive.value = false;
-    } else if (!isManualDisconnect) {
-      attemptReconnect();
-    }
+    console.error("WebSocket connection closed:", event);
   };
 
   socket.onerror = (error) => {
-    console.error("WebSocket error details:", {
-      readyState: socket?.readyState,
-      url: socket?.url,
-      protocol: socket?.protocol,
-      error: error,
-      timestamp: new Date().toISOString()
-    });
-    errorMessage.value = "Connection error. Attempting to reconnect...";
-
-    if (!isManualDisconnect) {
-      attemptReconnect();
-    }
+    console.error("WebSocket error:", error);
   };
 }
 
