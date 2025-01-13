@@ -51,10 +51,11 @@ function connectToWebSocket() {
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
   try {
-    // Create new WebSocket connection
-    socket.value = new WebSocket(wsUrl);
+    // Explicitly set credentials mode
+    socket.value = new WebSocket(wsUrl, {
+      credentials: 'include'  // This should send cookies with the request
+    });
 
-    // Log initial connection attempt
     console.log("WebSocket initial state:", {
       readyState: socket.value.readyState,
       url: socket.value.url,
