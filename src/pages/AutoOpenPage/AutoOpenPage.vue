@@ -50,7 +50,7 @@ function connectToWebSocket() {
   }
 
   // Helper function to get a specific cookie by name
-  function getCookie(name) {
+  function getCookie(name: string): string | null {
     const cookies = document.cookie.split("; ");
     for (let cookie of cookies) {
       const [key, value] = cookie.split("=");
@@ -71,7 +71,7 @@ function connectToWebSocket() {
 
   console.log("Attempting to connect to:", wsUrl);
 
-  const socket = new WebSocket(wsUrl);
+  socket = new WebSocket(wsUrl); // Updated to use global 'socket'
 
   socket.onopen = () => {
     console.log("Connected to WebSocket server");
@@ -89,7 +89,6 @@ function connectToWebSocket() {
     console.error("WebSocket error:", error);
   };
 }
-
 // Function to attempt a reconnect after a delay
 function attemptReconnect() {
   if (reconnectTimeout) return;
