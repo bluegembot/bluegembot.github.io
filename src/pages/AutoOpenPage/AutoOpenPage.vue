@@ -50,32 +50,16 @@ function connectToWebSocket() {
     return;
   }
 
-  // Helper function to get a specific cookie by name
-  function getCookie(name: string): string | null {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === name) {
-        return decodeURIComponent(value);
-      }
-    }
-    return null; // Return null if the cookie is not found
-  }
-
-  const sessionToken = getCookie("session_token");
-  if (!sessionToken) {
-    console.error("Session token not found in cookies. Please log in.");
-    return;
-  }
-
-  const wsUrl = `wss://bluegembot.duckdns.org/ws?session_token=${sessionToken}`;
-
+  const wsUrl = "wss://bluegembot.duckdns.org/ws";
   console.log("Attempting to connect to:", wsUrl);
 
-  socket = new WebSocket(wsUrl); // Updated to use global 'socket'
+  socket = new WebSocket(wsUrl);
 
   socket.onopen = () => {
-    console.log("Connected to WebSocket server");
+    console.log("WebSocket connection established at:", new Date().toISOString());
+    console.log("Socket state after open:", socket.readyState);
+
+    socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
   };
 
   socket.onmessage = (event) => {
@@ -83,11 +67,22 @@ function connectToWebSocket() {
   };
 
   socket.onclose = (event) => {
-    console.error("WebSocket connection closed:", event);
+    console.log("WebSocket closed:", {
+      code: event.code,
+      reason: event.reason,
+      wasClean: event.wasClean,
+      timestamp: new Date().toISOString()
+    });
   };
 
   socket.onerror = (error) => {
-    console.error("WebSocket error:", error);
+    console.error("WebSocket error details:", {
+      readyState: socket?.readyState,
+      url: socket?.url,
+      protocol: socket?.protocol,
+      error: error,
+      timestamp: new Date().toISOString()
+    });
   };
 }
 
