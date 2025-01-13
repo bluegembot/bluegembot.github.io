@@ -157,7 +157,6 @@ function openUrlInNewTab(url: string) {
     window.open(url, "_blank");
   } else {
     console.warn("Received invalid URL:", url);
-    errorMessage.value = "Received invalid URL from server";
   }
 }
 
