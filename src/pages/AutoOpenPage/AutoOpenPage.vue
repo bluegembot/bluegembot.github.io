@@ -49,7 +49,7 @@ function connectToWebSocket() {
     return;
   }
 
-  const wsUrl = "wss://bluegembot.duckdns.org";
+  const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
   console.log('Attempting to connect to:', wsUrl);
   socket = new WebSocket(wsUrl);
