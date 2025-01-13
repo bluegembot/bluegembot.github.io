@@ -42,52 +42,52 @@ const toggleAutoOpener = () => {
   }
 };
 
-// Function to connect to the WebSocket server
+function getSessionToken() {
+  const cookies = document.cookie.split(';');
+  const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session_token='));
+  if (sessionCookie) {
+    return sessionCookie.trim().split('=')[1];
+  }
+  return null;
+}
+
 function connectToWebSocket() {
   if (socket && socket.readyState !== WebSocket.CLOSED) {
     console.log("WebSocket is already connected or connecting.");
     return;
   }
 
-  // Helper function to get a specific cookie by name
-  function getCookie(name: string): string | null {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === name) {
-        return decodeURIComponent(value);
-      }
-    }
-    return null; // Return null if the cookie is not found
-  }
+  const sessionToken = getSessionToken();
+  console.log("Current cookies:", document.cookie); // Debug line
+  console.log("Found session token:", sessionToken); // Debug line
 
-  const sessionToken = getCookie("session_token");
   if (!sessionToken) {
-    console.error("Session token not found in cookies. Please log in.");
+    console.error("No session token found in cookies");
     return;
   }
 
-  const wsUrl = `wss://bluegembot.duckdns.org/ws?session_token=${sessionToken}`;
+  const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
-  console.log("Attempting to connect to:", wsUrl);
+  // Now we let the browser automatically include the cookies
+  const socket = new WebSocket(wsUrl);
 
-  socket = new WebSocket(wsUrl); // Updated to use global 'socket'
-
+  // Rest of your WebSocket event handlers...
   socket.onopen = () => {
     console.log("Connected to WebSocket server");
+    console.log("WebSocket connection established at:", new Date().toISOString());
+    console.log("WebSocket state:", socket.readyState);
+
+    socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
+
+    if (reconnectTimeout) {
+      clearTimeout(reconnectTimeout);
+      reconnectTimeout = null;
+    }
+
+    isManualDisconnect = false;
   };
 
-  socket.onmessage = (event) => {
-    console.log("Received message:", event.data);
-  };
-
-  socket.onclose = (event) => {
-    console.error("WebSocket connection closed:", event);
-  };
-
-  socket.onerror = (error) => {
-    console.error("WebSocket error:", error);
-  };
+  // Your existing event handlers...
 }
 // Function to attempt a reconnect after a delay
 function attemptReconnect() {
