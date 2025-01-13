@@ -19,10 +19,11 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
 
-let socket: WebSocket | null = null;
-let reconnectTimeout: number | null = null;
+
+const socket = ref<WebSocket | null>(null);
+const reconnectTimeout = ref<number | null>(null);
+const isManualDisconnect = ref<boolean>(false);
 const reconnectDelay = 5000;
-let isManualDisconnect = false;
 
 // Reactive variables
 const isAutoOpenerActive = ref(false);
@@ -52,14 +53,12 @@ function getSessionToken() {
 }
 
 function connectToWebSocket() {
-  if (socket && socket.readyState !== WebSocket.CLOSED) {
+  if (socket.value && socket.value.readyState !== WebSocket.CLOSED) {
     console.log("WebSocket is already connected or connecting.");
     return;
   }
 
   const sessionToken = getSessionToken();
-  console.log("Current cookies:", document.cookie); // Debug line
-  console.log("Found session token:", sessionToken); // Debug line
 
   if (!sessionToken) {
     console.error("No session token found in cookies");
@@ -68,43 +67,79 @@ function connectToWebSocket() {
 
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
-  // Now we let the browser automatically include the cookies
-  const socket = new WebSocket(wsUrl);
+  // Create new WebSocket connection
+  socket.value = new WebSocket(wsUrl);
 
-  // Rest of your WebSocket event handlers...
-  socket.onopen = () => {
+  // When the connection is established
+  socket.value.onopen = () => {
     console.log("Connected to WebSocket server");
     console.log("WebSocket connection established at:", new Date().toISOString());
-    console.log("WebSocket state:", socket.readyState);
+    console.log("WebSocket state:", socket.value?.readyState);
 
-    socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
+    socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
-    if (reconnectTimeout) {
-      clearTimeout(reconnectTimeout);
-      reconnectTimeout = null;
+    if (reconnectTimeout.value) {
+      clearTimeout(reconnectTimeout.value);
+      reconnectTimeout.value = null;
     }
 
-    isManualDisconnect = false;
+    isManualDisconnect.value = false;
   };
 
-  // Your existing event handlers...
+  // When a message is received from the server
+  socket.value.onmessage = (event) => {
+    const data = event.data;
+    console.log("Received message:", data);
+    openUrlInNewTab(data);
+  };
+
+  // When the connection is closed
+  socket.value.onclose = (event) => {
+    if (event.code === 4001) {
+      console.error("Unauthorized: No session token provided.");
+      errorMessage.value = "Authentication failed. Please log in again.";
+      isAutoOpenerActive.value = false;
+    } else {
+      console.log("WebSocket connection closed by server");
+
+      if (!isManualDisconnect.value) {
+        attemptReconnect();
+      }
+    }
+  };
+
+  // When there's an error with the WebSocket connection
+  socket.value.onerror = (error) => {
+    console.error("WebSocket error details:", {
+      readyState: socket.value?.readyState,
+      url: socket.value?.url,
+      protocol: socket.value?.protocol,
+      error: error
+    });
+    errorMessage.value = "Connection error. Attempting to reconnect...";
+
+    if (!isManualDisconnect.value) {
+      attemptReconnect();
+    }
+  };
 }
-// Function to attempt a reconnect after a delay
+
 function attemptReconnect() {
-  if (reconnectTimeout) return;
-  console.log("Attempting to reconnect...");
-  reconnectTimeout = setTimeout(() => {
-    connectToWebSocket();
-  }, reconnectDelay);
+  if (!reconnectTimeout.value) {
+    reconnectTimeout.value = setTimeout(() => {
+      console.log("Attempting to reconnect...");
+      connectToWebSocket();
+    }, 5000) as unknown as number; // 5 second delay before reconnecting
+  }
 }
 
 // Function to close the WebSocket connection
 function closeWebSocket() {
-  if (socket) {
+  if (socket.value) {
     console.log("Closing WebSocket connection");
-    isManualDisconnect = true;
-    socket.close();
-    socket = null;
+    isManualDisconnect.value = true;
+    socket.value.close();
+    socket.value = null;
     errorMessage.value = ""; // Clear any error messages
   } else {
     console.log("No active WebSocket connection to close.");
