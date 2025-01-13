@@ -23,7 +23,6 @@ import { ref, onUnmounted } from "vue";
 const socket = ref<WebSocket | null>(null);
 const reconnectTimeout = ref<number | null>(null);
 const isManualDisconnect = ref<boolean>(false);
-const reconnectDelay = 5000;
 
 // Reactive variables
 const isAutoOpenerActive = ref(false);
@@ -43,28 +42,10 @@ const toggleAutoOpener = () => {
   }
 };
 
-function getSessionToken() {
-  const cookies = document.cookie.split(';');
-  console.log(`cookies: ${cookies}`)
-  const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session_token='));
-  if (sessionCookie) {
-    return sessionCookie.trim().split('=')[1];
-  }
-  return null;
-}
 
 function connectToWebSocket() {
   if (socket.value && socket.value.readyState !== WebSocket.CLOSED) {
     console.log("WebSocket is already connected or connecting.");
-    return;
-  }
-
-  const sessionToken = getSessionToken();
-
-  console.log(`Token: ${sessionToken}`)
-
-  if (!sessionToken) {
-    console.error("No session token found in cookies");
     return;
   }
 
