@@ -51,12 +51,16 @@ function connectToWebSocket() {
 
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
+  socket.withCredentials = true;
+
   console.log('Attempting to connect to:', wsUrl);
   socket = new WebSocket(wsUrl);
 
   // When the connection is established
   socket.onopen = () => {
     console.log("Connected to WebSocket server");
+    console.log("WebSocket connection established at:", new Date().toISOString());
+    console.log("WebSocket state:", socket.readyState);
 
     // Send a message to the server once the connection is open
     socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
