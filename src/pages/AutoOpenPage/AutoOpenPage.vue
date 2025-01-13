@@ -50,19 +50,18 @@ function connectToWebSocket() {
   }
 
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
-
-  socket.withCredentials = true;
-
   console.log('Attempting to connect to:', wsUrl);
+
+  // Create socket with options
   socket = new WebSocket(wsUrl);
 
-  // When the connection is established
-  socket.onopen = () => {
-    console.log("Connected to WebSocket server");
-    console.log("WebSocket connection established at:", new Date().toISOString());
-    console.log("WebSocket state:", socket.readyState);
+  // Add connection state logging
+  console.log("Initial socket state:", socket.readyState);
 
-    // Send a message to the server once the connection is open
+  socket.onopen = () => {
+    console.log("WebSocket connection established at:", new Date().toISOString());
+    console.log("Socket state after open:", socket.readyState);
+
     socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
     if (reconnectTimeout) {
@@ -73,35 +72,36 @@ function connectToWebSocket() {
     isManualDisconnect = false;
   };
 
-  // When a message is received from the server
   socket.onmessage = (event) => {
     const data = event.data;
     console.log("Received message:", data);
     openUrlInNewTab(data);
   };
 
-  // When the connection is closed
   socket.onclose = (event) => {
+    console.log("WebSocket closed:", {
+      code: event.code,
+      reason: event.reason,
+      wasClean: event.wasClean,
+      timestamp: new Date().toISOString()
+    });
+
     if (event.code === 4001) {
       console.error("Unauthorized: No session token provided.");
       errorMessage.value = "Authentication failed. Please log in again.";
       isAutoOpenerActive.value = false;
-    } else {
-      console.log("WebSocket connection closed by server");
-
-      if (!isManualDisconnect) {
-        attemptReconnect();
-      }
+    } else if (!isManualDisconnect) {
+      attemptReconnect();
     }
   };
 
-  // When there's an error with the WebSocket connection
   socket.onerror = (error) => {
     console.error("WebSocket error details:", {
       readyState: socket?.readyState,
       url: socket?.url,
       protocol: socket?.protocol,
-      error: error
+      error: error,
+      timestamp: new Date().toISOString()
     });
     errorMessage.value = "Connection error. Attempting to reconnect...";
 
