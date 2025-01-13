@@ -54,22 +54,9 @@ function connectToWebSocket() {
     // Explicitly set credentials mode
     socket.value = new WebSocket(wsUrl);
 
-    console.log("WebSocket initial state:", {
-      readyState: socket.value.readyState,
-      url: socket.value.url,
-      protocol: socket.value.protocol,
-    });
-
     // When the connection is established
     socket.value.onopen = () => {
       console.log("Connected to WebSocket server");
-      console.log("WebSocket connection established at:", new Date().toISOString());
-      console.log("WebSocket state:", socket.value?.readyState);
-      console.log("WebSocket details:", {
-        url: socket.value?.url,
-        protocol: socket.value?.protocol,
-        readyState: socket.value?.readyState
-      });
 
       socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
