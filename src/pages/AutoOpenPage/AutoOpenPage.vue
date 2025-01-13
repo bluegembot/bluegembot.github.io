@@ -173,8 +173,9 @@ function isValidUrl(string: string): boolean {
 onUnmounted(() => {
   console.log("Page unmounted, cleaning up WebSocket connection.");
   closeWebSocket();
-  if (reconnectTimeout) {
-    clearTimeout(reconnectTimeout);
+  if (reconnectTimeout.value) {
+    clearTimeout(reconnectTimeout.value); // Now passing the actual number instead of the Ref
+    reconnectTimeout.value = null;
   }
 });
 </script>
