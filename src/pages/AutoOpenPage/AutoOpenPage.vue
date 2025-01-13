@@ -51,9 +51,8 @@ function connectToWebSocket() {
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
   try {
-    socket.value = new WebSocket(wsUrl, [
-      `origin=https://bluegembot.github.io`  // Try setting origin as a protocol
-    ]);
+    // Explicitly set credentials mode
+    socket.value = new WebSocket(wsUrl);
 
     console.log("WebSocket initial state:", {
       readyState: socket.value.readyState,
