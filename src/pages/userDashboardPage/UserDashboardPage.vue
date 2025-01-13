@@ -51,7 +51,7 @@
 
         <router-link to="/account" class="grid-item">Account</router-link>
 
-        <router-link to="/autoOpen" class="grid-item">Auto Opener (OPEN BETA)</router-link>
+        <router-link to="/autoOpen" class="grid-item">Auto Opener <br> (OPEN BETA)</router-link>
       </div>
     </main>
   </div>
