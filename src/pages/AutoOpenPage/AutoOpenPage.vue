@@ -52,6 +52,7 @@ function connectToWebSocket() {
 
   // Helper function to get a specific cookie by name
   function getCookie(name: string): string | null {
+    const cookies = document.cookie.split("; ");
     for (let cookie of cookies) {
       const [key, value] = cookie.split("=");
       if (key === name) {
