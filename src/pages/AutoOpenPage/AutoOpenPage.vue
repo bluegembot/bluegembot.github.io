@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
 
-// Global socket variable
 let socket: WebSocket | null = null;
 let reconnectTimeout: number | null = null;
 const reconnectDelay = 5000;
@@ -43,25 +42,39 @@ const toggleAutoOpener = () => {
   }
 };
 
+// Function to connect to the WebSocket server
 function connectToWebSocket() {
   if (socket && socket.readyState !== WebSocket.CLOSED) {
     console.log("WebSocket is already connected or connecting.");
     return;
   }
 
-  const wsUrl = "wss://bluegembot.duckdns.org/ws";
+  // Helper function to get a specific cookie by name
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+      const [key, value] = cookie.split("=");
+      if (key === name) {
+        return decodeURIComponent(value);
+      }
+    }
+    return null; // Return null if the cookie is not found
+  }
+
+  const sessionToken = getCookie("session_token");
+  if (!sessionToken) {
+    console.error("Session token not found in cookies. Please log in.");
+    return;
+  }
+
+  const wsUrl = `wss://bluegembot.duckdns.org/ws?session_token=${sessionToken}`;
+
   console.log("Attempting to connect to:", wsUrl);
 
-  socket = new WebSocket(wsUrl);
+  const socket = new WebSocket(wsUrl);
 
   socket.onopen = () => {
-    console.log("WebSocket connection established at:", new Date().toISOString());
-    console.log("Socket state after open:", socket?.readyState);
-
-    // Type-safe access to socket
-    if (socket) {
-      socket.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
-    }
+    console.log("Connected to WebSocket server");
   };
 
   socket.onmessage = (event) => {
@@ -69,22 +82,11 @@ function connectToWebSocket() {
   };
 
   socket.onclose = (event) => {
-    console.log("WebSocket closed:", {
-      code: event.code,
-      reason: event.reason,
-      wasClean: event.wasClean,
-      timestamp: new Date().toISOString()
-    });
+    console.error("WebSocket connection closed:", event);
   };
 
   socket.onerror = (error) => {
-    console.error("WebSocket error details:", {
-      readyState: socket?.readyState,
-      url: socket?.url,
-      protocol: socket?.protocol,
-      error: error,
-      timestamp: new Date().toISOString()
-    });
+    console.error("WebSocket error:", error);
   };
 }
 
@@ -139,5 +141,7 @@ onUnmounted(() => {
   }
 });
 </script>
+
+
 
 <style src="./AutoOpenPage.css"></style>
