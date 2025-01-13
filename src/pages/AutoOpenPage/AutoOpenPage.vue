@@ -43,9 +43,6 @@ const toggleAutoOpener = () => {
   }
 };
 
-// Function to connect to the WebSocket server
-let socket: WebSocket | null = null;  // Declare the socket variable at the top of your component
-
 function connectToWebSocket() {
   if (socket && socket.readyState !== WebSocket.CLOSED) {
     console.log("WebSocket is already connected or connecting.");
