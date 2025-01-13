@@ -45,6 +45,7 @@ const toggleAutoOpener = () => {
 
 function getSessionToken() {
   const cookies = document.cookie.split(';');
+  console.log(`cookies: ${cookies}`)
   const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session_token='));
   if (sessionCookie) {
     return sessionCookie.trim().split('=')[1];
@@ -59,6 +60,8 @@ function connectToWebSocket() {
   }
 
   const sessionToken = getSessionToken();
+
+  console.log(`Token: ${sessionToken}`)
 
   if (!sessionToken) {
     console.error("No session token found in cookies");
