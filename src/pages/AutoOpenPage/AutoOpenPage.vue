@@ -49,44 +49,65 @@ function connectToWebSocket() {
     return;
   }
 
-  // Helper function to get a specific cookie by name
-  function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === name) {
-        return decodeURIComponent(value);
-      }
-    }
-    return null; // Return null if the cookie is not found
-  }
+  const wsUrl = "wss://bluegembot.duckdns.org/ws";
+  console.log('Attempting to connect to:', wsUrl);
 
-  const sessionToken = getCookie("session_token");
-  if (!sessionToken) {
-    console.error("Session token not found in cookies. Please log in.");
-    return;
-  }
+  // Create socket with options
+  socket = new WebSocket(wsUrl);
 
-  const wsUrl = `wss://bluegembot.duckdns.org/ws?session_token=${sessionToken}`;
-
-  console.log("Attempting to connect to:", wsUrl);
-
-  const socket = new WebSocket(wsUrl);
+  // Add connection state logging
+  console.log("Initial socket state:", socket.readyState);
 
   socket.onopen = () => {
-    console.log("Connected to WebSocket server");
+    console.log("WebSocket connection established at:", new Date().toISOString());
+    console.log("Socket state after open:", socket.readyState);
+
+    socket?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
+
+    if (reconnectTimeout) {
+      clearTimeout(reconnectTimeout);
+      reconnectTimeout = null;
+    }
+
+    isManualDisconnect = false;
   };
 
   socket.onmessage = (event) => {
-    console.log("Received message:", event.data);
+    const data = event.data;
+    console.log("Received message:", data);
+    openUrlInNewTab(data);
   };
 
   socket.onclose = (event) => {
-    console.error("WebSocket connection closed:", event);
+    console.log("WebSocket closed:", {
+      code: event.code,
+      reason: event.reason,
+      wasClean: event.wasClean,
+      timestamp: new Date().toISOString()
+    });
+
+    if (event.code === 4001) {
+      console.error("Unauthorized: No session token provided.");
+      errorMessage.value = "Authentication failed. Please log in again.";
+      isAutoOpenerActive.value = false;
+    } else if (!isManualDisconnect) {
+      attemptReconnect();
+    }
   };
 
   socket.onerror = (error) => {
-    console.error("WebSocket error:", error);
+    console.error("WebSocket error details:", {
+      readyState: socket?.readyState,
+      url: socket?.url,
+      protocol: socket?.protocol,
+      error: error,
+      timestamp: new Date().toISOString()
+    });
+    errorMessage.value = "Connection error. Attempting to reconnect...";
+
+    if (!isManualDisconnect) {
+      attemptReconnect();
+    }
   };
 }
 
