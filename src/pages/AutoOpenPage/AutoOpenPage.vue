@@ -43,11 +43,9 @@ const toggleAutoOpener = () => {
 
 function connectToWebSocket() {
   if (socket.value && socket.value.readyState !== WebSocket.CLOSED) {
-    console.log("WebSocket is already connected or connecting.");
     return;
   }
 
-  console.log("Starting WebSocket connection...");
   const wsUrl = "wss://bluegembot.duckdns.org/ws";
 
   try {
@@ -56,7 +54,6 @@ function connectToWebSocket() {
 
     // When the connection is established
     socket.value.onopen = () => {
-      console.log("Connected to WebSocket server");
 
       socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
@@ -71,7 +68,6 @@ function connectToWebSocket() {
     // When a message is received from the server
     socket.value.onmessage = (event) => {
       const data = event.data;
-      console.log("Received message:", data);
       openUrlInNewTab(data);
     };
 
@@ -121,14 +117,13 @@ function attemptReconnect() {
     reconnectTimeout.value = setTimeout(() => {
       console.log("Attempting to reconnect...");
       connectToWebSocket();
-    }, 5000) as unknown as number; // 5 second delay before reconnecting
+    }, 5000) as unknown as number;
   }
 }
 
 // Function to close the WebSocket connection
 function closeWebSocket() {
   if (socket.value) {
-    console.log("Closing WebSocket connection");
     isManualDisconnect.value = true;
     socket.value.close();
     socket.value = null;
@@ -159,7 +154,6 @@ function isValidUrl(string: string): boolean {
 
 // Cleanup on component unmount
 onUnmounted(() => {
-  console.log("Page unmounted, cleaning up WebSocket connection.");
   closeWebSocket();
   if (reconnectTimeout.value) {
     clearTimeout(reconnectTimeout.value); // Now passing the actual number instead of the Ref

@@ -207,7 +207,6 @@ export default {
     openMenu(skin) {
       this.selectedSkin = skin;  // Store the selected skin object
       this.showAdvancedMenu = true;
-      console.log(skin)
     },
     closeMenu() {
       this.selectedSkin = null;

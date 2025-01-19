@@ -17,7 +17,6 @@ async function isAuthenticated() {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data.username)
       return data; // Return the full response including "username"
     } else {
       return null;
@@ -45,10 +44,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  console.log('Navigating to', to.path); // Log on every navigation attempt
 
   const authData = await isAuthenticated();
-  console.log('Auth Data:', authData); // Log the authentication data
 
   if (authData?.username && authData?.chatId) {
     // Save username only if it exists
