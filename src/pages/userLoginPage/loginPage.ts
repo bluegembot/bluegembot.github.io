@@ -42,7 +42,7 @@ export const useRegistrationForm = () => {
             });
 
             if (response.status === 201) {
-                router.push('/dashboard'); // Navigate using the Composition API's router
+                await router.push('/dashboard'); // Navigate using the Composition API's router
             } else {
                 errorMessage.value = 'Login failed. Please try again.';
             }
