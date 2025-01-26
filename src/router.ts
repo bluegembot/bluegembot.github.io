@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 import UserDashboard from './pages/userDashboardPage/UserDashboardPage.vue';
-import MedicalProfessionalRegisterPage from '@/pages/userRegisterPage/RegisterPage.vue';
+import RegisterPage from '@/pages/userRegisterPage/RegisterPage.vue';
 import SkinSelector from "@/pages/skinSelectionPage/SkinSelector.vue";
 import UserLoginPage from "@/pages/userLoginPage/loginPage.vue";
 import AccountPage from "@/pages/AccountPage/AccountPage.vue";
@@ -28,13 +28,13 @@ async function isAuthenticated() {
 
 // Define your routes
 const routes = [
-  { path: '/', component: MedicalProfessionalRegisterPage, pathToRegexpOptions: { strict: true } },
+  { path: '/', component: RegisterPage, pathToRegexpOptions: { strict: true } },
   { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true } },
-  { path: '/register', component: MedicalProfessionalRegisterPage },
+  { path: '/register', component: RegisterPage },
   { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
   { path: '/login', component: UserLoginPage },
   { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
-  {path: '/autoOpen', component: AutoOpenPage}
+  {path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}}
 ];
 
 // Create the router instance using hash mode

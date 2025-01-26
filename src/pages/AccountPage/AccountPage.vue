@@ -7,7 +7,13 @@
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
         </div>
       </div>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p v-if="errorMessage"
+         :class="[
+     messageType === 'success' ? 'success-message' : 'error-message',
+     'fixed-top-message'
+   ]">
+        {{ errorMessage }}
+      </p>
 
       <!-- Section with Upcoming and Announcements -->
       <div class="upcoming-announcements">
@@ -58,6 +64,22 @@
             <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
           </div>
         </div>
+        <div
+            class="grid-item basicBorder"
+            @click="requestSubscriptionCall('Basic')"
+        >
+          <div class="subscription-info">
+            <h3>Request basic</h3>
+          </div>
+        </div>
+        <div
+            class="grid-item goldBorder"
+            @click="requestSubscriptionCall('Gold')"
+        >
+          <div class="subscription-info">
+            <h3>Request gold</h3>
+          </div>
+        </div>
       </div>
 
       <!-- Popup for In-depth Information -->
@@ -82,6 +104,41 @@ export default {
     const username = ref("");
     const chatId = ref("");
     const subscriptionStatus = ref("");
+    const errorMessage = ref("");
+    const popupVisible = ref(false);
+    const selectedSubscription = ref('');
+
+    const clearErrorMessages = () => {
+      setTimeout(() => {
+        errorMessage.value = '';
+      }, 2500);
+    };
+
+    const requestSubscriptionCall = async (subscription) => {
+      try {
+        const response = await fetch(`https://bluegembot.duckdns.org/requestSubscription`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ subscription }),
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          errorMessage.value = errorData.message;
+          clearErrorMessages()
+        } else {
+          const data = await response.json();
+          errorMessage.value = data.message;
+          clearErrorMessages();
+        }
+      } catch (e) {
+        errorMessage.value = 'An error occurred while processing your request.';
+        clearErrorMessages();
+      }
+    };
 
     onMounted(() => {
       username.value = localStorage.getItem("username");
@@ -93,12 +150,15 @@ export default {
       username,
       chatId,
       subscriptionStatus,
+      errorMessage,
+      requestSubscriptionCall,
+      clearErrorMessages,
+      popupVisible,
+      selectedSubscription
     };
   },
   data() {
     return {
-      popupVisible: false,
-      selectedSubscription: '',
       subscriptions: {
         basic: {
           title: 'BlueGemBot Basic',
@@ -147,17 +207,19 @@ export default {
     closePopup() {
       this.popupVisible = false;
       this.selectedSubscription = '';
-    },
-  },
+    }
+  }
 };
 </script>
-
 <style>
+.success-message {
+  color: green;
+  font-weight: bold;
+}
+
 .error-message {
-  display: flex;
   color: red;
   font-weight: bold;
-  margin: 10px 0;
 }
 
 .subscription-grid-container {
@@ -202,7 +264,7 @@ export default {
   color: #333;
 }
 
-.subscription-info  {
+.subscription-info {
   font-size: 16px;
   color: #666;
   line-height: 1.5;
@@ -230,30 +292,30 @@ export default {
   text-align: center;
 }
 
-.basicText{
+.basicText {
   color: #2ed1e1;
 }
 
-.basicBorder{
+.basicBorder {
   border: 2px solid #2ed1e1;
   box-shadow: 0 0 15px #2ed1e1;
 
 }
 
-.goldText{
+.goldText {
   color: #e1be18;
 }
 
-.goldBorder{
+.goldBorder {
   border: 2px solid #e1be18;
   box-shadow: 0 0 15px #e1be18;
 }
 
-.eliteText{
+.eliteText {
   color: #dd2524
 }
 
-.eliteBorder{
+.eliteBorder {
   border: 2px solid #dd2524;
   box-shadow: 0 0 15px #dd2524;
 }
@@ -357,4 +419,19 @@ main {
 .close-btn:hover {
   background-color: #555;
 }
+
+.fixed-top-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999; /* Ensure it's on top of other elements */
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
 </style>
