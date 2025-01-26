@@ -3275,6 +3275,18 @@
         "itemName": "kukri-knife-crimson-web-factory-new"
     },
     {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1815560060/256x128",
+        "itemName": "karambit-gamma-doppler-factory-new+phase-3"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1815180002/256x128",
+        "itemName": "karambit-gamma-doppler-factory-new+phase-2"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/1815196682/256x128",
+        "itemName": "karambit-gamma-doppler-factory-new+phase-1"
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
