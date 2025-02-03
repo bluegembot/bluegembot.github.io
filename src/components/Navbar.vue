@@ -1,4 +1,5 @@
 <template>
+  <!-- Rest of the template remains the same -->
   <nav class="navbar">
     <div class="navbar-brand">
       <div class="logo-circle">
@@ -36,6 +37,7 @@
             {{ item.name }}
           </router-link>
         </template>
+        <!-- Dark mode toggle as first item -->
         <button @click="toggleDarkMode" class="navbar-item toggle-button">
           <span v-if="isDarkMode" class="mode-icon">☀️</span>
           <span v-else class="mode-icon">🌙</span>
@@ -60,7 +62,7 @@ export default {
   },
   data() {
     return {
-      isDarkMode: false
+      isDarkMode: true // Set default to true
     }
   },
   methods: {
@@ -71,17 +73,22 @@ export default {
     }
   },
   mounted() {
-    // Check for saved dark mode preference
+    // Check for saved dark mode preference, default to true if not set
     const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-      this.isDarkMode = true;
+    this.isDarkMode = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+    // Apply dark mode by default or based on saved preference
+    if (this.isDarkMode) {
       document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
     }
   }
 }
 </script>
 
 <style scoped>
+/* Styles remain the same */
 .navbar {
   padding: 1rem;
   display: flex;

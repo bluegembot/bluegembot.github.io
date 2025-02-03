@@ -293,3 +293,63 @@ body.dark-mode .close-btn:hover {
 body.dark-mode .grid-item:hover {
     background-color: #333333;
 }
+/* Login page title */
+body.dark-mode .main-title {
+    color: white;
+}
+
+/* Form styles */
+body.dark-mode .registration-form {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+body.dark-mode .registration-form fieldset {
+    border-color: #444;
+}
+
+/* Form inputs */
+body.dark-mode .form-group input {
+    background-color: #333333;
+    color: white;
+    border: 1px solid #444;
+}
+
+body.dark-mode .form-group input::placeholder {
+    color: #888;
+}
+
+body.dark-mode .form-group label {
+    color: white;
+}
+
+/* Links */
+body.dark-mode .registration-form a {
+    color: #2ed1e1;
+}
+
+body.dark-mode .registration-form a:hover {
+    color: #29bbc9;
+}
+
+/* Register button */
+body.dark-mode .register-button {
+    background-color: #2ed1e1;
+    color: white;
+    border: none;
+}
+
+body.dark-mode .register-button:hover {
+    background-color: #29bbc9;
+}
+
+/* Error message */
+body.dark-mode .error-message {
+    color: #ff4444;
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+/* Form text */
+body.dark-mode .registration-form p {
+    color: #cccccc;
+}
