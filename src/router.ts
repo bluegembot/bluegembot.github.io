@@ -47,29 +47,29 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to, from, next) => {
-
-  const authData = await isAuthenticated();
-
-  if (authData?.username && authData?.chatId) {
-    // Save username only if it exists
-    localStorage.setItem('username', authData.username);
-    localStorage.setItem('chatId', authData.chatId)
-    localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
-
-
-    if (to.path === '/register' || to.path === '/login' || to.path === '/') {
-      return next('/dashboard'); // Redirect if logged in
-    }
-  } else if (to.meta.requiresAuth) {
-    localStorage.removeItem('username'); // Remove username if not authenticated
-    localStorage.removeItem('chatId')// Remove chatId if not authenticated
-    localStorage.removeItem('subscriptionStatus')// Remove subscriptionStatus if not authenticated
-    return next('/login'); // Redirect to /login if authentication is required
-  }
-
-  next(); // Proceed to the requested route
-});
+// router.beforeEach(async (to, from, next) => {
+//
+//   const authData = await isAuthenticated();
+//
+//   if (authData?.username && authData?.chatId) {
+//     // Save username only if it exists
+//     localStorage.setItem('username', authData.username);
+//     localStorage.setItem('chatId', authData.chatId)
+//     localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
+//
+//
+//     if (to.path === '/register' || to.path === '/login' || to.path === '/') {
+//       return next('/dashboard'); // Redirect if logged in
+//     }
+//   } else if (to.meta.requiresAuth) {
+//     localStorage.removeItem('username'); // Remove username if not authenticated
+//     localStorage.removeItem('chatId')// Remove chatId if not authenticated
+//     localStorage.removeItem('subscriptionStatus')// Remove subscriptionStatus if not authenticated
+//     return next('/login'); // Redirect to /login if authentication is required
+//   }
+//
+//   next(); // Proceed to the requested route
+// });
 
 
 

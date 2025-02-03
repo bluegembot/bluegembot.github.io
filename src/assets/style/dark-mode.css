@@ -1,0 +1,295 @@
+/* assets/style/dark-mode.css */
+body {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+/* Dark mode navbar styles */
+body.dark-mode .navbar {
+    background-color: #1a1a1a;
+    border-bottom-color: #2ed1e1;
+}
+
+body.dark-mode .navbar-item {
+    color: white;
+}
+
+/* Dark mode section styles */
+body.dark-mode section {
+    background-color: #1a1a1a;
+}
+
+/* Dashboard specific dark mode styles */
+body.dark-mode .main-title {
+    color: white;
+}
+
+body.dark-mode .upcoming,
+body.dark-mode .announcements {
+    background-color: #2a2a2a;
+    border-color: #2ed1e1;
+}
+
+body.dark-mode .upcoming h2,
+body.dark-mode .announcements h2 {
+    background-color: #2a2a2a;
+    color: white;
+    border-bottom-color: #444;
+}
+
+/* Dark mode list items */
+body.dark-mode .upcoming-list li:nth-child(odd),
+body.dark-mode .announcement-list li:nth-child(odd) {
+    background-color: #333333;
+    color: white;
+}
+
+body.dark-mode .upcoming-list li:nth-child(even),
+body.dark-mode .announcement-list li:nth-child(even) {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+/* Dark mode grid items */
+body.dark-mode .grid-item {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #2ed1e1;
+}
+
+body.dark-mode .grid-item:hover {
+    background-color: #333333;
+}
+
+/* Dark mode tracked skin items */
+body.dark-mode .tracked-skin-item {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: white;
+}
+
+/* Keep the stop tracking button styles */
+body.dark-mode .stop-tracking-button {
+    background-color: #ff4444;
+    color: white;
+}
+
+body.dark-mode .stop-tracking-button:hover {
+    background-color: #cc0000;
+}
+
+/* Error/Success messages in dark mode */
+body.dark-mode .error-message,
+body.dark-mode .success-message {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+/* No tracking message in dark mode */
+body.dark-mode .no-tracking-message {
+    color: #cccccc;
+}
+
+/* Feature cards in dark mode */
+body.dark-mode .feature-card {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .testimonial-card {
+    background-color: #2a2a2a;
+}
+
+/* Keep the button colors but adjust text color */
+body.dark-mode .login-button,
+body.dark-mode .register-button {
+    color: white;
+}
+
+/* Preserve hover states */
+body.dark-mode .login-button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+body.dark-mode .register-button:hover {
+    background-color: #2ed1e1;
+    color: white;
+}
+
+body.dark-mode .search-container {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .search-bar {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #444;
+}
+
+body.dark-mode .search-bar::placeholder {
+    color: #888;
+}
+
+/* Table styles */
+body.dark-mode table {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #444;
+}
+
+body.dark-mode th {
+    background-color: #333333;
+    color: white;
+    border-color: #444;
+}
+
+body.dark-mode td {
+    border-color: #444;
+    color: white;
+}
+
+body.dark-mode tr:nth-child(even) {
+    background-color: #333333;
+}
+
+body.dark-mode tr:nth-child(odd) {
+    background-color: #2a2a2a;
+}
+
+/* Select dropdown */
+body.dark-mode select {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #444;
+}
+
+body.dark-mode select option {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+/* Input fields */
+body.dark-mode .float-input {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #444;
+}
+
+/* Buttons */
+body.dark-mode button {
+    background-color: #2ed1e1;
+    color: white;
+    border: none;
+}
+
+body.dark-mode button:hover {
+    background-color: #29bbc9;
+}
+
+body.dark-mode .dashboard-button {
+    background-color: #4CAF50;
+}
+
+body.dark-mode .dashboard-button:hover {
+    background-color: #45a049;
+}
+
+/* Modal */
+body.dark-mode .modal-content {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #444;
+}
+
+body.dark-mode .modal-checkbox label {
+    color: white;
+}
+
+/* Main title */
+body.dark-mode .main-title {
+    color: white;
+}
+/* Subscription page title */
+body.dark-mode .subscription-tiers-title2 {
+    color: white;
+}
+
+/* Subscription grid items */
+body.dark-mode .grid-item {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+/* Keep the border colors as they are for visual distinction */
+body.dark-mode .basicBorder {
+    border-color: #4CAF50;
+}
+
+body.dark-mode .goldBorder {
+    border-color: #FFD700;
+}
+
+body.dark-mode .eliteBorder {
+    border-color: #2ed1e1;
+}
+
+/* Subscription text colors - keeping them distinct */
+body.dark-mode .basicText {
+    color: #4CAF50;
+}
+
+body.dark-mode .goldText {
+    color: #FFD700;
+}
+
+body.dark-mode .eliteText {
+    color: #2ed1e1;
+}
+
+/* Subscription info */
+body.dark-mode .subscription-info h3 {
+    color: white;
+}
+
+body.dark-mode .subscription-info p {
+    color: #cccccc;
+}
+
+/* Popup styles */
+body.dark-mode .popup-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode .popup-content {
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+}
+
+body.dark-mode .subscription-perks {
+    color: #cccccc;
+}
+
+body.dark-mode .subscription-perks li {
+    border-bottom: 1px solid #444;
+}
+
+/* Close button */
+body.dark-mode .close-btn {
+    background-color: #2ed1e1;
+    color: white;
+    border: none;
+}
+
+body.dark-mode .close-btn:hover {
+    background-color: #29bbc9;
+}
+
+/* Grid hover effects */
+body.dark-mode .grid-item:hover {
+    background-color: #333333;
+}

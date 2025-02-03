@@ -22,6 +22,13 @@
 
       <!-- Right side navbar items -->
       <div class="navbar-end">
+        <!-- Dark mode toggle as first item -->
+        <button @click="toggleDarkMode" class="navbar-item toggle-button">
+          <span v-if="isDarkMode" class="mode-icon">☀️</span>
+          <span v-else class="mode-icon">🌙</span>
+        </button>
+
+        <!-- Regular right side items -->
         <template v-for="(item, index) in rightItems" :key="item.name">
           <router-link
               :to="item.path"
@@ -51,6 +58,26 @@ export default {
     rightItems: {
       type: Array,
       default: () => []
+    }
+  },
+  data() {
+    return {
+      isDarkMode: false
+    }
+  },
+  methods: {
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode;
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', this.isDarkMode);
+    }
+  },
+  mounted() {
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'true') {
+      this.isDarkMode = true;
+      document.body.classList.add('dark-mode');
     }
   }
 }
@@ -82,8 +109,22 @@ export default {
   color: black;
   text-decoration: none;
   padding: 0.5rem 1rem;
+  border-radius: 4px;
   transition: background-color 0.3s;
-  border-radius: 5px;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mode-icon {
+  font-size: 1.2rem;
 }
 
 .navbar-item:hover {
@@ -107,24 +148,24 @@ export default {
 
 /* Custom styles for login and register buttons */
 .login-button {
-  border: 2px solid forestgreen; /* Green color */
+  border-bottom: 2px solid #4CAF50;
   color: black;
   background-color: transparent;
 }
 
 .register-button {
-  border: 2px solid #2ed1e1; /* Your specified color */
+  border-bottom: 2px solid #2ed1e1;
   color: black;
   background-color: transparent;
 }
 
 .login-button:hover {
   color: white;
-  background-color: forestgreen; /* Green on hover */
+  background-color: #4CAF50;
 }
 
 .register-button:hover {
   color: white;
-  background-color: #2ed1e1; /* Your color on hover */
+  background-color: #2ed1e1;
 }
 </style>

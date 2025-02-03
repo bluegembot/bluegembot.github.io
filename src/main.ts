@@ -3,6 +3,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import Navbar from "@/components/Navbar.vue"
+import './assets/style/main.css'
+import './assets/style/dark-mode.css'  // Add this line
 
 const app = createApp(App)
 
