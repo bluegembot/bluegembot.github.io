@@ -22,12 +22,6 @@
 
       <!-- Right side navbar items -->
       <div class="navbar-end">
-        <!-- Dark mode toggle as first item -->
-        <button @click="toggleDarkMode" class="navbar-item toggle-button">
-          <span v-if="isDarkMode" class="mode-icon">☀️</span>
-          <span v-else class="mode-icon">🌙</span>
-        </button>
-
         <!-- Regular right side items -->
         <template v-for="(item, index) in rightItems" :key="item.name">
           <router-link
@@ -42,6 +36,10 @@
             {{ item.name }}
           </router-link>
         </template>
+        <button @click="toggleDarkMode" class="navbar-item toggle-button">
+          <span v-if="isDarkMode" class="mode-icon">☀️</span>
+          <span v-else class="mode-icon">🌙</span>
+        </button>
       </div>
     </div>
   </nav>
