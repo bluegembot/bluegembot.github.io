@@ -10,17 +10,17 @@
     <section id="features" ref="features" class="fade-section">
       <div class="content-wrapper">
         <div class="features">
-          <div class="feature-card">
+          <div class="feature-card fast">
             <div class="feature-icon">⚡</div>
             <h3>Lightning Fast</h3>
             <p>Experience unprecedented speed and efficiency with our discord bot, and automatically open listings instantly with the integrated auto-opener.</p>
           </div>
-          <div class="feature-card">
+          <div class="feature-card secure">
             <div class="feature-icon">🛡️</div>
             <h3>Secure by Design</h3>
             <p>Login and registration tokens are all managed through your discord DM's with BlueGemBot, eliminating the need for passwords and 3rd party logins.</p>
           </div>
-          <div class="feature-card">
+          <div class="feature-card profitable">
             <div class="feature-icon">💰</div>
             <h3>Profitable</h3>
             <p>Combine the speed of BlueGemBot with your skin knowledge to cherry pick profitable deals!</p>
@@ -412,4 +412,18 @@ input:focus, textarea:focus {
   --text-light: #ffffff;
   --text-gray: #a0a0a0;
 }
+
+.fast{
+  border: 3px solid #f8f800;
+}
+
+.secure{
+  border: 3px solid red;
+}
+
+.profitable{
+  border: 3px solid forestgreen;
+}
+
+
 </style>
