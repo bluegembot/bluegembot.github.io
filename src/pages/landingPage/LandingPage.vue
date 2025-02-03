@@ -1,5 +1,11 @@
 <template>
   <div>
+    <Navbar
+        :rightItems="[
+        { name: 'Login', path: '/login' },
+        { name: 'Register', path: '/register' }
+      ]"
+    />
     <section id="hero" ref="hero">
       <div class="content-wrapper hero-content">
         <h1>Transform the way you snipe CS skins</h1>
@@ -404,7 +410,6 @@ input:focus, textarea:focus {
   transform: translateY(0);
 }
 
-/* Rest of your existing styles remain the same */
 :root {
   --accent-color: #2ed1e1;
   --bg-dark: #121212;
@@ -424,6 +429,5 @@ input:focus, textarea:focus {
 .profitable{
   border: 3px solid forestgreen;
 }
-
 
 </style>

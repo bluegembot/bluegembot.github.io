@@ -1,12 +1,13 @@
 <template>
   <div>
+    <Navbar
+        :rightItems="[
+        { name: 'Upgrade', path: '/subscriptions' }
+      ]"
+    />
     <main>
       <h1 class="main-title">Welcome to BGB, {{ username }}!</h1>
-      <div class="logo-container">
-        <div class="logo-circle">
-          <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img"/>
-        </div>
-      </div>
+
       <!-- Error/Success Message -->
       <p v-if="errorMessage"
          :class="[

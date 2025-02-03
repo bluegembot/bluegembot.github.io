@@ -1,9 +1,10 @@
 <template>
-  <div class="logo-container">
-    <div class="logo-circle">
-      <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
-    </div>
-  </div>
+
+  <Navbar
+      :rightItems="[
+        { name: 'Dashboard', path: '/dashboard' }
+      ]"
+  />
   <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   <div class="auto-opener-page">
     <h1>Auto Opener</h1>

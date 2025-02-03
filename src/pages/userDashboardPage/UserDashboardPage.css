@@ -76,7 +76,7 @@ nav ul li a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* Allow vertical scrolling */
   max-height: 325px; /* Set a max height to enable scrolling */
-  border: 5px solid #2ed1e1;
+  border: 3px solid #2ed1e1;
 }
 
 .upcoming {
@@ -143,7 +143,7 @@ li {
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
-  border: 5px solid #2ed1e1;
+  border: 3px solid #2ed1e1;
   text-decoration: none; /* Removes underline */
   color: inherit; /* Inherits the text color from parent or specified color */
 }

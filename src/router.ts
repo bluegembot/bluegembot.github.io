@@ -6,7 +6,8 @@ import SkinSelector from "@/pages/skinSelectionPage/SkinSelector.vue";
 import UserLoginPage from "@/pages/userLoginPage/loginPage.vue";
 import AccountPage from "@/pages/AccountPage/AccountPage.vue";
 import AutoOpenPage from "@/pages/AutoOpenPage/AutoOpenPage.vue";
-import LandingPage from "@/pages/landingPage/landingPage.vue";
+import LandingPage from "@/pages/landingPage/LandingPage.vue";
+import SubscriptionsPage from "@/pages/Subscriptions/SubscriptionsPage.vue";
 
 // Async function to check if the session token is valid by making an API call
 async function isAuthenticated() {
@@ -36,7 +37,8 @@ const routes = [
   { path: '/login', component: UserLoginPage },
   { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
   {path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}},
-  {path: '/about', component: LandingPage, meta:{requiresAuth: false}}
+  {path: '/about', component: LandingPage, meta:{requiresAuth: false}},
+  {path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}}
 ];
 
 // Create the router instance using hash mode

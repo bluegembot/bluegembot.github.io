@@ -1,34 +1,85 @@
 <template>
-  <div>
 
-    <Navbar
-        :rightItems="[
-        { name: 'Dashboard', path: '/dashboard' }
-      ]"
-    />
-    <main>
-      <h1 class="main-title">Account information</h1>
-      <p v-if="errorMessage"
-         :class="[
+  <p v-if="errorMessage"
+     :class="[
      messageType === 'success' ? 'success-message' : 'error-message',
      'fixed-top-message'
    ]">
-        {{ errorMessage }}
-      </p>
+    {{ errorMessage }}
+  </p>
 
-      <!-- Section with Upcoming and Announcements -->
-      <div class="upcoming-announcements">
-        <div class="upcoming">
-          <h2>{{ username }}'s info</h2>
-          <ul class="upcoming-list">
-            <li>Your BGB username: {{ username }}</li>
-            <li>Your discord user ID: {{ chatId }}</li>
-            <li>Your current subscription: {{ subscriptionStatus }}</li>
-          </ul>
-        </div>
+<main>
+  <Navbar
+      :rightItems="[
+        { name: 'Dashboard', path: '/dashboard' }
+      ]"
+  />
+
+  <h2 class="subscription-tiers-title2">SUBSCRIPTION TIERS</h2>
+
+  <div class="subscription-grid-container">
+    <div
+        class="grid-item basicBorder"
+        @click="openPopup('basic')"
+    >
+      <img class="subscription-image" src="@/assets/BGBLogo.jpg" alt="BGB Basic subscription logo" />
+      <div class="subscription-info">
+        <h3>BlueGemBot Basic</h3>
+        <p>Access essential features with basic filtering to track skins efficiently.</p>
+        <div class="price-tag basicText">&euro;10/month</div>
       </div>
-    </main>
+    </div>
+    <div
+        class="grid-item goldBorder"
+        @click="openPopup('gold')"
+    >
+      <img class="subscription-image" src="@/assets/BGBGold.jpg" alt="BGB Gold subscription logo" />
+      <div class="subscription-info">
+        <h3>BlueGemBot Gold</h3>
+        <p>Access everything from BlueGemBot Basic. Enjoy less restrictive skin tracking capabilities.</p>
+        <div class="price-tag goldText">&euro;15/month</div>
+      </div>
+    </div>
+    <div
+        class="grid-item eliteBorder"
+        @click="openPopup('elite')"
+    >
+      <img class="subscription-image" src="@/assets/BGBElite.jpg" alt="BGB Elite subscription logo" />
+      <div class="subscription-info">
+        <h3>BlueGemBot Elite</h3>
+        <p>Everything from Gold, premium filtering capabilities and Discord server integration.</p>
+        <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
+      </div>
+    </div>
+    <div
+        class="grid-item basicBorder"
+        @click="requestSubscriptionCall('Basic')"
+    >
+      <div class="subscription-info">
+        <h3>Request basic</h3>
+      </div>
+    </div>
+    <div
+        class="grid-item goldBorder"
+        @click="requestSubscriptionCall('Gold')"
+    >
+      <div class="subscription-info">
+        <h3>Request gold</h3>
+      </div>
+    </div>
   </div>
+
+  <!-- Popup for In-depth Information -->
+  <div v-if="popupVisible" class="popup-overlay" @click.self="closePopup">
+    <div class="popup-content">
+      <h2>{{ selectedSubscriptionTitle }}</h2>
+      <ul class="subscription-perks">
+        <li v-for="perk in selectedSubscriptionPerks" :key="perk">{{ perk }}</li>
+      </ul>
+      <button class="close-btn" @click="closePopup">Close</button>
+    </div>
+  </div>
+</main>
 </template>
 
 <script>
@@ -146,70 +197,15 @@ export default {
   }
 };
 </script>
-<style>
-.success-message {
-  color: green;
+
+<style scoped>
+.subscription-tiers-title2 {
+  text-align: center;
+  font-size: 28px;
+  color: #444;
+  margin: 30px 0 20px;
+  text-transform: uppercase;
   font-weight: bold;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-}
-
-.subscription-grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  margin: 50px auto;
-  //padding: 5px;
-}
-
-.grid-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  max-height: fit-content;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.grid-item:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-.subscription-image {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.subscription-info h3 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.main-title {
-  text-align: center;
-  font-size: 36px;
-  color: #333;
 }
 
 body {
@@ -280,5 +276,101 @@ main {
   opacity: 1;
   transition: opacity 1s ease-out;
 }
+
+.success-message {
+  color: green;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.coming-soon {
+  color: #dd2524;
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.price-tag {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2ed1e1;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.basicText {
+  color: #2ed1e1;
+}
+
+.basicBorder {
+  border: 2px solid #2ed1e1;
+  box-shadow: 0 0 15px #2ed1e1;
+
+}
+
+.goldText {
+  color: #e1be18;
+}
+
+.goldBorder {
+  border: 2px solid #e1be18;
+  box-shadow: 0 0 15px #e1be18;
+}
+
+.eliteText {
+  color: #dd2524
+}
+
+.eliteBorder {
+  border: 2px solid #dd2524;
+  box-shadow: 0 0 15px #dd2524;
+}
+
+.subscription-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 50px auto;
+  //padding: 5px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-height: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.subscription-image {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.subscription-info h3 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
 
 </style>
