@@ -430,4 +430,8 @@ input:focus, textarea:focus {
   border: 3px solid forestgreen;
 }
 
+.video-container{
+  border: 2px solid #2ed1e1;
+}
+
 </style>
