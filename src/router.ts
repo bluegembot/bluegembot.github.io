@@ -48,6 +48,10 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  // Skip authentication check for the about page
+  if (to.path === '/about') {
+    return next();
+  }
 
   const authData = await isAuthenticated();
 
@@ -57,7 +61,6 @@ router.beforeEach(async (to, from, next) => {
     localStorage.setItem('chatId', authData.chatId)
     localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
 
-
     if (to.path === '/register' || to.path === '/login' || to.path === '/') {
       return next('/dashboard'); // Redirect if logged in
     }
@@ -65,7 +68,7 @@ router.beforeEach(async (to, from, next) => {
     localStorage.removeItem('username'); // Remove username if not authenticated
     localStorage.removeItem('chatId')// Remove chatId if not authenticated
     localStorage.removeItem('subscriptionStatus')// Remove subscriptionStatus if not authenticated
-    return next('/login'); // Redirect to /login if authentication is required
+    return next('/about'); // Redirect to /about if authentication is required
   }
 
   next(); // Proceed to the requested route
