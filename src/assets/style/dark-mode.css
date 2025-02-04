@@ -272,6 +272,7 @@ body.dark-mode .subscription-perks {
 
 body.dark-mode .subscription-perks li {
     border-bottom: 1px solid #444;
+    color: white;
 }
 
 /* Close button */
@@ -322,8 +323,4 @@ body.dark-mode .registration-form a:hover {
 /* Form text */
 body.dark-mode .registration-form p {
     color: #cccccc;
-}
-
-body.dark-mode .subscription-perks{
-    color: white;
 }
