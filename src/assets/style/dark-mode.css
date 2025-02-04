@@ -219,15 +219,30 @@ body.dark-mode .subscription-tiers-title2 {
 }
 
 /* Subscription text colors - keeping them distinct */
-body.dark-mode .basicText .basicBorder {
+body.dark-mode .basicText {
     color: #2ed1e1;
 }
 
-body.dark-mode .goldText .goldBorder {
+.basicBorder {
+    border: 2px solid #2ed1e1;
+    box-shadow: 0 0 15px #2ed1e1;
+}
+
+.goldBorder {
+    border: 2px solid #e1be18;
+    box-shadow: 0 0 15px #e1be18;
+}
+
+.eliteBorder {
+    border: 2px solid #dd2524;
+    box-shadow: 0 0 15px #dd2524;
+}
+
+body.dark-mode .goldText {
     color: #FFD700;
 }
 
-body.dark-mode .eliteText .eliteBorder {
+body.dark-mode .eliteText {
     color: #dd2524;
 }
 
