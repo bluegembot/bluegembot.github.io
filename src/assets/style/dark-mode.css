@@ -219,16 +219,16 @@ body.dark-mode .subscription-tiers-title2 {
 }
 
 /* Subscription text colors - keeping them distinct */
-body.dark-mode .basicText {
-    color: #4CAF50;
+body.dark-mode .basicText .basicBorder {
+    color: #2ed1e1;
 }
 
-body.dark-mode .goldText {
+body.dark-mode .goldText .goldBorder {
     color: #FFD700;
 }
 
-body.dark-mode .eliteText {
-    color: #2ed1e1;
+body.dark-mode .eliteText .eliteBorder {
+    color: #dd2524;
 }
 
 /* Subscription info */
