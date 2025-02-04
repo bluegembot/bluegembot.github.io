@@ -223,17 +223,17 @@ body.dark-mode .basicText {
     color: #2ed1e1;
 }
 
-.basicBorder {
+body.dark-mode .basicBorder {
     border: 2px solid #2ed1e1;
     box-shadow: 0 0 15px #2ed1e1;
 }
 
-.goldBorder {
+body.dark-mode .goldBorder {
     border: 2px solid #e1be18;
     box-shadow: 0 0 15px #e1be18;
 }
 
-.eliteBorder {
+body.dark-mode .eliteBorder {
     border: 2px solid #dd2524;
     box-shadow: 0 0 15px #dd2524;
 }
