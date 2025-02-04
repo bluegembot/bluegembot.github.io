@@ -323,3 +323,7 @@ body.dark-mode .registration-form a:hover {
 body.dark-mode .registration-form p {
     color: #cccccc;
 }
+
+body.dark-mode.subscription-perks{
+    color: white;
+}
