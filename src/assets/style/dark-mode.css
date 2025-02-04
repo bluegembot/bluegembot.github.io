@@ -218,19 +218,6 @@ body.dark-mode .subscription-tiers-title2 {
     color: white;
 }
 
-/* Keep the border colors as they are for visual distinction */
-body.dark-mode .basicBorder {
-    border-color: #4CAF50;
-}
-
-body.dark-mode .goldBorder {
-    border-color: #FFD700;
-}
-
-body.dark-mode .eliteBorder {
-    border-color: #2ed1e1;
-}
-
 /* Subscription text colors - keeping them distinct */
 body.dark-mode .basicText {
     color: #4CAF50;
