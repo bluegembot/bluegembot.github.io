@@ -19,6 +19,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onUnmounted } from "vue";
+import { WS_URL} from '@/config/environment';
 
 const socket = ref<WebSocket | null>(null);
 const reconnectTimeout = ref<number | null>(null);
@@ -47,7 +48,7 @@ function connectToWebSocket() {
     return;
   }
 
-  const wsUrl = "wss://bluegembot.duckdns.org/ws";
+  const wsUrl = `${WS_URL}`;
 
   try {
     // Explicitly set credentials mode

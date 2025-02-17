@@ -1,5 +1,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';  // Import useRouter hook
+import {API_URL} from '@/config/environment';
 
 export const useRegistrationForm = () => {
     const router = useRouter(); // Use the Composition API's useRouter hook
@@ -13,7 +14,7 @@ export const useRegistrationForm = () => {
 
     const fetchCsrfToken = async () => {
         try {
-            const response = await fetch('https://bluegembot.duckdns.org/csrf-token', {
+            const response = await fetch(`${API_URL}/csrf-token`, {
                 credentials: 'include',
             });
             const data = await response.json();
@@ -30,8 +31,8 @@ export const useRegistrationForm = () => {
             const requestBody = {
                 OTL: form.value.OTL,
             };
-
-            const response = await fetch('https://bluegembot.duckdns.org/loginUser', {
+            console.log(API_URL)
+            const response = await fetch(`${API_URL}/loginUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

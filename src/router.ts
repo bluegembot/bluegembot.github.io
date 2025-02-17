@@ -9,22 +9,29 @@ import AutoOpenPage from "@/pages/AutoOpenPage/AutoOpenPage.vue";
 import LandingPage from "@/pages/landingPage/LandingPage.vue";
 import SubscriptionsPage from "@/pages/Subscriptions/SubscriptionsPage.vue";
 
-// Async function to check if the session token is valid by making an API call
+const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
+
+export const API_URL = isDevelopment
+    ? 'http://localhost:3002'
+    : 'https://bluegembot.duckdns.org';
+
+// Your authentication function
 async function isAuthenticated() {
   try {
-    const response = await fetch('https://bluegembot.duckdns.org/authenticateToken', {
+    const response = await fetch(`${API_URL}/authenticateToken`, {
       method: 'GET',
       credentials: 'include',
     });
 
     if (response.ok) {
       const data = await response.json();
-      return data; // Return the full response including "username"
+      return data;
     } else {
       return null;
     }
   } catch (error) {
-    return null; // Return null if there's an error
+    console.error('Authentication error:', error);
+    return null;
   }
 }
 

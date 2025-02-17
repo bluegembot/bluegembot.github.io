@@ -33,6 +33,7 @@
 
 <script>
 import { onMounted, ref } from "vue";
+import { API_URL} from '@/config/environment';
 
 export default {
   setup() {
@@ -51,7 +52,7 @@ export default {
 
     const requestSubscriptionCall = async (subscription) => {
       try {
-        const response = await fetch(`https://bluegembot.duckdns.org/requestSubscription`, {
+        const response = await fetch(`${API_URL}/requestSubscription`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

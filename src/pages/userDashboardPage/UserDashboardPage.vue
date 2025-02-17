@@ -24,7 +24,7 @@
           <ul class="upcoming-list">
             <template v-if="trackedSkins.length > 0">
               <li v-for="(skin, index) in trackedSkins" :key="skin.name" class="tracked-skin-item">
-                {{ index + 1 }}. {{ skin.name }} | Min Float: {{ skin.minWear }} | Max Float: {{ skin.maxWear }}
+                {{ index + 1 }}. {{ skin.name }} | Min Float: {{ skin.minWear }} | Max Float: {{ skin.maxWear }} | Forced Discount: {{skin.forcedDiscount}}
                 <button class="stop-tracking-button" @click="stopTracking(skin)">
                   Stop Tracking
                 </button>
@@ -63,6 +63,7 @@
 
 <script>
 import {onMounted, ref} from "vue";
+import {API_URL} from '@/config/environment';
 
 export default {
   setup() {
@@ -77,7 +78,7 @@ export default {
 
     const fetchCsrfTokenAndUserConfig = async () => {
       try {
-        const csrfResponse = await fetch("https://bluegembot.duckdns.org/csrf-token", {
+        const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
           method: "GET",
           credentials: "include",
         });
@@ -90,7 +91,7 @@ export default {
         const csrfToken = csrfData.csrfToken;
 
         const configResponse = await fetch(
-            `https://bluegembot.duckdns.org/getUserConfig`,
+            `${API_URL}/getUserConfig`,
             {
               method: "GET",
               headers: {
@@ -109,6 +110,7 @@ export default {
           name: item.itemOfInterest,
           minWear: item.minWear,
           maxWear: item.maxWear,
+          forcedDiscount: item.forcedDiscount
         }));
       } catch (error) {
         console.error("Error fetching user config:", error);
@@ -118,7 +120,7 @@ export default {
 
     const stopTracking = async (skin) => {
       try {
-        const csrfResponse = await fetch("https://bluegembot.duckdns.org/csrf-token", {
+        const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
           method: "GET",
           credentials: "include",
         });
@@ -130,7 +132,7 @@ export default {
         const csrfData = await csrfResponse.json();
         const csrfToken = csrfData.csrfToken;
 
-        const deleteResponse = await fetch("https://bluegembot.duckdns.org/deleteSkin", {
+        const deleteResponse = await fetch(`${API_URL}/deleteSkin`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

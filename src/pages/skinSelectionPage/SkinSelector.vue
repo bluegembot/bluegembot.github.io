@@ -29,7 +29,6 @@
     </p>
 
 
-
     <!-- Table -->
     <table v-if="displayedSkins.length > 0">
       <thead>
@@ -97,12 +96,22 @@
             </p>
             <h3>Advanced Options</h3>
             <div class="modal-checkbox-container">
+              <div class="multi-range">
+                <!-- Input controls -->
+
+                <!-- Multi-handle slider -->
+                <DiscountSlider
+                    v-model:minDiscount="advancedOptions.minDiscount"
+                    v-model:forceDiscount="advancedOptions.forceDiscount"
+                />
+
+              </div>
               <div class="modal-checkbox">
-                <label for="option1">StatTrak</label>
+                <label for="option3">StatTrak</label>
                 <input id="StatTrak" v-model="advancedOptions.statTrak" type="checkbox"/>
               </div>
               <div class="modal-checkbox">
-                <label for="option2">Souvenir</label>
+                <label for="option4">Souvenir</label>
                 <input id="Souvenir" v-model="advancedOptions.souvenir" type="checkbox"/>
               </div>
             </div>
@@ -121,19 +130,26 @@
 </template>
 <script>
 import skinsJson from "@/assets/skins.json";
+import {API_URL} from '@/config/environment';
+import DiscountSlider from "@/components/DiscountSlider.vue"
 
 export default {
+  components: {
+    DiscountSlider
+  },
   data() {
     return {
       searchQuery: "",
-      skins: [], // Full dataset
-      displayedSkins: [], // Currently displayed skins based on search
-      errorMessage: "", // Error message to display
+      skins: [],
+      displayedSkins: [],
+      errorMessage: "",
       modalErrorMessage: "",
-      showAdvancedMenu: false, // Controls visibility of the modal
+      showAdvancedMenu: false,
       advancedOptions: {
         statTrak: false,
         souvenir: false,
+        minDiscount: -1,
+        forceDiscount: false
       },
     };
   },
@@ -252,12 +268,11 @@ export default {
       }
 
       // Pass the selected skin directly to addSkin
-      this.addSkin(this.selectedSkin, advancedOption);
+      this.addSkin(this.selectedSkin, advancedOption = "");
 
       this.closeMenu(); // Close the modal after applying options
     },
     addSkin(skin, advancedOption = "") {
-      // Modify the itemName to include the selected condition
       let finalSkinName = skin.itemName
           .replace('factory-new', skin.condition.toLowerCase().replace(' ', '-'))
           .replace('minimal-wear', skin.condition.toLowerCase().replace(' ', '-'))
@@ -270,13 +285,14 @@ export default {
       }
 
       const payload = {
-        skinName: finalSkinName, // Updated skin name
+        skinName: finalSkinName,
         minFloat: skin.minFloat,
         maxFloat: skin.maxFloat,
+        minDiscount: this.advancedOptions.forceDiscount ? this.advancedOptions.minDiscount : false
       };
 
       // First, fetch the CSRF token
-      fetch("https://bluegembot.duckdns.org/csrf-token", {
+      fetch(`${API_URL}/csrf-token`, {
         method: "GET",
         credentials: "include", // Include credentials (cookies) in the request
       })
@@ -285,7 +301,7 @@ export default {
             const csrfToken = data.csrfToken; // Get the CSRF token
 
             // Now send the request to add the skin
-            fetch("https://bluegembot.duckdns.org/addSkin", {
+            fetch(`${API_URL}/addSkin`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -315,7 +331,7 @@ export default {
           });
     },
 
-    clearErrorMessages(){
+    clearErrorMessages() {
       // After 1 second, fade out the message
       setTimeout(() => {
         this.errorMessage = ''; // Clear the message

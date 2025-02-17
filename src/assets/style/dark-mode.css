@@ -324,3 +324,7 @@ body.dark-mode .registration-form a:hover {
 body.dark-mode .registration-form p {
     color: #cccccc;
 }
+
+.range-labels{
+    color:white;
+}

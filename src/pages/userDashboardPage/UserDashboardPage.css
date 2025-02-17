@@ -80,7 +80,7 @@ nav ul li a {
 }
 
 .upcoming {
-  width: 66%;
+  width: 75%;
   position: relative; /* Ensures child elements' positioning is relative to this container */
 }
 

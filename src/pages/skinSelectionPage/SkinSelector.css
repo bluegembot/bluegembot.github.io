@@ -190,5 +190,111 @@ button:hover {
     transition: opacity 1s ease-out;
 }
 
+.modal-input{
+    max-width: 8vh;
+    max-height: 2vh;
+    margin-left: 45px;
+    font-size: 14px; /* Adjust label font size for readability */
+    line-height: 1.5; /* Ensure consistent height for text alignment */
+}
 
+.multi-range {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
+.input-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.number-input {
+    width: 120px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.slider-container {
+    position: relative;
+    height: 40px;
+    margin: 10px 0;
+}
+
+.slider-track {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #ddd;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+}
+
+.slider-fill {
+    position: absolute;
+    height: 4px;
+    background-color: #4299e1;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+}
+
+.slider-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 2px solid #4299e1;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 2;
+    transition: border-color 0.2s;
+}
+
+.slider-handle:hover,
+.slider-handle:active {
+    border-color: #2b6cb0;
+}
+
+.handle-tooltip {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4299e1;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.slider-handle:hover .handle-tooltip {
+    opacity: 1;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Prevent text selection while dragging */
+.slider-container {
+    user-select: none;
+}
