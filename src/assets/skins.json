@@ -3323,7 +3323,60 @@
         "itemName": "navaja-knife-ultraviolet-factory-new"
     },
     {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2221700304/256x128",
+        "itemName": "shadow-daggers-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3221924964/256x128",
+        "itemName": "navaja-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/720341907/256x128",
+        "itemName": "bayonet-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/720353189/256x128",
+        "itemName": "m9-bayonet-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2221333801/256x128",
+        "itemName": "butterfly-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/720381639/256x128",
+        "itemName": "karambit-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3222892946/256x128",
+        "itemName": "talon-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3221850261/256x128",
+        "itemName": "stiletto-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://cdn.skinport.com/cdn-cgi/image/width=256,height=128,fit=pad,format=avif,quality=85,background=transparent/images/screenshots/415606418/playside.png",
+        "itemName": "huntsman-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2221341635/256x128",
+        "itemName": "bowie-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3222332564/256x128",
+        "itemName": "ursus-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "falchion-knife-rust-coat-battle-scarred",
+        "itemName": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2220389143/256x128"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/721170268/256x128",
+        "itemName": "gut-knife-rust-coat-battle-scarred"
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
+
 ]
