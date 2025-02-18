@@ -3375,8 +3375,55 @@
         "itemName": "gut-knife-rust-coat-battle-scarred"
     },
     {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/721704520/256x128",
+        "itemName": "bayonet-ultraviolet-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3231164540/256x128",
+        "itemName": "talon-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2221530572/256x128",
+        "itemName": "butterfly-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/721708424/256x128",
+        "itemName": "m9-bayonet-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2224849400/256x128",
+        "itemName": "huntsman-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/720422428/256x128",
+        "itemName": "karambit-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3223999271/256x128",
+        "itemName": "ursus-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/5146980103/256x128",
+        "itemName": "bowie-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/3222830129/256x128",
+        "itemName": "stiletto-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/720991802/256x128",
+        "itemName": "flip-knife-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/2221451808/256x128",
+        "itemName": "shadow-daggers-ultraviolet-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/725785687/256x128",
+        "itemName": "gut-knife-ultraviolet-minimal-wear"
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
-
 ]
