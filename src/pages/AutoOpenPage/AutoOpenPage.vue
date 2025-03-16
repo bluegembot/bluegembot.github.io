@@ -119,7 +119,7 @@ function attemptReconnect() {
     reconnectTimeout.value = setTimeout(() => {
       console.log("Attempting to reconnect...");
       connectToWebSocket();
-    }, 5000) as unknown as number;
+    }, 7500) as unknown as number;
   }
 }
 
