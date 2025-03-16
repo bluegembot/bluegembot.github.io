@@ -15,7 +15,7 @@
       ]"
   />
 
-  <h2 class="subscription-tiers-title2">SUBSCRIPTION TIERS</h2>
+  <h2 class="subscription-tiers-title2">SUBSCRIPTION TIERS (click for more)</h2>
 
   <div class="subscription-grid-container">
     <div
