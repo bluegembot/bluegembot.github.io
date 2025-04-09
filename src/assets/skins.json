@@ -3427,6 +3427,178 @@
         "itemName": "desert-eagle-night-factory-new"
     },
     {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918449328/256x128",
+        "itemName": "nomad-knife-doppler-factory-new+phase-1"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918244006/256x128",
+        "itemName": "nomad-knife-doppler-factory-new+phase-2"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918273719/256x128",
+        "itemName": "nomad-knife-doppler-factory-new+phase-3"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918462906/256x128",
+        "itemName": "nomad-knife-doppler-factory-new+phase-4"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918406636/256x128",
+        "itemName": "nomad-knife-doppler-factory-new+sapphire"
+    },
+    {
+        "imageUrl": " https://community.cloudflare.steamstatic.com/economy/image/class/730/6918247645/256x128",
+        "itemName": "nomad-knife-doppler-factory-new+black-pearl"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918260923/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+phase-1"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918561064/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+phase-2"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918230367/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+phase-3"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918238185/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+phase-4"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918450751/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+black-pearl"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918292368/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+sapphire"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918227415/256x128",
+        "itemName": "skeleton-knife-doppler-factory-new+ruby"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918632550/256x128",
+        "itemName": "survival-knife-doppler-factory-new+phase-1"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918260452/256x128",
+        "itemName": "survival-knife-doppler-factory-new+phase-2"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918378973/256x128",
+        "itemName": "survival-knife-doppler-factory-new+phase-3"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918527893/256x128",
+        "itemName": "survival-knife-doppler-factory-new+phase-4"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918406936/256x128",
+        "itemName": "survival-knife-doppler-factory-new+ruby"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918250629/256x128",
+        "itemName": "survival-knife-doppler-factory-new+sapphire"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918275562/256x128",
+        "itemName": "survival-knife-marble-fade-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918696688/256x128",
+        "itemName": "paracord-knife-doppler-factory-new+phase-1"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918435746/256x128",
+        "itemName": "paracord-knife-doppler-factory-new+phase-2"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918660194/256x128",
+        "itemName": "paracord-knife-doppler-factory-new+phase-3"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918272392/256x128",
+        "itemName": "paracord-knife-doppler-factory-new+ruby"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918238972/256x128",
+        "itemName": "paracord-knife-doppler-factory-new+sapphire"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918336087/256x128",
+        "itemName": "paracord-knife-doppler-factory-new+black-pearl"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918332312/256x128",
+        "itemName": "paracord-knife-marble-fade-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918291975/256x128",
+        "itemName": "nomad-knife-marble-fade-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918362560/256x128",
+        "itemName": "nomad-knife-tiger-tooth-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918293712/256x128",
+        "itemName": "skeleton-knife-tiger-tooth-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918350129/256x128",
+        "itemName": "skeleton-knife-marble-fade-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6919634455/256x128",
+        "itemName": "nomad-knife-damascus-steel-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918522684/256x128",
+        "itemName": "nomad-knife-ultraviolet-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918255704/256x128",
+        "itemName": "nomad-knife-rust-coat-well-worn"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918326673/256x128",
+        "itemName": "paracord-knife-damascus-steel-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918283500/256x128",
+        "itemName": "paracord-knife-tiger-tooth-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918266067/256x128",
+        "itemName": "paracord-knife-ultraviolet-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918329535/256x128",
+        "itemName": "skeleton-knife-damascus-steel-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918263728/256x128",
+        "itemName": "skeleton-knife-ultraviolet-field-tested"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918473379/256x128",
+        "itemName": "skeleton-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918473379/256x128",
+        "itemName": "skeleton-knife-rust-coat-battle-scarred"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918488305/256x128",
+        "itemName": "survival-knife-damascus-steel-factory-new"
+    },
+    {
+        "imageUrl": "https://community.cloudflare.steamstatic.com/economy/image/class/730/6918487942/256x128",
+        "itemName": "survival-knife-tiger-tooth-factory-new"
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
