@@ -328,3 +328,53 @@ body.dark-mode .registration-form p {
 .range-labels{
     color:white;
 }
+
+/* Dark mode styles for the improved tracked skin layout */
+body.dark-mode .skin-info {
+    color: white;
+}
+
+body.dark-mode .skin-header .skin-index {
+    color: #999;
+}
+
+body.dark-mode .skin-header .skin-name {
+    color: white;
+}
+
+body.dark-mode .detail-label {
+    color: #999;
+}
+
+body.dark-mode .detail-value {
+    color: white;
+}
+
+/* Ensure the tracked skin item background works in dark mode */
+body.dark-mode .tracked-skin-item {
+    background-color: #363636;
+    border-color: #444;
+}
+
+/* Alternate row coloring for tracked skins in dark mode */
+body.dark-mode .upcoming-list .tracked-skin-item:nth-child(odd) {
+    background-color: #363636;
+}
+
+body.dark-mode .upcoming-list .tracked-skin-item:nth-child(even) {
+    background-color: #2f2f2f;
+}
+
+/* Keep the stop tracking button red in dark mode */
+body.dark-mode .stop-tracking-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+body.dark-mode .stop-tracking-button:hover {
+    background-color: #c82333;
+}
+
+body.dark-mode .skin-name {
+    color: white;
+}

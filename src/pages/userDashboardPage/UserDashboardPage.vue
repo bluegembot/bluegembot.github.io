@@ -24,7 +24,26 @@
           <ul class="upcoming-list">
             <template v-if="trackedSkins.length > 0">
               <li v-for="(skin, index) in trackedSkins" :key="skin.name" class="tracked-skin-item">
-                {{ index + 1 }}. {{ skin.name }} | Min Float: {{ skin.minWear }} | Max Float: {{ skin.maxWear }} | Forced Discount: {{skin.forcedDiscount}}
+                <div class="skin-info">
+                  <div class="skin-header">
+                    <span class="skin-index">{{ index + 1 }}.</span>
+                    <span class="skin-name">{{ skin.name }}</span>
+                  </div>
+                  <div class="skin-details">
+                    <div class="detail-row">
+                      <span class="detail-label">Float Range:</span>
+                      <span class="detail-value">{{ skin.minWear }} - {{ skin.maxWear }}</span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Forced Discount:</span>
+                      <span class="detail-value">{{ skin.forcedDiscount }}</span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="detail-label">Min Fade %:</span>
+                      <span class="detail-value">{{ skin.minFadePercentage }}</span>
+                    </div>
+                  </div>
+                </div>
                 <button class="stop-tracking-button" @click="stopTracking(skin)">
                   Stop Tracking
                 </button>
@@ -35,14 +54,8 @@
                 Not tracking any skins at this time, add a skin to start tracking.
               </li>
             </template>
-            <template v-else>
-              <li class="no-tracking-message">
-                Not tracking any skins at this time, add a skin to start tracking.
-              </li>
-            </template>
           </ul>
         </div>
-
       </div>
 
       <!-- Grid section -->
@@ -110,7 +123,8 @@ export default {
           name: item.itemOfInterest,
           minWear: item.minWear,
           maxWear: item.maxWear,
-          forcedDiscount: item.forcedDiscount
+          forcedDiscount: item.forcedDiscount,
+          minFadePercentage: item.minFadePercentage
         }));
       } catch (error) {
         console.error("Error fetching user config:", error);

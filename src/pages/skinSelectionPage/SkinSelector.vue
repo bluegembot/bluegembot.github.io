@@ -97,12 +97,33 @@
             <h3>Advanced Options</h3>
             <div class="modal-checkbox-container">
               <div class="multi-range">
-                <!-- Input controls -->
+                <!-- Discount slider -->
+                <Slider
+                    v-model="advancedOptions.minDiscount"
+                    v-model:enabledModelValue="advancedOptions.forceDiscount"
+                    checkboxLabel="Force discount"
+                    inputLabel="Minimum discount in %"
+                    min="0"
+                    max="100"
+                    minLabel="-100%"
+                    maxLabel="-1%"
+                    tooltipSuffix="%"
+                    sliderType="discount"
+                />
 
-                <!-- Multi-handle slider -->
-                <DiscountSlider
-                    v-model:minDiscount="advancedOptions.minDiscount"
-                    v-model:forceDiscount="advancedOptions.forceDiscount"
+                <!-- Fade percentage slider - Only show if item has "fade" without "marble" or "amber" -->
+                <Slider
+                    v-if="shouldShowFadeSlider"
+                    v-model="advancedOptions.minFadePercentage"
+                    v-model:enabledModelValue="advancedOptions.forceFadePercentage"
+                    checkboxLabel="Force fade percentage"
+                    inputLabel="Minimum fade percentage"
+                    min="0"
+                    max="100"
+                    minLabel="0%"
+                    maxLabel="100%"
+                    tooltipSuffix="%"
+                    sliderType="percentage"
                 />
 
               </div>
@@ -131,10 +152,12 @@
 <script>
 import skinsJson from "@/assets/skins.json";
 import {API_URL} from '@/config/environment';
-import DiscountSlider from "@/components/DiscountSlider.vue"
+import DiscountSlider from "@/components/Slider.vue"
+import Slider from "@/components/Slider.vue";
 
 export default {
   components: {
+    Slider,
     DiscountSlider
   },
   data() {
@@ -148,15 +171,28 @@ export default {
       advancedOptions: {
         statTrak: false,
         souvenir: false,
-        minDiscount: -1,
-        forceDiscount: false
+        minDiscount: 1,
+        forceDiscount: false,
+        minFadePercentage: 80,
+        forceFadePercentage: false
       },
+      selectedSkin: null
     };
+  },
+  computed: {
+    shouldShowFadeSlider() {
+      if (!this.selectedSkin) return false;
+
+      const itemName = this.selectedSkin.itemName.toLowerCase();
+      return itemName.includes('fade') &&
+          !itemName.includes('marble') &&
+          !itemName.includes('amber');
+    }
   },
   watch: {
     searchQuery(newQuery) {
       if (newQuery.trim() === "") {
-        this.displayedSkins = []; // Clear results if the search is empty
+        this.displayedSkins = [];
       } else {
         this.filterSkins(newQuery);
       }
@@ -164,17 +200,13 @@ export default {
   },
   methods: {
     filterSkins(query) {
-      // Replace spaces in the search query with dashes for comparison
       const formattedQuery = query.trim().toLowerCase().replace(/\s+/g, '-');
-
-      // Filter skins based on the formatted search query (using dashes)
       const filtered = this.skins.filter((skin) =>
           skin.itemName.toLowerCase().includes(formattedQuery)
       );
-      this.displayedSkins = filtered.slice(0, 50); // Display first 50 results
+      this.displayedSkins = filtered.slice(0, 50);
     },
     updateFloats(skin) {
-      // Update minFloat and maxFloat based on the selected condition
       const floatRanges = {
         "Factory new": {minFloat: 0, maxFloat: 0.07},
         "Minimal wear": {minFloat: 0.07, maxFloat: 0.15},
@@ -187,8 +219,8 @@ export default {
       if (selectedCondition) {
         skin.minFloat = selectedCondition.minFloat;
         skin.maxFloat = selectedCondition.maxFloat;
-        skin.allowedMinFloat = selectedCondition.minFloat; // Set allowed min
-        skin.allowedMaxFloat = selectedCondition.maxFloat; // Set allowed max
+        skin.allowedMinFloat = selectedCondition.minFloat;
+        skin.allowedMaxFloat = selectedCondition.maxFloat;
       }
     },
     validateFloatInput(skin, field) {
@@ -200,10 +232,10 @@ export default {
           skin.minFloat = skin.allowedMaxFloat;
         }
         if (skin.minFloat < 0) {
-          skin.minFloat = 0; // Enforce global lower bound
+          skin.minFloat = 0;
         }
         if (skin.minFloat > 1) {
-          skin.minFloat = 1; // Enforce global upper bound
+          skin.minFloat = 1;
         }
       } else if (field === "maxFloat") {
         if (skin.maxFloat < skin.allowedMinFloat) {
@@ -213,15 +245,15 @@ export default {
           skin.maxFloat = skin.allowedMaxFloat;
         }
         if (skin.maxFloat < 0) {
-          skin.maxFloat = 0; // Enforce global lower bound
+          skin.maxFloat = 0;
         }
         if (skin.maxFloat > 1) {
-          skin.maxFloat = 1; // Enforce global upper bound
+          skin.maxFloat = 1;
         }
       }
     },
     openMenu(skin) {
-      this.selectedSkin = skin;  // Store the selected skin object
+      this.selectedSkin = skin;
       this.showAdvancedMenu = true;
     },
     closeMenu() {
@@ -236,7 +268,6 @@ export default {
         return;
       }
 
-      // Check if the item name contains "gloves", "hand-wraps", or "knife"
       const restrictedSouvenirKeywords = ["gloves", "hand-wraps", "knife", "karambit", "bayonet", "m9-bayonet", "shadow-daggers", "m4a1-s-fade"];
       const containsRestrictedSouvenirKeyword = restrictedSouvenirKeywords.some(keyword =>
           this.selectedSkin.itemName.toLowerCase().includes(keyword)
@@ -259,7 +290,6 @@ export default {
         return;
       }
 
-      // Determine the advanced option (if any)
       let advancedOption = "";
       if (this.advancedOptions.souvenir) {
         advancedOption = "souvenir";
@@ -267,10 +297,9 @@ export default {
         advancedOption = "stattrak";
       }
 
-      // Pass the selected skin directly to addSkin
-      this.addSkin(this.selectedSkin, advancedOption = "");
+      this.addSkin(this.selectedSkin, advancedOption);
 
-      this.closeMenu(); // Close the modal after applying options
+      this.closeMenu();
     },
     addSkin(skin, advancedOption = "") {
       let finalSkinName = skin.itemName
@@ -288,62 +317,56 @@ export default {
         skinName: finalSkinName,
         minFloat: skin.minFloat,
         maxFloat: skin.maxFloat,
-        minDiscount: this.advancedOptions.forceDiscount ? this.advancedOptions.minDiscount : false
+        minDiscount: this.advancedOptions.forceDiscount ? this.advancedOptions.minDiscount : false,
+        minFadePercentage: this.advancedOptions.forceFadePercentage ? this.advancedOptions.minFadePercentage : false
       };
 
-      // First, fetch the CSRF token
       fetch(`${API_URL}/csrf-token`, {
         method: "GET",
-        credentials: "include", // Include credentials (cookies) in the request
+        credentials: "include",
       })
           .then((response) => response.json())
           .then((data) => {
-            const csrfToken = data.csrfToken; // Get the CSRF token
+            const csrfToken = data.csrfToken;
 
-            // Now send the request to add the skin
             fetch(`${API_URL}/addSkin`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "csrf-token": csrfToken, // Include the CSRF token in the header
+                "csrf-token": csrfToken,
               },
               body: JSON.stringify(payload),
-              credentials: "include", // Include credentials (cookies) in the request
+              credentials: "include",
             })
                 .then((response) => response.json())
                 .then((data) => {
-                  this.errorMessage = data.message; // Set the success message
-                  this.messageType = "success"; // Set the message type to success
+                  this.errorMessage = data.message;
+                  this.messageType = "success";
                   this.clearErrorMessages()
                 })
                 .catch((error) => {
                   console.error("Error adding skin:", error);
                   this.errorMessage = "Failed to add skin, please try again.";
-                  this.messageType = "error"; // Set the message type to error
+                  this.messageType = "error";
                   this.clearErrorMessages()
                 });
           })
           .catch((error) => {
             console.error("Error fetching CSRF token:", error);
             this.errorMessage = "Internal server error, please try again.";
-            this.messageType = "error"; // Set the message type to error
+            this.messageType = "error";
             this.clearErrorMessages()
           });
     },
-
     clearErrorMessages() {
-      // After 1 second, fade out the message
       setTimeout(() => {
-        this.errorMessage = ''; // Clear the message
+        this.errorMessage = '';
         this.modalErrorMessage = '';
-      }, 2500); // Fade away after 1 second
+      }, 2500);
     },
-
-    // New method to format the skin name for display
     formattedSkinName(skin) {
-      // Replace dashes with spaces and remove the 'factory-new' part
       return skin.itemName
-          .replace(/-/g, ' ') // Replace dashes with spaces
+          .replace(/-/g, ' ')
           .replace(/factory new/g, '')
           .replace(/minimal wear/g, '')
           .replace(/field tested/g, '')
@@ -352,14 +375,13 @@ export default {
     },
   },
   created() {
-    // Load the JSON data and initialize skin properties
     this.skins = skinsJson.map((skin) => ({
       ...skin,
       condition: "Factory new",
       minFloat: 0,
       maxFloat: 0.07,
-      allowedMinFloat: 0, // Initial allowed min
-      allowedMaxFloat: 0.07, // Initial allowed max
+      allowedMinFloat: 0,
+      allowedMaxFloat: 0.07,
     }));
   },
 };

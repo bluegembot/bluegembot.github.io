@@ -175,44 +175,116 @@ li {
   object-fit: cover;
 }
 
-.tracked-skin-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.stop-tracking-button {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.stop-tracking-button:hover {
-  background-color: darkred;
-}
-
 .upcoming-list {
   list-style: none; /* Remove default bullet points */
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margin */
 }
 
-.tracked-skin-item {
-  display: flex; /* Arrange elements in a row */
-  justify-content: space-between; /* Space between skin details and button */
-  align-items: center; /* Align items vertically */
-  padding: 10px; /* Add space inside each row */
-  border: 1px solid #ccc; /* Add a border to separate rows */
-  border-radius: 5px; /* Round corners */
-  margin-bottom: 10px; /* Add space between rows */
-  font-size: 1rem; /* Set a readable font size */
-}
-
 .error-message{
   display: flex;
   justify-content: center;
+}
+
+/* Improved tracked skin item styles */
+.tracked-skin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.skin-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.skin-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.skin-index {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #666;
+}
+
+.skin-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;  /* Changed from white to #333 */
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: #333;  /* Changed from white to #333 */
+  font-weight: 500;
+}
+
+.skin-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.stop-tracking-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.stop-tracking-button:hover {
+  background-color: #c82333;
+}
+
+.no-tracking-message {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .skin-details {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .tracked-skin-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .skin-info {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .stop-tracking-button {
+    width: 100%;
+  }
 }

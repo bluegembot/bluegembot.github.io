@@ -4,22 +4,22 @@
     <div class="toggle-checkbox">
       <input
           type="checkbox"
-          id="priceRangeToggle"
+          :id="toggleId"
           v-model="isEnabled"
           @change="handleToggle"
       >
-      <label for="priceRangeToggle">Force discount</label>
+      <label :for="toggleId">{{ checkboxLabel }}</label>
     </div>
 
     <!-- Input controls -->
     <div class="input-controls" :class="{ 'disabled': !isEnabled }">
       <div class="input-group">
-        <label>Minimum discount in %</label>
+        <label>{{ inputLabel }}</label>
         <input
             type="number"
             v-model.number="minValue"
-            :min="-100"
-            :max="-1"
+            :min="min"
+            :max="max"
             @input="validateMin"
             class="number-input"
             :disabled="!isEnabled"
@@ -45,14 +45,14 @@
           @mousedown="startDragging('min', $event)"
           @touchstart="startDragging('min', $event)"
       >
-        <div class="handle-tooltip">{{ minValue }}%</div>
+        <div class="handle-tooltip">{{ tooltipText }}</div>
       </div>
     </div>
 
     <!-- Range labels -->
     <div class="range-labels">
-      <span>-100%</span>
-      <span>-1%</span>
+      <span>{{ minLabel }}</span>
+      <span>{{ maxLabel }}</span>
     </div>
   </div>
 </template>
@@ -60,62 +60,116 @@
 <script>
 export default {
   props: {
-    minDiscount: {
+    modelValue: {
       type: Number,
       default: -1
     },
-    forceDiscount: {
+    enabledModelValue: {
       type: Boolean,
       default: false
+    },
+    checkboxLabel: {
+      type: String,
+      default: 'Force discount'
+    },
+    inputLabel: {
+      type: String,
+      default: 'Minimum discount in %'
+    },
+    min: {
+      type: Number,
+      default: -100
+    },
+    max: {
+      type: Number,
+      default: -1
+    },
+    minLabel: {
+      type: String,
+      default: '-100%'
+    },
+    maxLabel: {
+      type: String,
+      default: '-1%'
+    },
+    tooltipSuffix: {
+      type: String,
+      default: '%'
+    },
+    sliderType: {
+      type: String,
+      default: 'discount' // 'discount' or 'percentage'
     }
   },
 
   data() {
     return {
-      minValue: -1,
-      maxValue: -1,
+      minValue: this.modelValue,
       isDragging: null,
       startX: 0,
       startLeft: 0,
       sliderWidth: 0,
-      isEnabled: false
+      isEnabled: this.enabledModelValue
     };
+  },
+
+  created() {
+    // Initialize minValue properly
+    if (this.modelValue !== undefined && this.modelValue !== null) {
+      this.minValue = this.modelValue;
+    } else {
+      // Set default value based on slider type
+      this.minValue = this.sliderType === 'percentage' ? this.max : this.max;
+    }
   },
 
   computed: {
     minHandlePosition() {
-      return `${((this.minValue + 100) / 99) * 100}%`;
+      const range = Math.abs(this.max - this.min);
+      const normalizedValue = Math.abs(this.minValue - this.min);
+      return `${(normalizedValue / range) * 100}%`;
     },
     rangeStyle() {
-      const position = ((this.minValue + 100) / 99) * 100;
-      return {
-        left: '0',
-        width: `${position}%`,
-        opacity: this.isEnabled ? '1' : '0.5'
-      };
+      const range = Math.abs(this.max - this.min);
+      const normalizedValue = Math.abs(this.minValue - this.min);
+      const position = (normalizedValue / range) * 100;
+
+      if (this.sliderType === 'percentage') {
+        return {
+          left: `${position}%`,
+          width: `${100 - position}%`,
+          opacity: this.isEnabled ? '1' : '0.5'
+        };
+      } else {
+        return {
+          left: '0',
+          width: `${position}%`,
+          opacity: this.isEnabled ? '1' : '0.5'
+        };
+      }
+    },
+    tooltipText() {
+      return `${this.minValue}${this.tooltipSuffix}`;
+    },
+    toggleId() {
+      return `toggle-${Math.random().toString(36).substr(2, 9)}`;
     }
   },
 
   methods: {
     handleToggle() {
-      this.$emit('update:forceDiscount', this.isEnabled);
+      this.$emit('update:enabledModelValue', this.isEnabled);
 
       if (!this.isEnabled) {
-        this.minValue = -1;
-        this.$emit('update:minDiscount', -1);
-      } else {
-        this.$emit('update:minDiscount', this.minValue);
+        // When disabling, reset to default value based on slider type
+        if (this.sliderType === 'percentage') {
+          this.minValue = this.max; // For percentage, default to max (100)
+        } else {
+          this.minValue = this.max; // For discount, default to max (-1)
+        }
+        this.$emit('update:modelValue', this.minValue);
       }
-    },
-
-    toggleSlider() {
-      if (!this.isEnabled) {
-        this.minValue = -1;
-        this.$emit('update:minDiscount', -1);
-        this.$emit('update:forceDiscount', false);
-      } else {
-        this.$emit('update:forceDiscount', true);
-      }
+      // When enabling, keep the current value (don't emit anything)
     },
 
     startDragging(handle, event) {
@@ -153,11 +207,11 @@ export default {
       const slider = this.$el.querySelector('.slider-container');
       const rect = slider.getBoundingClientRect();
       const position = Math.min(Math.max(0, (clientX - rect.left) / rect.width * 100), 100);
-      const value = Math.round(this.percentToPosition(position));
+      const value = Math.round(this.percentToValue(position));
 
       if (this.isDragging === 'min') {
-        this.minValue = Math.max(-100, Math.min(-1, value));
-        this.$emit('update:minDiscount', this.minValue);
+        this.minValue = Math.max(this.min, Math.min(this.max, value));
+        this.$emit('update:modelValue', this.minValue);
       }
     },
 
@@ -169,31 +223,43 @@ export default {
       document.removeEventListener('touchend', this.stopDragging);
     },
 
-    percentToPosition(position) {
-      return (position / 100) * 99 - 100;
+    percentToValue(position) {
+      const range = Math.abs(this.max - this.min);
+      return Math.round(this.min + (position / 100) * range);
     },
 
     validateMin() {
       if (!this.isEnabled) return;
       let value = parseInt(this.minValue);
-      if (isNaN(value)) value = -1;
-      value = Math.max(-100, Math.min(-1, value));
+      if (isNaN(value)) value = this.min;
+      value = Math.max(this.min, Math.min(this.max, value));
       this.minValue = value;
-      this.$emit('update:minDiscount', value);
+      this.$emit('update:modelValue', value);
+    }
+  },
+
+  watch: {
+    modelValue(newValue) {
+      this.minValue = newValue;
+    },
+    enabledModelValue(newValue) {
+      this.isEnabled = newValue;
+    },
+    isEnabled(newValue) {
+      if (!newValue) {
+        this.minValue = this.sliderType === 'percentage' ? this.min : this.max;
+        this.$emit('update:modelValue', this.minValue);
+        this.$emit('update:enabledModelValue', false);
+      } else {
+        this.$emit('update:enabledModelValue', true);
+      }
     }
   },
 
   beforeDestroy() {
     this.stopDragging();
-  },
-
-  watch: {
-    isEnabled(newValue) {
-      this.toggleSlider();
-    }
   }
-}
-</script>
+}</script>
 
 <style>
 .multi-range {
