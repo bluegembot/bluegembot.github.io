@@ -27,28 +27,32 @@ body.dark-mode .main-title {
     color: white;
 }
 
-body.dark-mode .upcoming,
-body.dark-mode .announcements {
+body.dark-mode .tracked-skins-container,
+body.dark-mode .announcements,
+body.dark-mode .user-information-container {
     background-color: #2f2f2f;
     border-color: #2ed1e1;
 }
 
-body.dark-mode .upcoming h2,
-body.dark-mode .announcements h2 {
+body.dark-mode .tracked-skins-container h2,
+body.dark-mode .announcements h2,
+body.dark-mode .user-information-container h2 {
     background-color: #2f2f2f;
     color: white;
     border-bottom-color: #444;
 }
 
 /* Dark mode list items */
-body.dark-mode .upcoming-list li:nth-child(odd),
-body.dark-mode .announcement-list li:nth-child(odd) {
+body.dark-mode .tracked-skins-unordered-list li:nth-child(odd),
+body.dark-mode .announcement-list li:nth-child(odd),
+body.dark-mode .user-information-unordered-list li:nth-child(odd) {
     background-color: #363636;
     color: white;
 }
 
-body.dark-mode .upcoming-list li:nth-child(even),
-body.dark-mode .announcement-list li:nth-child(even) {
+body.dark-mode .tracked-skins-unordered-list li:nth-child(even),
+body.dark-mode .announcement-list li:nth-child(even),
+body.dark-mode .user-information-unordered-list li:nth-child(even) {
     background-color: #2f2f2f;
     color: white;
 }
@@ -357,11 +361,13 @@ body.dark-mode .tracked-skin-item {
 }
 
 /* Alternate row coloring for tracked skins in dark mode */
-body.dark-mode .upcoming-list .tracked-skin-item:nth-child(odd) {
+body.dark-mode .tracked-skins-unordered-list .tracked-skin-item:nth-child(odd),
+body.dark-mode .user-information-unordered-list .tracked-skin-item:nth-child(odd) {
     background-color: #363636;
 }
 
-body.dark-mode .upcoming-list .tracked-skin-item:nth-child(even) {
+body.dark-mode .tracked-skins-unordered-list .tracked-skin-item:nth-child(even),
+body.dark-mode .user-information-unordered-list .tracked-skin-item:nth-child(even) {
     background-color: #2f2f2f;
 }
 
@@ -377,4 +383,40 @@ body.dark-mode .stop-tracking-button:hover {
 
 body.dark-mode .skin-name {
     color: white;
+}
+
+/* Add these specific rules to your dark-mode.css file */
+
+/* Target the hero section specifically */
+body.dark-mode #hero {
+    background-color: #222222 !important; /* Using !important to ensure override */
+}
+
+/* Target the testimonials section specifically */
+body.dark-mode #testimonials {
+    background-color: #222222 !important;
+}
+
+/* Ensure text remains visible in dark mode for these sections */
+body.dark-mode #hero h1,
+body.dark-mode #hero p,
+body.dark-mode #testimonials h1,
+body.dark-mode #testimonials .testimonial-text,
+body.dark-mode #testimonials .testimonial-author {
+    color: white;
+}
+
+/* Make sure the features section also gets the dark background */
+body.dark-mode #features {
+    background-color: #222222 !important;
+}
+
+/* Ensure video section background gets dark mode */
+body.dark-mode #video {
+    background-color: #222222 !important;
+}
+
+/* Ensure socials section gets dark mode */
+body.dark-mode #socials {
+    background-color: #222222 !important;
 }

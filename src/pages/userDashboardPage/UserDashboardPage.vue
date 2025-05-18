@@ -17,11 +17,11 @@
         {{ errorMessage }}
       </p>
       <!-- Section with Upcoming and Announcements -->
-      <div class="upcoming-announcements">
+      <div class="tracked-skins-section">
         <!-- Upcoming list -->
-        <div class="upcoming">
+        <div class="tracked-skins-container">
           <h2>Tracked skins</h2>
-          <ul class="upcoming-list">
+          <ul class="tracked-skins-unordered-list">
             <template v-if="trackedSkins.length > 0">
               <li v-for="(skin, index) in trackedSkins" :key="skin.name" class="tracked-skin-item">
                 <div class="skin-info">
@@ -73,137 +73,14 @@
 
 <style src="./UserDashboardPage.css"></style>
 
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useUserDashboard } from './UserDashboardPage';
 
-<script>
-import {onMounted, ref} from "vue";
-import {API_URL} from '@/config/environment';
-
-export default {
+export default defineComponent({
+  name: 'UserDashboardPage',
   setup() {
-    const trackedSkins = ref([]);
-    const errorMessage = ref(""); // Reactive variable for error messages
-    const username = ref("")
-
-    onMounted(() => {
-      username.value = localStorage.getItem('username'); // Get the stored username
-      console.log(username.value)
-    });
-
-    const fetchCsrfTokenAndUserConfig = async () => {
-      try {
-        const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (!csrfResponse.ok) {
-          throw new Error("Failed to fetch CSRF token");
-        }
-
-        const csrfData = await csrfResponse.json();
-        const csrfToken = csrfData.csrfToken;
-
-        const configResponse = await fetch(
-            `${API_URL}/getUserConfig`,
-            {
-              method: "GET",
-              headers: {
-                "csrf-token": csrfToken,
-              },
-              credentials: "include",
-            }
-        );
-
-        if (!configResponse.ok) {
-          throw new Error("Failed to fetch user config");
-        }
-
-        const configData = await configResponse.json();
-        trackedSkins.value = configData.itemsOfInterest.map((item) => ({
-          name: item.itemOfInterest,
-          minWear: item.minWear,
-          maxWear: item.maxWear,
-          forcedDiscount: item.forcedDiscount,
-          minFadePercentage: item.minFadePercentage
-        }));
-      } catch (error) {
-        console.error("Error fetching user config:", error);
-        errorMessage.value = "Failed to load tracked skins. Please try again later.";
-      }
-    };
-
-    const stopTracking = async (skin) => {
-      try {
-        const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (!csrfResponse.ok) {
-          throw new Error("Failed to fetch CSRF token");
-        }
-
-        const csrfData = await csrfResponse.json();
-        const csrfToken = csrfData.csrfToken;
-
-        const deleteResponse = await fetch(`${API_URL}/deleteSkin`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "csrf-token": csrfToken,
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            skinName: skin.name,
-            minFloat: skin.minWear,
-            maxFloat: skin.maxWear,
-          }),
-        });
-
-        if (!deleteResponse.ok) {
-          throw new Error("Failed to delete skin");
-        }
-
-        // Remove the skin from the local list on success
-        trackedSkins.value = trackedSkins.value.filter(
-            (trackedSkin) => trackedSkin.name !== skin.name
-        );
-        errorMessage.value = `Stopped tracking skin: ${skin.name}`;
-        clearErrorMessages(); // Clear error message after a delay
-      } catch (error) {
-        console.error("Error stopping tracking for skin:", error);
-        errorMessage.value = "Failed to stop tracking the skin. Please try again.";
-        clearErrorMessages(); // Clear error message after a delay
-      }
-    };
-
-    const clearErrorMessages = () => {
-      // After 1 second, fade out the message
-      setTimeout(() => {
-        errorMessage.value = ''; // Clear the message
-      }, 2500); // Fade away after 1 second
-    };
-
-    onMounted(fetchCsrfTokenAndUserConfig);
-
-    return {
-      trackedSkins,
-      errorMessage, // Return errorMessage for use in the template
-      stopTracking,
-      username
-    };
-  },
-};
+    return useUserDashboard();
+  }
+});
 </script>
-
-<style>
-.error-message {
-  display: flex;
-  color: red;
-  font-weight: bold;
-  margin: 10px 0;
-}
-</style>
-
-
-<style src="./UserDashboardPage.css"></style>
