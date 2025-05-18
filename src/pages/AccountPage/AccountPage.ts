@@ -1,96 +1,86 @@
 import { onMounted, ref } from "vue";
+import type { Ref } from "vue";
 import { API_URL } from '@/config/environment';
 
-export const subscriptionsData = {
-    basic: {
-        title: 'BlueGemBot Basic',
-        perks: [
-            '- Track up to 25 skins.',
-            '- Filter on min and max float for each skin.',
-            '- Get instant notifications from BlueGemBot.',
-        ],
-    },
-    gold: {
-        title: 'BlueGemBot Gold',
-        perks: [
-            '- All Basic features.',
-            '- Track up to 50 skins.',
-            '- Priority support.',
-        ],
-    },
-    elite: {
-        title: 'BlueGemBot Elite',
-        perks: [
-            '- All Gold features.',
-            '- Track up to 100 skins.',
-            '- Allows Discord server integration.',
-            '- Bluegem only mode.',
-            '- Discount filter.',
-            '- Fade percentage filter.',
-            '- Personalized support.',
-        ],
-    },
-};
+interface Subscription {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    features: string[];
+}
 
+// Export subscriptions data as a separate named export
+export const subscriptionsData: Subscription[] = [
+    {
+        id: "gold",
+        name: "Gold",
+        description: "Unlock advanced features",
+        price: 10,
+        features: [
+            "Forced discount",
+            "Auto opener",
+            "Priority notifications",
+            "Add up to 20 skins",
+            "Market history tracking"
+        ]
+    },
+    {
+        id: "elite",
+        name: "Elite",
+        description: "Ultimate skin sniping experience",
+        price: 20,
+        features: [
+            "Everything in Gold",
+            "Up to 50 tracked skins",
+            "Advanced pattern filters",
+            "Investment tracking",
+            "Market analytics"
+        ]
+    }
+];
+
+// Make this the default export
 export default function useAccountPage() {
-    const username = ref("");
-    const chatId = ref("");
-    const subscriptionStatus = ref("");
-    const errorMessage = ref("");
-    const popupVisible = ref(false);
-    const selectedSubscription = ref('');
-    const messageType = ref('error');
+    const showBrowserWarning: Ref<boolean> = ref(false);
+    const userInfo: Ref<{
+        username: string;
+        email: string;
+        subscription: string;
+    }> = ref({
+        username: "",
+        email: "",
+        subscription: ""
+    });
 
-    const clearErrorMessages = () => {
-        setTimeout(() => {
-            errorMessage.value = '';
-        }, 2500);
-    };
+    const subscriptions: Ref<Subscription[]> = ref(subscriptionsData);
 
-    const requestSubscriptionCall = async (subscription) => {
-        try {
-            const response = await fetch(`${API_URL}/requestSubscription`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ subscription }),
-                credentials: 'include',
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                errorMessage.value = errorData.message;
-                messageType.value = 'error';
-                clearErrorMessages();
-            } else {
-                const data = await response.json();
-                errorMessage.value = data.message;
-                messageType.value = 'success';
-                clearErrorMessages();
-            }
-        } catch (e) {
-            errorMessage.value = 'An error occurred while processing your request.';
-            messageType.value = 'error';
-            clearErrorMessages();
-        }
+    // Add explicit parameter typing
+    const handleSubscribe = (subscription: Subscription): void => {
+        // Subscription logic here
+        console.log(`Subscribing to ${subscription.name}`);
     };
 
     onMounted(() => {
-        username.value = localStorage.getItem("username");
-        chatId.value = localStorage.getItem("chatId");
-        subscriptionStatus.value = localStorage.getItem("subscriptionStatus");
+        // Check browser compatibility
+        const isChrome = navigator.userAgent.indexOf("Chrome") > -1;
+        showBrowserWarning.value = !isChrome;
+
+        // Safe way to get items from localStorage with fallbacks
+        const storedUsername = localStorage.getItem('username');
+        const storedEmail = localStorage.getItem('email');
+        const storedSubscription = localStorage.getItem('subscription');
+
+        // Set values with null checks
+        userInfo.value.username = storedUsername || "";
+        userInfo.value.email = storedEmail || "";
+        userInfo.value.subscription = storedSubscription || "";
     });
 
     return {
-        username,
-        chatId,
-        subscriptionStatus,
-        errorMessage,
-        messageType,
-        requestSubscriptionCall,
-        clearErrorMessages,
-        popupVisible,
-        selectedSubscription
+        showBrowserWarning,
+        userInfo,
+        subscriptions,
+        handleSubscribe
     };
 }

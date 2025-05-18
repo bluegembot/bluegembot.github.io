@@ -138,7 +138,7 @@
             </div>
             <div class="modal-actions">
               <button @click="closeMenu">Close</button>
-              <button @click="applyAdvancedOptions(index)">Add skin with options</button>
+              <button @click="applyAdvancedOptions()">Add skin with options</button>
             </div>
           </div>
         </div>

@@ -44,9 +44,16 @@ export function initLandingPage() {
                 });
             }, observerOptions);
 
-            const section = eval(`${sectionId}.value`);
-            if (section) {
-                observer.observe(section);
+            // Use the ref directly without eval
+            const sectionRef = {
+                'features': features.value,
+                'video': video.value,
+                'testimonials': testimonials.value,
+                'socials': socials.value
+            }[sectionId];
+
+            if (sectionRef) {
+                observer.observe(sectionRef);
                 observers.value.push(observer);
             }
         });
