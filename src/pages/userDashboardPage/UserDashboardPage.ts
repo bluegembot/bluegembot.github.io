@@ -1,4 +1,5 @@
-import { onMounted, ref, Ref } from "vue";
+import { onMounted, ref } from "vue";
+import type { Ref } from "vue";
 import { API_URL } from '@/config/environment';
 
 interface TrackedSkin {
