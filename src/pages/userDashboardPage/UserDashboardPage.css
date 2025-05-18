@@ -1,4 +1,3 @@
-/* General reset */
 * {
   margin: 0;
   padding: 0;
@@ -23,15 +22,15 @@ header {
 }
 
 nav {
-  flex-grow: 1; /* Allow the nav to take available space */
+  flex-grow: 1;
   text-align: center;
 }
 
 nav ul {
   list-style-type: none;
-  display: flex; /* Use flex to align items in a row */
-  justify-content: center; /* Center items in nav */
-  padding: 0; /* Remove padding */
+  display: flex;
+  justify-content: center;
+  padding: 0;
 }
 
 nav ul li {
@@ -52,12 +51,12 @@ nav ul li a {
   color: #333;
 }
 
-/* Section styles for Upcoming and Announcements */
-.upcoming-announcements {
+.tracked-skins-section,
+.user-information-section {
   display: flex;
   justify-content: center;
   max-width: 100%;
-  margin: 30px auto; /* Center the content and add margin */
+  margin: 30px auto;
 }
 
 .fa-user {
@@ -66,44 +65,47 @@ nav ul li a {
   border-radius: 50%;
 }
 
-.upcoming,
-.announcements {
+.tracked-skins-container,
+.announcements,
+.user-information-container {
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: #f4f4f4;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Allow vertical scrolling */
-  max-height: 325px; /* Set a max height to enable scrolling */
+  overflow-y: auto;
+  max-height: 450px;
   border: 3px solid #2ed1e1;
 }
 
-.upcoming {
+.tracked-skins-container,
+.user-information-container {
   width: 75%;
-  position: relative; /* Ensures child elements' positioning is relative to this container */
+  position: relative;
 }
 
-.upcoming h2 {
-  position: sticky; /* Keeps the element static within its container */
-  top: 0; /* Position it at the top of the scrolling area */
-  background-color: #f4f4f4; /* Match the background to avoid visual glitches */
-  z-index: 10; /* Ensure it stays above list items */
-  padding: 10px; /* Add padding to the heading for a clean look */
-  border-bottom: 2px solid #ccc; /* Optional: Add a border for separation */
+.tracked-skins-container h2,
+.user-information-container h2 {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  z-index: 10;
+  padding: 10px;
+  border-bottom: 2px solid #ccc;
 }
 
 .announcements {
-  width: 30%; /* Leave some space between the two sections */
+  width: 30%;
 }
 
-.upcoming h2,
-.announcements h2 {
+.tracked-skins-container h2,
+.announcements h2,
+.user-information-container h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Styling the list */
 ul {
   list-style-type: none;
   padding: 0;
@@ -112,40 +114,41 @@ ul {
 li {
   padding: 10px;
   font-size: 18px;
-  color: #333; /* Default color for other lists */
+  color: #333;
 }
 
-.upcoming-list li:nth-child(odd),
-.announcement-list li:nth-child(odd) {
-  background-color: #f9f9f9; /* White background */
+.tracked-skins-unordered-list li:nth-child(odd),
+.announcement-list li:nth-child(odd),
+.user-information-unordered-list li:nth-child(odd) {
+  background-color: #f9f9f9;
 }
 
-.upcoming-list li:nth-child(even),
-.announcement-list li:nth-child(even) {
-  background-color: #e0e0e0; /* Gray background */
+.tracked-skins-unordered-list li:nth-child(even),
+.announcement-list li:nth-child(even),
+.user-information-unordered-list li:nth-child(even) {
+  background-color: #e0e0e0;
 }
 
-/* Grid styles */
 .grid-container-dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 800px;
-  margin: 50px auto; /* Center the grid and add margin */
+  margin: 50px auto;
 }
 
 .grid-item {
   background-color: #f4f4f4;
   text-align: center;
-  padding: 40px;
+  padding: 20px;
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
   border: 3px solid #2ed1e1;
-  text-decoration: none; /* Removes underline */
-  color: inherit; /* Inherits the text color from parent or specified color */
+  text-decoration: none;
+  color: inherit;
 }
 
 .grid-item:hover {
@@ -157,7 +160,7 @@ li {
   justify-content: center;
 }
 
-/* Logo circle styles (as you already have) */
+
 .logo-circle {
   width: 100px;
   height: 100px;
@@ -166,7 +169,6 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Margin is now handled by the container */
 }
 
 .logo-img {
@@ -175,10 +177,11 @@ li {
   object-fit: cover;
 }
 
-.upcoming-list {
-  list-style: none; /* Remove default bullet points */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
+.tracked-skins-unordered-list,
+.user-information-unordered-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .error-message{
@@ -186,7 +189,6 @@ li {
   justify-content: center;
 }
 
-/* Improved tracked skin item styles */
 .tracked-skin-item {
   display: flex;
   justify-content: space-between;
@@ -218,12 +220,12 @@ li {
 .skin-name {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #333;  /* Changed from white to #333 */
+  color: #333;
 }
 
 .detail-value {
   font-size: 1rem;
-  color: #333;  /* Changed from white to #333 */
+  color: #333;
   font-weight: 500;
 }
 
@@ -267,7 +269,6 @@ li {
   font-style: italic;
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .skin-details {
     grid-template-columns: 1fr;

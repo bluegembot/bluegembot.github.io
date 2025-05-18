@@ -31,7 +31,6 @@ export const useRegistrationForm = () => {
             const requestBody = {
                 OTL: form.value.OTL,
             };
-            console.log(API_URL)
             const response = await fetch(`${API_URL}/loginUser`, {
                 method: 'POST',
                 headers: {
