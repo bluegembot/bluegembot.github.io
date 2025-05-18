@@ -18,7 +18,6 @@ export function useUserDashboard() {
 
     onMounted(() => {
         username.value = localStorage.getItem('username') || ""; // Get the stored username
-        console.log(username.value);
     });
 
     const fetchCsrfTokenAndUserConfig = async (): Promise<void> => {
