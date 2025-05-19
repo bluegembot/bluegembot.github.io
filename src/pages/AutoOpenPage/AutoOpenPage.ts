@@ -1,150 +1,154 @@
-import { ref, onMounted } from 'vue';
-import type { Ref } from 'vue';
-import { API_URL } from '@/config/environment';
+import { ref, onUnmounted } from "vue";
+import { WS_URL } from '@/config/environment';
 
-export function useAutoOpenPage() {
-    const autoOpenerEnabled: Ref<boolean> = ref(false);
-    const statusMessage: Ref<string> = ref('');
-    const isLoading: Ref<boolean> = ref(true);
-    const messageType: Ref<'success' | 'error' | 'info'> = ref('info');
+export default {
+    setup() {
+        const socket = ref<WebSocket | null>(null);
+        const reconnectTimeout = ref<number | null>(null);
+        const isManualDisconnect = ref<boolean>(false);
 
-    const toggleAutoOpener = async (): Promise<void> => {
-        try {
-            // Toggle the state locally first for immediate UI feedback
-            const newState = !autoOpenerEnabled.value;
-            autoOpenerEnabled.value = newState;
+        // Reactive variables
+        const isAutoOpenerActive = ref(false);
+        const errorMessage = ref("");
 
-            statusMessage.value = `Setting auto opener to ${newState ? 'enabled' : 'disabled'}...`;
-            messageType.value = 'info';
-
-            // Try to get CSRF token
-            let csrfToken;
+        // Toggle function
+        const toggleAutoOpener = () => {
             try {
-                const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (!csrfResponse.ok) {
-                    throw new Error("Failed to fetch CSRF token");
+                isAutoOpenerActive.value = !isAutoOpenerActive.value;
+                if (isAutoOpenerActive.value === true) {
+                    connectToWebSocket();
+                } else {
+                    closeWebSocket();
                 }
-
-                const csrfData = await csrfResponse.json();
-                csrfToken = csrfData.csrfToken;
             } catch (error) {
-                console.warn("CSRF token fetch failed, continuing without token:", error);
-                // Continue without the token since some environments might not require it
+                errorMessage.value = "An error occurred.";
+            }
+        };
+
+        function connectToWebSocket() {
+            if (socket.value && socket.value.readyState !== WebSocket.CLOSED) {
+                return;
             }
 
-            const headers: Record<string, string> = {
-                "Content-Type": "application/json"
-            };
+            const wsUrl = `${WS_URL}`;
 
-            if (csrfToken) {
-                headers["csrf-token"] = csrfToken;
-            }
-
-            // Try to update server state, but don't revert UI if it fails
             try {
-                const response = await fetch(`${API_URL}/toggleAutoOpener`, {
-                    method: "POST",
-                    headers,
-                    credentials: "include",
-                    body: JSON.stringify({ enabled: newState }),
-                });
+                // Explicitly set credentials mode
+                socket.value = new WebSocket(wsUrl);
 
-                if (!response.ok) {
-                    throw new Error("Server rejected the request");
-                }
+                // When the connection is established
+                socket.value.onopen = () => {
+                    socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
-                statusMessage.value = `Auto opener ${newState ? 'enabled' : 'disabled'} successfully`;
-                messageType.value = 'success';
-
-                // Clear success message after 3 seconds
-                setTimeout(() => {
-                    if (messageType.value === 'success') {
-                        statusMessage.value = '';
+                    if (reconnectTimeout.value) {
+                        clearTimeout(reconnectTimeout.value);
+                        reconnectTimeout.value = null;
                     }
-                }, 3000);
 
+                    isManualDisconnect.value = false;
+                };
+
+                // When a message is received from the server
+                socket.value.onmessage = (event) => {
+                    const data = event.data;
+                    openUrlInNewTab(data);
+                };
+
+                // When the connection is closed
+                socket.value.onclose = (event) => {
+                    console.log("WebSocket close event:", {
+                        code: event.code,
+                        reason: event.reason,
+                        wasClean: event.wasClean
+                    });
+
+                    if (event.code === 4001) {
+                        console.error("Unauthorized: No session token provided.");
+                        errorMessage.value = "Authentication failed. Please log in again.";
+                        isAutoOpenerActive.value = false;
+                    } else {
+                        console.log("WebSocket connection closed by server");
+
+                        if (!isManualDisconnect.value) {
+                            attemptReconnect();
+                        }
+                    }
+                };
+
+                // When there's an error with the WebSocket connection
+                socket.value.onerror = (error) => {
+                    console.error("WebSocket error details:", {
+                        readyState: socket.value?.readyState,
+                        url: socket.value?.url,
+                        protocol: socket.value?.protocol,
+                        error: error
+                    });
+                    errorMessage.value = "Connection error. Attempting to reconnect...";
+
+                    if (!isManualDisconnect.value) {
+                        attemptReconnect();
+                    }
+                };
             } catch (error) {
-                console.warn("Error updating server, but keeping UI state:", error);
-                statusMessage.value = "Changed locally, but couldn't update server. Feature will work until page reload.";
-                messageType.value = 'error';
+                console.error("Error creating WebSocket:", error);
+                errorMessage.value = "Failed to create WebSocket connection";
             }
-
-        } catch (error) {
-            console.error("Critical error in toggle function:", error);
-            statusMessage.value = "Something went wrong. Please try again.";
-            messageType.value = 'error';
         }
-    };
 
-    onMounted(async () => {
-        isLoading.value = true;
-        statusMessage.value = 'Loading auto opener status...';
-
-        try {
-            // Default to disabled if we can't reach the server
-            autoOpenerEnabled.value = false;
-
-            // Try to get CSRF token
-            let csrfToken;
-            try {
-                const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (!csrfResponse.ok) {
-                    throw new Error("Failed to fetch CSRF token");
-                }
-
-                const csrfData = await csrfResponse.json();
-                csrfToken = csrfData.csrfToken;
-            } catch (error) {
-                console.warn("CSRF token fetch failed, continuing without token:", error);
-                // Continue without the token
+        function attemptReconnect() {
+            if (!reconnectTimeout.value) {
+                reconnectTimeout.value = setTimeout(() => {
+                    console.log("Attempting to reconnect...");
+                    connectToWebSocket();
+                }, 5000) as unknown as number;
             }
-
-            const headers: Record<string, string> = {};
-            if (csrfToken) {
-                headers["csrf-token"] = csrfToken;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/getAutoOpenerStatus`, {
-                    method: "GET",
-                    headers,
-                    credentials: "include",
-                });
-
-                if (!response.ok) {
-                    throw new Error("Server returned an error");
-                }
-
-                const data = await response.json();
-                autoOpenerEnabled.value = Boolean(data.enabled);
-                statusMessage.value = '';
-            } catch (error) {
-                console.warn("Couldn't fetch status from server, using default:", error);
-                statusMessage.value = "Auto opener is available in local mode";
-                messageType.value = 'info';
-            }
-        } catch (error) {
-            console.error("Error in initialization:", error);
-            statusMessage.value = "Auto opener is available in local mode";
-            messageType.value = 'info';
-        } finally {
-            isLoading.value = false;
         }
-    });
 
-    return {
-        autoOpenerEnabled,
-        statusMessage,
-        messageType,
-        isLoading,
-        toggleAutoOpener
-    };
-}
+        // Function to close the WebSocket connection
+        function closeWebSocket() {
+            if (socket.value) {
+                isManualDisconnect.value = true;
+                socket.value.close();
+                socket.value = null;
+                errorMessage.value = ""; // Clear any error messages
+            } else {
+                console.log("No active WebSocket connection to close.");
+            }
+        }
+
+        // Function to open a URL in a new tab
+        function openUrlInNewTab(url: string) {
+            if (isValidUrl(url)) {
+                window.open(url, "_blank");
+            } else {
+                console.warn("Received invalid URL:", url);
+            }
+        }
+
+        // Function to validate if a string is a valid URL
+        function isValidUrl(string: string): boolean {
+            try {
+                new URL(string);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        // Cleanup on component unmount
+        onUnmounted(() => {
+            closeWebSocket();
+            if (reconnectTimeout.value) {
+                clearTimeout(reconnectTimeout.value);
+                reconnectTimeout.value = null;
+            }
+        });
+
+        // Return exposed values and functions
+        return {
+            isAutoOpenerActive,
+            errorMessage,
+            toggleAutoOpener
+        };
+    }
+};

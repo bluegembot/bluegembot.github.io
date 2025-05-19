@@ -1,5 +1,4 @@
 <template>
-  <!-- Rest of the template remains the same -->
   <nav class="navbar">
     <div class="navbar-brand">
       <div class="logo-circle">
@@ -62,13 +61,14 @@ export default {
   },
   data() {
     return {
-      isDarkMode: true // Set default to true
+      isDarkMode: true // Default to dark mode
     }
   },
   methods: {
     toggleDarkMode() {
       this.isDarkMode = !this.isDarkMode;
-      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('dark-mode', this.isDarkMode);
+      document.body.classList.toggle('light-mode', !this.isDarkMode);
       localStorage.setItem('darkMode', this.isDarkMode);
     }
   },
@@ -77,18 +77,14 @@ export default {
     const savedDarkMode = localStorage.getItem('darkMode');
     this.isDarkMode = savedDarkMode === null ? true : savedDarkMode === 'true';
 
-    // Apply dark mode by default or based on saved preference
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+    // Apply appropriate mode classes
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
+    document.body.classList.toggle('light-mode', !this.isDarkMode);
   }
 }
 </script>
 
 <style scoped>
-/* Styles remain the same */
 .navbar {
   padding: 1rem;
   display: flex;
@@ -111,11 +107,10 @@ export default {
 }
 
 .navbar-item {
-  color: black;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .toggle-button {
@@ -154,23 +149,23 @@ export default {
 /* Custom styles for login and register buttons */
 .login-button {
   border-bottom: 2px solid #4CAF50;
-  color: black;
   background-color: transparent;
+  color: #333;
 }
 
 .register-button {
   border-bottom: 2px solid #2ed1e1;
-  color: black;
   background-color: transparent;
+  color: #333;
 }
 
 .login-button:hover {
-  color: white;
+  color: black;
   background-color: #4CAF50;
 }
 
 .register-button:hover {
-  color: white;
+  color: black;
   background-color: #2ed1e1;
 }
 </style>
