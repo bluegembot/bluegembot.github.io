@@ -1,5 +1,14 @@
+/* LandingPage.css with light/dark mode fixes */
+
 :root {
+    /* Light mode (default) variables */
     --accent-color: #2ed1e1;
+    --bg-light: #f8f8f8;
+    --bg-lighter: #ffffff;
+    --text-dark: #333333;
+    --text-gray-light: #666666;
+
+    /* Dark mode variables - only used when .dark-mode class is active */
     --bg-dark: #121212;
     --bg-darker: #0a0a0a;
     --text-light: #ffffff;
@@ -13,9 +22,11 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/* Default light mode styles */
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--bg-lighter);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
 }
 
 .logo {
@@ -29,11 +40,13 @@ body {
 }
 
 section {
-    min-height:35vh;
+    min-height: 35vh;
     padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--bg-light); /* Default light background */
+    transition: background-color 0.3s ease;
 }
 
 .content-wrapper {
@@ -43,19 +56,23 @@ section {
 }
 
 #hero {
-    background-color: var(--bg-darker);
+    background-color: var(--bg-light);
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .hero-content h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .hero-content p {
     font-size: 1.5rem;
-    color: var(--text-gray);
+    color: var(--text-gray-light);
     margin-bottom: 2rem;
+    transition: color 0.3s ease;
 }
 
 .logo-circle {
@@ -71,10 +88,11 @@ section {
 }
 
 .feature-card {
-    background-color: var(--bg-darker);
+    background-color: var(--bg-lighter);
     padding: 2rem;
     border-radius: 12px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    color: var(--text-dark);
 }
 
 .feature-card:hover {
@@ -89,22 +107,27 @@ section {
 
 .feature-card h3 {
     margin-bottom: 1rem;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .feature-card p {
-    color: var(--text-gray);
+    color: var(--text-gray-light);
+    transition: color 0.3s ease;
 }
 
 /* Video section styles */
 #video {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-light);
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 #video h2 {
     margin-bottom: 2rem;
     font-size: 2.5rem;
-    color: var(--text-light);
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .video-container {
@@ -124,7 +147,8 @@ section {
 }
 
 #testimonials {
-    background-color: var(--bg-darker);
+    background-color: var(--bg-light);
+    transition: background-color 0.3s ease;
 }
 
 .testimonial-grid {
@@ -134,15 +158,19 @@ section {
 }
 
 .testimonial-card {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-light);
     padding: 2rem;
     border-radius: 12px;
     border-left: 4px solid var(--accent-color);
+    transition: background-color 0.3s ease;
+    color: var(--text-dark);
 }
 
 .testimonial-text {
     font-style: italic;
     margin-bottom: 1rem;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .testimonial-author {
@@ -153,11 +181,12 @@ section {
 input, textarea {
     width: 100%;
     padding: 1rem;
-    background-color: var(--bg-darker);
-    border: 1px solid var(--text-gray);
+    background-color: var(--bg-lighter);
+    border: 1px solid var(--text-gray-light);
     border-radius: 8px;
-    color: var(--text-light);
+    color: var(--text-dark);
     margin-top: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 input:focus, textarea:focus {
@@ -206,7 +235,6 @@ input:focus, textarea:focus {
     background-color: #7289da;
 }
 
-
 .youtube{
     background-color: #FF0000;
 }
@@ -221,9 +249,16 @@ input:focus, textarea:focus {
     height: 24px;
 }
 
+#socials {
+    background-color: var(--bg-light);
+    transition: background-color 0.3s ease;
+}
+
 #socials h2 {
     text-align: center;
     margin-bottom: 1rem;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .video-container {
@@ -248,12 +283,14 @@ input:focus, textarea:focus {
 }
 
 .testimonial-card{
-    border: 2px solid #2ed1e1
+    border: 2px solid #2ed1e1;
 }
 
 .testimonial-title{
     margin-bottom: 10px;
     justify-self: center;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
 }
 
 .fade-section {
@@ -266,14 +303,6 @@ input:focus, textarea:focus {
 .fade-section.fade-in {
     opacity: 1;
     transform: translateY(0);
-}
-
-:root {
-    --accent-color: #2ed1e1;
-    --bg-dark: #121212;
-    --bg-darker: #0a0a0a;
-    --text-light: #ffffff;
-    --text-gray: #a0a0a0;
 }
 
 .fast{
@@ -290,4 +319,58 @@ input:focus, textarea:focus {
 
 .video-container{
     border: 2px solid #2ed1e1;
+}
+
+/* DARK MODE STYLES */
+/* These styles will only apply when the body has the dark-mode class */
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+body.dark-mode section {
+    background-color: var(--bg-dark);
+}
+
+body.dark-mode #hero,
+body.dark-mode #testimonials {
+    background-color: var(--bg-darker);
+}
+
+body.dark-mode .hero-content h1,
+body.dark-mode #hero p,
+body.dark-mode #testimonials h1,
+body.dark-mode .testimonial-text {
+    color: var(--text-light);
+}
+
+body.dark-mode #hero p,
+body.dark-mode .feature-card p {
+    color: var(--text-gray);
+}
+
+body.dark-mode .feature-card,
+body.dark-mode .testimonial-card {
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+}
+
+body.dark-mode .feature-card h3,
+body.dark-mode #video h2,
+body.dark-mode #socials h2,
+body.dark-mode .testimonial-title {
+    color: var(--text-light);
+}
+
+body.dark-mode #video,
+body.dark-mode #features,
+body.dark-mode #socials {
+    background-color: var(--bg-dark);
+}
+
+body.dark-mode input,
+body.dark-mode textarea {
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+    border-color: var(--text-gray);
 }
