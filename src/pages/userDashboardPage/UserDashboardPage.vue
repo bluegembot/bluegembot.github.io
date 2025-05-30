@@ -36,11 +36,13 @@
                     </div>
                     <div class="detail-row">
                       <span class="detail-label">Forced Discount:</span>
-                      <span class="detail-value">{{ skin.forcedDiscount }}</span>
+                      <span v-if="skin.forcedDiscount !== false" class="detail-value">{{ skin.forcedDiscount }}%</span>
+                      <span v-else class="detail-value">Disabled</span>
                     </div>
                     <div class="detail-row">
                       <span class="detail-label">Min Fade %:</span>
-                      <span class="detail-value">{{ skin.minFadePercentage }}</span>
+                      <span v-if="skin.minFadePercentage" class="detail-value">{{ skin.minFadePercentage }}%</span>
+                      <span v-else class="detail-value">Disabled</span>
                     </div>
                   </div>
                 </div>
