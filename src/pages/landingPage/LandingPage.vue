@@ -37,9 +37,9 @@
 
     <section id="video" ref="video" class="fade-section">
       <div class="content-wrapper">
-        <h2>See BlueGemBot in Action</h2>
+        <h2>The latest BlueGemBot update</h2>
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/73wglgsOsgY?si=VGzdC_sO5VubKxLu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/watch?v=8gMYTLQiZ60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </section>
