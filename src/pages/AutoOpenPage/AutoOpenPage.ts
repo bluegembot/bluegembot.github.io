@@ -1,4 +1,5 @@
-import { ref, onUnmounted } from "vue";
+// AutoOpenPage.ts
+import { ref, onMounted, onUnmounted } from "vue";
 import { WS_URL } from '@/config/environment';
 
 export default {
@@ -10,6 +11,66 @@ export default {
         // Reactive variables
         const isAutoOpenerActive = ref(false);
         const errorMessage = ref("");
+
+        // Permission checking variables
+        const hasPopupPermission = ref<boolean | null>(null);
+        const permissionChecked = ref(false);
+
+        // Check browser permissions on component mount
+        onMounted(() => {
+            // await checkBrowserPermissions();
+            testPopupPermission()
+        });
+
+        // Permission checking functions
+        async function checkBrowserPermissions() {
+            // Method 1: Try Permissions API first (limited browser support)
+            if ('permissions' in navigator) {
+                try {
+                    const result = await (navigator.permissions as any).query({ name: 'popup' });
+                    if (result.state === 'granted') {
+                        hasPopupPermission.value = true;
+                        permissionChecked.value = true;
+                        await testPopupPermission()
+                        return;
+                    } else if (result.state === 'denied') {
+                        hasPopupPermission.value = false;
+                        permissionChecked.value = true;
+                        return;
+                    }
+                } catch (error) {
+                    // Popup permission query not supported, fall back to test method
+                }
+            }
+
+            // Method 2: Test by attempting to open a window
+            await testPopupPermission();
+        }
+
+        async function testPopupPermission() {
+            try {
+                // Try to open a small test window off-screen
+                const testWindow = window.open('', '_blank', 'width=1,height=1,left=-1000,top=-1000');
+                if (testWindow) {
+                    hasPopupPermission.value = true;
+                    console.log('Has permission')
+                    testWindow.close()
+                } else {
+                    hasPopupPermission.value = false;
+                    console.log('No permission')
+                    testWindow.close()
+                }
+            } catch (error) {
+                hasPopupPermission.value = false;
+                testWindow.close()
+            }
+            permissionChecked.value = true;
+            testWindow.close()
+        }
+
+        function reloadPage(){
+            location.reload()
+        }
 
         // Toggle function
         const toggleAutoOpener = () => {
@@ -33,10 +94,8 @@ export default {
             const wsUrl = `${WS_URL}`;
 
             try {
-                // Explicitly set credentials mode
                 socket.value = new WebSocket(wsUrl);
 
-                // When the connection is established
                 socket.value.onopen = () => {
                     socket.value?.send(JSON.stringify({ action: "greet", message: "Hello, server!" }));
 
@@ -48,13 +107,11 @@ export default {
                     isManualDisconnect.value = false;
                 };
 
-                // When a message is received from the server
                 socket.value.onmessage = (event) => {
                     const data = event.data;
                     openUrlInNewTab(data);
                 };
 
-                // When the connection is closed
                 socket.value.onclose = (event) => {
                     console.log("WebSocket close event:", {
                         code: event.code,
@@ -75,7 +132,6 @@ export default {
                     }
                 };
 
-                // When there's an error with the WebSocket connection
                 socket.value.onerror = (error) => {
                     console.error("WebSocket error details:", {
                         readyState: socket.value?.readyState,
@@ -104,28 +160,30 @@ export default {
             }
         }
 
-        // Function to close the WebSocket connection
         function closeWebSocket() {
             if (socket.value) {
                 isManualDisconnect.value = true;
                 socket.value.close();
                 socket.value = null;
-                errorMessage.value = ""; // Clear any error messages
+                errorMessage.value = "";
             } else {
                 console.log("No active WebSocket connection to close.");
             }
         }
 
-        // Function to open a URL in a new tab
         function openUrlInNewTab(url: string) {
             if (isValidUrl(url)) {
-                window.open(url, "_blank");
+                const newWindow = window.open(url, "_blank");
+                // If window.open returns null, permissions might have changed
+                if (!newWindow) {
+                    hasPopupPermission.value = false;
+                    errorMessage.value = "Failed to open URL. Please check your browser's popup settings.";
+                }
             } else {
                 console.warn("Received invalid URL:", url);
             }
         }
 
-        // Function to validate if a string is a valid URL
         function isValidUrl(string: string): boolean {
             try {
                 new URL(string);
@@ -148,7 +206,11 @@ export default {
         return {
             isAutoOpenerActive,
             errorMessage,
-            toggleAutoOpener
+            toggleAutoOpener,
+            hasPopupPermission,
+            permissionChecked,
+            testPopupPermission,
+            reloadPage
         };
     }
 };
