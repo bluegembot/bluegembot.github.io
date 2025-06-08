@@ -52,6 +52,11 @@
         </div>
       </div>
     </div>
+    <!-- Notification Settings Component -->
+    <NotificationSettings
+        ref="notificationSettingsRef"
+        @log-message="addConsoleLog"
+    />
   </div>
 
   <!-- Permission Notice Component -->
@@ -62,5 +67,4 @@
 </template>
 
 <script lang="ts" src="./AutoOpenPage.ts"></script>
-
 <style src="./AutoOpenPage.css"></style>
