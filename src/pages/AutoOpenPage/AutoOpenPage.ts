@@ -2,9 +2,13 @@
 import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { WS_URL } from '@/config/environment';
 import PermissionNotice from "@/components/PermissionNotice.vue";
+import NotificationSettings from "@/components/NotificationSettings.vue";
 
 export default {
-    components: {PermissionNotice},
+    components: {
+        PermissionNotice,
+        NotificationSettings
+    },
     setup() {
         const socket = ref<WebSocket | null>(null);
         const reconnectTimeout = ref<number | null>(null);
@@ -20,6 +24,9 @@ export default {
         // Console logging variables
         const consoleLogs = ref<Array<{id: number, timestamp: string, message: string, type: string}>>([]);
         const showConsole = ref(true);
+
+        // Reference to the NotificationSettings component
+        const notificationSettingsRef = ref<any>(null);
 
         // Store original console methods
         const originalConsoleLog = console.log;
@@ -364,6 +371,10 @@ export default {
                 addConsoleLog(`Failed to open URL: ${url} - Check popup settings`, 'error');
             } else {
                 addConsoleLog(`🎯 DEAL OPENED: ${url}`, 'deal');
+                // Play notification sound when deal is opened using the component reference
+                if (notificationSettingsRef.value && notificationSettingsRef.value.playNotificationSound) {
+                    notificationSettingsRef.value.playNotificationSound();
+                }
             }
         }
 
@@ -387,7 +398,9 @@ export default {
             consoleLogs,
             showConsole,
             toggleConsole,
-            clearConsole
+            clearConsole,
+            addConsoleLog,
+            notificationSettingsRef
         };
     }
 };
