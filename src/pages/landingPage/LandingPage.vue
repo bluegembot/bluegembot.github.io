@@ -64,7 +64,7 @@
       <div class="content-wrapper">
         <h2>Get started with BlueGemBot for free</h2>
         <div class="social-links">
-          <a href="https://discord.gg/gCzdeGxH" class="social-link discord" target="_blank" rel="noopener noreferrer">
+          <a href="https://discord.com/invite/kWGfK6St4m" class="social-link discord" target="_blank" rel="noopener noreferrer">
             <font-awesome-icon :icon="['fab', 'discord']" class="social-icon" />
             <span>Join our Discord</span>
           </a>
@@ -75,7 +75,69 @@
         </div>
       </div>
     </section>
+
   </div>
+  <footer id="footer" class="footer-section">
+    <div class="content-wrapper">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>BlueGemBot</h4>
+          <p>Transform the way you snipe CS skins with our free, instant and customizable listing tracker.</p>
+          <p class="api-disclaimer">🔗 Connects to publicly available APIs - no scraping or automated website actions</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><router-link to="/TOS">Terms of Service</router-link></li>
+            <li><router-link to="/privacy">Privacy Policy</router-link></li>
+            <li><router-link to="/refunds">Refund Policy</router-link></li>
+            <li><router-link to="/cancellation">Cancellation Policy</router-link></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Customer Support</h4>
+          <div class="support-info">
+            <div class="support-item">
+              <span class="support-icon">📧</span>
+              <div>
+                <strong>Email Support</strong>
+                <a href="mailto:lucaskaas2@gmail.com" class="support-email">lucaskaas2@gmail.com</a>
+              </div>
+            </div>
+            <div class="support-item">
+              <span class="support-icon">💬</span>
+              <div>
+                <strong>Discord Support</strong>
+                <a href="https://discord.gg/RtV4zggY26" target="_blank" class="support-link">Create a ticket</a>
+              </div>
+            </div>
+            <div class="business-hours">
+              <small>🕒 Response usually within 24 hours on work days</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <div class="footer-socials">
+            <a href="https://discord.gg/gCzdeGxH" target="_blank" rel="noopener noreferrer" title="Join Discord">
+              <font-awesome-icon :icon="['fab', 'discord']" />
+            </a>
+            <a href="https://www.youtube.com/@muxeyy" target="_blank" rel="noopener noreferrer" title="YouTube Channel">
+              <font-awesome-icon :icon="['fab', 'youtube']" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 BlueGemBot. All rights reserved.</p>
+        <p class="disclaimer">BlueGemBot connects to publicly available APIs and does not perform scraping or automated actions on websites.</p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <script lang="ts">

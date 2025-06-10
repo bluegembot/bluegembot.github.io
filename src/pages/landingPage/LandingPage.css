@@ -374,3 +374,217 @@ body.dark-mode textarea {
     color: var(--text-light);
     border-color: var(--text-gray);
 }
+
+/* Enhanced Footer Styles - Add this to your LandingPage.css */
+
+.footer-section {
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+    padding: 3rem 1rem 1rem;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-column h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.footer-column p {
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+.api-disclaimer {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(46, 209, 225, 0.1);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 4px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Enhanced Support Section */
+.support-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.support-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: rgba(46, 209, 225, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(46, 209, 225, 0.2);
+}
+
+.support-icon {
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+}
+
+.support-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.support-item strong {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.support-email,
+.support-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.support-email:hover,
+.support-link:hover {
+    color: #1fb8c4;
+    text-decoration: underline;
+}
+
+.support-item small {
+    color: var(--text-gray);
+    font-size: 0.8rem;
+}
+
+.business-hours {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(46, 209, 225, 0.08);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.business-hours small {
+    color: var(--text-gray);
+    font-style: italic;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-socials a {
+    color: var(--text-gray);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: rgba(46, 209, 225, 0.1);
+}
+
+.footer-socials a:hover {
+    color: var(--accent-color);
+    background-color: rgba(46, 209, 225, 0.2);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--text-gray);
+    padding-top: 1rem;
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.disclaimer {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--text-gray);
+}
+
+/* Dark mode adjustments */
+body.dark-mode .footer-section {
+    background-color: var(--bg-darker);
+}
+
+body.dark-mode .footer-column h4 {
+    color: var(--accent-color);
+}
+
+body.dark-mode .footer-column p,
+body.dark-mode .footer-links a,
+body.dark-mode .footer-bottom,
+body.dark-mode .footer-socials a {
+    color: var(--text-gray);
+}
+
+body.dark-mode .api-disclaimer {
+    background-color: rgba(46, 209, 225, 0.15);
+    color: var(--text-light);
+}
+
+body.dark-mode .support-item {
+    background-color: rgba(46, 209, 225, 0.08);
+    border-color: rgba(46, 209, 225, 0.3);
+}
+
+body.dark-mode .support-item strong {
+    color: var(--text-light);
+}
+
+body.dark-mode .business-hours {
+    background-color: rgba(46, 209, 225, 0.12);
+}
+
+body.dark-mode .footer-socials a {
+    background-color: rgba(46, 209, 225, 0.15);
+}
+
+body.dark-mode .footer-socials a:hover {
+    background-color: rgba(46, 209, 225, 0.25);
+}
+
+/* Mobile responsiveness for footer */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .support-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .footer-socials {
+        justify-content: center;
+    }
+}
