@@ -8,6 +8,10 @@ import AccountPage from "@/pages/AccountPage/AccountPage.vue";
 import AutoOpenPage from "@/pages/AutoOpenPage/AutoOpenPage.vue";
 import LandingPage from "@/pages/landingPage/LandingPage.vue";
 import SubscriptionsPage from "@/pages/Subscriptions/SubscriptionsPage.vue";
+import TOS from "@/pages/LegalInfo/TOS.vue"
+import privacy from "@/pages/LegalInfo/privacy.vue"
+import refunds from "@/pages/LegalInfo/refunds.vue"
+import cancellationpolicy from "@/pages/LegalInfo/Cancellation.vue"
 
 const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
 
@@ -39,6 +43,10 @@ async function isAuthenticated() {
 const routes = [
   { path: '/', component: RegisterPage, pathToRegexpOptions: { strict: true } },
   { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true } },
+  // { path: '/TOS', component: TOS, meta: { requiresAuth: false } },
+  // { path: '/privacy', component: privacy, meta: { requiresAuth: false } },
+  // { path: '/refunds', component: refunds, meta: { requiresAuth: false } },
+  // {path: '/cancellation', component: cancellationpolicy, meta:{requiresAuth: false}},
   { path: '/register', component: RegisterPage },
   { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
   { path: '/login', component: UserLoginPage },

@@ -36,7 +36,7 @@
                     </div>
                     <div class="detail-row">
                       <span class="detail-label">Forced Discount:</span>
-                      <span v-if="skin.forcedDiscount != null" class="detail-value">{{ skin.forcedDiscount }}%</span>
+                      <span v-if="skin.forcedDiscount" class="detail-value">{{ skin.forcedDiscount }}%</span>
                       <span v-else class="detail-value">Disabled</span>
                     </div>
                     <div class="detail-row">

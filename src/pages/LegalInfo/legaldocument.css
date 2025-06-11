@@ -1,0 +1,175 @@
+/* Complete CSS Reset and Isolation - Properly Scoped */
+.legal-document {
+    all: initial;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    color: #333333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.legal-document * {
+    all: unset;
+    display: revert;
+    box-sizing: border-box;
+}
+
+.legal-document .document-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    color: #333333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.legal-document .document-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #e1e5e9;
+    padding-bottom: 30px;
+}
+
+.legal-document .document-header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.legal-document .document-meta {
+    color: #666;
+    font-size: 0.95em;
+}
+
+.legal-document .document-meta p {
+    margin: 5px 0;
+}
+
+.legal-document .document-content {
+    margin-bottom: 40px;
+}
+
+.legal-document section {
+    margin-bottom: 35px;
+}
+
+.legal-document h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e1e5e9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.legal-document h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 20px 0 10px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.legal-document p {
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #333333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.legal-document ul {
+    margin: 15px 0 15px 25px;
+    list-style-type: disc;
+}
+
+.legal-document li {
+    margin-bottom: 8px;
+    color: #333333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.legal-document .contact-section {
+    background-color: #f8f9fa;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.legal-document a {
+    color: #007bff;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.legal-document a:hover {
+    text-decoration: underline;
+}
+
+.legal-document .document-footer {
+    text-align: center;
+    border-top: 1px solid #e1e5e9;
+    padding-top: 30px;
+    color: #666;
+}
+
+.legal-document .document-footer p {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.legal-document .home-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+}
+
+.legal-document .home-link:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .legal-document .document-container {
+        padding: 20px 15px;
+    }
+
+    .legal-document .document-header h1 {
+        font-size: 2em;
+    }
+
+    .legal-document h2 {
+        font-size: 1.3em;
+    }
+
+    .legal-document h3 {
+        font-size: 1.1em;
+    }
+
+    .legal-document ul {
+        margin-left: 20px;
+    }
+}

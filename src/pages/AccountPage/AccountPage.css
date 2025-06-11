@@ -20,7 +20,6 @@ main {
     margin-bottom: 20px;
 }
 
-/* Message Styles */
 .fixed-top-message {
     position: fixed;
     top: 20px;
@@ -43,15 +42,15 @@ main {
     flex: 1;
     min-width: 300px;
     padding: 20px;
-    background-color: #333;
+    background-color: var(--color-background-mute);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 3px solid #2ed1e1; /* Added the requested border with color */
+    border: 3px solid var(--accent-color);
 }
 
 .upcoming h2 {
     font-size: 22px;
-    color: white;
+    color: var(--text-light);
     margin-top: 0;
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -66,8 +65,8 @@ main {
 
 .upcoming-list li {
     padding: 10px 0;
-    color: white;
-    border-bottom: 1px solid #f0f0f0;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--accent-color);
     font-size: 16px;
 }
 

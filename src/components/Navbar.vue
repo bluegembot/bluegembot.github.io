@@ -85,12 +85,17 @@ export default {
 </script>
 
 <style scoped>
+/* Add these styles to your Navbar component's <style> section */
+
 .navbar {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #2ed1e1;
+  border-bottom: 2px solid var(--accent-color);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: all 0.3s ease;
 }
 
 .navbar-menu {
@@ -111,6 +116,7 @@ export default {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: all 0.3s ease;
+  color: var(--color-text);
 }
 
 .toggle-button {
@@ -121,6 +127,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-text);
+  transition: all 0.3s ease;
 }
 
 .mode-icon {
@@ -128,11 +136,16 @@ export default {
 }
 
 .navbar-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(46, 209, 225, 0.1);
+}
+
+.toggle-button:hover {
+  background-color: rgba(46, 209, 225, 0.1);
+  border-radius: 4px;
 }
 
 .is-active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(46, 209, 225, 0.2);
 }
 
 .logo-circle {
@@ -150,22 +163,37 @@ export default {
 .login-button {
   border-bottom: 2px solid #4CAF50;
   background-color: transparent;
-  color: #333;
+  color: var(--color-text);
 }
 
 .register-button {
-  border-bottom: 2px solid #2ed1e1;
+  border-bottom: 2px solid var(--accent-color);
   background-color: transparent;
-  color: #333;
+  color: var(--color-text);
 }
 
 .login-button:hover {
-  color: black;
   background-color: #4CAF50;
+  color: white;
 }
 
 .register-button:hover {
-  color: black;
-  background-color: #2ed1e1;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* Dark mode specific navbar adjustments */
+body.dark-mode .navbar {
+  background-color: var(--color-background-soft);
+}
+
+body.dark-mode .navbar-item,
+body.dark-mode .toggle-button {
+  color: var(--color-text);
+}
+
+body.dark-mode .login-button,
+body.dark-mode .register-button {
+  color: var(--color-text);
 }
 </style>
