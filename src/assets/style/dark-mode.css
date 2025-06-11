@@ -1,195 +1,127 @@
-/* assets/style/dark-mode.css */
-body {
-    transition: all 0.3s ease;
-}
+/* dark-mode.css - Simplified and focused */
 
+/* Main dark mode styles - leveraging CSS variables from base.css */
 body.dark-mode {
-    background-color: #222222;
-    color: white;
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
 
-/* Dark mode navbar styles */
-body.dark-mode .navbar {
-    background-color: #222222;
+/* Exclude legal documents from dark mode - keep these overrides */
+body.dark-mode .legal-document,
+body.dark-mode .legal-document * {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border-color: #e1e5e9 !important;
 }
 
-body.dark-mode .navbar-item {
-    color: white;
+body.dark-mode .legal-document a {
+    color: #007bff !important;
 }
 
-/* Dark mode section styles */
-body.dark-mode section {
-    background-color: #222222;
+body.dark-mode .legal-document a:hover {
+    color: #0056b3 !important;
 }
 
 /* Dashboard specific dark mode styles */
-body.dark-mode .main-title {
-    color: white;
+body.dark-mode .main-title,
+body.dark-mode .subscription-tiers-title2 {
+    color: var(--color-text);
 }
 
 body.dark-mode .tracked-skins-container,
 body.dark-mode .announcements,
 body.dark-mode .user-information-container {
-    background-color: #2f2f2f;
-    border-color: #2ed1e1;
+    background-color: var(--color-background-mute);
+    border-color: var(--accent-color);
 }
 
 body.dark-mode .tracked-skins-container h2,
 body.dark-mode .announcements h2,
 body.dark-mode .user-information-container h2 {
-    background-color: #2f2f2f;
-    color: white;
-    border-bottom-color: #444;
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+    border-bottom-color: var(--color-border);
 }
 
-/* Dark mode list items */
+/* List items */
 body.dark-mode .tracked-skins-unordered-list li:nth-child(odd),
 body.dark-mode .announcement-list li:nth-child(odd),
 body.dark-mode .user-information-unordered-list li:nth-child(odd) {
-    background-color: #363636;
-    color: white;
+    background-color: var(--color-background-soft);
+    color: var(--color-text);
 }
 
 body.dark-mode .tracked-skins-unordered-list li:nth-child(even),
 body.dark-mode .announcement-list li:nth-child(even),
 body.dark-mode .user-information-unordered-list li:nth-child(even) {
-    background-color: #2f2f2f;
-    color: white;
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
 }
 
-/* Dark mode grid items */
+/* Grid items */
 body.dark-mode .grid-item {
-    background-color: #2f2f2f;
-    color: white;
-    border-color: #2ed1e1;
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+    border-color: var(--accent-color);
 }
 
 body.dark-mode .grid-item:hover {
-    background-color: #363636;
+    background-color: var(--color-background-soft);
 }
 
-/* Dark mode tracked skin items */
-body.dark-mode .tracked-skin-item {
-    background-color: #2f2f2f;
-    border-color: #444;
-    color: white;
+/* Forms and inputs */
+body.dark-mode .search-bar,
+body.dark-mode .float-input,
+body.dark-mode .form-group input,
+body.dark-mode select {
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+    border-color: var(--color-border);
 }
 
-/* Keep the stop tracking button styles */
-body.dark-mode .stop-tracking-button {
-    background-color: #ff4444;
-    color: white;
+body.dark-mode .search-bar::placeholder,
+body.dark-mode .form-group input::placeholder {
+    color: var(--text-gray-light);
 }
 
-body.dark-mode .stop-tracking-button:hover {
-    background-color: #cc0000;
+body.dark-mode .form-group label {
+    color: var(--color-text);
 }
 
-/* Error/Success messages in dark mode */
-body.dark-mode .error-message,
-body.dark-mode .success-message {
-    background-color: #2f2f2f;
-    color: white;
-}
-
-/* No tracking message in dark mode */
-body.dark-mode .no-tracking-message {
-    color: #cccccc;
-}
-
-/* Feature cards in dark mode */
-body.dark-mode .feature-card {
-    background-color: #2f2f2f;
-}
-
-body.dark-mode .testimonial-card {
-    background-color: #2f2f2f;
-}
-
-/* Keep the button colors but adjust text color */
-body.dark-mode .login-button,
-body.dark-mode .register-button {
-    color: white;
-}
-
-/* Preserve hover states */
-body.dark-mode .login-button:hover {
-    background-color: #4CAF50;
-    color: white;
-}
-
-body.dark-mode .register-button:hover {
-    background-color: #2ed1e1;
-    color: white;
-}
-
-body.dark-mode .search-container {
-    background-color: #222222;
-}
-
-body.dark-mode .search-bar {
-    background-color: #2f2f2f;
-    color: white;
-    border-color: #444;
-}
-
-body.dark-mode .search-bar::placeholder {
-    color: #888;
-}
-
-/* Table styles */
+/* Tables */
 body.dark-mode table {
-    background-color: #2f2f2f;
-    color: white;
-    border-color: #444;
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+    border-color: var(--color-border);
 }
 
 body.dark-mode th {
-    background-color: #363636;
-    color: white;
-    border-color: #444;
+    background-color: var(--color-background-soft);
+    color: var(--color-text);
+    border-color: var(--color-border);
 }
 
 body.dark-mode td {
-    border-color: #444;
-    color: white;
+    border-color: var(--color-border);
+    color: var(--color-text);
 }
 
 body.dark-mode tr:nth-child(even) {
-    background-color: #363636;
+    background-color: var(--color-background-soft);
 }
 
 body.dark-mode tr:nth-child(odd) {
-    background-color: #2f2f2f;
-}
-
-/* Select dropdown */
-body.dark-mode select {
-    background-color: #2f2f2f;
-    color: white;
-    border-color: #444;
-}
-
-body.dark-mode select option {
-    background-color: #2f2f2f;
-    color: white;
-}
-
-/* Input fields */
-body.dark-mode .float-input {
-    background-color: #2f2f2f;
-    color: white;
-    border-color: #444;
+    background-color: var(--color-background-soft);
 }
 
 /* Buttons */
-body.dark-mode button {
-    background-color: #2ed1e1;
+body.dark-mode button:not(.legal-document button) {
+    background-color: var(--accent-color);
     color: white;
     border: none;
 }
 
-body.dark-mode button:hover {
+body.dark-mode button:not(.legal-document button):hover {
     background-color: #29bbc9;
 }
 
@@ -201,35 +133,61 @@ body.dark-mode .dashboard-button:hover {
     background-color: #45a049;
 }
 
+body.dark-mode .stop-tracking-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+body.dark-mode .stop-tracking-button:hover {
+    background-color: #c82333;
+}
+
 /* Modal */
-body.dark-mode .modal-content {
-    background-color: #2f2f2f;
-    color: white;
-    border-color: #444;
+body.dark-mode .modal-content,
+body.dark-mode .popup-content {
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+    border-color: var(--color-border);
 }
 
-body.dark-mode .modal-checkbox label {
-    color: white;
+/* Registration forms */
+body.dark-mode .registration-form {
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
 }
 
-/* Main title */
-body.dark-mode .main-title {
-    color: white;
+body.dark-mode .registration-form fieldset {
+    border-color: var(--color-border);
 }
 
-/* Subscription page title */
-body.dark-mode .subscription-tiers-title2 {
-    color: white;
+body.dark-mode .registration-form a {
+    color: var(--accent-color);
 }
 
-/* Subscription text colors - keeping them distinct */
+body.dark-mode .registration-form a:hover {
+    color: #29bbc9;
+}
+
+body.dark-mode .registration-form p {
+    color: var(--text-gray-light);
+}
+
+/* Subscription tiers */
 body.dark-mode .basicText {
-    color: #2ed1e1;
+    color: var(--accent-color);
+}
+
+body.dark-mode .goldText {
+    color: #FFD700;
+}
+
+body.dark-mode .eliteText {
+    color: #dd2524;
 }
 
 body.dark-mode .basicBorder {
-    border: 2px solid #2ed1e1;
-    box-shadow: 0 0 15px #2ed1e1;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color);
 }
 
 body.dark-mode .goldBorder {
@@ -242,181 +200,71 @@ body.dark-mode .eliteBorder {
     box-shadow: 0 0 15px #dd2524;
 }
 
-body.dark-mode .goldText {
-    color: #FFD700;
+/* Skin tracking components */
+body.dark-mode .tracked-skin-item {
+    background-color: var(--color-background-soft);
+    border-color: var(--color-border);
+    color: var(--color-text);
 }
 
-body.dark-mode .eliteText {
-    color: #dd2524;
+body.dark-mode .skin-info,
+body.dark-mode .skin-name {
+    color: var(--color-text);
 }
 
-/* Subscription info */
-body.dark-mode .subscription-info h3 {
-    color: white;
+body.dark-mode .skin-header .skin-index,
+body.dark-mode .detail-label {
+    color: var(--text-gray-light);
 }
 
-body.dark-mode .subscription-info p {
-    color: #cccccc;
+body.dark-mode .detail-value {
+    color: var(--color-text);
 }
 
-/* Popup styles */
+/* Feature cards - lighter background in dark mode */
+body.dark-mode .feature-card {
+    background-color: #333333; /* Lighter than the main background */
+}
+
+/* Feature cards text override */
+body.dark-mode .feature-card h3 {
+    color: var(--color-text) !important;
+}
+
+/* Miscellaneous */
+body.dark-mode .range-labels {
+    color: var(--color-text);
+}
+
+body.dark-mode .error-message,
+body.dark-mode .success-message {
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+}
+
+body.dark-mode .no-tracking-message {
+    color: var(--text-gray-light);
+}
+
 body.dark-mode .popup-overlay {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-body.dark-mode .popup-content {
-    background-color: #2f2f2f;
-    color: white;
-    border: 1px solid #444;
-}
-
 body.dark-mode .subscription-perks {
-    color: #cccccc;
+    color: var(--text-gray-light);
 }
 
 body.dark-mode .subscription-perks li {
-    border-bottom: 1px solid #444;
-    color: white;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
 }
 
-/* Close button */
 body.dark-mode .close-btn {
-    background-color: #2ed1e1;
+    background-color: var(--accent-color);
     color: white;
     border: none;
 }
 
 body.dark-mode .close-btn:hover {
     background-color: #29bbc9;
-}
-
-/* Login/Registration form styles */
-body.dark-mode .registration-form {
-    background-color: #2f2f2f;
-    color: white;
-}
-
-body.dark-mode .registration-form fieldset {
-    border-color: #444;
-}
-
-/* Form inputs */
-body.dark-mode .form-group input {
-    background-color: #363636;
-    color: white;
-    border: 1px solid #444;
-}
-
-body.dark-mode .form-group input::placeholder {
-    color: #888;
-}
-
-body.dark-mode .form-group label {
-    color: white;
-}
-
-/* Form links */
-body.dark-mode .registration-form a {
-    color: #2ed1e1;
-}
-
-body.dark-mode .registration-form a:hover {
-    color: #29bbc9;
-}
-
-/* Form text */
-body.dark-mode .registration-form p {
-    color: #cccccc;
-}
-
-.range-labels{
-    color:white;
-}
-
-/* Dark mode styles for the improved tracked skin layout */
-body.dark-mode .skin-info {
-    color: white;
-}
-
-body.dark-mode .skin-header .skin-index {
-    color: #999;
-}
-
-body.dark-mode .skin-header .skin-name {
-    color: white;
-}
-
-body.dark-mode .detail-label {
-    color: #999;
-}
-
-body.dark-mode .detail-value {
-    color: white;
-}
-
-/* Ensure the tracked skin item background works in dark mode */
-body.dark-mode .tracked-skin-item {
-    background-color: #363636;
-    border-color: #444;
-}
-
-/* Alternate row coloring for tracked skins in dark mode */
-body.dark-mode .tracked-skins-unordered-list .tracked-skin-item:nth-child(odd),
-body.dark-mode .user-information-unordered-list .tracked-skin-item:nth-child(odd) {
-    background-color: #363636;
-}
-
-body.dark-mode .tracked-skins-unordered-list .tracked-skin-item:nth-child(even),
-body.dark-mode .user-information-unordered-list .tracked-skin-item:nth-child(even) {
-    background-color: #2f2f2f;
-}
-
-/* Keep the stop tracking button red in dark mode */
-body.dark-mode .stop-tracking-button {
-    background-color: #dc3545;
-    color: white;
-}
-
-body.dark-mode .stop-tracking-button:hover {
-    background-color: #c82333;
-}
-
-body.dark-mode .skin-name {
-    color: white;
-}
-
-/* Add these specific rules to your dark-mode.css file */
-
-/* Target the hero section specifically */
-body.dark-mode #hero {
-    background-color: #222222 !important; /* Using !important to ensure override */
-}
-
-/* Target the testimonials section specifically */
-body.dark-mode #testimonials {
-    background-color: #222222 !important;
-}
-
-/* Ensure text remains visible in dark mode for these sections */
-body.dark-mode #hero h1,
-body.dark-mode #hero p,
-body.dark-mode #testimonials h1,
-body.dark-mode #testimonials .testimonial-text,
-body.dark-mode #testimonials .testimonial-author {
-    color: white;
-}
-
-/* Make sure the features section also gets the dark background */
-body.dark-mode #features {
-    background-color: #222222 !important;
-}
-
-/* Ensure video section background gets dark mode */
-body.dark-mode #video {
-    background-color: #222222 !important;
-}
-
-/* Ensure socials section gets dark mode */
-body.dark-mode #socials {
-    background-color: #222222 !important;
 }

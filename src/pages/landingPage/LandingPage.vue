@@ -39,7 +39,7 @@
       <div class="content-wrapper">
         <h2>See BlueGemBot in Action</h2>
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/73wglgsOsgY?si=VGzdC_sO5VubKxLu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/8gMYTLQiZ60?si=PaGFaB8x7IVL50mS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -89,10 +89,11 @@
         <div class="footer-column">
           <h4>Legal</h4>
           <ul class="footer-links">
-            <li><router-link to="/TOS">Terms of Service</router-link></li>
-            <li><router-link to="/privacy">Privacy Policy</router-link></li>
-            <li><router-link to="/refunds">Refund Policy</router-link></li>
-            <li><router-link to="/cancellation">Cancellation Policy</router-link></li>
+            Coming soon.
+<!--            <li><router-link to="/TOS">Terms of Service</router-link></li>-->
+<!--            <li><router-link to="/privacy">Privacy Policy</router-link></li>-->
+<!--            <li><router-link to="/refunds">Refund Policy</router-link></li>-->
+<!--            <li><router-link to="/cancellation">Cancellation Policy</router-link></li>-->
           </ul>
         </div>
 
@@ -122,7 +123,7 @@
         <div class="footer-column">
           <h4>Connect</h4>
           <div class="footer-socials">
-            <a href="https://discord.gg/gCzdeGxH" target="_blank" rel="noopener noreferrer" title="Join Discord">
+            <a href="https://discord.com/invite/kWGfK6St4m" target="_blank" rel="noopener noreferrer" title="Join Discord">
               <font-awesome-icon :icon="['fab', 'discord']" />
             </a>
             <a href="https://www.youtube.com/@muxeyy" target="_blank" rel="noopener noreferrer" title="YouTube Channel">

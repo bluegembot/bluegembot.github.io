@@ -181,7 +181,7 @@
       </main>
 
       <footer class="document-footer">
-        <p><em>This Privacy Policy was last updated on January 1, 2025. We encourage you to review this policy periodically for any changes.</em></p>
+        <p><em>This Privacy Policy was last updated on June 10, 2025. We encourage you to review this policy periodically for any changes.</em></p>
         <p><a href="/" class="home-link">← Back to BlueGemBot</a></p>
       </footer>
     </div>

@@ -1,4 +1,4 @@
-/* Complete CSS Reset and Isolation */
+/* Complete CSS Reset and Isolation - Properly Scoped */
 .legal-document {
     all: initial;
     position: fixed;
@@ -21,7 +21,7 @@
     box-sizing: border-box;
 }
 
-.document-container {
+.legal-document .document-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 40px 20px;
@@ -32,14 +32,14 @@
     line-height: 1.6;
 }
 
-.document-header {
+.legal-document .document-header {
     text-align: center;
     margin-bottom: 40px;
     border-bottom: 2px solid #e1e5e9;
     padding-bottom: 30px;
 }
 
-.document-header h1 {
+.legal-document .document-header h1 {
     font-size: 2.5em;
     font-weight: 700;
     color: #1a1a1a;
@@ -47,42 +47,41 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.document-meta {
+.legal-document .document-meta {
     color: #666;
     font-size: 0.95em;
 }
 
-.document-meta p {
+.legal-document .document-meta p {
     margin: 5px 0;
 }
 
-.document-content {
+.legal-document .document-content {
     margin-bottom: 40px;
 }
 
-section {
+.legal-document section {
     margin-bottom: 35px;
 }
 
-h2 {
-    font-size: 1.5em !important;
-    font-weight: bold !important;
-    color: #1a1a1a !important;
-    margin-bottom: 15px !important;
-    padding-bottom: 8px !important;
-    border-bottom: 1px solid #e1e5e9 !important;
+.legal-document h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e1e5e9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.legal-document h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 20px 0 10px 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
 }
 
-h3 {
-    font-size: 1.2em !important;
-    font-weight: bold !important;
-    color: #2c3e50 !important;
-    margin: 20px 0 10px 0 !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
-}
-
-p {
+.legal-document p {
     margin-bottom: 15px;
     text-align: justify;
     color: #333333;
@@ -91,12 +90,12 @@ p {
     line-height: 1.6;
 }
 
-ul {
+.legal-document ul {
     margin: 15px 0 15px 25px;
     list-style-type: disc;
 }
 
-li {
+.legal-document li {
     margin-bottom: 8px;
     color: #333333;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -104,7 +103,7 @@ li {
     line-height: 1.6;
 }
 
-.contact-section {
+.legal-document .contact-section {
     background-color: #f8f9fa;
     border: 1px solid #e1e5e9;
     border-radius: 8px;
@@ -112,34 +111,34 @@ li {
     margin: 20px 0;
 }
 
-a {
+.legal-document a {
     color: #007bff;
     text-decoration: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-a:hover {
+.legal-document a:hover {
     text-decoration: underline;
 }
 
-.document-footer {
+.legal-document .document-footer {
     text-align: center;
     border-top: 1px solid #e1e5e9;
     padding-top: 30px;
     color: #666;
 }
 
-.document-footer p {
+.legal-document .document-footer p {
     margin-bottom: 10px;
     text-align: center;
 }
 
-.home-link {
+.legal-document .home-link {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 20px;
     background-color: #007bff;
-    color: white !important;
+    color: white;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -147,30 +146,30 @@ a:hover {
     font-weight: 500;
 }
 
-.home-link:hover {
+.legal-document .home-link:hover {
     background-color: #0056b3;
     text-decoration: none;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-    .document-container {
+    .legal-document .document-container {
         padding: 20px 15px;
     }
 
-    .document-header h1 {
+    .legal-document .document-header h1 {
         font-size: 2em;
     }
 
-    h2 {
+    .legal-document h2 {
         font-size: 1.3em;
     }
 
-    h3 {
+    .legal-document h3 {
         font-size: 1.1em;
     }
 
-    ul {
+    .legal-document ul {
         margin-left: 20px;
     }
 }
