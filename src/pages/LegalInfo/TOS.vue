@@ -18,6 +18,8 @@
         <section>
           <h2>2. Description of Service</h2>
           <p>BlueGemBot is a Software-as-a-Service (SaaS) Discord bot that provides real-time notifications for Counter-Strike skin listings on Skinport marketplace. The Service operates by:</p>
+          <p>**Disclaimer:** BlueGemBot is not affiliated with, endorsed by, or connected to Skinport GmbH. Skinport is a trademark of Skinport GmbH. We access only publicly available APIs and do not represent or act on behalf of Skinport.</p>
+          <p>**Disclaimer:** BlueGemBot is not affiliated with, endorsed by, or connected to Valve corp/ Steam.</p>
           <ul>
             <li>Connecting to publicly available APIs to retrieve market data</li>
             <li>Sending automated notifications through Discord channels</li>
@@ -180,7 +182,7 @@
             <li>Skin prices and market information are provided for informational purposes only</li>
             <li>We make no representations about market data accuracy or investment potential</li>
             <li>Past performance does not guarantee future results</li>
-            <li>You are solely responsible for your investment and trading decisions</li>
+            <li>You are solely responsible for your investment, trading and overall buying decisions</li>
           </ul>
 
           <h3>9.3 Third-Party Content</h3>
