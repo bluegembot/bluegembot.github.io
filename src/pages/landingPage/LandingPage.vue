@@ -35,14 +35,14 @@
       </div>
     </section>
 
-    <section id="video" ref="video" class="fade-section">
-      <div class="content-wrapper">
-        <h2>The latest BlueGemBot update</h2>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/8gMYTLQiZ60?si=PaGFaB8x7IVL50mS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
+<!--    <section id="video" ref="video" class="fade-section">-->
+<!--      <div class="content-wrapper">-->
+<!--        <h2>The latest BlueGemBot update</h2>-->
+<!--        <div class="video-container">-->
+<!--          <iframe src="https://www.youtube.com/embed/8gMYTLQiZ60?si=PaGFaB8x7IVL50mS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
 
     <section id="testimonials" ref="testimonials" class="fade-section">
       <div class="content-wrapper">
@@ -89,11 +89,10 @@
         <div class="footer-column">
           <h4>Legal</h4>
           <ul class="footer-links">
-            Coming soon.
-<!--            <li><router-link to="/TOS">Terms of Service</router-link></li>-->
-<!--            <li><router-link to="/privacy">Privacy Policy</router-link></li>-->
-<!--            <li><router-link to="/refunds">Refund Policy</router-link></li>-->
-<!--            <li><router-link to="/cancellation">Cancellation Policy</router-link></li>-->
+            <li><router-link to="/TOS">Terms of Service</router-link></li>
+            <li><router-link to="/privacy">Privacy Policy</router-link></li>
+            <li><router-link to="/refunds">Refund Policy</router-link></li>
+            <li><router-link to="/cancellation">Cancellation Policy</router-link></li>
           </ul>
         </div>
 
@@ -134,8 +133,10 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2024 BlueGemBot. All rights reserved.</p>
+        <p>&copy; 2025 BlueGemBot. All rights reserved.</p>
         <p class="disclaimer">BlueGemBot connects to publicly available APIs and does not perform scraping or automated actions on websites.</p>
+        <p class="trademark-disclaimer">BlueGemBot is not affiliated with Skinport GmbH. Skinport is a trademark of Skinport GmbH.</p>
+        <p class="trademark-disclaimer">BlueGemBot is not affiliated with Valve corp / Steam.</p>
       </div>
     </div>
   </footer>
