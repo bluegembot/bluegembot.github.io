@@ -12,6 +12,7 @@ import TOS from "@/pages/LegalInfo/TOS.vue"
 import privacy from "@/pages/LegalInfo/privacy.vue"
 import refunds from "@/pages/LegalInfo/refunds.vue"
 import cancellationpolicy from "@/pages/LegalInfo/Cancellation.vue"
+import StripeCheckout from "@/components/Stripe/StripeCheckout.vue";
 
 const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
 
@@ -53,7 +54,8 @@ const routes = [
   { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
   {path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}},
   {path: '/about', component: LandingPage, meta:{requiresAuth: false}},
-  {path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}}
+  {path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}},
+  {path: '/checkout', component: StripeCheckout, meta:{requiresAuth: true}}
 ];
 
 // Create the router instance using hash mode

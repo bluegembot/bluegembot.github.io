@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <div class="logo-circle">
-        <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
+        <img src="../../assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
       </div>
     </div>
 
