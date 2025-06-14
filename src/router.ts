@@ -77,6 +77,7 @@ router.beforeEach(async (to, from, next) => {
     localStorage.setItem('username', authData.username);
     localStorage.setItem('chatId', authData.chatId)
     localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
+    localStorage.setItem('subscriptionEndDate', authData.subscriptionEndDate)
 
     if (to.path === '/register' || to.path === '/login' || to.path === '/') {
       return next('/dashboard'); // Redirect if logged in
@@ -85,6 +86,7 @@ router.beforeEach(async (to, from, next) => {
     localStorage.removeItem('username'); // Remove username if not authenticated
     localStorage.removeItem('chatId')// Remove chatId if not authenticated
     localStorage.removeItem('subscriptionStatus')// Remove subscriptionStatus if not authenticated
+    localStorage.removeItem('subscriptionEndDate')// Remove subscriptionEndDate if not authenticated
     return next('/about'); // Redirect to /about if authentication is required
   }
 

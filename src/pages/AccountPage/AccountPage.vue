@@ -23,6 +23,8 @@
             <li>Your BGB username: {{ username }}</li>
             <li>Your discord user ID: {{ chatId }}</li>
             <li>Your current subscription: {{ subscriptionStatus }}</li>
+            <li v-if="formattedEndDate !== 'Invalid Date'">Your subscription will end on: {{formattedEndDate}}</li>
+            <li v-else>Your subscription will end on: Trial, no end date.</li>
           </ul>
         </div>
       </div>
