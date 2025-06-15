@@ -70,14 +70,27 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+// Define types for better TypeScript support
+interface Plan {
+  name: string;
+  price: number;
+  currency: string;
+  description: string;
+  type: string;
+}
+
+type OneTimePlanKey = 'basic_onetime' | 'gold_onetime';
+type SubscriptionPlanKey = 'basic' | 'gold';
+type PlanKey = OneTimePlanKey | SubscriptionPlanKey;
+
 // Simple configuration
 const API_BASE_URL = 'http://localhost:3002'; // Adjust to your backend port
 
 // One-time payment plans (1 month)
-const oneTimePlans = ref({
+const oneTimePlans = ref<Record<OneTimePlanKey, Plan>>({
   basic_onetime: {
     name: 'Basic Plan',
-    price: 12.99,
+    price: 9.99,
     currency: 'eur',
     description: '1 month access with essential features',
     type: 'onetime'
@@ -92,17 +105,17 @@ const oneTimePlans = ref({
 });
 
 // Subscription plans (6 months)
-const subscriptionPlans = ref({
+const subscriptionPlans = ref<Record<SubscriptionPlanKey, Plan>>({
   basic: {
     name: 'Basic Plan',
-    price: 9.99,
+    price: 7.49,
     currency: 'eur',
     description: '6 months recurring with essential features',
     type: 'subscription'
   },
   gold: {
     name: 'Gold Plan',
-    price: 14.99,
+    price: 12.49,
     currency: 'eur',
     description: '6 months recurring with all premium features',
     type: 'subscription'
@@ -113,27 +126,34 @@ const subscriptionPlans = ref({
 const loading = ref(false);
 const message = ref('');
 const messageType = ref<'success' | 'error'>('success');
-const selectedPlan = ref('');
+const selectedPlan = ref<PlanKey | ''>('');
 
 const selectPlan = (planKey: string) => {
-  selectedPlan.value = planKey;
+  selectedPlan.value = planKey as PlanKey;
 };
 
 const getSelectedPlanType = () => {
   if (!selectedPlan.value) return null;
 
-  if (oneTimePlans.value[selectedPlan.value]) {
+  if (selectedPlan.value in oneTimePlans.value) {
     return 'onetime';
-  } else if (subscriptionPlans.value[selectedPlan.value]) {
+  } else if (selectedPlan.value in subscriptionPlans.value) {
     return 'subscription';
   }
   return null;
 };
 
-const getSelectedPlan = () => {
+const getSelectedPlan = (): Plan | null => {
   if (!selectedPlan.value) return null;
 
-  return oneTimePlans.value[selectedPlan.value] || subscriptionPlans.value[selectedPlan.value];
+  // Use 'in' operator for type-safe checking
+  if (selectedPlan.value in oneTimePlans.value) {
+    return oneTimePlans.value[selectedPlan.value as OneTimePlanKey];
+  } else if (selectedPlan.value in subscriptionPlans.value) {
+    return subscriptionPlans.value[selectedPlan.value as SubscriptionPlanKey];
+  }
+
+  return null;
 };
 
 const redirectToCheckout = async () => {
@@ -150,24 +170,26 @@ const redirectToCheckout = async () => {
       throw new Error('Invalid plan selection');
     }
 
-    // Create checkout session with payment type information
+    const requestBody = {
+      amount: plan.price, // Send price in euros (e.g., 9.99)
+      currency: plan.currency,
+      subscriptionType: selectedPlan.value,
+      paymentType: planType, // 'onetime' or 'subscription'
+      planDetails: {
+        name: plan.name,
+        description: plan.description,
+        duration: planType === 'onetime' ? '1 month' : '6 months'
+      }
+    };
+
+    // Send price in euros - backend will convert to cents for Stripe
     const response = await fetch(`${API_BASE_URL}/create-checkout-session`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       credentials: 'include', // Use cookies for authentication
-      body: JSON.stringify({
-        amount: plan.price,
-        currency: plan.currency,
-        subscriptionType: selectedPlan.value,
-        paymentType: planType, // 'onetime' or 'subscription'
-        planDetails: {
-          name: plan.name,
-          description: plan.description,
-          duration: planType === 'onetime' ? '1 month' : '6 months'
-        }
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     const data = await response.json();
@@ -185,8 +207,7 @@ const redirectToCheckout = async () => {
     messageType.value = 'error';
     loading.value = false;
   }
-};
-</script>
+};</script>
 
 <style scoped>
 .simple-checkout {

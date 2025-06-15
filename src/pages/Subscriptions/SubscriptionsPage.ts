@@ -59,14 +59,12 @@ export default defineComponent({
             username.value = localStorage.getItem("username") || "";
             chatId.value = localStorage.getItem("chatId") || "";
             subscriptionStatus.value = localStorage.getItem("subscriptionStatus") || "";
-            subscriptionStatus.value = localStorage.getItem("subscriptionEndDate") || "";
         });
 
         return {
             username,
             chatId,
             subscriptionStatus,
-            subscriptionEndDate,
             errorMessage,
             messageType,
             requestSubscriptionCall,

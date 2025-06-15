@@ -16,7 +16,7 @@ export default defineComponent({
             }, 2500);
         };
 
-        const formatDate = (dateString) => {
+        const formatDate = (dateString : string) => {
             if (!dateString || dateString === "Indefinite") return dateString;
 
             const date = new Date(dateString);
@@ -36,7 +36,7 @@ export default defineComponent({
             username.value = localStorage.getItem("username") || "";
             chatId.value = localStorage.getItem("chatId") || "";
             subscriptionStatus.value = localStorage.getItem("subscriptionStatus") || "";
-            subscriptionEndDate.value = localStorage.getItem("subscriptionEndDate");
+            subscriptionEndDate.value = localStorage.getItem("subscriptionEndDate") || "";
         });
 
         return {
