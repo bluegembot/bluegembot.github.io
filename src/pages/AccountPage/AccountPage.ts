@@ -157,9 +157,57 @@ export default defineComponent({
 
         const validateJsonData = (jsonString: string) => {
             try {
-                const parsed = JSON.parse(jsonString);
+                // Check for duplicate keys within individual objects
+                const checkDuplicateKeysInObjects = (str: string): string | null => {
+                    // Find all object boundaries
+                    const objectPattern = /\{[^{}]*\}/g;
+                    let objectMatch;
+
+                    while ((objectMatch = objectPattern.exec(str)) !== null) {
+                        const objectStr = objectMatch[0];
+                        const keyPattern = /"([^"]+)"\s*:/g;
+                        const keys: string[] = [];
+                        let keyMatch;
+
+                        while ((keyMatch = keyPattern.exec(objectStr)) !== null) {
+                            const key = keyMatch[1];
+                            if (keys.includes(key)) {
+                                return key;
+                            }
+                            keys.push(key);
+                        }
+                    }
+                    return null;
+                };
+
+                const duplicateKey = checkDuplicateKeysInObjects(jsonString);
+                if (duplicateKey) {
+                    throw new Error(`Duplicate property "${duplicateKey}" found within a single object. Each property must appear only once per object.`);
+                }
+
+                let parsed;
+                try {
+                    parsed = JSON.parse(jsonString);
+                } catch (parseError) {
+                    // Provide more helpful error messages for common JSON syntax errors
+                    const errorMsg = parseError instanceof Error ? parseError.message : 'Invalid JSON';
+                    if (errorMsg.includes('trailing comma') || errorMsg.includes('Unexpected token')) {
+                        throw new Error(`Invalid JSON syntax: ${errorMsg}. Common issues: trailing commas, missing quotes, or extra commas.`);
+                    }
+                    throw new Error(`Invalid JSON format: ${errorMsg}`);
+                }
+
                 if (!Array.isArray(parsed)) {
-                    throw new Error("Data must be an array");
+                    throw new Error("Data must be an array of objects");
+                }
+
+                // Check maximum items limit
+                if (parsed.length > 50) {
+                    throw new Error(`Maximum 50 items allowed. You provided ${parsed.length} items.`);
+                }
+
+                if (parsed.length === 0) {
+                    throw new Error("Array cannot be empty");
                 }
 
                 // Validate each skin object structure and values
@@ -167,7 +215,35 @@ export default defineComponent({
                     const skin = parsed[i];
                     const index = i + 1;
 
-                    // Check required fields
+                    // Check that each item is an object
+                    if (typeof skin !== 'object' || skin === null || Array.isArray(skin)) {
+                        throw new Error(`Item ${index}: Must be an object, not ${Array.isArray(skin) ? 'array' : typeof skin}`);
+                    }
+
+                    // Check exact object structure - must have exactly these 5 properties
+                    const requiredKeys = ['itemOfInterest', 'minWear', 'maxWear', 'forcedDiscount', 'minFadePercentage'];
+                    const skinKeys = Object.keys(skin);
+
+                    // Check if object has exactly the required keys
+                    if (skinKeys.length !== requiredKeys.length) {
+                        throw new Error(`Item ${index}: Object must have exactly ${requiredKeys.length} properties (itemOfInterest, minWear, maxWear, forcedDiscount, minFadePercentage). Found ${skinKeys.length} properties.`);
+                    }
+
+                    // Check if all required keys are present
+                    for (const key of requiredKeys) {
+                        if (!(key in skin)) {
+                            throw new Error(`Item ${index}: Missing required property "${key}"`);
+                        }
+                    }
+
+                    // Check for extra properties
+                    for (const key of skinKeys) {
+                        if (!requiredKeys.includes(key)) {
+                            throw new Error(`Item ${index}: Unexpected property "${key}". Only allowed properties are: ${requiredKeys.join(', ')}`);
+                        }
+                    }
+
+                    // Validate itemOfInterest
                     if (!skin.itemOfInterest || typeof skin.itemOfInterest !== 'string') {
                         throw new Error(`Item ${index}: itemOfInterest is required and must be a string`);
                     }
@@ -263,7 +339,7 @@ export default defineComponent({
             // Validate JSON
             const validation = validateJsonData(jsonData);
             if (!validation.isValid) {
-                importError.value = `Invalid JSON: ${validation.error}`;
+                importError.value = `Invalid JSON`;
                 importLoading.value = false;
                 return;
             }
