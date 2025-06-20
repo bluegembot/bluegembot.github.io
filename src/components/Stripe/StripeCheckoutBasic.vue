@@ -43,9 +43,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
-// Simple configuration
-const API_BASE_URL = 'http://localhost:3002'; // Adjust to your backend port
+import { API_URL } from '@/config/environment';
 
 // Plan configuration
 const planConfig = {
@@ -79,7 +77,7 @@ const redirectToCheckout = async () => {
       }
     };
 
-    const response = await fetch(`${API_BASE_URL}/create-checkout-session`, {
+    const response = await fetch(`${API_URL}/create-checkout-session`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
