@@ -26,35 +26,6 @@ export default defineComponent({
             }, 2500);
         };
 
-        const requestSubscriptionCall = async (subscription: string) => {
-            try {
-                const response = await fetch(`${API_URL}/requestSubscription`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ subscription }),
-                    credentials: 'include',
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    errorMessage.value = errorData.message;
-                    messageType.value = "error";
-                    clearErrorMessages();
-                } else {
-                    const data = await response.json();
-                    errorMessage.value = data.message;
-                    messageType.value = "success";
-                    clearErrorMessages();
-                }
-            } catch (e) {
-                errorMessage.value = 'An error occurred while processing your request.';
-                messageType.value = "error";
-                clearErrorMessages();
-            }
-        };
-
         onMounted(() => {
             username.value = localStorage.getItem("username") || "";
             chatId.value = localStorage.getItem("chatId") || "";
@@ -67,7 +38,6 @@ export default defineComponent({
             subscriptionStatus,
             errorMessage,
             messageType,
-            requestSubscriptionCall,
             clearErrorMessages,
             popupVisible,
             selectedSubscription

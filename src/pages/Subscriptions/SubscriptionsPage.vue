@@ -25,7 +25,7 @@
         <div class="subscription-info">
           <h3>BlueGemBot Basic</h3>
           <p>Access essential features with basic filtering to track skins efficiently.</p>
-          <div class="price-tag basicText">&euro;10/month</div>
+          <div class="price-tag basicText">&euro;7.49/month</div>
         </div>
       </div>
       <div
@@ -36,7 +36,7 @@
         <div class="subscription-info">
           <h3>BlueGemBot Gold</h3>
           <p>Access everything from BlueGemBot Basic. Enjoy less restrictive skin tracking capabilities.</p>
-          <div class="price-tag goldText">&euro;15/month</div>
+          <div class="price-tag goldText">&euro;12.49/month</div>
         </div>
       </div>
       <div
@@ -50,23 +50,29 @@
           <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
         </div>
       </div>
+      <router-link to="/checkoutBasic">
       <div
           class="grid-item basicBorder"
-          @click="requestSubscriptionCall('Basic')"
       >
         <div class="subscription-info">
-          <h3>Request basic</h3>
+          <h3>Get basic</h3>
         </div>
+
       </div>
+      </router-link>
+      <router-link to="/checkoutGold">
       <div
           class="grid-item goldBorder"
-          @click="requestSubscriptionCall('Gold')"
       >
+
         <div class="subscription-info">
-          <h3>Request gold</h3>
+          <h3>Get gold</h3>
         </div>
+
       </div>
+      </router-link>
     </div>
+
 
     <!-- Popup for In-depth Information -->
     <div v-if="popupVisible" class="popup-overlay" @click.self="closePopup">

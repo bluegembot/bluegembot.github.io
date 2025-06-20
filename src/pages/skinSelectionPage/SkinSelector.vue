@@ -155,7 +155,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useSkinSelector } from './SkinSelector';
-import Slider from "@/components/Slider.vue";
+import Slider from "@/components/SkinSelector/Slider.vue";
 
 export default defineComponent({
   components: {

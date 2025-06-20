@@ -1,8 +1,8 @@
 // AutoOpenPage.ts
 import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { WS_URL } from '@/config/environment';
-import PermissionNotice from "@/components/PermissionNotice.vue";
-import NotificationSettings from "@/components/NotificationSettings.vue";
+import PermissionNotice from "@/components/AutoOpenPage/PermissionNotice.vue";
+import NotificationSettings from "@/components/AutoOpenPage/NotificationSettings.vue";
 
 export default {
     components: {

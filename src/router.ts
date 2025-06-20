@@ -12,6 +12,8 @@ import TOS from "@/pages/LegalInfo/TOS.vue"
 import privacy from "@/pages/LegalInfo/privacy.vue"
 import refunds from "@/pages/LegalInfo/refunds.vue"
 import cancellationpolicy from "@/pages/LegalInfo/Cancellation.vue"
+import StripeCheckoutBasic from "@/components/Stripe/StripeCheckoutBasic.vue";
+import StripeCheckoutGold from "@/components/Stripe/StripeCheckoutGold.vue";
 
 const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
 
@@ -53,7 +55,10 @@ const routes = [
   { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
   {path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}},
   {path: '/about', component: LandingPage, meta:{requiresAuth: false}},
-  {path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}}
+  {path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}},
+  {path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{requiresAuth: true}},
+  {path: '/checkoutGold', component: StripeCheckoutGold, meta:{requiresAuth: true}}
+
 ];
 
 // Create the router instance using hash mode
@@ -75,6 +80,7 @@ router.beforeEach(async (to, from, next) => {
     localStorage.setItem('username', authData.username);
     localStorage.setItem('chatId', authData.chatId)
     localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
+    localStorage.setItem('subscriptionEndDate', authData.subscriptionEndDate)
 
     if (to.path === '/register' || to.path === '/login' || to.path === '/') {
       return next('/dashboard'); // Redirect if logged in
@@ -83,6 +89,7 @@ router.beforeEach(async (to, from, next) => {
     localStorage.removeItem('username'); // Remove username if not authenticated
     localStorage.removeItem('chatId')// Remove chatId if not authenticated
     localStorage.removeItem('subscriptionStatus')// Remove subscriptionStatus if not authenticated
+    localStorage.removeItem('subscriptionEndDate')// Remove subscriptionEndDate if not authenticated
     return next('/about'); // Redirect to /about if authentication is required
   }
 
