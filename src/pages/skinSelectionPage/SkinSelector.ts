@@ -56,7 +56,8 @@ export function useSkinSelector() {
         const itemName = selectedSkin.value.itemName.toLowerCase();
         return itemName.includes('fade') &&
             !itemName.includes('marble') &&
-            !itemName.includes('amber');
+            !itemName.includes('amber') &&
+            !itemName.includes('crossfade');
     });
 
     watch(searchQuery, (newQuery) => {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Existing UI -->
     <div class="logo-container">
       <div class="logo-circle">
         <img alt="BGB Logo" class="logo-img" src="@/assets/BGBLogo.jpg"/>
@@ -18,6 +17,10 @@
         <button class="dashboard-button">Dashboard</button>
       </router-link>
     </div>
+
+    <h3 v-if="searchQuery.trim() !== '' && displayedSkins.length === 0" class="not-found-text">
+      Cant find the skin you are looking for? Let us know through discord.
+    </h3>
 
     <!-- Error/Success Message -->
     <p v-if="errorMessage"
@@ -111,7 +114,6 @@
                     sliderType="discount"
                 />
 
-                <!-- Fade percentage slider - Only show if item has "fade" without "marble" or "amber" -->
                 <Slider
                     v-if="shouldShowFadeSlider"
                     v-model="advancedOptions.minFadePercentage"
@@ -149,7 +151,6 @@
 
   </div>
 </template>
-
 <style src="./SkinSelector.css"></style>
 
 <script lang="ts">

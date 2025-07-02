@@ -298,3 +298,8 @@ button:hover {
 .slider-container {
     user-select: none;
 }
+
+.not-found-text{
+    margin-top: 50px;
+    justify-self: center;
+}
