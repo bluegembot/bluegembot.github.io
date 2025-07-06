@@ -289,3 +289,124 @@ li {
     width: 100%;
   }
 }
+/* Add this CSS to your existing UserDashboardPage.css file */
+
+/* Subscription error message styles */
+.subscription-error-message {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, red, red);
+  color: white;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+  animation: slideInDown 0.3s ease-out;
+}
+
+.subscription-error-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  position: relative;
+}
+
+.subscription-error-message .error-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.subscription-error-message .error-text {
+  flex: 1;
+}
+
+.subscription-error-message .error-text p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.subscription-error-message .error-text p:first-child {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.subscription-error-message .error-text p:last-child {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.upgrade-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.upgrade-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  opacity: 1;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .subscription-error-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .subscription-error-message .error-icon {
+    font-size: 24px;
+  }
+
+  .upgrade-button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}

@@ -18,6 +18,7 @@ export default defineComponent({
         const chatId = ref("");
         const subscriptionStatus = ref("");
         const subscriptionEndDate = ref("");
+        const wantedSources = ref("")
         const errorMessage = ref("");
         const popupVisible = ref(false);
         const messageType = ref("");
@@ -398,6 +399,7 @@ export default defineComponent({
             chatId.value = localStorage.getItem("chatId") || "";
             subscriptionStatus.value = localStorage.getItem("subscriptionStatus") || "";
             subscriptionEndDate.value = localStorage.getItem("subscriptionEndDate") || "";
+            wantedSources.value = localStorage.getItem("wantedSources") || "";
 
             // Process the skins data when component mounts
             processItemNamesFromJson();

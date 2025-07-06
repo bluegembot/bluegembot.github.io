@@ -50,6 +50,7 @@ export default defineComponent({
                     title: 'BlueGemBot Basic',
                     perks: [
                         '- Track up to 25 skins.',
+                        '- Access to csfloat tracking.',
                         '- Filter on min and max float for each skin.',
                         '- Get instant notifications from BlueGemBot.',
                     ],
