@@ -10,15 +10,55 @@ interface TrackedSkin {
     minFadePercentage: number;
 }
 
+interface UserSettings {
+    csfloatTracking: boolean; // Enable notifications for new items
+    skinportTracking: boolean; // Auto-sync data with cloud storage
+}
+
 export function useUserDashboard() {
     const trackedSkins: Ref<TrackedSkin[]> = ref([]);
     const errorMessage: Ref<string> = ref(""); // Reactive variable for error messages
     const username: Ref<string> = ref("");
     const messageType: Ref<'success' | 'error'> = ref('error');
+    const isSettingsModalOpen: Ref<boolean> = ref(false); // Modal state
+    const isSettingsLoading: Ref<boolean> = ref(false); // Loading state for settings
 
-    onMounted(() => {
-        username.value = localStorage.getItem('username') || ""; // Get the stored username
+    const userSettings: Ref<UserSettings> = ref({
+        csfloatTracking: false,
+        skinportTracking: false,
     });
+
+    // Function to apply wantedSources preferences
+    const applyWantedSourcesPreferences = (): void => {
+        const wantedSources = localStorage.getItem('wantedSources');
+
+        if (wantedSources) {
+            const sourceValue = parseInt(wantedSources, 10);
+
+            switch (sourceValue) {
+                case 2:
+                    // Only skinport tracking enabled selected
+                    userSettings.value.csfloatTracking = false;
+                    userSettings.value.skinportTracking = true;
+                    break;
+                case 3:
+                    // Only csfloat tracking enabled selected
+                    userSettings.value.csfloatTracking = true;
+                    userSettings.value.skinportTracking = false;
+                    break;
+                case 1:
+                    // Both options enabled
+                    userSettings.value.csfloatTracking = true;
+                    userSettings.value.skinportTracking = true;
+                    break;
+                default:
+                    // Default case - only skinportTracking
+                    userSettings.value.csfloatTracking = false;
+                    userSettings.value.skinportTracking = true;
+                    break;
+            }
+        }
+    };
 
     const fetchCsrfTokenAndUserConfig = async (): Promise<void> => {
         try {
@@ -131,13 +171,96 @@ export function useUserDashboard() {
         }, 2500);
     };
 
-    onMounted(fetchCsrfTokenAndUserConfig);
+    const openSettingsModal = (): void => {
+        isSettingsModalOpen.value = true;
+    };
+
+    const closeSettingsModal = (): void => {
+        isSettingsModalOpen.value = false;
+    };
+
+    const handleSettingsSave = async (newSettings: UserSettings): Promise<void> => {
+        isSettingsLoading.value = true;
+
+        try {
+            // First fetch CSRF token
+            const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (!csrfResponse.ok) {
+                throw new Error("Failed to fetch CSRF token");
+            }
+
+            const csrfData = await csrfResponse.json();
+            const csrfToken = csrfData.csrfToken;
+
+            // Convert boolean settings to wantedSources number
+            let wantedSources: number;
+
+            if (newSettings.csfloatTracking && newSettings.skinportTracking) {
+                // Both options enabled
+                wantedSources = 1;
+            } else if (newSettings.csfloatTracking && !newSettings.skinportTracking) {
+                // Only csfloat tracking enabled
+                wantedSources = 3;
+            } else if (!newSettings.csfloatTracking && newSettings.skinportTracking) {
+                // Only skinport tracking enabled
+                wantedSources = 2;
+            } else {
+                // Neither enabled - default to skinport only
+                wantedSources = 2;
+            }
+
+            const settingsResponse = await fetch(`${API_URL}/skins/updateWantedSources`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "csrf-token": csrfToken,
+                },
+                credentials: "include",
+                body: JSON.stringify({ wantedSources }),
+            });
+
+            if (!settingsResponse.ok) {
+                throw new Error("Failed to save settings");
+            }
+
+            // Update local settings on success
+            userSettings.value = { ...newSettings };
+            errorMessage.value = "Settings saved successfully!";
+            messageType.value = 'success';
+            closeSettingsModal();
+            clearErrorMessages();
+        } catch (error) {
+            console.error("Error saving settings:", error);
+            errorMessage.value = "Failed to save settings. Please try again.";
+            messageType.value = 'error';
+            clearErrorMessages();
+        } finally {
+            isSettingsLoading.value = false;
+        }
+    };
+
+    onMounted(() => {
+        username.value = localStorage.getItem('username') || ""; // Get the stored username
+        fetchCsrfTokenAndUserConfig();
+        applyWantedSourcesPreferences(); // Apply localStorage preferences
+    });
 
     return {
         trackedSkins,
         errorMessage,
         messageType,
         stopTracking,
-        username
+        username,
+        isSettingsModalOpen,
+        isSettingsLoading,
+        userSettings,
+        openSettingsModal,
+        closeSettingsModal,
+        handleSettingsSave,
+        applyWantedSourcesPreferences
     };
 }

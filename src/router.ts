@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import {createRouter, createWebHashHistory} from 'vue-router';
 
 import UserDashboard from './pages/userDashboardPage/UserDashboardPage.vue';
 import RegisterPage from '@/pages/userRegisterPage/RegisterPage.vue';
@@ -48,16 +48,16 @@ const routes = [
   { path: '/TOS', component: TOS, meta: { requiresAuth: false } },
   { path: '/privacy', component: privacy, meta: { requiresAuth: false } },
   { path: '/refunds', component: refunds, meta: { requiresAuth: false } },
-  {path: '/cancellation', component: cancellationpolicy, meta:{requiresAuth: false}},
+  { path: '/cancellation', component: cancellationpolicy, meta:{requiresAuth: false}},
   { path: '/register', component: RegisterPage },
-  { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
   { path: '/login', component: UserLoginPage },
+  { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
   { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
-  {path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}},
-  {path: '/about', component: LandingPage, meta:{requiresAuth: false}},
-  {path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}},
-  {path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{requiresAuth: true}},
-  {path: '/checkoutGold', component: StripeCheckoutGold, meta:{requiresAuth: true}}
+  { path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}},
+  { path: '/about', component: LandingPage, meta:{requiresAuth: false}},
+  { path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}},
+  { path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{requiresAuth: true}},
+  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{requiresAuth: true}}
 
 ];
 
@@ -81,15 +81,17 @@ router.beforeEach(async (to, from, next) => {
     localStorage.setItem('chatId', authData.chatId)
     localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
     localStorage.setItem('subscriptionEndDate', authData.subscriptionEndDate)
-
+    localStorage.setItem('wantedSources', authData.wantedSources)
     if (to.path === '/register' || to.path === '/login' || to.path === '/') {
       return next('/dashboard'); // Redirect if logged in
     }
   } else if (to.meta.requiresAuth) {
-    localStorage.removeItem('username'); // Remove username if not authenticated
-    localStorage.removeItem('chatId')// Remove chatId if not authenticated
-    localStorage.removeItem('subscriptionStatus')// Remove subscriptionStatus if not authenticated
-    localStorage.removeItem('subscriptionEndDate')// Remove subscriptionEndDate if not authenticated
+    //Remove auth data when authentication is required.
+    localStorage.removeItem('username');
+    localStorage.removeItem('chatId')
+    localStorage.removeItem('subscriptionStatus')
+    localStorage.removeItem('subscriptionEndDate')
+    localStorage.removeItem('wantedSources')
     return next('/about'); // Redirect to /about if authentication is required
   }
 
