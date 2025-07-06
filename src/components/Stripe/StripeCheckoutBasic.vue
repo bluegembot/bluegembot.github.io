@@ -10,6 +10,8 @@
       <div class="payment-section">
         <h3 class="section-title">One-Time Payment</h3>
         <p class="section-description">Pay once, access for 1 month. Supports credit card, iDEAL, and other payment methods, recurring payments will extend subscription end date.</p>
+        <p class="section-description">- Track up to 25 skins</p>
+        <p class="section-description">- Track csfloat listings</p>
 
         <div class="plan-card selected">
           <div class="plan-info">

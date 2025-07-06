@@ -399,7 +399,7 @@ export default defineComponent({
             chatId.value = localStorage.getItem("chatId") || "";
             subscriptionStatus.value = localStorage.getItem("subscriptionStatus") || "";
             subscriptionEndDate.value = localStorage.getItem("subscriptionEndDate") || "";
-            wantedSources.value = localStorage.getItem("wantedSources");
+            wantedSources.value = localStorage.getItem("wantedSources") || "";
 
             // Process the skins data when component mounts
             processItemNamesFromJson();

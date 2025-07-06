@@ -57,17 +57,6 @@
           @close="closeImportModal"
           @import="importSkins"
       />
-
-      <!-- Settings Modal -->
-      <SettingsModal
-          :visible="settingsModalVisible"
-          title="Settings"
-          description="Configure your application settings:"
-          :settings="settingsData"
-          :isLoading="settingsLoading"
-          @close="closeSettingsModal"
-          @save="saveSettings"
-      />
     </main>
   </div>
 </template>

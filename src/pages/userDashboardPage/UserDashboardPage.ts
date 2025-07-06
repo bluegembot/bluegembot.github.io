@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import {nextTick, onMounted, ref} from "vue";
 import type { Ref } from "vue";
 import { API_URL } from '@/config/environment';
 
@@ -22,6 +22,7 @@ export function useUserDashboard() {
     const messageType: Ref<'success' | 'error'> = ref('error');
     const isSettingsModalOpen: Ref<boolean> = ref(false); // Modal state
     const isSettingsLoading: Ref<boolean> = ref(false); // Loading state for settings
+    const showSubscriptionError: Ref<boolean> = ref(false); // New reactive variable for subscription error
 
     const userSettings: Ref<UserSettings> = ref({
         csfloatTracking: false,
@@ -179,6 +180,38 @@ export function useUserDashboard() {
         isSettingsModalOpen.value = false;
     };
 
+    // Helper function to show subscription required message
+    const showSubscriptionRequiredError = (): void => {
+        // First reset the loading state
+        isSettingsLoading.value = false;
+
+        // Use nextTick to ensure the loading state is processed first
+        nextTick(() => {
+            // Close the modal
+            closeSettingsModal();
+
+            // Then show the subscription error
+            showSubscriptionError.value = true;
+
+            // Auto-hide after 10 seconds (longer since it has a button)
+            setTimeout(() => {
+                showSubscriptionError.value = false;
+            }, 10000);
+        });
+    };
+
+    // Helper function to show regular error messages
+    const showErrorMessage = (message: string): void => {
+        errorMessage.value = message;
+        messageType.value = 'error';
+        clearErrorMessages();
+    };
+
+    // Function to navigate to subscriptions page
+    const navigateToSubscriptions = (): void => {
+        window.location.href = 'https://bluegembot.github.io/#/subscriptions';
+    };
+
     const handleSettingsSave = async (newSettings: UserSettings): Promise<void> => {
         isSettingsLoading.value = true;
 
@@ -224,7 +257,25 @@ export function useUserDashboard() {
             });
 
             if (!settingsResponse.ok) {
-                throw new Error("Failed to save settings");
+                // Parse the error response
+                const errorData = await settingsResponse.json();
+
+                // Handle specific error cases
+                if (errorData.error === 'SUBSCRIPTION_REQUIRED') {
+                    // Show subscription required message and close modal
+                    showSubscriptionRequiredError();
+                    return; // Don't continue with the rest of the function
+                } else if (errorData.error === 'INVALID_SOURCE_VALUE') {
+                    // Show invalid input message
+                    isSettingsLoading.value = false;
+                    showErrorMessage('Invalid source selection. Please try again.');
+                    return;
+                } else {
+                    // Generic error message
+                    isSettingsLoading.value = false;
+                    showErrorMessage(errorData.message || 'Failed to save settings');
+                    return;
+                }
             }
 
             // Update local settings on success
@@ -261,6 +312,8 @@ export function useUserDashboard() {
         openSettingsModal,
         closeSettingsModal,
         handleSettingsSave,
-        applyWantedSourcesPreferences
+        applyWantedSourcesPreferences,
+        showSubscriptionError,
+        navigateToSubscriptions
     };
 }

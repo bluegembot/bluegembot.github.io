@@ -16,6 +16,23 @@
    ]">
         {{ errorMessage }}
       </p>
+
+      <!-- Subscription Required Error Message -->
+      <div v-if="showSubscriptionError" class="subscription-error-message fixed-top-message">
+        <div class="subscription-error-content">
+          <div class="error-icon">🔒</div>
+          <div class="error-text">
+            <p><strong>Subscription Required</strong></p>
+            <p>Subscribe to access csfloat tracking!</p>
+          </div>
+          <router-link to="checkoutBasic">
+          <button class="upgrade-button">
+            Upgrade Now
+          </button>
+          </router-link>
+        </div>
+      </div>
+
       <!-- Section with Upcoming and Announcements -->
       <div class="tracked-skins-section">
         <!-- Upcoming list -->
