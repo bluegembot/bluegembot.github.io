@@ -9,7 +9,7 @@
     <section id="hero" ref="hero">
       <div class="content-wrapper hero-content">
         <h1>Transform the way you snipe CS skins</h1>
-        <p>BlueGemBot: the free, instant and customizable Skinport listing tracker</p>
+        <p>BlueGemBot: the free, instant and customizable Skinport & CSFloat listing tracker</p>
       </div>
     </section>
 
@@ -136,7 +136,7 @@
       <div class="footer-bottom">
         <p>&copy; 2025 BlueGemBot. All rights reserved.</p>
         <p class="disclaimer">BlueGemBot connects to publicly available APIs and does not perform scraping or automated actions on websites.</p>
-        <p class="trademark-disclaimer">BlueGemBot is not affiliated with Skinport GmbH. Skinport is a trademark of Skinport GmbH.</p>
+        <p class="trademark-disclaimer">BlueGemBot is not affiliated with Skinport GmbH or CSFloat. Skinport is a trademark of Skinport GmbH.</p>
         <p class="trademark-disclaimer">BlueGemBot is not affiliated with Valve corp / Steam.</p>
       </div>
     </div>
