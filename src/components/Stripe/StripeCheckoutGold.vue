@@ -15,6 +15,8 @@
         <p class="section-description">Pay once, access for 1 month. Supports credit card, iDEAL, and other payment methods, recurring payments will extend subscription end date.</p>
         <p class="section-description">- Everything from basic</p>
         <p class="section-description">- Track up to 50 skins</p>
+        <p class="section-description">- Priority support</p>
+        <p class="section-description">- Notice: it may take up to 30 minutes for csfloat tracking to become available</p>
         <div class="plan-card selected">
           <div class="plan-info">
             <h4>Gold Plan - 1 Month</h4>
