@@ -25,7 +25,7 @@
             <p><strong>Subscription Required</strong></p>
             <p>Subscribe to access csfloat tracking!</p>
           </div>
-          <router-link to="checkoutBasic">
+          <router-link to="subscriptions">
           <button class="upgrade-button">
             Upgrade Now
           </button>

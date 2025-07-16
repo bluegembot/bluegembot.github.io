@@ -1,4 +1,5 @@
-import { ref, computed, watch, onMounted } from 'vue';
+//SkinSelector.ts
+import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
 import skinsJson from "@/assets/skins.json";
 import { API_URL } from '@/config/environment';
@@ -38,6 +39,7 @@ export function useSkinSelector() {
     const modalErrorMessage: Ref<string> = ref("");
     const showAdvancedMenu: Ref<boolean> = ref(false);
     const messageType: Ref<'success' | 'error'> = ref('error');
+    const showSubscriptionError: Ref<boolean> = ref(false); // Add subscription error state
 
     const advancedOptions: Ref<AdvancedOptions> = ref({
         statTrak: false,
@@ -150,6 +152,30 @@ export function useSkinSelector() {
         modalErrorMessage.value = "";
     }
 
+    // Helper function to show subscription required error
+    const showSubscriptionRequiredError = (): void => {
+        // Use nextTick to ensure any modal states are processed first
+        nextTick(() => {
+            // Close any open modals
+            closeMenu();
+
+            // Show the subscription error
+            showSubscriptionError.value = true;
+
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                showSubscriptionError.value = false;
+            }, 10000);
+        });
+    };
+
+    // Helper function to show regular error messages
+    const showErrorMessage = (message: string): void => {
+        errorMessage.value = message;
+        messageType.value = 'error';
+        clearErrorMessages();
+    };
+
     function applyAdvancedOptions(): void {
         if (!selectedSkin.value) return;
 
@@ -229,7 +255,14 @@ export function useSkinSelector() {
                     body: JSON.stringify(payload),
                     credentials: "include",
                 })
-                    .then((response) => response.json())
+                    .then((response) => {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                throw new Error(JSON.stringify(errorData));
+                            });
+                        }
+                        return response.json();
+                    })
                     .then((data) => {
                         errorMessage.value = data.message;
                         messageType.value = "success";
@@ -237,16 +270,28 @@ export function useSkinSelector() {
                     })
                     .catch((error) => {
                         console.error("Error adding skin:", error);
-                        errorMessage.value = "Failed to add skin, please try again.";
-                        messageType.value = "error";
-                        clearErrorMessages();
+
+                        // Try to parse the error message
+                        try {
+                            const errorData = JSON.parse(error.message);
+
+                            // Check if the error message indicates item limit exceeded
+                            if (errorData.message && errorData.message.includes("Exceeded item limit")) {
+                                showSubscriptionRequiredError();
+                                return;
+                            }
+
+                            // Handle other specific error cases if needed
+                            showErrorMessage(errorData.message || "Failed to add skin, please try again.");
+                        } catch (parseError) {
+                            // If parsing fails, show generic error
+                            showErrorMessage("Failed to add skin, please try again.");
+                        }
                     });
             })
             .catch((error) => {
                 console.error("Error fetching CSRF token:", error);
-                errorMessage.value = "Internal server error, please try again.";
-                messageType.value = "error";
-                clearErrorMessages();
+                showErrorMessage("Internal server error, please try again.");
             });
     }
 
@@ -277,6 +322,7 @@ export function useSkinSelector() {
         selectedSkin,
         messageType,
         shouldShowFadeSlider,
+        showSubscriptionError, // Export the new subscription error state
         filterSkins,
         updateFloats,
         validateFloatInput,

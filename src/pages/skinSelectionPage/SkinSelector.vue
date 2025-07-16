@@ -22,6 +22,22 @@
       Cant find the skin you are looking for? Let us know through discord.
     </h3>
 
+
+    <div v-if="showSubscriptionError" class="subscription-error-message fixed-top-message">
+      <div class="subscription-error-content">
+        <div class="error-icon">🔒</div>
+        <div class="error-text">
+          <p><strong>Subscription Required</strong></p>
+          <p>Subscribe to track more items!</p>
+        </div>
+        <router-link to="subscriptions">
+          <button class="upgrade-button">
+            Upgrade Now
+          </button>
+        </router-link>
+      </div>
+    </div>
+
     <!-- Error/Success Message -->
     <p v-if="errorMessage"
        :class="[
