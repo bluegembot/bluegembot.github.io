@@ -7,8 +7,15 @@ interface TrackedSkin {
     name: string;
     minWear: number;
     maxWear: number;
-    forcedDiscount: number;
-    minFadePercentage: number;
+    forcedDiscount: number | false;
+    minFadePercentage: number | false;
+    // Store original values for comparison
+    _original?: {
+        minWear: number;
+        maxWear: number;
+        forcedDiscount: number | false;
+        minFadePercentage: number | false;
+    };
 }
 
 interface UserSettings {
@@ -16,7 +23,60 @@ interface UserSettings {
     skinportTracking: boolean; // Auto-sync data with cloud storage
 }
 
-export function useUserDashboard() {
+interface UseUserDashboardReturn {
+    trackedSkins: Ref<TrackedSkin[]>;
+    errorMessage: Ref<string>;
+    messageType: Ref<'success' | 'error'>;
+    stopTracking: (skin: TrackedSkin) => Promise<void>;
+    username: Ref<string>;
+    isSettingsModalOpen: Ref<boolean>;
+    isSettingsLoading: Ref<boolean>;
+    userSettings: Ref<UserSettings>;
+    openSettingsModal: () => void;
+    closeSettingsModal: () => void;
+    handleSettingsSave: (newSettings: UserSettings) => Promise<void>;
+    applyWantedSourcesPreferences: () => void;
+    showSubscriptionError: Ref<boolean>;
+    navigateToSubscriptions: () => void;
+    validateAndUpdateSkin: (skin: TrackedSkin, field: string) => Promise<void>;
+    toggleForcedDiscount: (skin: TrackedSkin) => void;
+    toggleMinFade: (skin: TrackedSkin) => void;
+    updateSkinSettings: (skin: TrackedSkin) => Promise<void>;
+    hasUnsavedChanges: (skin: TrackedSkin) => boolean;
+    markSkinAsChanged: (skin: TrackedSkin) => void;
+    submitChanges: (skin: TrackedSkin) => Promise<void>;
+    cancelChanges: (skin: TrackedSkin) => void;
+    isUpdating: Ref<boolean>;
+}
+
+// Validate skin inputs
+const validateSkinInputs = (skin: TrackedSkin): void => {
+    // Validate float range (0-1)
+    if (skin.minWear < 0) skin.minWear = 0;
+    if (skin.minWear > 1) skin.minWear = 1;
+    if (skin.maxWear < 0) skin.maxWear = 0;
+    if (skin.maxWear > 1) skin.maxWear = 1;
+
+    // Ensure minWear <= maxWear
+    if (skin.minWear > skin.maxWear) {
+        skin.maxWear = skin.minWear;
+    }
+
+    // Validate percentages (0-100) and round to integers
+    if (typeof skin.forcedDiscount === 'number') {
+        if (skin.forcedDiscount < 0) skin.forcedDiscount = 0;
+        if (skin.forcedDiscount > 100) skin.forcedDiscount = 100;
+        skin.forcedDiscount = Math.round(skin.forcedDiscount);
+    }
+
+    if (typeof skin.minFadePercentage === 'number') {
+        if (skin.minFadePercentage < 0) skin.minFadePercentage = 0;
+        if (skin.minFadePercentage > 100) skin.minFadePercentage = 100;
+        skin.minFadePercentage = Math.round(skin.minFadePercentage);
+    }
+};
+
+export function useUserDashboard(): UseUserDashboardReturn {
     const trackedSkins: Ref<TrackedSkin[]> = ref([]);
     const errorMessage: Ref<string> = ref(""); // Reactive variable for error messages
     const username: Ref<string> = ref("");
@@ -24,6 +84,7 @@ export function useUserDashboard() {
     const isSettingsModalOpen: Ref<boolean> = ref(false); // Modal state
     const isSettingsLoading: Ref<boolean> = ref(false); // Loading state for settings
     const showSubscriptionError: Ref<boolean> = ref(false); // New reactive variable for subscription error
+    const isUpdating: Ref<boolean> = ref(false); // Loading state for updating skins
 
     const userSettings: Ref<UserSettings> = ref({
         csfloatTracking: false,
@@ -95,8 +156,8 @@ export function useUserDashboard() {
                 itemOfInterest: string;
                 minWear: number;
                 maxWear: number;
-                forcedDiscount: number;
-                minFadePercentage: number;
+                forcedDiscount: number | false;
+                minFadePercentage: number | false;
             }
 
             interface ConfigData {
@@ -110,7 +171,13 @@ export function useUserDashboard() {
                 minWear: item.minWear,
                 maxWear: item.maxWear,
                 forcedDiscount: item.forcedDiscount,
-                minFadePercentage: item.minFadePercentage
+                minFadePercentage: item.minFadePercentage,
+                _original: {
+                    minWear: item.minWear,
+                    maxWear: item.maxWear,
+                    forcedDiscount: item.forcedDiscount,
+                    minFadePercentage: item.minFadePercentage
+                }
             }));
         } catch (error) {
             console.error("Error fetching user config:", error);
@@ -295,6 +362,127 @@ export function useUserDashboard() {
         }
     };
 
+    // New functions for editable field functionality
+    const validateAndUpdateSkin = async (skin: TrackedSkin, field: string): Promise<void> => {
+        // This function is no longer needed since we use submitChanges instead
+        // Keeping for compatibility if referenced elsewhere
+        await submitChanges(skin);
+    };
+
+    const toggleForcedDiscount = (skin: TrackedSkin): void => {
+        if (skin.forcedDiscount === false) {
+            skin.forcedDiscount = 0;
+        } else {
+            skin.forcedDiscount = false;
+        }
+    };
+
+    const toggleMinFade = (skin: TrackedSkin): void => {
+        if (skin.minFadePercentage === false) {
+            skin.minFadePercentage = 0;
+        } else {
+            skin.minFadePercentage = false;
+        }
+    };
+
+    // Check if skin has unsaved changes
+    const hasUnsavedChanges = (skin: TrackedSkin): boolean => {
+        if (!skin._original) return false;
+
+        return (
+            skin.minWear !== skin._original.minWear ||
+            skin.maxWear !== skin._original.maxWear ||
+            skin.forcedDiscount !== skin._original.forcedDiscount ||
+            skin.minFadePercentage !== skin._original.minFadePercentage
+        );
+    };
+
+    // Mark skin as changed (this function can be used for additional logic if needed)
+    const markSkinAsChanged = (skin: TrackedSkin): void => {
+        // This function is called on input changes
+        // Could be used for additional validation or UI feedback
+    };
+
+    // Validate and submit changes for a specific skin
+    const submitChanges = async (skin: TrackedSkin): Promise<void> => {
+        // Validate inputs before submitting
+        validateSkinInputs(skin);
+
+        // Submit the changes
+        isUpdating.value = true;
+        try {
+            await updateSkinSettings(skin);
+
+            // Update the original values after successful save
+            if (skin._original) {
+                skin._original.minWear = skin.minWear;
+                skin._original.maxWear = skin.maxWear;
+                skin._original.forcedDiscount = skin.forcedDiscount;
+                skin._original.minFadePercentage = skin.minFadePercentage;
+            }
+        } finally {
+            isUpdating.value = false;
+        }
+    };
+
+    // Cancel changes and reset to original values
+    const cancelChanges = (skin: TrackedSkin): void => {
+        if (skin._original) {
+            skin.minWear = skin._original.minWear;
+            skin.maxWear = skin._original.maxWear;
+            skin.forcedDiscount = skin._original.forcedDiscount;
+            skin.minFadePercentage = skin._original.minFadePercentage;
+        }
+    };
+
+    const updateSkinSettings = async (skin: TrackedSkin): Promise<void> => {
+        try {
+            // Fetch CSRF token
+            const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (!csrfResponse.ok) {
+                throw new Error("Failed to fetch CSRF token");
+            }
+
+            const csrfData = await csrfResponse.json();
+            const csrfToken = csrfData.csrfToken;
+
+            // Update skin settings via API
+            const updateResponse = await fetch(`${API_URL}/updateSkinSettings`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "csrf-token": csrfToken,
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    skinName: skin.name,
+                    minWear: skin.minWear,
+                    maxWear: skin.maxWear,
+                    forcedDiscount: skin.forcedDiscount,
+                    minFadePercentage: skin.minFadePercentage
+                }),
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error("Failed to update skin settings");
+            }
+
+            // Show success message
+            errorMessage.value = `Updated settings for ${skin.name}`;
+            messageType.value = 'success';
+            clearErrorMessages();
+        } catch (error) {
+            console.error('Failed to update skin settings:', error);
+            errorMessage.value = "Failed to update skin settings. Please try again.";
+            messageType.value = 'error';
+            clearErrorMessages();
+        }
+    };
+
     onMounted(() => {
         username.value = localStorage.getItem('username') || ""; // Get the stored username
         fetchCsrfTokenAndUserConfig();
@@ -315,6 +503,15 @@ export function useUserDashboard() {
         handleSettingsSave,
         applyWantedSourcesPreferences,
         showSubscriptionError,
-        navigateToSubscriptions
+        navigateToSubscriptions,
+        validateAndUpdateSkin,
+        toggleForcedDiscount,
+        toggleMinFade,
+        updateSkinSettings,
+        hasUnsavedChanges,
+        markSkinAsChanged,
+        submitChanges,
+        cancelChanges,
+        isUpdating
     };
 }
