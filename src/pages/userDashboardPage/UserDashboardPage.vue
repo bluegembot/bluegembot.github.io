@@ -26,9 +26,9 @@
             <p>Subscribe to access csfloat tracking!</p>
           </div>
           <router-link to="subscriptions">
-          <button class="upgrade-button">
-            Upgrade Now
-          </button>
+            <button class="upgrade-button">
+              Upgrade Now
+            </button>
           </router-link>
         </div>
       </div>
@@ -57,25 +57,111 @@
                     <span class="skin-name">{{ skin.name }}</span>
                   </div>
                   <div class="skin-details">
+                    <!-- Float Range -->
                     <div class="detail-row">
                       <span class="detail-label">Float Range:</span>
-                      <span class="detail-value">{{ skin.minWear }} - {{ skin.maxWear }}</span>
+                      <div class="editable-field">
+                        <input
+                            type="number"
+                            v-model.number="skin.minWear"
+                            @input="markSkinAsChanged(skin)"
+                            class="float-input"
+                            min="0"
+                            max="1"
+                            step="0.001"
+                            placeholder="0.000"
+                        /> -
+                        <input
+                            type="number"
+                            v-model.number="skin.maxWear"
+                            @input="markSkinAsChanged(skin)"
+                            class="float-input"
+                            min="0"
+                            max="1"
+                            step="0.001"
+                            placeholder="1.000"
+                        />
+                      </div>
                     </div>
+
+                    <!-- Forced Discount -->
                     <div class="detail-row">
                       <span class="detail-label">Forced Discount:</span>
-                      <span v-if="skin.forcedDiscount" class="detail-value">{{ skin.forcedDiscount }}%</span>
-                      <span v-else class="detail-value">Disabled</span>
+                      <div class="editable-field">
+                        <label class="checkbox-container">
+                          <input
+                              type="checkbox"
+                              :checked="skin.forcedDiscount !== false"
+                              @change="toggleForcedDiscount(skin)"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                        <input
+                            v-if="skin.forcedDiscount !== false"
+                            type="number"
+                            v-model.number="skin.forcedDiscount"
+                            @input="markSkinAsChanged(skin)"
+                            class="percentage-input"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="0"
+                        />
+                        <span v-if="skin.forcedDiscount !== false" class="percentage-symbol">%</span>
+                        <span v-else class="disabled-text">Disabled</span>
+                      </div>
                     </div>
+
+                    <!-- Min Fade % -->
                     <div class="detail-row">
                       <span class="detail-label">Min Fade %:</span>
-                      <span v-if="skin.minFadePercentage" class="detail-value">{{ skin.minFadePercentage }}%</span>
-                      <span v-else class="detail-value">Disabled</span>
+                      <div class="editable-field">
+                        <label class="checkbox-container">
+                          <input
+                              type="checkbox"
+                              :checked="skin.minFadePercentage !== false"
+                              @change="toggleMinFade(skin)"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                        <input
+                            v-if="skin.minFadePercentage !== false"
+                            type="number"
+                            v-model.number="skin.minFadePercentage"
+                            @input="markSkinAsChanged(skin)"
+                            class="percentage-input"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="0"
+                        />
+                        <span v-if="skin.minFadePercentage !== false" class="percentage-symbol">%</span>
+                        <span v-else class="disabled-text">Disabled</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <button class="stop-tracking-button" @click="stopTracking(skin)">
-                  Stop Tracking
-                </button>
+                <div class="button-container">
+                  <div v-if="hasUnsavedChanges(skin)" class="changes-buttons">
+                    <button
+                        @click="cancelChanges(skin)"
+                        class="cancel-changes-button"
+                        :disabled="isUpdating"
+                    >
+                      Cancel Changes
+                    </button>
+                    <button
+                        @click="submitChanges(skin)"
+                        class="submit-changes-button"
+                        :disabled="isUpdating"
+                    >
+                      {{ isUpdating ? 'Saving...' : 'Submit Changes' }}
+                    </button>
+                  </div>
+                  <button class="stop-tracking-button" @click="stopTracking(skin)">
+                    Stop Tracking
+                  </button>
+                </div>
               </li>
             </template>
             <template v-else>
@@ -121,7 +207,7 @@ import SettingsModal from '../../components/UserDashboard/SettingsModal.vue'
 export default defineComponent({
   name: 'UserDashboardPage',
   components: {
-    SettingsModal // Register the component
+    SettingsModal
   },
   setup() {
     return useUserDashboard();
