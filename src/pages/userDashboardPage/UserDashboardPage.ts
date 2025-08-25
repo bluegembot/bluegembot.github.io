@@ -47,6 +47,10 @@ interface UseUserDashboardReturn {
     submitChanges: (skin: TrackedSkin) => Promise<void>;
     cancelChanges: (skin: TrackedSkin) => void;
     isUpdating: Ref<boolean>;
+    // Add these three missing function signatures:
+    validateFloatInput: (skin: TrackedSkin, field: 'minWear' | 'maxWear') => void;
+    validateSkinInputs: (skin: TrackedSkin) => void;
+    getAllowedFloatRange: (skinName: string) => { minFloat: number, maxFloat: number } | null;
 }
 
 // Validate skin inputs
@@ -90,6 +94,118 @@ export function useUserDashboard(): UseUserDashboardReturn {
         csfloatTracking: false,
         skinportTracking: false,
     });
+
+    // Float ranges for different wear conditions
+    const floatRanges: Record<string, { minFloat: number, maxFloat: number }> = {
+        "factory-new": { minFloat: 0, maxFloat: 0.07 },
+        "minimal-wear": { minFloat: 0.07, maxFloat: 0.15 },
+        "field-tested": { minFloat: 0.15, maxFloat: 0.38 },
+        "well-worn": { minFloat: 0.38, maxFloat: 0.45 },
+        "battle-scarred": { minFloat: 0.45, maxFloat: 1 },
+    };
+
+    // Function to extract condition from skin name
+    const getConditionFromSkinName = (skinName: string): string | null => {
+        const lowerName = skinName.toLowerCase();
+
+        if (lowerName.includes('factory-new')) return 'factory-new';
+        if (lowerName.includes('minimal-wear')) return 'minimal-wear';
+        if (lowerName.includes('field-tested')) return 'field-tested';
+        if (lowerName.includes('well-worn')) return 'well-worn';
+        if (lowerName.includes('battle-scarred')) return 'battle-scarred';
+
+        return null;
+    };
+
+    // Function to get allowed float range for a skin
+    const getAllowedFloatRange = (skinName: string): { minFloat: number, maxFloat: number } | null => {
+        const condition = getConditionFromSkinName(skinName);
+        return condition ? floatRanges[condition] : null;
+    };
+
+    // Validation function for float inputs (similar to skin selector)
+    const validateFloatInput = (skin: TrackedSkin, field: 'minWear' | 'maxWear'): void => {
+        const allowedRange = getAllowedFloatRange(skin.name);
+
+        if (!allowedRange) {
+            // If we can't determine the condition, apply basic 0-1 validation
+            if (field === "minWear") {
+                if (skin.minWear < 0) skin.minWear = 0;
+                if (skin.minWear > 1) skin.minWear = 1;
+            } else if (field === "maxWear") {
+                if (skin.maxWear < 0) skin.maxWear = 0;
+                if (skin.maxWear > 1) skin.maxWear = 1;
+            }
+            return;
+        }
+
+        if (field === "minWear") {
+            // Ensure minWear is within the allowed range for the condition
+            if (skin.minWear < allowedRange.minFloat) {
+                skin.minWear = allowedRange.minFloat;
+            }
+            if (skin.minWear > allowedRange.maxFloat) {
+                skin.minWear = allowedRange.maxFloat;
+            }
+            // Basic 0-1 validation
+            if (skin.minWear < 0) {
+                skin.minWear = 0;
+            }
+            if (skin.minWear > 1) {
+                skin.minWear = 1;
+            }
+            // Ensure minWear doesn't exceed maxWear
+            if (skin.minWear > skin.maxWear) {
+                skin.maxWear = skin.minWear;
+            }
+        } else if (field === "maxWear") {
+            // Ensure maxWear is within the allowed range for the condition
+            if (skin.maxWear < allowedRange.minFloat) {
+                skin.maxWear = allowedRange.minFloat;
+            }
+            if (skin.maxWear > allowedRange.maxFloat) {
+                skin.maxWear = allowedRange.maxFloat;
+            }
+            // Basic 0-1 validation
+            if (skin.maxWear < 0) {
+                skin.maxWear = 0;
+            }
+            if (skin.maxWear > 1) {
+                skin.maxWear = 1;
+            }
+            // Ensure maxWear doesn't go below minWear
+            if (skin.maxWear < skin.minWear) {
+                skin.minWear = skin.maxWear;
+            }
+        }
+    };
+
+    // Complete skin validation function
+    const validateSkinInputs = (skin: TrackedSkin): void => {
+        // Validate float inputs
+        validateFloatInput(skin, 'minWear');
+        validateFloatInput(skin, 'maxWear');
+
+        // Validate forced discount if enabled
+        if (skin.forcedDiscount !== false) {
+            if (skin.forcedDiscount < 1) {
+                skin.forcedDiscount = 1;
+            }
+            if (skin.forcedDiscount > 100) {
+                skin.forcedDiscount = 100;
+            }
+        }
+
+        // Validate min fade percentage if enabled
+        if (skin.minFadePercentage !== false) {
+            if (skin.minFadePercentage < 0) {
+                skin.minFadePercentage = 0;
+            }
+            if (skin.minFadePercentage > 100) {
+                skin.minFadePercentage = 100;
+            }
+        }
+    };
 
     // Function to apply wantedSources preferences
     const applyWantedSourcesPreferences = (): void => {
@@ -363,7 +479,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
     };
 
     // New functions for editable field functionality
-    const validateAndUpdateSkin = async (skin: TrackedSkin, field: string): Promise<void> => {
+    const validateAndUpdateSkin = async (skin: TrackedSkin): Promise<void> => {
         // This function is no longer needed since we use submitChanges instead
         // Keeping for compatibility if referenced elsewhere
         await submitChanges(skin);
@@ -397,10 +513,15 @@ export function useUserDashboard(): UseUserDashboardReturn {
         );
     };
 
-    // Mark skin as changed (this function can be used for additional logic if needed)
-    const markSkinAsChanged = (skin: TrackedSkin): void => {
-        // This function is called on input changes
-        // Could be used for additional validation or UI feedback
+    // Mark skin as changed and apply validation
+    const markSkinAsChanged = (skin: TrackedSkin, field?: 'minWear' | 'maxWear'): void => {
+        // Apply validation when a field is changed
+        if (field) {
+            validateFloatInput(skin, field);
+        } else {
+            // If no specific field is provided, validate all inputs
+            validateSkinInputs(skin);
+        }
     };
 
     // Validate and submit changes for a specific skin
@@ -452,14 +573,14 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
             // Update skin settings via API
             const updateResponse = await fetch(`${API_URL}/updateSkinSettings`, {
-                method: "PUT",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "csrf-token": csrfToken,
                 },
                 credentials: "include",
                 body: JSON.stringify({
-                    skinName: skin.name,
+                    itemOfInterest: skin.name,
                     minWear: skin.minWear,
                     maxWear: skin.maxWear,
                     forcedDiscount: skin.forcedDiscount,
@@ -512,6 +633,9 @@ export function useUserDashboard(): UseUserDashboardReturn {
         markSkinAsChanged,
         submitChanges,
         cancelChanges,
-        isUpdating
+        isUpdating,
+        validateFloatInput, // Export for use in components
+        validateSkinInputs,  // Export for use in components
+        getAllowedFloatRange // Export for displaying allowed ranges in UI
     };
 }
