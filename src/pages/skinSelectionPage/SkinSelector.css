@@ -303,3 +303,205 @@ button:hover {
     margin-top: 50px;
     justify-self: center;
 }
+
+/* Mobile styles - REPLACE YOUR EXISTING @media (max-width: 768px) SECTION */
+@media (max-width: 768px) {
+    /* Container adjustments */
+    body {
+        overflow-x: auto;
+    }
+
+    /* Logo adjustments */
+    .logo-circle {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Search container stack vertically */
+    .search-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .dashboard-button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Table wrapper to handle overflow */
+    table {
+        width: 100%;
+        font-size: 14px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        border: 1px solid #ddd;
+    }
+
+    table thead,
+    table tbody,
+    table tr {
+        display: table;
+        width: 100%;
+        table-layout: auto; /* CHANGED FROM fixed TO auto */
+    }
+
+    table tr {
+        width: 100%;
+    }
+
+    /* Adjust column widths for mobile */
+    th:nth-child(1), td:nth-child(1) { width: 60px; } /* Image */
+    th:nth-child(2), td:nth-child(2) {
+        min-width: 150px;
+        width: auto;
+        white-space: normal; /* CHANGED: Allow text wrapping */
+        word-wrap: break-word; /* ADDED: Break long words if needed */
+        overflow: visible;
+    } /* Skin name - FLEXIBLE WIDTH WITH WRAPPING */
+    th:nth-child(3), td:nth-child(3) { width: 100px; } /* Condition */
+    th:nth-child(4), td:nth-child(4) { width: 80px; } /* Min float */
+    th:nth-child(5), td:nth-child(5) { width: 80px; } /* Max float */
+    th:nth-child(6), td:nth-child(6) { width: 120px; } /* Advanced */
+    th:nth-child(7), td:nth-child(7) { width: 100px; } /* Add button */
+
+    /* Image adjustments */
+    .skin-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+
+    /* Button adjustments */
+    th button, td button {
+        padding: 8px 12px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    /* Input adjustments */
+    .float-input {
+        width: 60px;
+        padding: 4px;
+        font-size: 16px !important;
+    }
+
+    select {
+        width: 90px;
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    /* Modal responsive */
+    .modal-content {
+        width: 95vw;
+        max-width: 95vw;
+        margin: 10px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+
+    /* Slider component adjustments */
+    .multi-range {
+        padding: 10px;
+    }
+
+    .input-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .number-input {
+        width: 100%;
+    }
+
+    /* Fixed messages responsive */
+    .fixed-top-message {
+        left: 10px;
+        right: 10px;
+        transform: none;
+        width: auto;
+    }
+
+    .subscription-error-message {
+        padding: 15px;
+    }
+
+    .subscription-error-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .upgrade-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Very small screens - REPLACE YOUR EXISTING @media (max-width: 480px) SECTION */
+@media (max-width: 480px) {
+    .logo-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    h2.main-title {
+        font-size: 20px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px 4px;
+    }
+
+    /* Stack table vertically for very small screens */
+    th:nth-child(1), td:nth-child(1) { width: 50px; }
+    th:nth-child(2), td:nth-child(2) {
+        min-width: 120px;
+        width: auto;
+        white-space: normal; /* CHANGED: Allow text wrapping */
+        word-wrap: break-word; /* ADDED: Break long words if needed */
+        overflow: visible;
+    } /* FLEXIBLE SKIN NAME WITH WRAPPING */
+    th:nth-child(3), td:nth-child(3) { width: 80px; }
+    th:nth-child(4), td:nth-child(4) { width: 70px; }
+    th:nth-child(5), td:nth-child(5) { width: 70px; }
+    th:nth-child(6), td:nth-child(6) { width: 100px; }
+    th:nth-child(7), td:nth-child(7) { width: 80px; }
+
+    .skin-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .float-input {
+        width: 50px;
+        font-size: 16px !important;
+    }
+
+    select {
+        width: 75px;
+        font-size: 12px;
+    }
+
+    button {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+}
