@@ -29,7 +29,7 @@
       <div class="console-header">
         <div class="console-title">
           <span class="console-icon">📟</span>
-          <span>Console Output</span>
+          <span>Console Output (system logs)</span>
         </div>
         <div class="console-controls">
           <button @click="clearConsole" class="console-btn clear-btn">Clear</button>
