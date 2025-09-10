@@ -1,6 +1,6 @@
-<!-- PaymentSuccess.vue -->
+<!-- PaymentFailed.vue -->
 <template>
-  <PaymentResult type="success" :show-session-id="isDevelopment" />
+  <PaymentResult type="failed" :show-session-id="isDevelopment" />
 </template>
 
 <script setup lang="ts">

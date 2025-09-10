@@ -14,6 +14,8 @@ import refunds from "@/pages/LegalInfo/refunds.vue"
 import cancellationpolicy from "@/pages/LegalInfo/Cancellation.vue"
 import StripeCheckoutBasic from "@/components/Stripe/StripeCheckoutBasic.vue";
 import StripeCheckoutGold from "@/components/Stripe/StripeCheckoutGold.vue";
+import PaymentSuccess from "@/components/Stripe/PaymentSuccess.vue";
+import PaymentFailed from "@/components/Stripe/PaymentFailed.vue";
 
 const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
 
@@ -57,8 +59,9 @@ const routes = [
   { path: '/about', component: LandingPage, meta:{requiresAuth: false}},
   { path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}},
   { path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{requiresAuth: true}},
-  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{requiresAuth: true}}
-
+  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{requiresAuth: true}},
+  { path: '/payment-success', component: PaymentSuccess, meta:{requiresAuth: true}},
+  { path: '/payment-failed', component: PaymentFailed, meta:{requiresAuth: true}}
 ];
 
 // Create the router instance using hash mode
@@ -68,6 +71,36 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  // Check for payment success/failure in URL parameters (from Stripe redirects)
+  const urlParams = new URLSearchParams(window.location.search);
+  const sessionId = urlParams.get('session_id');
+  const paymentType = urlParams.get('type');
+
+  // If we have payment parameters and we're being redirected to dashboard
+  if (sessionId && (to.path === '/dashboard' || to.path === '/')) {
+    // Check if this is a successful payment by checking session_id format
+    // Stripe test session IDs start with cs_test_ and live ones with cs_live_
+    if (sessionId.startsWith('cs_test_') || sessionId.startsWith('cs_live_')) {
+      // Redirect to payment success page with parameters
+      return next({
+        path: '/payment-success',
+        query: {
+          session_id: sessionId,
+          type: paymentType
+        }
+      });
+    } else {
+      // If session_id format suggests failure, redirect to failure page
+      return next({
+        path: '/payment-failed',
+        query: {
+          session_id: sessionId,
+          type: paymentType
+        }
+      });
+    }
+  }
+
   // Skip authentication check for the about page
   if (to.path === '/about') {
     return next();
@@ -97,7 +130,5 @@ router.beforeEach(async (to, from, next) => {
 
   next(); // Proceed to the requested route
 });
-
-
 
 export default router;
