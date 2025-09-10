@@ -104,7 +104,7 @@
               <span class="support-icon">📧</span>
               <div>
                 <strong>Email Support</strong>
-                <a href="mailto:lucaskaas2@gmail.com" class="support-email">lucaskaas2@gmail.com</a>
+                <a href="mailto:bluegembot@gmail.com" class="support-email">bluegembot@gmail.com</a>
               </div>
             </div>
             <div class="support-item">

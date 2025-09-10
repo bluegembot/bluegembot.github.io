@@ -81,7 +81,7 @@ nav ul li a {
 
 .tracked-skins-container,
 .user-information-container {
-  width: 75%;
+  width: 100%;
   position: relative;
 }
 
@@ -563,7 +563,7 @@ li {
 
 .upgrade-button {
   background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255);
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
@@ -615,17 +615,70 @@ li {
   }
 }
 
-/* Responsive design */
+/* REPLACE YOUR EXISTING @media (max-width: 768px) SECTION WITH THIS: */
 @media (max-width: 768px) {
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: auto;
+  }
+
+  /* Header responsive */
+  header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav ul li {
+    margin: 0;
+  }
+
+  /* Main title responsive */
+  .main-title {
+    font-size: 28px;
+    padding: 0 15px;
+  }
+
+  /* Container adjustments */
+  .tracked-skins-section {
+    margin: 20px 15px;
+  }
+
+  .tracked-skins-container {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+  }
+
+  /* Skin details responsive */
   .skin-details {
     grid-template-columns: 1fr;
     gap: 15px;
+  }
+
+  .tracked-skins-container h2{
+    position: static;
   }
 
   .tracked-skin-item {
     padding: 15px;
   }
 
+  /* Input fields - CRITICAL FOR PREVENTING ZOOM */
+  .float-input,
+  .percentage-input {
+    width: 70px;
+    max-width: 70px;
+    font-size: 16px !important; /* Prevents iOS zoom */
+    padding: 8px 6px;
+  }
+
+  /* Button containers */
   .button-container {
     flex-direction: column-reverse;
     gap: 10px;
@@ -642,12 +695,48 @@ li {
   .stop-tracking-button {
     width: 100%;
     justify-content: center;
+    font-size: 16px !important; /* Ensures no zoom on button text */
+  }
+
+  /* Grid container responsive */
+  .grid-container-dashboard {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 100%;
+    margin: 30px 15px;
+    padding: 0;
+  }
+
+  .grid-item {
+    padding: 20px 15px;
+    font-size: 18px;
+    white-space: nowrap;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Fixed messages responsive */
+  .fixed-top-message {
+    left: 15px;
+    right: 15px;
+    width: auto;
+    transform: none;
+  }
+
+  .subscription-error-message {
+    left: 15px;
+    right: 15px;
+    width: auto;
+    transform: none;
   }
 
   .subscription-error-content {
     flex-direction: column;
     text-align: center;
     gap: 10px;
+    padding: 15px;
   }
 
   .subscription-error-message .error-icon {
@@ -656,17 +745,138 @@ li {
 
   .upgrade-button {
     padding: 12px 24px;
+    font-size: 16px !important;
+    width: 100%;
+  }
+
+  /* Editable field responsive */
+  .editable-field {
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* Checkbox adjustments */
+  .checkbox-container {
+    flex-shrink: 0;
+  }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Settings button */
+  .settings-btn {
+    padding: 8px;
+    font-size: 16px !important;
+  }
+
+  /* Detail labels */
+  .detail-label {
+    font-size: 16px !important; /* Prevent zoom */
+  }
+
+  .detail-value {
+    font-size: 16px !important; /* Prevent zoom */
+  }
+
+  /* Logo adjustments */
+  .logo-circle {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 24px;
+  }
+
+  .tracked-skins-container,
+  .announcements,
+  .user-information-container {
+    padding: 10px;
+  }
+
+  .tracked-skin-item {
+    padding: 10px;
+  }
+
+  .skin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .float-input,
+  .percentage-input {
+    width: 60px;
+    max-width: 60px;
+    font-size: 16px !important;
+  }
+
+  .grid-item {
+    padding: 15px 10px;
     font-size: 16px;
   }
 
-  /* Mobile responsive adjustments for input fields */
-  .editable-field {
-    flex-wrap: wrap; /* Allow wrapping on mobile if needed */
-    gap: 6px;
+  .logo-circle {
+    width: 60px;
+    height: 60px;
   }
 
-  .float-input, .percentage-input {
-    width: 70px; /* Slightly wider on mobile for better usability */
-    max-width: 70px;
+  /* Make text larger to prevent zoom */
+  .skin-name {
+    font-size: 18px;
+  }
+
+  .detail-label {
+    font-size: 16px !important;
+  }
+
+  .percentage-symbol {
+    font-size: 16px !important;
+  }
+
+  .disabled-text {
+    font-size: 16px !important;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .main-title {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+
+  .tracked-skins-section {
+    margin: 15px;
+  }
+
+  .grid-container-dashboard {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 20px 15px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tracked-skins-container {
+    width: 90%;
+  }
+
+  .grid-container-dashboard {
+    max-width: 90%;
+  }
+
+  /* Ensure inputs still prevent zoom on tablets */
+  .float-input,
+  .percentage-input,
+  input[type="number"],
+  input[type="text"] {
+    font-size: 16px !important;
   }
 }

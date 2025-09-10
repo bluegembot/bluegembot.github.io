@@ -85,7 +85,14 @@ export default {
 </script>
 
 <style scoped>
-/* Add these styles to your Navbar component's <style> section */
+/* REPLACE YOUR EXISTING NAVBAR <style scoped> SECTION WITH THIS: */
+
+/* Prevent iOS auto-zoom - CRITICAL */
+.navbar-item,
+.toggle-button,
+.mode-icon {
+  font-size: 16px !important;
+}
 
 .navbar {
   padding: 1rem;
@@ -96,6 +103,8 @@ export default {
   background-color: var(--color-background);
   color: var(--color-text);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden; /* Prevent horizontal overflow */
 }
 
 .navbar-menu {
@@ -117,6 +126,8 @@ export default {
   border-radius: 4px;
   transition: all 0.3s ease;
   color: var(--color-text);
+  font-size: 16px !important;
+  white-space: nowrap;
 }
 
 .toggle-button {
@@ -129,6 +140,8 @@ export default {
   justify-content: center;
   color: var(--color-text);
   transition: all 0.3s ease;
+  font-size: 16px !important;
+  flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 .mode-icon {
@@ -151,6 +164,7 @@ export default {
 .logo-circle {
   max-width: 80px;
   max-height: 80px;
+  flex-shrink: 0; /* Prevent logo from shrinking */
 }
 
 .logo-img {
@@ -195,5 +209,181 @@ body.dark-mode .toggle-button {
 body.dark-mode .login-button,
 body.dark-mode .register-button {
   color: var(--color-text);
+}
+
+/* MOBILE RESPONSIVE STYLES */
+
+/* Tablet and smaller */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+
+  .navbar-menu {
+    margin-left: 0.5rem;
+  }
+
+  .navbar-start, .navbar-end {
+    gap: 0.5rem;
+  }
+
+  .navbar-item {
+    padding: 0.4rem 0.8rem;
+    font-size: 16px !important;
+  }
+
+  .toggle-button {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Mobile landscape and portrait */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+  }
+
+  .navbar-menu {
+    margin-left: 0.25rem;
+    flex: 1;
+    min-width: 0; /* Allow shrinking */
+  }
+
+  .navbar-start, .navbar-end {
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .navbar-item {
+    padding: 0.3rem 0.6rem;
+    font-size: 16px !important;
+    border-radius: 6px;
+  }
+
+  .toggle-button {
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+  }
+
+  .logo-circle {
+    max-width: 60px;
+    max-height: 60px;
+  }
+
+  .mode-icon {
+    font-size: 1.1rem;
+  }
+
+  /* Stack navbar items if too cramped */
+  .navbar-end {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+/* Small mobile phones */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.4rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .navbar-menu {
+    margin-left: 0;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .navbar-start, .navbar-end {
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .navbar-item {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    flex: 1;
+    min-width: fit-content;
+  }
+
+  .toggle-button {
+    padding: 0.5rem 1rem;
+    align-self: center;
+    min-width: fit-content;
+  }
+
+  .logo-circle {
+    max-width: 50px;
+    max-height: 50px;
+    align-self: center;
+  }
+
+  /* Center the logo */
+  .navbar-brand {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .navbar {
+    padding: 0.3rem;
+  }
+
+  .navbar-item {
+    padding: 0.4rem 0.6rem;
+    font-size: 16px !important;
+  }
+
+  .toggle-button {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .logo-circle {
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  .mode-icon {
+    font-size: 1rem;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .navbar {
+    flex-direction: row;
+    padding: 0.4rem;
+  }
+
+  .navbar-menu {
+    flex-direction: row;
+    margin-left: 0.5rem;
+  }
+
+  .navbar-start, .navbar-end {
+    flex-direction: row;
+    gap: 0.3rem;
+  }
+
+  .navbar-item {
+    padding: 0.25rem 0.5rem;
+    font-size: 14px;
+  }
+
+  .toggle-button {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .logo-circle {
+    max-width: 55px;
+    max-height: 55px;
+  }
 }
 </style>
