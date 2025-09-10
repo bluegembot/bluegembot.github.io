@@ -328,7 +328,9 @@ button:hover {
         width: 100%;
         padding: 12px;
     }
-
+    .search-bar {
+        width: 100%;
+    }
     /* Table wrapper to handle overflow */
     table {
         width: 100%;
@@ -453,6 +455,11 @@ button:hover {
 
 /* Very small screens - REPLACE YOUR EXISTING @media (max-width: 480px) SECTION */
 @media (max-width: 480px) {
+
+    .search-bar {
+        width: 100%;
+    }
+
     .logo-circle {
         width: 60px;
         height: 60px;
