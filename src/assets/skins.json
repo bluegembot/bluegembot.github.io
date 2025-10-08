@@ -3814,7 +3814,11 @@
         "itemName": "usp-s-monster-mashup-factory-new"
     },
     {
-        "imageUrl": "",
-        "itemName": ""
+        "imageUrl": "https://community.steamstatic.com/economy/image/class/730/7488693039/256x128",
+        "itemName": "ak-47-the-oligarch-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.steamstatic.com/economy/image/class/730/6220424264/256x128",
+        "itemName": "ak-47-b-the-monster-factory-new"
     }
 ]
