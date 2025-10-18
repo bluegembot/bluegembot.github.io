@@ -3,8 +3,8 @@ import { useRouter, useRoute } from 'vue-router';
 import {API_URL} from '@/config/environment';
 
 export const useRegistrationForm = () => {
-  const router = useRouter(); // Use the Composition API's useRouter hook
-  const route = useRoute();   // Use the Composition API's useRoute hook
+  const router = useRouter();
+  const route = useRoute();
 
   const form = ref({
     userName: '',
@@ -15,8 +15,8 @@ export const useRegistrationForm = () => {
   const csrfToken = ref('');
 
   // Store aID from URL query to localStorage if valid
-  if(route.query.aID && route.query.aID.length >= 17){
-    const aID = route.query.aID;
+  const aID = route.query.aID;
+  if (aID && typeof aID === 'string' && aID.length >= 17) {
     localStorage.setItem('aID', aID);
   }
 
@@ -34,19 +34,24 @@ export const useRegistrationForm = () => {
 
   const handleSubmit = async () => {
     try {
-      await fetchCsrfToken();  // Ensure CSRF token is loaded
+      await fetchCsrfToken();
 
-      // Get and validate aID - declare outside the if block
+      // Get and validate aID
       const aIDValue = localStorage.getItem('aID');
-      let validatedAID = null;
+      let validatedAID: string | null = null;
 
       if (aIDValue && /^\d{16,25}$/.test(aIDValue)) {
         validatedAID = aIDValue;
         console.log('Valid aID found:', validatedAID);
       }
 
-      // Build request body
-      const requestBody = {
+      // Build request body with proper typing
+      const requestBody: {
+        username: string;
+        itemsOfInterest: never[];
+        OTP: string;
+        aID?: string;
+      } = {
         username: form.value.userName,
         itemsOfInterest: [],
         OTP: form.value.OTP,
@@ -61,14 +66,14 @@ export const useRegistrationForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'CSRF-Token': csrfToken.value,  // Add CSRF token to the header
+          'CSRF-Token': csrfToken.value,
         },
         body: JSON.stringify(requestBody),
         credentials: 'include',
       });
 
       if (response.status === 201) {
-        router.push('/dashboard'); // Navigate using the Composition API's router
+        router.push('/dashboard');
       } else {
         errorMessage.value = 'Registration failed. Please try again.';
       }
