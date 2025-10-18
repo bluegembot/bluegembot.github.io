@@ -4,6 +4,7 @@ import {API_URL} from '@/config/environment';
 
 export const useRegistrationForm = () => {
     const router = useRouter(); // Use the Composition API's useRouter hook
+
     const form = ref({
         userName: '',
         OTL: '',
@@ -31,6 +32,7 @@ export const useRegistrationForm = () => {
             const requestBody = {
                 OTL: form.value.OTL,
             };
+
             const response = await fetch(`${API_URL}/loginUser`, {
                 method: 'POST',
                 headers: {
