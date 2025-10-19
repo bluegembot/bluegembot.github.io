@@ -99,16 +99,13 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach((to) => {
-  console.log('Route changed to:', to.fullPath); // Debug log
-
   const gtag = (window as any).gtag;
-  console.log('gtag exists?', !!gtag); // Check if gtag is loaded
-
   if (gtag) {
-    console.log('Tracking pageview:', to.fullPath); // Confirm tracking
+    // For hash routing, prepend # to the path
     gtag('config', 'G-D32T6VQQQE', {
-      page_path: to.fullPath
+      page_path: '/#' + to.fullPath
     });
+    console.log('Tracking pageview:', '/#' + to.fullPath);
   }
 });
 
