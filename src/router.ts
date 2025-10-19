@@ -98,6 +98,13 @@ router.beforeEach(async (to, from, next) => {
   next(); // Proceed to the requested route
 });
 
-
+router.afterEach((to) => {
+  const gtag = (window as any).gtag;
+  if (gtag) {
+    gtag('config', 'G-D32T6VQQQE', {
+      page_path: to.fullPath
+    });
+  }
+});
 
 export default router;
