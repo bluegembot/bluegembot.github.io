@@ -13,7 +13,14 @@ const app = createApp(App)
 app.component('Navbar', Navbar)
 app.use(router)
 app.use(VueGtag, {
-    property: { id: 'G-D32T6VQQQE' }
+    property: { id: 'G-D32T6VQQQE' },
+    useRouter: true,
+    config: {
+        id: 'G-D32T6VQQQE',
+        params: {
+            send_page_view: true
+        }
+    }
 })
 
 // Mount the app last
