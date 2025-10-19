@@ -101,11 +101,12 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach((to) => {
   const gtag = (window as any).gtag;
   if (gtag) {
-    // For hash routing, prepend # to the path
-    gtag('config', 'G-D32T6VQQQE', {
-      page_path: '/#' + to.fullPath
+    // Send explicit pageview event instead of config
+    gtag('event', 'page_view', {
+      page_path: '/#' + to.fullPath,
+      page_location: window.location.href
     });
-    console.log('Tracking pageview:', '/#' + to.fullPath);
+    console.log('Tracking pageview event:', '/#' + to.fullPath);
   }
 });
 

@@ -28,7 +28,7 @@ export default defineComponent({
         const importData = ref("");
         const importError = ref("");
         const importLoading = ref(false);
-        const itemsHaveBeenProcessed = ref(false)
+        const itemsHaveBeenProcessed = ref(false);
 
         //Database validation related data
 
@@ -52,8 +52,8 @@ export default defineComponent({
 
         // Function to process item names from the JSON file
         const processItemNamesFromJson = (): string[] => {
-            if(itemsHaveBeenProcessed){
-                return;
+            if(itemsHaveBeenProcessed.value === true){
+                return [];
             }
             const processedNames: string[] = [];
 
