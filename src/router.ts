@@ -106,7 +106,6 @@ router.afterEach((to) => {
       page_path: '/#' + to.fullPath,
       page_location: window.location.href
     });
-    console.log('Tracking pageview event:', '/#' + to.fullPath);
   }
 });
 
