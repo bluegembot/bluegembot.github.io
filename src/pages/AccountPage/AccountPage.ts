@@ -147,6 +147,7 @@ export default defineComponent({
             importData.value = "";
             importError.value = "";
             importLoading.value = false;
+            processItemNamesFromJson();
         };
 
         const closeImportModal = () => {
@@ -400,9 +401,6 @@ export default defineComponent({
             subscriptionStatus.value = localStorage.getItem("subscriptionStatus") || "";
             subscriptionEndDate.value = localStorage.getItem("subscriptionEndDate") || "";
             wantedSources.value = localStorage.getItem("wantedSources") || "";
-
-            // Process the skins data when component mounts
-            processItemNamesFromJson();
         });
 
         return {
