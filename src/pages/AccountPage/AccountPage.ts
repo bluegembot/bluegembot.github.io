@@ -67,6 +67,7 @@ export default defineComponent({
                 });
 
                 itemsHaveBeenProcessed.value = true;
+                console.log('Processed items.')
 
                 return processedNames;
             } catch (error) {
