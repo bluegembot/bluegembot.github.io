@@ -295,9 +295,9 @@ export default {
                 socket.value.onmessage = (event) => {
                     const data = event.data;
 
-                    const allowedDomain = "https://skinport.com/";
+                    const allowedDomains = ["https://skinport.com/", "https://csfloat.com/"];
 
-                    if (typeof data === "string" && data.startsWith(allowedDomain)) {
+                    if (typeof data === "string" && allowedDomains.some(domain => data.startsWith(domain))) {
                         openUrlInNewTab(data);
                     } else {
                         addConsoleLog(`Received message from server: ${data}`, 'info');
