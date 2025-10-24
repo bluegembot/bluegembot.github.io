@@ -3816,5 +3816,13 @@
     {
         "imageUrl": "https://community.steamstatic.com/economy/image/class/730/7488693039/256x128",
         "itemName": "ak-47-the-oligarch-minimal-wear"
+    },
+    {
+        "imageUrl": "https://community.steamstatic.com/economy/image/class/730/310790146/256x128",
+        "itemName": "flip-knife-slaughter-factory-new"
+    },
+    {
+        "imageUrl": "",
+        "itemName": ""
     }
 ]
