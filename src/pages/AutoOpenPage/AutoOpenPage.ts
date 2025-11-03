@@ -345,6 +345,7 @@ export default {
                 addConsoleLog('Attempting reconnection in 5 seconds...', 'warning');
                 reconnectTimeout.value = setTimeout(() => {
                     console.log("Attempting to reconnect...");
+                    closeWebSocket();
                     connectToWebSocket();
                 }, 5000) as unknown as number;
             }
