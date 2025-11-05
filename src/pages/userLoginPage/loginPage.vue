@@ -16,7 +16,7 @@
 
             <label for="OTP">Your login token</label>
             <input
-                type="text"
+                type="hidden"
                 id="OTP"
                 v-model="form.OTL"
                 required
