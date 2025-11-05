@@ -26,7 +26,7 @@
           <div class="form-group">
             <label for="OTP">Your OTP</label>
             <input
-                type="hidden"
+                type="text"
                 id="OTP"
                 v-model="form.OTP"
                 required
