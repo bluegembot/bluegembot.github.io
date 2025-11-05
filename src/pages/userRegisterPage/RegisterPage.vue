@@ -16,6 +16,7 @@
             <input
                 type="text"
                 id="userName"
+                maxlength="25"
                 v-model="form.userName"
                 required
                 placeholder="Enter username"
