@@ -7,14 +7,14 @@ interface TrackedSkin {
     name: string;
     minWear: number;
     maxWear: number;
-    forcedDiscount: number | false;
-    minFadePercentage: number | false;
+    forcedDiscount: number;
+    minFadePercentage: number;
     // Store original values for comparison
     _original?: {
         minWear: number;
         maxWear: number;
-        forcedDiscount: number | false;
-        minFadePercentage: number | false;
+        forcedDiscount: number;
+        minFadePercentage: number;
     };
 }
 
@@ -67,17 +67,13 @@ const validateSkinInputs = (skin: TrackedSkin): void => {
     }
 
     // Validate percentages (0-100) and round to integers
-    if (typeof skin.forcedDiscount === 'number') {
-        if (skin.forcedDiscount < 0) skin.forcedDiscount = 0;
-        if (skin.forcedDiscount > 100) skin.forcedDiscount = 100;
-        skin.forcedDiscount = Math.round(skin.forcedDiscount);
-    }
+    if (skin.forcedDiscount < 0) skin.forcedDiscount = 0;
+    if (skin.forcedDiscount > 100) skin.forcedDiscount = 100;
+    skin.forcedDiscount = Math.round(skin.forcedDiscount);
 
-    if (typeof skin.minFadePercentage === 'number') {
-        if (skin.minFadePercentage < 0) skin.minFadePercentage = 0;
-        if (skin.minFadePercentage > 100) skin.minFadePercentage = 100;
-        skin.minFadePercentage = Math.round(skin.minFadePercentage);
-    }
+    if (skin.minFadePercentage < 0) skin.minFadePercentage = 0;
+    if (skin.minFadePercentage > 100) skin.minFadePercentage = 100;
+    skin.minFadePercentage = Math.round(skin.minFadePercentage);
 };
 
 export function useUserDashboard(): UseUserDashboardReturn {
@@ -187,7 +183,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
         validateFloatInput(skin, 'maxWear');
 
         // Validate forced discount if enabled
-        if (skin.forcedDiscount !== false) {
+        if (skin.forcedDiscount > 0) {
             if (skin.forcedDiscount < 1) {
                 skin.forcedDiscount = 1;
             }
@@ -197,7 +193,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
         }
 
         // Validate min fade percentage if enabled
-        if (skin.minFadePercentage !== false) {
+        if (skin.minFadePercentage > 0) {
             if (skin.minFadePercentage < 0) {
                 skin.minFadePercentage = 0;
             }
@@ -269,11 +265,11 @@ export function useUserDashboard(): UseUserDashboardReturn {
             }
 
             interface ItemOfInterest {
-                itemOfInterest: string;
-                minWear: number;
-                maxWear: number;
-                forcedDiscount: number | false;
-                minFadePercentage: number | false;
+                item_of_interest: string;
+                min_wear: number;
+                max_wear: number;
+                forced_discount: number;
+                forced_fade_percentage: number;
             }
 
             interface ConfigData {
@@ -282,17 +278,19 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
             const configData: ConfigData = await configResponse.json();
 
+            console.log(configData);
+
             trackedSkins.value = configData.itemsOfInterest.map((item) => ({
-                name: item.itemOfInterest,
-                minWear: item.minWear,
-                maxWear: item.maxWear,
-                forcedDiscount: item.forcedDiscount,
-                minFadePercentage: item.minFadePercentage,
+                name: item.item_of_interest,
+                minWear: item.min_wear,
+                maxWear: item.max_wear,
+                forcedDiscount: item.forced_discount,
+                minFadePercentage: item.forced_fade_percentage,
                 _original: {
-                    minWear: item.minWear,
-                    maxWear: item.maxWear,
-                    forcedDiscount: item.forcedDiscount,
-                    minFadePercentage: item.minFadePercentage
+                    minWear: item.min_wear,
+                    maxWear: item.max_wear,
+                    forcedDiscount: item.forced_discount,
+                    minFadePercentage: item.forced_fade_percentage
                 }
             }));
         } catch (error) {
@@ -486,18 +484,18 @@ export function useUserDashboard(): UseUserDashboardReturn {
     };
 
     const toggleForcedDiscount = (skin: TrackedSkin): void => {
-        if (skin.forcedDiscount === false) {
+        if (skin.forcedDiscount > 0) {
             skin.forcedDiscount = 0;
         } else {
-            skin.forcedDiscount = false;
+            skin.forcedDiscount = 0;
         }
     };
 
     const toggleMinFade = (skin: TrackedSkin): void => {
-        if (skin.minFadePercentage === false) {
+        if (skin.minFadePercentage === 0) {
             skin.minFadePercentage = 0;
         } else {
-            skin.minFadePercentage = false;
+            skin.minFadePercentage = 1;
         }
     };
 
