@@ -26,6 +26,14 @@
           <h3>BlueGemBot Basic</h3>
           <p>Access essential features with basic filtering to track skins efficiently.</p>
           <div class="price-tag basicText">&euro;7.49/month</div>
+      <router-link to="/checkoutBasic">
+      <div class="get-subscription-button basicBorder">
+        <div class="subscription-info">
+          <h3>Get basic</h3>
+        </div>
+
+      </div>
+      </router-link>
         </div>
       </div>
       <div
@@ -37,6 +45,14 @@
           <h3>BlueGemBot Gold</h3>
           <p>Access everything from BlueGemBot Basic. Enjoy less restrictive skin tracking capabilities.</p>
           <div class="price-tag goldText">&euro;12.49/month</div>
+                <router-link to="/checkoutGold">
+      <div class="get-subscription-button goldBorder">
+
+        <div class="subscription-info">
+          <h3>Get gold</h3>
+        </div>
+      </div>
+      </router-link>
         </div>
       </div>
       <div
@@ -50,40 +66,45 @@
           <div class="price-tag eliteText"><strong>COMING SOON</strong></div>
         </div>
       </div>
-      <router-link to="/checkoutBasic">
-      <div
-          class="grid-item basicBorder"
-      >
-        <div class="subscription-info">
-          <h3>Get basic</h3>
-        </div>
 
-      </div>
-      </router-link>
-      <router-link to="/checkoutGold">
-      <div
-          class="grid-item goldBorder"
-      >
-
-        <div class="subscription-info">
-          <h3>Get gold</h3>
-        </div>
-
-      </div>
-      </router-link>
     </div>
 
 
-    <!-- Popup for In-depth Information -->
-    <div v-if="popupVisible" class="popup-overlay" @click.self="closePopup">
-      <div class="popup-content">
-        <h2>{{ selectedSubscriptionTitle }}</h2>
-        <ul class="subscription-perks">
-          <li v-for="perk in selectedSubscriptionPerks" :key="perk">{{ perk }}</li>
-        </ul>
-        <button class="close-btn" @click="closePopup">Close</button>
+
+<!-- Popup for In-depth Information -->
+<div v-if="popupVisible" class="popup-overlay" @click.self="closePopup">
+  <div class="popup-content">
+    <h2>{{ selectedSubscriptionTitle }}</h2>
+
+    <ul class="subscription-perks">
+      <li v-for="perk in selectedSubscriptionPerks" :key="perk">{{ perk }}</li>
+    </ul>
+
+    <!-- NEW: CTA inside popup -->
+    <div class="popup-actions">
+      <router-link
+        v-if="selectedCheckoutRoute"
+        :to="selectedCheckoutRoute"
+        class="popup-cta-link"
+        @click="closePopup"
+      >
+        <div class="get-subscription-button-in-popup" :class="selectedCtaBorderClass">
+          <div class="subscription-info">
+            <h3>{{ selectedCtaText }}</h3>
+          </div>
+        </div>
+      </router-link>
+
+      <!-- Optional: show something for Elite -->
+      <div v-else class="coming-soon">
+        <strong>COMING SOON</strong>
       </div>
+
+      <button class="close-btn" @click="closePopup">Close</button>
     </div>
+  </div>
+</div>
+
   </main>
 </template>
 

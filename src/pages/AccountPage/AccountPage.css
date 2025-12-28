@@ -36,6 +36,7 @@ main {
     color: white;
     margin-top: 10px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 .fixed-top-message {
@@ -47,7 +48,7 @@ main {
     border-radius: 5px;
     z-index: 1000;
     font-size: 16px !important;
-    max-width: 90%;
+    max-width: fit-content;
     text-align: center;
 }
 

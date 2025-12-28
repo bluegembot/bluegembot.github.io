@@ -198,7 +198,7 @@ export default {
 
 /* Dark mode specific navbar adjustments */
 body.dark-mode .navbar {
-  background-color: var(--color-background-soft);
+  /*background-color: var(--color-background-soft);*/
 }
 
 body.dark-mode .navbar-item,

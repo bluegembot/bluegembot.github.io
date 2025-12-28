@@ -303,35 +303,31 @@ export default defineComponent({
         };
 
         const sendSkinsToBackend = async (itemsData: any[]) => {
-            try {
-                console.log(API_URL)
-                const response = await fetch(`${API_URL}/skins/import`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        userId: chatId.value,
-                        username: username.value,
-                        items: itemsData,
-                    }),
-                    credentials: 'include',
-                });
+          try {
+            const response = await fetch(`${API_URL}/skins/import`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ items: itemsData }),
+              credentials: "include",
+            });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+            // Always try to read backend message so you know *why* it's 400
+            const payload = await response.json().catch(() => null);
 
-                const result = await response.json();
-                return { success: true, data: result };
-            } catch (error) {
-                console.error('Error sending items to backend:', error);
-                return {
-                    success: false,
-                    error: error instanceof Error ? error.message : "Failed to import items"
-                };
+            if (!response.ok) {
+              throw new Error(payload?.message ?? `HTTP error! status: ${response.status}`);
             }
+
+            return { success: true, data: payload };
+          } catch (error) {
+            console.error("Error sending items to backend:", error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : "Failed to import items",
+            };
+          }
         };
+
 
         const importSkins = async (jsonData: string) => {
             importError.value = "";
