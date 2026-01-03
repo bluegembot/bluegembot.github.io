@@ -54,8 +54,8 @@ const planConfig = {
   price: 7.49,
   currency: 'eur',
   description: '1 month access with essential features',
-  type: 'onetime',
-  subscriptionType: 'basic_onetime'
+  type: 'subscription',
+  subscriptionType: 'basic'
 };
 
 // Reactive data

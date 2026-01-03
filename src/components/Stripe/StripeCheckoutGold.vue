@@ -57,8 +57,8 @@ const planConfig = {
   price: 12.49,
   currency: 'eur',
   description: '1 month access with all premium features',
-  type: 'onetime',
-  subscriptionType: 'gold_onetime'
+  type: 'subscription',
+  subscriptionType: 'gold'
 };
 
 // Reactive data
