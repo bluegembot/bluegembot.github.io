@@ -3,6 +3,7 @@ import ImportSkinsModal from "../../components/UserDashboard/ImportSkinsModal.vu
 import { API_URL } from "@/config/environment";
 // Import the JSON file directly
 import skinsData from "@/assets/skins.json";
+import { faLess } from "@fortawesome/free-brands-svg-icons";
 
 interface SkinItem {
     imageUrl: string;
@@ -29,6 +30,7 @@ export default defineComponent({
         const importError = ref("");
         const importLoading = ref(false);
         const itemsHaveBeenProcessed = ref(false);
+        const isSubscriptionModalOpen = ref(false);
 
         //Database validation related data
 
@@ -161,6 +163,10 @@ export default defineComponent({
             importError.value = "";
             importLoading.value = false;
         };
+
+        const openSubscriptionModal = () => {
+            isSubscriptionModalOpen = true;
+        }
 
         const validateJsonData = (jsonString: string) => {
             try {
