@@ -17,18 +17,15 @@
       <div class="content-wrapper">
         <div class="features">
           <div class="feature-card fast">
-            <div class="feature-icon">⚡</div>
-            <h3>Lightning Fast</h3>
+            <div class="feature-icon">⚡ <h3>Lightning Fast</h3></div>
             <p>Experience unprecedented speed and efficiency with our discord bot, and automatically open listings instantly with the integrated auto-opener.</p>
           </div>
           <div class="feature-card secure">
-            <div class="feature-icon">🛡️</div>
-            <h3>Secure by Design</h3>
+            <div class="feature-icon">🛡️ <h3>Secure by Design</h3></div>
             <p>Login and registration tokens are all managed through your discord DM's with BlueGemBot, eliminating the need for passwords and 3rd party logins.</p>
           </div>
           <div class="feature-card profitable">
-            <div class="feature-icon">💰</div>
-            <h3>Profitable</h3>
+            <div class="feature-icon">💰 <h3>Profitable</h3></div>
             <p>Combine the speed of BlueGemBot with your skin knowledge to cherry pick profitable deals!</p>
           </div>
         </div>
