@@ -11,23 +11,9 @@ export const useRegistrationForm = () => {
     });
 
     const errorMessage = ref('');
-    const csrfToken = ref('');
-
-    const fetchCsrfToken = async () => {
-        try {
-            const response = await fetch(`${API_URL}/csrf-token`, {
-                credentials: 'include',
-            });
-            const data = await response.json();
-            csrfToken.value = data.csrfToken;
-        } catch (error) {
-            console.error('Failed to fetch CSRF token:', error);
-        }
-    };
 
     const handleSubmit = async () => {
         try {
-            await fetchCsrfToken();  // Ensure CSRF token is loaded
 
             const requestBody = {
                 OTL: form.value.OTL,
@@ -37,7 +23,6 @@ export const useRegistrationForm = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'CSRF-Token': csrfToken.value,  // Add CSRF token to the header
                 },
                 body: JSON.stringify(requestBody),
                 credentials: 'include',

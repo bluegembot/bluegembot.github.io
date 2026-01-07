@@ -5,117 +5,174 @@
         <h3>{{ title }}</h3>
         <button @click="handleClose" class="close-btn">&times;</button>
       </div>
-      <div class="modal-body">
-        <p>{{ description }}</p>
-        <div class="settings-container">
-          <div class="setting-item">
-            <label class="checkbox-container">
 
-              <input
-                  type="checkbox"
-                  v-model="localSettings.csfloatTracking"
-                  class="setting-checkbox"
-              >
-              <span class="checkmark"></span>
-              <span class="setting-label">Enable csfloat tracking</span>
-            </label>
-          </div>
-          <div class="setting-item">
-            <label class="checkbox-container">
-              <input
-                  type="checkbox"
-                  v-model="localSettings.skinportTracking"
-                  class="setting-checkbox"
-              >
-              <span class="checkmark"></span>
-              <span class="setting-label">Enable Skinport tracking</span>
-            </label>
-          </div>
-          <div class="setting-item">
-            <label class="checkbox-container"></label>
-          </div>
+      <div class="modal-body">
+        <div class="actions-container">
+          <button
+              type="button"
+              class="cancel-subscription-btn"
+              @click="handleCancelSubscription"
+              :disabled="isLoading"
+          >
+            Cancel subscription
+          </button>
+
+          <button
+              type="button"
+              class="delete-account-btn"
+              @click="handleDeleteAccount"
+              :disabled="isLoading"
+          >
+            Delete account
+          </button>
         </div>
       </div>
+
       <div class="modal-footer">
-        <button @click="handleClose" class="cancel-btn">Cancel</button>
-        <button
-            @click="handleSave"
-            class="save-btn"
-            :disabled="isLoading"
-        >
-          {{ isLoading ? 'Saving...' : 'Save Settings' }}
-        </button>
       </div>
     </div>
   </div>
 </template>
 
+
 <script>
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3002";
+
 export default {
-  name: 'SubscriptionsModal',
+  name: "SubscriptionsModal",
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: 'Settings'
-    },
-    description: {
-      type: String,
-      default: 'Configure your tracking preferences:'
-    },
+    visible: {type: Boolean, default: false},
+    title: {type: String, default: "Settings"},
     settings: {
       type: Object,
       default: () => ({
         csfloatTracking: false,
         skinportTracking: true,
-      })
+      }),
     },
-    isLoading: {
-      type: Boolean,
-      default: false
-    }
+    isLoading: {type: Boolean, default: false},
   },
-  emits: ['close', 'save'],
+  emits: ["close", "save"],
   data() {
     return {
-      localSettings: { ...this.settings }
-    }
+      localSettings: {...this.settings},
+      csrfToken: "",
+      internalLoading: false,
+      errorMessage: "",
+    };
+  },
+  computed: {
+    loading() {
+      return this.isLoading || this.internalLoading;
+    },
   },
   watch: {
     settings: {
       handler(newSettings) {
-        this.localSettings = { ...newSettings };
+        this.localSettings = {...newSettings};
       },
-      deep: true
+      deep: true,
     },
     visible(newVisible) {
       if (newVisible) {
-        this.localSettings = { ...this.settings };
+        this.localSettings = {...this.settings};
+        this.errorMessage = "";
       }
-    }
+    },
   },
   methods: {
     handleClose() {
-      this.$emit('close');
+      this.$emit("close");
     },
     handleSave() {
-      this.$emit('save', this.localSettings);
-    }
-  }
-}
+      this.$emit("save", this.localSettings);
+    },
+
+    async fetchCsrfToken() {
+      const r = await fetch(`${API_URL}/csrf-token`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        throw new Error(err.message || "Failed to fetch CSRF token");
+      }
+
+      const data = await r.json();
+      if (!data?.csrfToken) throw new Error("CSRF token missing in response");
+
+      this.csrfToken = data.csrfToken;
+      return this.csrfToken;
+    },
+
+    async handleDeleteAccount() {
+      this.errorMessage = "";
+
+      const confirmed = window.confirm(
+          "Are you sure you want to delete your account? This cannot be undone."
+      );
+      if (!confirmed) return;
+
+      try {
+        this.internalLoading = true;
+
+        if (!this.csrfToken) {
+          await this.fetchCsrfToken();
+        }
+
+        const r = await fetch(`${API_URL}/deleteUser`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": this.csrfToken,
+          },
+        });
+
+        // If CSRF expired, refresh once and retry
+        if (r.status === 403) {
+          await this.fetchCsrfToken();
+
+          const retry = await fetch(`${API_URL}/deleteUser`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRF-Token": this.csrfToken,
+            },
+          });
+
+          if (!retry.ok) {
+            const err = await retry.json().catch(() => ({}));
+            throw new Error(err.message || "Delete failed");
+          }
+        } else if (!r.ok) {
+          const err = await r.json().catch(() => ({}));
+          throw new Error(err.message || "Delete failed");
+        }
+
+        // Close modal and take user out of the authenticated area
+        this.$emit("close");
+
+        // Optional: redirect to login/home
+        window.location.href = "/";
+      } catch (e) {
+        console.error(e);
+        this.errorMessage = e?.message || "Something went wrong while deleting your account.";
+      } finally {
+        this.internalLoading = false;
+      }
+    },
+  },
+};
 </script>
 
+
 <style scoped>
-/* Modal styles - similar to ImportSkinsModal */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
@@ -172,7 +229,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background-color 0.2s ease;
 }
 
@@ -184,134 +241,84 @@ export default {
   padding: 20px;
 }
 
-.modal-body p {
-  margin-bottom: 20px;
-  color: var(--text-light);
-  font-size: 16px;
-}
-
-.settings-container {
+.actions-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
-.setting-item {
-  display: flex;
-  align-items: center;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
+.cancel-subscription-btn,
+.delete-account-btn {
+  width: 100%;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 9999px;
   cursor: pointer;
-  font-size: 16px;
-  color: var(--text-light);
-  user-select: none;
-  position: relative;
-  padding-left: 35px;
-  line-height: 1.4;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
 }
 
-.setting-checkbox {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+.cancel-subscription-btn {
+  background-color: #dc2626;
 }
 
-.checkmark {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 20px;
-  width: 20px;
-  background-color: transparent;
-  border: 2px solid var(--accent-color);
-  border-radius: 4px;
-  transition: all 0.2s ease;
+.delete-account-btn {
+  background-color: #b91c1c;
 }
 
-.checkbox-container:hover .checkmark {
-  background-color: rgba(255, 255, 255, 0.1);
+.cancel-subscription-btn:hover:not(:disabled),
+.delete-account-btn:hover:not(:disabled) {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
 }
 
-.setting-checkbox:checked ~ .checkmark {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
+.cancel-subscription-btn:active:not(:disabled),
+.delete-account-btn:active:not(:disabled) {
+  transform: translateY(0);
+  filter: brightness(0.88);
 }
 
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 6px;
-  top: 2px;
-  width: 6px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.setting-checkbox:checked ~ .checkmark:after {
-  display: block;
-}
-
-.setting-label {
-  margin-left: 8px;
-  font-weight: 400;
+.cancel-subscription-btn:disabled,
+.delete-account-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
 }
 
 .modal-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
   padding: 20px;
   border-top: 1px solid var(--accent-color);
 }
 
-.cancel-btn {
-  padding: 8px 16px;
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.cancel-btn:hover {
-  background-color: #545b62;
-  transform: translateY(-1px);
-}
-
-.save-btn {
-  padding: 8px 16px;
-  background-color: var(--accent-color);
+.close-btn-secondary {
+  padding: 10px 18px;
+  background-color: rgba(255, 255, 255, 0.08);
   color: var(--text-light);
-  border: none;
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
   cursor: pointer;
   font-size: 14px;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
 }
 
-.save-btn:hover:not(:disabled) {
-  opacity: 0.8;
+.close-btn-secondary:hover:not(:disabled) {
+  filter: brightness(1.08);
   transform: translateY(-1px);
 }
 
-.save-btn:disabled {
-  background-color: #6c757d;
+.close-btn-secondary:disabled {
+  opacity: 0.55;
   cursor: not-allowed;
-  opacity: 0.6;
+  transform: none;
+  filter: none;
 }
 
-/* Responsive design for mobile */
 @media (max-width: 768px) {
   .modal-content {
     margin: 0.5rem;
@@ -323,21 +330,11 @@ export default {
   }
 
   .modal-footer {
-    flex-direction: column;
-    gap: 8px;
+    padding: 16px;
   }
 
-  .cancel-btn,
-  .save-btn {
+  .close-btn-secondary {
     width: 100%;
-  }
-
-  .checkbox-container {
-    font-size: 14px;
-  }
-
-  .setting-label {
-    line-height: 1.3;
   }
 }
 </style>

@@ -2,6 +2,7 @@
 import {nextTick, onMounted, ref} from "vue";
 import type { Ref } from "vue";
 import { API_URL } from '@/config/environment';
+import { csrfFetch } from "@/api/csrf";
 
 interface TrackedSkin {
     name: string;
@@ -237,28 +238,10 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
     const fetchCsrfTokenAndUserConfig = async (): Promise<void> => {
         try {
-            const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
+            const configResponse = await fetch(`${API_URL}/getUserConfig`, {
                 method: "GET",
                 credentials: "include",
             });
-
-            if (!csrfResponse.ok) {
-                throw new Error("Failed to fetch CSRF token");
-            }
-
-            const csrfData = await csrfResponse.json();
-            const csrfToken = csrfData.csrfToken;
-
-            const configResponse = await fetch(
-                `${API_URL}/getUserConfig`,
-                {
-                    method: "GET",
-                    headers: {
-                        "csrf-token": csrfToken,
-                    },
-                    credentials: "include",
-                }
-            );
 
             if (!configResponse.ok) {
                 throw new Error("Failed to fetch user config");
@@ -278,8 +261,6 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
             const configData: ConfigData = await configResponse.json();
 
-            console.log(configData);
-
             trackedSkins.value = configData.itemsOfInterest.map((item) => ({
                 name: item.item_of_interest,
                 minWear: item.min_wear,
@@ -290,37 +271,23 @@ export function useUserDashboard(): UseUserDashboardReturn {
                     minWear: item.min_wear,
                     maxWear: item.max_wear,
                     forcedDiscount: item.forced_discount,
-                    minFadePercentage: item.forced_fade_percentage
-                }
+                    minFadePercentage: item.forced_fade_percentage,
+                },
             }));
         } catch (error) {
             console.error("Error fetching user config:", error);
             errorMessage.value = "Failed to load tracked skins. Please try again later.";
-            messageType.value = 'error';
+            messageType.value = "error";
         }
     };
 
     const stopTracking = async (skin: TrackedSkin): Promise<void> => {
         try {
-            const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-                method: "GET",
-                credentials: "include",
-            });
-
-            if (!csrfResponse.ok) {
-                throw new Error("Failed to fetch CSRF token");
-            }
-
-            const csrfData = await csrfResponse.json();
-            const csrfToken = csrfData.csrfToken;
-
-            const deleteResponse = await fetch(`${API_URL}/deleteSkin`, {
+            const deleteResponse = await csrfFetch(`${API_URL}/deleteSkin`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "csrf-token": csrfToken,
                 },
-                credentials: "include",
                 body: JSON.stringify({
                     skinName: skin.name,
                     minFloat: skin.minWear,
@@ -329,21 +296,22 @@ export function useUserDashboard(): UseUserDashboardReturn {
             });
 
             if (!deleteResponse.ok) {
-                throw new Error("Failed to delete skin");
+                const errorData = await deleteResponse.json().catch(() => ({}));
+                throw new Error(errorData.message || "Failed to delete skin");
             }
 
-            // Remove the skin from the local list on success
             trackedSkins.value = trackedSkins.value.filter(
                 (trackedSkin) => trackedSkin.name !== skin.name
             );
+
             errorMessage.value = `Stopped tracking skin: ${skin.name}`;
-            messageType.value = 'success';
-            clearErrorMessages(); // Clear error message after a delay
+            messageType.value = "success";
+            clearErrorMessages();
         } catch (error) {
             console.error("Error stopping tracking for skin:", error);
             errorMessage.value = "Failed to stop tracking the skin. Please try again.";
-            messageType.value = 'error';
-            clearErrorMessages(); // Clear error message after a delay
+            messageType.value = "error";
+            clearErrorMessages();
         }
     };
 
@@ -398,78 +366,49 @@ export function useUserDashboard(): UseUserDashboardReturn {
         isSettingsLoading.value = true;
 
         try {
-            // First fetch CSRF token
-            const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-                method: "GET",
-                credentials: "include",
-            });
+            const wantedSources =
+                newSettings.csfloatTracking && newSettings.skinportTracking
+                    ? 1
+                    : newSettings.csfloatTracking && !newSettings.skinportTracking
+                        ? 3
+                        : !newSettings.csfloatTracking && newSettings.skinportTracking
+                            ? 2
+                            : 2;
 
-            if (!csrfResponse.ok) {
-                throw new Error("Failed to fetch CSRF token");
-            }
-
-            const csrfData = await csrfResponse.json();
-            const csrfToken = csrfData.csrfToken;
-
-            // Convert boolean settings to wantedSources number
-            let wantedSources: number;
-
-            if (newSettings.csfloatTracking && newSettings.skinportTracking) {
-                // Both options enabled
-                wantedSources = 1;
-            } else if (newSettings.csfloatTracking && !newSettings.skinportTracking) {
-                // Only csfloat tracking enabled
-                wantedSources = 3;
-            } else if (!newSettings.csfloatTracking && newSettings.skinportTracking) {
-                // Only skinport tracking enabled
-                wantedSources = 2;
-            } else {
-                // Neither enabled - default to skinport only
-                wantedSources = 2;
-            }
-
-            const settingsResponse = await fetch(`${API_URL}/skins/updateWantedSources`, {
+            const settingsResponse = await csrfFetch(`${API_URL}/skins/updateWantedSources`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "csrf-token": csrfToken,
                 },
-                credentials: "include",
                 body: JSON.stringify({ wantedSources }),
             });
 
             if (!settingsResponse.ok) {
-                // Parse the error response
-                const errorData = await settingsResponse.json();
+                const errorData = await settingsResponse.json().catch(() => ({}));
 
-                // Handle specific error cases
-                if (errorData.error === 'SUBSCRIPTION_REQUIRED') {
-                    // Show subscription required message and close modal
+                if (errorData.error === "SUBSCRIPTION_REQUIRED") {
                     showSubscriptionRequiredError();
-                    return; // Don't continue with the rest of the function
-                } else if (errorData.error === 'INVALID_SOURCE_VALUE') {
-                    // Show invalid input message
-                    isSettingsLoading.value = false;
-                    showErrorMessage('Invalid source selection. Please try again.');
-                    return;
-                } else {
-                    // Generic error message
-                    isSettingsLoading.value = false;
-                    showErrorMessage(errorData.message || 'Failed to save settings');
                     return;
                 }
+
+                if (errorData.error === "INVALID_SOURCE_VALUE") {
+                    showErrorMessage("Invalid source selection. Please try again.");
+                    return;
+                }
+
+                showErrorMessage(errorData.message || "Failed to save settings");
+                return;
             }
 
-            // Update local settings on success
             userSettings.value = { ...newSettings };
             errorMessage.value = "Settings saved successfully!";
-            messageType.value = 'success';
+            messageType.value = "success";
             closeSettingsModal();
             clearErrorMessages();
         } catch (error) {
             console.error("Error saving settings:", error);
             errorMessage.value = "Failed to save settings. Please try again.";
-            messageType.value = 'error';
+            messageType.value = "error";
             clearErrorMessages();
         } finally {
             isSettingsLoading.value = false;
@@ -556,48 +495,32 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
     const updateSkinSettings = async (skin: TrackedSkin): Promise<void> => {
         try {
-            // Fetch CSRF token
-            const csrfResponse = await fetch(`${API_URL}/csrf-token`, {
-                method: "GET",
-                credentials: "include",
-            });
-
-            if (!csrfResponse.ok) {
-                throw new Error("Failed to fetch CSRF token");
-            }
-
-            const csrfData = await csrfResponse.json();
-            const csrfToken = csrfData.csrfToken;
-
-            // Update skin settings via API
-            const updateResponse = await fetch(`${API_URL}/updateSkinSettings`, {
+            const updateResponse = await csrfFetch(`${API_URL}/updateSkinSettings`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "csrf-token": csrfToken,
                 },
-                credentials: "include",
                 body: JSON.stringify({
                     itemOfInterest: skin.name,
                     minWear: skin.minWear,
                     maxWear: skin.maxWear,
                     forcedDiscount: skin.forcedDiscount,
-                    minFadePercentage: skin.minFadePercentage
+                    minFadePercentage: skin.minFadePercentage,
                 }),
             });
 
             if (!updateResponse.ok) {
-                throw new Error("Failed to update skin settings");
+                const errorData = await updateResponse.json().catch(() => ({}));
+                throw new Error(errorData.message || "Failed to update skin settings");
             }
 
-            // Show success message
             errorMessage.value = `Updated settings for ${skin.name}`;
-            messageType.value = 'success';
+            messageType.value = "success";
             clearErrorMessages();
         } catch (error) {
-            console.error('Failed to update skin settings:', error);
+            console.error("Failed to update skin settings:", error);
             errorMessage.value = "Failed to update skin settings. Please try again.";
-            messageType.value = 'error';
+            messageType.value = "error";
             clearErrorMessages();
         }
     };

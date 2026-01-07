@@ -1,9 +1,9 @@
 import { defineComponent, onMounted, ref, computed } from "vue";
 import ImportSkinsModal from "../../components/UserDashboard/ImportSkinsModal.vue";
 import { API_URL } from "@/config/environment";
-// Import the JSON file directly
 import skinsData from "@/assets/skins.json";
-import { faLess } from "@fortawesome/free-brands-svg-icons";
+import { csrfFetch } from "@/api/csrf";
+import SubscriptionsModal from "@/components/AccountPage/SubscriptionModal.vue";
 
 interface SkinItem {
     imageUrl: string;
@@ -12,6 +12,7 @@ interface SkinItem {
 
 export default defineComponent({
     components: {
+        SubscriptionsModal,
         ImportSkinsModal
     },
     setup() {
@@ -164,10 +165,6 @@ export default defineComponent({
             importLoading.value = false;
         };
 
-        const openSubscriptionModal = () => {
-            isSubscriptionModalOpen = true;
-        }
-
         const validateJsonData = (jsonString: string) => {
             try {
                 // Check for duplicate keys within individual objects
@@ -309,31 +306,28 @@ export default defineComponent({
         };
 
         const sendSkinsToBackend = async (itemsData: any[]) => {
-          try {
-            const response = await fetch(`${API_URL}/skins/import`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ items: itemsData }),
-              credentials: "include",
-            });
+            try {
+                const response = await csrfFetch(`${API_URL}/skins/import`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ items: itemsData }),
+                });
 
-            // Always try to read backend message so you know *why* it's 400
-            const payload = await response.json().catch(() => null);
+                const payload = await response.json().catch(() => null);
 
-            if (!response.ok) {
-              throw new Error(payload?.message ?? `HTTP error! status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(payload?.message ?? `HTTP error! status: ${response.status}`);
+                }
+
+                return { success: true, data: payload };
+            } catch (error) {
+                console.error("Error sending items to backend:", error);
+                return {
+                    success: false,
+                    error: error instanceof Error ? error.message : "Failed to import items",
+                };
             }
-
-            return { success: true, data: payload };
-          } catch (error) {
-            console.error("Error sending items to backend:", error);
-            return {
-              success: false,
-              error: error instanceof Error ? error.message : "Failed to import items",
-            };
-          }
         };
-
 
         const importSkins = async (jsonData: string) => {
             importError.value = "";
@@ -402,6 +396,46 @@ export default defineComponent({
             importLoading.value = false;
         };
 
+        type UserSettings = {
+            csfloatTracking: boolean;
+            skinportTracking: boolean;
+        };
+
+        const isSubscriptionLoading = ref(false);
+
+        const userSettings = ref<UserSettings>({
+            csfloatTracking: false,
+            skinportTracking: true,
+        });
+
+        const openSubscriptionModal = () => {
+            isSubscriptionModalOpen.value = true;
+        };
+
+        const closeSubscriptionModal = () => {
+            isSubscriptionModalOpen.value = false;
+        };
+
+        const handleSubscriptionSave = async (newSettings: UserSettings) => {
+            isSubscriptionLoading.value = true;
+            try {
+                // OPTION A: just store locally
+                userSettings.value = { ...newSettings };
+                localStorage.setItem("wantedSources", newSettings.csfloatTracking && newSettings.skinportTracking ? "1"
+                    : newSettings.csfloatTracking ? "3"
+                        : "2"
+                );
+
+                // OPTION B: call backend (same endpoint you already use on dashboard)
+                // await fetch(`${API_URL}/skins/updateWantedSources`, ...)
+
+                closeSubscriptionModal();
+            } finally {
+                isSubscriptionLoading.value = false;
+            }
+        };
+
+
         onMounted(() => {
             username.value = localStorage.getItem("username") || "";
             chatId.value = localStorage.getItem("chatId") || "";
@@ -436,6 +470,12 @@ export default defineComponent({
             processItemNamesFromJson,
             cleanItemName,
             validateImportedSkins,
+            isSubscriptionModalOpen,
+            isSubscriptionLoading,
+            userSettings,
+            openSubscriptionModal,
+            closeSubscriptionModal,
+            handleSubscriptionSave
         };
     },
 });
