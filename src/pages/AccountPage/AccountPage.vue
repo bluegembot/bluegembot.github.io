@@ -75,6 +75,7 @@
           :isLoading="isSubscriptionLoading"
           @close="closeSubscriptionModal"
           @save="handleSubscriptionSave"
+          @message="handleAccountMessage"
       />
 
     </main>

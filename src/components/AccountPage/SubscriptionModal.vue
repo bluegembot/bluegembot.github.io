@@ -36,6 +36,10 @@
 
 
 <script>
+// import {csrfFetch} from "@/api/csrf.js";
+
+import {csrfFetch} from "@/api/csrf.ts";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3002";
 
 export default {
@@ -52,7 +56,7 @@ export default {
     },
     isLoading: {type: Boolean, default: false},
   },
-  emits: ["close", "save"],
+  emits: ["close", "save", "message"],
   data() {
     return {
       localSettings: {...this.settings},
@@ -164,6 +168,47 @@ export default {
         this.internalLoading = false;
       }
     },
+    async handleCancelSubscription() {
+      const confirmed = window.confirm(
+          "Are you sure you want to cancel your subscription? This cannot be undone."
+      );
+      if (!confirmed) return;
+
+      try {
+        this.internalLoading = true;
+
+        const r = await csrfFetch(`${API_URL}/cancelSubscription`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const body = await r.json().catch(() => ({}));
+
+        if (!r.ok) {
+          this.$emit("message", {
+            type: "error",
+            text: body.message || "Cancellation failed",
+          });
+          return; // keep modal open so user can read it
+        }
+
+        this.$emit("message", {
+          type: "success",
+          text: body.message || "Subscription cancelled successfully",
+        });
+
+        this.$emit("close");
+        // If you redirect here, the message on the page will disappear immediately.
+        // window.location.href = "/";
+      } catch (e) {
+        this.$emit("message", {
+          type: "error",
+          text: e?.message || "Something went wrong while cancelling your subscription.",
+        });
+      } finally {
+        this.internalLoading = false;
+      }
+    }
   },
 };
 </script>

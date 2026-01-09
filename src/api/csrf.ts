@@ -1,4 +1,4 @@
-import { API_URL } from "@/config/environment";
+import {API_URL} from "@/config/environment";
 
 let cachedCsrfToken: string | null = null;
 
@@ -8,8 +8,7 @@ export function clearCsrfTokenCache(): void {
 
 async function fetchCsrfToken(): Promise<string> {
     const r = await fetch(`${API_URL}/csrf-token`, {
-        method: "GET",
-        credentials: "include",
+        method: "GET", credentials: "include",
     });
 
     if (!r.ok) {
@@ -29,13 +28,9 @@ export async function getCsrfToken(): Promise<string> {
     return cachedCsrfToken;
 }
 
-export async function csrfFetch(
-    input: RequestInfo | URL,
-    init: RequestInit = {}
-): Promise<Response> {
+export async function csrfFetch(input: RequestInfo | URL, init: RequestInit = {}): Promise<Response> {
     const method = (init.method || "GET").toUpperCase();
-    const isStateChanging =
-        method === "POST" || method === "PUT" || method === "PATCH" || method === "DELETE";
+    const isStateChanging = method === "POST" || method === "PUT" || method === "PATCH" || method === "DELETE";
 
     const headers = new Headers(init.headers || {});
 
@@ -46,9 +41,7 @@ export async function csrfFetch(
 
     // Important: spread init first, then override headers/credentials LAST
     let response = await fetch(input, {
-        ...init,
-        headers,
-        credentials: "include",
+        ...init, headers, credentials: "include",
     });
 
     // Retry once if CSRF rejected
@@ -60,9 +53,7 @@ export async function csrfFetch(
         retryHeaders.set("X-CSRF-Token", fresh);
 
         response = await fetch(input, {
-            ...init,
-            headers: retryHeaders,
-            credentials: "include",
+            ...init, headers: retryHeaders, credentials: "include",
         });
     }
 

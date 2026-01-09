@@ -109,6 +109,12 @@ export default defineComponent({
             return { validSkins, invalidSkins };
         };
 
+        const handleAccountMessage = (payload: { type: string; text: string }) => {
+            messageType.value = payload.type;
+            errorMessage.value = payload.text;
+            clearErrorMessages();
+        };
+
         // Placeholder for the textarea
         const importPlaceholder = `[
   {
@@ -475,7 +481,8 @@ export default defineComponent({
             userSettings,
             openSubscriptionModal,
             closeSubscriptionModal,
-            handleSubscriptionSave
+            handleSubscriptionSave,
+            handleAccountMessage
         };
     },
 });
