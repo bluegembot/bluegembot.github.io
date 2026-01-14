@@ -425,15 +425,11 @@ export default defineComponent({
         const handleSubscriptionSave = async (newSettings: UserSettings) => {
             isSubscriptionLoading.value = true;
             try {
-                // OPTION A: just store locally
                 userSettings.value = { ...newSettings };
                 localStorage.setItem("wantedSources", newSettings.csfloatTracking && newSettings.skinportTracking ? "1"
                     : newSettings.csfloatTracking ? "3"
                         : "2"
                 );
-
-                // OPTION B: call backend (same endpoint you already use on dashboard)
-                // await fetch(`${API_URL}/skins/updateWantedSources`, ...)
 
                 closeSubscriptionModal();
             } finally {
