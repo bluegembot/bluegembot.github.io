@@ -39,8 +39,7 @@
 // import {csrfFetch} from "@/api/csrf.js";
 
 import {csrfFetch} from "@/api/csrf.ts";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3002";
+import { API_URL } from '@/config/environment';
 
 export default {
   name: "SubscriptionsModal",
