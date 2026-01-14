@@ -79,13 +79,38 @@ export default defineComponent({
         };
     },
     computed: {
-        selectedSubscriptionTitle(): string {
-            return this.subscriptions[this.selectedSubscription]?.title || '';
-        },
-        selectedSubscriptionPerks(): string[] {
-            return this.subscriptions[this.selectedSubscription]?.perks || [];
-        },
+      selectedSubscriptionTitle(): string {
+        return this.subscriptions[this.selectedSubscription]?.title || '';
+      },
+      selectedSubscriptionPerks(): string[] {
+        return this.subscriptions[this.selectedSubscription]?.perks || [];
+      },
+
+      // NEW:
+      selectedCheckoutRoute(): string {
+        const routes: Record<string, string> = {
+          basic: '/checkoutBasic',
+          gold: '/checkoutGold',
+          // elite: '' // no route (coming soon)
+        };
+        return routes[this.selectedSubscription] || '';
+      },
+      selectedCtaText(): string {
+        const labels: Record<string, string> = {
+          basic: 'Get basic',
+          gold: 'Get gold',
+        };
+        return labels[this.selectedSubscription] || '';
+      },
+      selectedCtaBorderClass(): string {
+        const classes: Record<string, string> = {
+          basic: 'basicBorder',
+          gold: 'goldBorder',
+        };
+        return classes[this.selectedSubscription] || '';
+      },
     },
+
     methods: {
         openPopup(subscription: string): void {
             this.selectedSubscription = subscription;

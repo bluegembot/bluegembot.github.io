@@ -50,6 +50,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { API_URL } from '@/config/environment';
+import {csrfFetch} from "@/api/csrf";
 
 // Plan configuration
 const planConfig = {
@@ -57,8 +58,8 @@ const planConfig = {
   price: 12.49,
   currency: 'eur',
   description: '1 month access with all premium features',
-  type: 'onetime',
-  subscriptionType: 'gold_onetime'
+  type: 'subscription',
+  subscriptionType: 'gold'
 };
 
 // Reactive data
@@ -83,7 +84,7 @@ const redirectToCheckout = async () => {
       }
     };
 
-    const response = await fetch(`${API_URL}/create-checkout-session`, {
+    const response = await csrfFetch(`${API_URL}/create-checkout-session`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

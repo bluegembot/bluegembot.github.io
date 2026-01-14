@@ -12,7 +12,6 @@ export const useRegistrationForm = () => {
   });
 
   const errorMessage = ref('');
-  const csrfToken = ref('');
 
   // Store aID from URL query to localStorage if valid
   const aID = route.query.aID;
@@ -20,21 +19,8 @@ export const useRegistrationForm = () => {
     localStorage.setItem('aID', aID);
   }
 
-  const fetchCsrfToken = async () => {
-    try {
-      const response = await fetch(`${API_URL}/csrf-token`, {
-        credentials: 'include',
-      });
-      const data = await response.json();
-      csrfToken.value = data.csrfToken;
-    } catch (error) {
-      console.error('Failed to fetch CSRF token:', error);
-    }
-  };
-
   const handleSubmit = async () => {
     try {
-      await fetchCsrfToken();
 
       // Get and validate aID
       const aIDValue = localStorage.getItem('aID');
@@ -66,7 +52,6 @@ export const useRegistrationForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'CSRF-Token': csrfToken.value,
         },
         body: JSON.stringify(requestBody),
         credentials: 'include',

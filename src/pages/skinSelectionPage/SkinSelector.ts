@@ -1,5 +1,5 @@
-//SkinSelector.ts
-import { ref, computed, watch, onMounted, nextTick } from 'vue';
+// SkinSelector.ts
+import { ref, computed, watch, nextTick } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
 import skinsJson from "@/assets/skins.json";
 import { API_URL } from '@/config/environment';
@@ -39,7 +39,7 @@ export function useSkinSelector() {
     const modalErrorMessage: Ref<string> = ref("");
     const showAdvancedMenu: Ref<boolean> = ref(false);
     const messageType: Ref<'success' | 'error'> = ref('error');
-    const showSubscriptionError: Ref<boolean> = ref(false); // Add subscription error state
+    const showSubscriptionError: Ref<boolean> = ref(false);
 
     const advancedOptions: Ref<AdvancedOptions> = ref({
         statTrak: false,
@@ -70,7 +70,6 @@ export function useSkinSelector() {
         }
     });
 
-    // Initialize the skins when the composable is used
     function initializeSkins(): void {
         skins.value = skinsJson.map((skin: any) => ({
             ...skin,
@@ -82,7 +81,6 @@ export function useSkinSelector() {
         }));
     }
 
-    // Call initialization immediately
     initializeSkins();
 
     function filterSkins(query: string): void {
@@ -113,31 +111,15 @@ export function useSkinSelector() {
 
     function validateFloatInput(skin: Skin, field: 'minFloat' | 'maxFloat'): void {
         if (field === "minFloat") {
-            if (skin.minFloat < skin.allowedMinFloat) {
-                skin.minFloat = skin.allowedMinFloat;
-            }
-            if (skin.minFloat > skin.allowedMaxFloat) {
-                skin.minFloat = skin.allowedMaxFloat;
-            }
-            if (skin.minFloat < 0) {
-                skin.minFloat = 0;
-            }
-            if (skin.minFloat > 1) {
-                skin.minFloat = 1;
-            }
+            if (skin.minFloat < skin.allowedMinFloat) skin.minFloat = skin.allowedMinFloat;
+            if (skin.minFloat > skin.allowedMaxFloat) skin.minFloat = skin.allowedMaxFloat;
+            if (skin.minFloat < 0) skin.minFloat = 0;
+            if (skin.minFloat > 1) skin.minFloat = 1;
         } else if (field === "maxFloat") {
-            if (skin.maxFloat < skin.allowedMinFloat) {
-                skin.maxFloat = skin.allowedMinFloat;
-            }
-            if (skin.maxFloat > skin.allowedMaxFloat) {
-                skin.maxFloat = skin.allowedMaxFloat;
-            }
-            if (skin.maxFloat < 0) {
-                skin.maxFloat = 0;
-            }
-            if (skin.maxFloat > 1) {
-                skin.maxFloat = 1;
-            }
+            if (skin.maxFloat < skin.allowedMinFloat) skin.maxFloat = skin.allowedMinFloat;
+            if (skin.maxFloat > skin.allowedMaxFloat) skin.maxFloat = skin.allowedMaxFloat;
+            if (skin.maxFloat < 0) skin.maxFloat = 0;
+            if (skin.maxFloat > 1) skin.maxFloat = 1;
         }
     }
 
@@ -152,24 +134,17 @@ export function useSkinSelector() {
         modalErrorMessage.value = "";
     }
 
-    // Helper function to show subscription required error
     const showSubscriptionRequiredError = (): void => {
-        // Use nextTick to ensure any modal states are processed first
         nextTick(() => {
-            // Close any open modals
             closeMenu();
-
-            // Show the subscription error
             showSubscriptionError.value = true;
 
-            // Auto-hide after 10 seconds
             setTimeout(() => {
                 showSubscriptionError.value = false;
             }, 10000);
         });
     };
 
-    // Helper function to show regular error messages
     const showErrorMessage = (message: string): void => {
         errorMessage.value = message;
         messageType.value = 'error';
@@ -218,81 +193,110 @@ export function useSkinSelector() {
         closeMenu();
     }
 
-    function addSkin(skin: Skin, advancedOption: string = ""): void {
+    let cachedCsrfToken: string | null = null;
+
+    async function getCsrfToken(): Promise<string> {
+        if (cachedCsrfToken != null && cachedCsrfToken !== "") return cachedCsrfToken;
+
+        const r = await fetch(`${API_URL}/csrf-token`, {
+            method: "GET",
+            credentials: "include",
+        });
+
+        if (!r.ok) {
+            const err = await r.json().catch(() => ({}));
+            throw new Error(err.message || "Failed to fetch CSRF token");
+        }
+
+        const data: any = await r.json();
+        const token: string | undefined = data?.csrfToken;
+
+        if (!token) throw new Error("CSRF token missing in response");
+
+        cachedCsrfToken = token;
+        return token;
+    }
+
+    function buildFinalSkinName(skin: Skin, advancedOption: string): string {
+        const conditionSlug = skin.condition.toLowerCase().replace(" ", "-");
+
         let finalSkinName = skin.itemName
-            .replace('factory-new', skin.condition.toLowerCase().replace(' ', '-'))
-            .replace('minimal-wear', skin.condition.toLowerCase().replace(' ', '-'))
-            .replace('field-tested', skin.condition.toLowerCase().replace(' ', '-'))
-            .replace('battle-scarred', skin.condition.toLowerCase().replace(' ', '-'))
-            .replace('well-worn', skin.condition.toLowerCase().replace(' ', '-'));
+            .replace("factory-new", conditionSlug)
+            .replace("minimal-wear", conditionSlug)
+            .replace("field-tested", conditionSlug)
+            .replace("battle-scarred", conditionSlug)
+            .replace("well-worn", conditionSlug);
 
         if (advancedOption) {
             finalSkinName = `${advancedOption}-${finalSkinName}`;
         }
 
-        const payload: AddSkinPayload = {
-            skinName: finalSkinName,
-            minFloat: skin.minFloat,
-            maxFloat: skin.maxFloat,
-            minDiscount: advancedOptions.value.forceDiscount ? advancedOptions.value.minDiscount : false,
-            minFadePercentage: advancedOptions.value.forceFadePercentage ? advancedOptions.value.minFadePercentage : false
-        };
+        return finalSkinName;
+    }
 
-        fetch(`${API_URL}/csrf-token`, {
-            method: "GET",
-            credentials: "include",
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                const csrfToken = data.csrfToken;
+    async function addSkin(skin: Skin, advancedOption: string = ""): Promise<void> {
+        try {
+            const finalSkinName = buildFinalSkinName(skin, advancedOption);
 
-                fetch(`${API_URL}/addSkin`, {
+            const payload: AddSkinPayload = {
+                skinName: finalSkinName,
+                minFloat: skin.minFloat,
+                maxFloat: skin.maxFloat,
+                minDiscount: advancedOptions.value.forceDiscount
+                    ? advancedOptions.value.minDiscount
+                    : false,
+                minFadePercentage: advancedOptions.value.forceFadePercentage
+                    ? advancedOptions.value.minFadePercentage
+                    : false,
+            };
+
+            const sendAddSkin = async (csrfToken: string) => {
+                return fetch(`${API_URL}/addSkin`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "csrf-token": csrfToken,
+                        "X-CSRF-Token": csrfToken,
                     },
                     body: JSON.stringify(payload),
                     credentials: "include",
-                })
-                    .then((response) => {
-                        if (!response.ok) {
-                            return response.json().then(errorData => {
-                                throw new Error(JSON.stringify(errorData));
-                            });
-                        }
-                        return response.json();
-                    })
-                    .then((data) => {
-                        errorMessage.value = data.message;
-                        messageType.value = "success";
-                        clearErrorMessages();
-                    })
-                    .catch((error) => {
-                        console.error("Error adding skin:", error);
+                });
+            };
 
-                        // Try to parse the error message
-                        try {
-                            const errorData = JSON.parse(error.message);
+            let csrfToken = await getCsrfToken();
+            let response = await sendAddSkin(csrfToken);
 
-                            // Check if the error message indicates item limit exceeded
-                            if (errorData.message && errorData.message.includes("Exceeded item limit")) {
-                                showSubscriptionRequiredError();
-                                return;
-                            }
+            if (response.status === 403) {
+                cachedCsrfToken = null;
+                csrfToken = await getCsrfToken();
+                response = await sendAddSkin(csrfToken);
+            }
 
-                            // Handle other specific error cases if needed
-                            showErrorMessage(errorData.message || "Failed to add skin, please try again.");
-                        } catch (parseError) {
-                            // If parsing fails, show generic error
-                            showErrorMessage("Failed to add skin, please try again.");
-                        }
-                    });
-            })
-            .catch((error) => {
-                console.error("Error fetching CSRF token:", error);
-                showErrorMessage("Internal server error, please try again.");
-            });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(JSON.stringify(errorData));
+            }
+
+            const data = await response.json();
+
+            errorMessage.value = data.message;
+            messageType.value = "success";
+            clearErrorMessages();
+        } catch (error: any) {
+            console.error("Error adding skin:", error);
+
+            try {
+                const errorData = JSON.parse(error.message);
+
+                if (errorData.message && errorData.message.includes("Exceeded item limit")) {
+                    showSubscriptionRequiredError();
+                    return;
+                }
+
+                showErrorMessage(errorData.message || "Failed to add skin, please try again.");
+            } catch {
+                showErrorMessage("Failed to add skin, please try again.");
+            }
+        }
     }
 
     function clearErrorMessages(): void {
@@ -322,7 +326,7 @@ export function useSkinSelector() {
         selectedSkin,
         messageType,
         shouldShowFadeSlider,
-        showSubscriptionError, // Export the new subscription error state
+        showSubscriptionError,
         filterSkins,
         updateFloats,
         validateFloatInput,

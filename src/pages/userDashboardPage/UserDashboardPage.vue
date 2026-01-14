@@ -9,11 +9,13 @@
       <h1 class="main-title">Welcome to BGB, {{ username }}!</h1>
 
       <!-- Error/Success Message -->
-      <p v-if="errorMessage"
-         :class="[
-     messageType === 'success' ? 'success-message' : 'error-message',
-     'fixed-top-message'
-   ]">
+      <p
+          v-if="errorMessage"
+          :class="[
+          messageType === 'success' ? 'success-message' : 'error-message',
+          'fixed-top-message'
+        ]"
+      >
         {{ errorMessage }}
       </p>
 
@@ -37,16 +39,30 @@
       <div class="tracked-skins-section">
         <!-- Upcoming list -->
         <div class="tracked-skins-container">
-          <h2>Tracked skins <button
-              @click="openSettingsModal"
-              class="settings-btn"
-              title="Settings"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </button></h2>
+          <h2>
+            Tracked skins
+            <button
+                @click="openSettingsModal"
+                class="settings-btn"
+                title="Settings"
+            >
+              <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                ></path>
+              </svg>
+            </button>
+          </h2>
 
           <ul class="tracked-skins-unordered-list">
             <template v-if="trackedSkins.length > 0">
@@ -56,6 +72,7 @@
                     <span class="skin-index">{{ index + 1 }}.</span>
                     <span class="skin-name">{{ skin.name }}</span>
                   </div>
+
                   <div class="skin-details">
                     <!-- Float Range -->
                     <div class="detail-row">
@@ -91,13 +108,14 @@
                         <label class="checkbox-container">
                           <input
                               type="checkbox"
-                              :checked="skin.forcedDiscount !== false"
+                              :checked="isForcedDiscountEnabled(skin)"
                               @change="toggleForcedDiscount(skin)"
                           />
                           <span class="checkmark"></span>
                         </label>
+
                         <input
-                            v-if="skin.forcedDiscount !== false"
+                            v-if="isForcedDiscountEnabled(skin)"
                             type="number"
                             v-model.number="skin.forcedDiscount"
                             @input="markSkinAsChanged(skin)"
@@ -107,7 +125,7 @@
                             step="1"
                             placeholder="0"
                         />
-                        <span v-if="skin.forcedDiscount !== false" class="percentage-symbol">%</span>
+                        <span v-if="isForcedDiscountEnabled(skin)" class="percentage-symbol">%</span>
                         <span v-else class="disabled-text">Disabled</span>
                       </div>
                     </div>
@@ -119,13 +137,14 @@
                         <label class="checkbox-container">
                           <input
                               type="checkbox"
-                              :checked="skin.minFadePercentage !== false"
+                              :checked="isMinFadeEnabled(skin)"
                               @change="toggleMinFade(skin)"
                           />
                           <span class="checkmark"></span>
                         </label>
+
                         <input
-                            v-if="skin.minFadePercentage !== false"
+                            v-if="isMinFadeEnabled(skin)"
                             type="number"
                             v-model.number="skin.minFadePercentage"
                             @input="markSkinAsChanged(skin)"
@@ -135,12 +154,13 @@
                             step="1"
                             placeholder="0"
                         />
-                        <span v-if="skin.minFadePercentage !== false" class="percentage-symbol">%</span>
+                        <span v-if="isMinFadeEnabled(skin)" class="percentage-symbol">%</span>
                         <span v-else class="disabled-text">Disabled</span>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <div class="button-container">
                   <div v-if="hasUnsavedChanges(skin)" class="changes-buttons">
                     <button
@@ -158,12 +178,14 @@
                       {{ isUpdating ? 'Saving...' : 'Submit Changes' }}
                     </button>
                   </div>
+
                   <button class="stop-tracking-button" @click="stopTracking(skin)">
                     Stop Tracking
                   </button>
                 </div>
               </li>
             </template>
+
             <template v-else>
               <li class="no-tracking-message">
                 Not tracking any skins at this time, add a skin to start tracking.
@@ -175,11 +197,8 @@
 
       <!-- Grid section -->
       <div class="grid-container-dashboard">
-
         <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
-
         <router-link to="/account" class="grid-item">Account</router-link>
-
         <router-link to="/autoOpen" class="grid-item">Auto Opener</router-link>
       </div>
     </main>
@@ -202,7 +221,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useUserDashboard } from './UserDashboardPage';
-import SettingsModal from '../../components/UserDashboard/SettingsModal.vue'
+import SettingsModal from '../../components/UserDashboard/SettingsModal.vue';
 
 export default defineComponent({
   name: 'UserDashboardPage',
@@ -210,7 +229,23 @@ export default defineComponent({
     SettingsModal
   },
   setup() {
-    return useUserDashboard();
+    const dashboard = useUserDashboard();
+
+    const isForcedDiscountEnabled = (skin: unknown): boolean => {
+      const s = skin as { forcedDiscount?: unknown };
+      return s.forcedDiscount !== false && s.forcedDiscount !== null && s.forcedDiscount !== undefined;
+    };
+
+    const isMinFadeEnabled = (skin: unknown): boolean => {
+      const s = skin as { minFadePercentage?: unknown };
+      return s.minFadePercentage !== false && s.minFadePercentage !== null && s.minFadePercentage !== undefined;
+    };
+
+    return {
+      ...dashboard,
+      isForcedDiscountEnabled,
+      isMinFadeEnabled
+    };
   }
 });
 </script>

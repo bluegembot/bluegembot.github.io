@@ -1,8 +1,9 @@
 import { defineComponent, onMounted, ref, computed } from "vue";
 import ImportSkinsModal from "../../components/UserDashboard/ImportSkinsModal.vue";
 import { API_URL } from "@/config/environment";
-// Import the JSON file directly
 import skinsData from "@/assets/skins.json";
+import { csrfFetch } from "@/api/csrf";
+import SubscriptionsModal from "@/components/AccountPage/SubscriptionModal.vue";
 
 interface SkinItem {
     imageUrl: string;
@@ -11,6 +12,7 @@ interface SkinItem {
 
 export default defineComponent({
     components: {
+        SubscriptionsModal,
         ImportSkinsModal
     },
     setup() {
@@ -29,6 +31,7 @@ export default defineComponent({
         const importError = ref("");
         const importLoading = ref(false);
         const itemsHaveBeenProcessed = ref(false);
+        const isSubscriptionModalOpen = ref(false);
 
         //Database validation related data
 
@@ -104,6 +107,12 @@ export default defineComponent({
             });
 
             return { validSkins, invalidSkins };
+        };
+
+        const handleAccountMessage = (payload: { type: string; text: string }) => {
+            messageType.value = payload.type;
+            errorMessage.value = payload.text;
+            clearErrorMessages();
         };
 
         // Placeholder for the textarea
@@ -304,31 +313,24 @@ export default defineComponent({
 
         const sendSkinsToBackend = async (itemsData: any[]) => {
             try {
-                console.log(API_URL)
-                const response = await fetch(`${API_URL}/skins/import`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        userId: chatId.value,
-                        username: username.value,
-                        items: itemsData,
-                    }),
-                    credentials: 'include',
+                const response = await csrfFetch(`${API_URL}/skins/import`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ items: itemsData }),
                 });
 
+                const payload = await response.json().catch(() => null);
+
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(payload?.message ?? `HTTP error! status: ${response.status}`);
                 }
 
-                const result = await response.json();
-                return { success: true, data: result };
+                return { success: true, data: payload };
             } catch (error) {
-                console.error('Error sending items to backend:', error);
+                console.error("Error sending items to backend:", error);
                 return {
                     success: false,
-                    error: error instanceof Error ? error.message : "Failed to import items"
+                    error: error instanceof Error ? error.message : "Failed to import items",
                 };
             }
         };
@@ -400,6 +402,42 @@ export default defineComponent({
             importLoading.value = false;
         };
 
+        type UserSettings = {
+            csfloatTracking: boolean;
+            skinportTracking: boolean;
+        };
+
+        const isSubscriptionLoading = ref(false);
+
+        const userSettings = ref<UserSettings>({
+            csfloatTracking: false,
+            skinportTracking: true,
+        });
+
+        const openSubscriptionModal = () => {
+            isSubscriptionModalOpen.value = true;
+        };
+
+        const closeSubscriptionModal = () => {
+            isSubscriptionModalOpen.value = false;
+        };
+
+        const handleSubscriptionSave = async (newSettings: UserSettings) => {
+            isSubscriptionLoading.value = true;
+            try {
+                userSettings.value = { ...newSettings };
+                localStorage.setItem("wantedSources", newSettings.csfloatTracking && newSettings.skinportTracking ? "1"
+                    : newSettings.csfloatTracking ? "3"
+                        : "2"
+                );
+
+                closeSubscriptionModal();
+            } finally {
+                isSubscriptionLoading.value = false;
+            }
+        };
+
+
         onMounted(() => {
             username.value = localStorage.getItem("username") || "";
             chatId.value = localStorage.getItem("chatId") || "";
@@ -434,6 +472,13 @@ export default defineComponent({
             processItemNamesFromJson,
             cleanItemName,
             validateImportedSkins,
+            isSubscriptionModalOpen,
+            isSubscriptionLoading,
+            userSettings,
+            openSubscriptionModal,
+            closeSubscriptionModal,
+            handleSubscriptionSave,
+            handleAccountMessage
         };
     },
 });
