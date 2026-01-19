@@ -11,21 +11,19 @@
 
       <!-- One-time Payment Option -->
       <div class="payment-section">
-        <h3 class="section-title">One-Time Payment</h3>
-        <p class="section-description">Pay once, access for 1 month. Supports credit card, iDEAL, and other payment methods, recurring payments will extend subscription end date.</p>
-        <p class="section-description">- Everything from basic</p>
+        <h3 class="section-title">Subscription benefits:</h3>
+        <p class="section-description">- CSFloat tracking</p>
         <p class="section-description">- Track up to 50 skins</p>
         <p class="section-description">- Priority support</p>
-        <p class="section-description">- Notice: it may take up to 30 minutes for csfloat tracking to become available</p>
+        <p class="section-description">- Instant access to all features</p>
         <div class="plan-card selected">
           <div class="plan-info">
-            <h4>Gold Plan - 1 Month</h4>
+            <h4>Gold Plan</h4>
             <p class="price">€12.49</p>
-            <p class="description">1 month access with all premium features</p>
+            <p class="description">Recurring payments. Payment by credit card, recurring payments will extend subscription end date.</p>
+            <p class="description">Cancel anytime.</p>
             <div class="payment-methods">
               <span class="payment-badge">Credit Card</span>
-              <span class="payment-badge">iDEAL</span>
-              <span class="payment-badge">+More</span>
             </div>
           </div>
         </div>
