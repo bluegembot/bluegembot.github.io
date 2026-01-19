@@ -15,7 +15,7 @@
 
         <div class="plan-card selected">
           <div class="plan-info">
-            <h4>Basic Plan - 1 Month</h4>
+            <h4>Basic Plan</h4>
             <p class="price">€7.49</p>
             <p class="description">Monthly access with essential features</p>
             <p class="description">Recurring payments. Payment by credit card, recurring payments will extend subscription end date.</p>
