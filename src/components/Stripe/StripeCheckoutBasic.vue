@@ -8,7 +8,7 @@
 
       <!-- One-time Payment Option -->
       <div class="payment-section">
-        <h3 class="section-title">Subscription benefits:/h3>
+        <h3 class="section-title">Subscription benefits: </h3>
         <p class="section-description">- Track up to 25 skins</p>
         <p class="section-description">- Track csfloat listings</p>
         <p class="section-description">- Instant access</p>
