@@ -3826,7 +3826,12 @@
         "itemName": "bowie-knife-autotronic-factory-new"
     },
     {
+        "imageUrl": "https://community.steamstatic.com/economy/image/class/730/1825426525/256x128",
+        "itemName": "bayonet-autotronic-factory-new"
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
+    
 ]
