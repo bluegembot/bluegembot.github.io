@@ -3830,8 +3830,11 @@
         "itemName": "bayonet-autotronic-factory-new"
     },
     {
+        "imageUrl": "https://community.steamstatic.com/economy/image/class/730/2968033316/256x128",
+        "itemName": "stiletto-knife"
+    },
+    {
         "imageUrl": "",
         "itemName": ""
     }
-    
 ]
