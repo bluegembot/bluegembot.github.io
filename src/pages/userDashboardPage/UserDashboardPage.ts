@@ -253,6 +253,8 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 max_wear: number;
                 forced_discount: number;
                 forced_fade_percentage: number;
+                is_stattrak: boolean;
+                is_souvenir: boolean;
             }
 
             interface ConfigData {
@@ -267,11 +269,15 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 maxWear: item.max_wear,
                 forcedDiscount: item.forced_discount,
                 minFadePercentage: item.forced_fade_percentage,
+                itemIsStattrak: item.is_stattrak,
+                itemIsSouvenir: item.is_souvenir,
                 _original: {
                     minWear: item.min_wear,
                     maxWear: item.max_wear,
                     forcedDiscount: item.forced_discount,
                     minFadePercentage: item.forced_fade_percentage,
+                    itemIsStattrak: item.is_stattrak,
+                    itemIsSouvenir: item.is_souvenir,
                 },
             }));
         } catch (error) {
@@ -555,8 +561,8 @@ export function useUserDashboard(): UseUserDashboardReturn {
         submitChanges,
         cancelChanges,
         isUpdating,
-        validateFloatInput, // Export for use in components
-        validateSkinInputs,  // Export for use in components
-        getAllowedFloatRange // Export for displaying allowed ranges in UI
+        validateFloatInput,
+        validateSkinInputs,
+        getAllowedFloatRange
     };
 }

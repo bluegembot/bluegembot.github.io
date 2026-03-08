@@ -64,42 +64,47 @@
       <tbody>
       <tr v-for="(skin, index) in displayedSkins" :key="index">
         <td>
-          <img :src="skin.imageUrl" alt="Skin image" class="skin-image"/>
+          <img :src="skin.image_url" alt="Skin image" class="skin-image"/>
         </td>
         <td>{{ formattedSkinName(skin) }}</td>
         <td>
-          <select v-model="skin.condition" @change="updateFloats(skin)">
-            <option value="Factory new">Factory new</option>
-            <option value="Minimal wear">Minimal wear</option>
-            <option value="Field tested">Field tested</option>
-            <option value="Well worn">Well worn</option>
-            <option value="Battle scarred">Battle scarred</option>
-          </select>
-        </td>
-        <td>
-          <input
-              v-model.number="skin.minFloat"
-              :max="Math.min(1, skin.allowedMaxFloat)"
-              :min="Math.max(0, skin.allowedMinFloat)"
-              class="float-input"
-              placeholder="Min Float"
-              step="0.01"
-              type="number"
-              @blur="validateFloatInput(skin, 'minFloat')"
-          />
-        </td>
-        <td>
-          <input
-              v-model.number="skin.maxFloat"
-              :max="Math.min(1, skin.allowedMaxFloat)"
-              :min="Math.max(0, skin.allowedMinFloat)"
-              class="float-input"
-              placeholder="Max Float"
-              step="0.01"
-              type="number"
-              @blur="validateFloatInput(skin, 'maxFloat')"
-          />
-        </td>
+      <select v-model="skin.condition" @change="updateFloats(skin)">
+        <option
+          v-for="tier in getAvailableConditions(skin)"
+          :key="tier.label"
+          :value="tier.label"
+        >
+          {{ tier.label }}
+        </option>
+      </select>
+    </td>
+
+    <td>
+      <input
+        v-model.number="skin.min_float"
+        :min="getMinBoundForCondition(skin)"
+        :max="skin.max_float"
+        class="float-input"
+        placeholder="Min Float"
+        step="0.01"
+        type="number"
+        @blur="validateFloatInput(skin, 'minFloat')"
+      />
+    </td>
+
+    <td>
+      <input
+        v-model.number="skin.max_float"
+        :min="skin.min_float"
+        :max="getMaxBoundForCondition(skin)"
+        class="float-input"
+        placeholder="Max Float"
+        step="0.01"
+        type="number"
+        @blur="validateFloatInput(skin, 'maxFloat')"
+      />
+    </td>
+
         <td>
           <button @click="openMenu(skin)">Advanced options</button>
         </td>
@@ -156,7 +161,7 @@
             </div>
             <div class="modal-actions">
               <button @click="closeMenu">Close</button>
-              <button @click="applyAdvancedOptions()">Add skin with options</button>
+              <button @click="applyAdvancedOptions(skin)">Add skin with options</button>
             </div>
           </div>
         </div>

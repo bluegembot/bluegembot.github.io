@@ -78,6 +78,8 @@ button:hover {
 
 .skin-image{
     background-color: #323738;
+    max-width: 8rem;
+    max-height: 8rem;
 }
 
 .search-container {

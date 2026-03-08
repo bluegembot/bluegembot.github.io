@@ -1,17 +1,20 @@
 // SkinSelector.ts
 import { ref, computed, watch, nextTick } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
-import skinsJson from "@/assets/skins.json";
+import skinsJson from "@/assets/converted-skins.json";
 import { API_URL } from '@/config/environment';
 
 interface Skin {
-    itemName: string;
-    imageUrl: string;
+    market_hash_name: string;
+    image_url: string;
     condition: string;
-    minFloat: number;
-    maxFloat: number;
-    allowedMinFloat: number;
-    allowedMaxFloat: number;
+    min_float: number;
+    max_float: number;
+    allowed_min_float: number;
+    allowed_max_float: number;
+    can_be_stattrak: boolean;
+    can_be_souvenir: boolean;
+    
 }
 
 interface AdvancedOptions {
@@ -29,7 +32,19 @@ interface AddSkinPayload {
     maxFloat: number;
     minDiscount: number | boolean;
     minFadePercentage: number | boolean;
+    isStattrak: boolean;
+    isSouvenir: boolean;
 }
+
+type WearTier = { label: Skin["condition"]; min: number; max: number };
+
+const WEAR_TIERS: WearTier[] = [
+  { label: "Factory new",   min: 0.00, max: 0.07 },
+  { label: "Minimal wear",  min: 0.07, max: 0.15 },
+  { label: "Field tested",  min: 0.15, max: 0.38 },
+  { label: "Well worn",     min: 0.38, max: 0.45 },
+  { label: "Battle scarred",min: 0.45, max: 1.00 },
+];
 
 export function useSkinSelector() {
     const searchQuery: Ref<string> = ref("");
@@ -40,6 +55,7 @@ export function useSkinSelector() {
     const showAdvancedMenu: Ref<boolean> = ref(false);
     const messageType: Ref<'success' | 'error'> = ref('error');
     const showSubscriptionError: Ref<boolean> = ref(false);
+    const selectedSkin: Ref<Skin | null> = ref(null);
 
     const advancedOptions: Ref<AdvancedOptions> = ref({
         statTrak: false,
@@ -50,12 +66,10 @@ export function useSkinSelector() {
         forceFadePercentage: false
     });
 
-    const selectedSkin: Ref<Skin | null> = ref(null);
-
     const shouldShowFadeSlider: ComputedRef<boolean> = computed(() => {
         if (!selectedSkin.value) return false;
 
-        const itemName = selectedSkin.value.itemName.toLowerCase();
+        const itemName = selectedSkin.value.market_hash_name.toLowerCase();
         return itemName.includes('fade') &&
             !itemName.includes('marble') &&
             !itemName.includes('amber') &&
@@ -70,56 +84,132 @@ export function useSkinSelector() {
         }
     });
 
+    type SkinJson = {
+        market_hash_name: string;
+        image_url: string;
+        min_float: number;
+        max_float: number;
+        souvenir?: boolean;
+        stattrak?: boolean;
+        can_be_souvenir?: boolean;
+        can_be_stattrak?: boolean;
+    };
+
     function initializeSkins(): void {
-        skins.value = skinsJson.map((skin: any) => ({
-            ...skin,
-            condition: "Factory new",
-            minFloat: 0,
-            maxFloat: 0.07,
-            allowedMinFloat: 0,
-            allowedMaxFloat: 0.07,
-        }));
-    }
+    skins.value = (skinsJson as SkinJson[]).map((s) => {
+        const allowedMin = s.min_float ?? 0;
+        const allowedMax = s.max_float ?? 1;
+
+        return {
+        market_hash_name: s.market_hash_name,
+        image_url: s.image_url,
+        condition: "Factory new",
+        min_float: 0,
+        max_float: 0.07,
+        allowed_min_float: allowedMin,
+        allowed_max_float: allowedMax,
+        can_be_souvenir: Boolean(s.can_be_souvenir ?? s.souvenir),
+        can_be_stattrak: Boolean(s.can_be_stattrak ?? s.stattrak),
+        };
+    });
+}
 
     initializeSkins();
 
+    function normalizeTokens(s: string): string[] {
+    return s
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+    }
+
     function filterSkins(query: string): void {
-        const formattedQuery = query.trim().toLowerCase().replace(/\s+/g, '-');
-        const filtered = skins.value.filter((skin) =>
-            skin.itemName.toLowerCase().includes(formattedQuery)
-        );
-        displayedSkins.value = filtered.slice(0, 50);
+    const qTokens = normalizeTokens(query);
+
+    if (qTokens.length === 0) {
+        displayedSkins.value = skins.value.slice(0, 50);
+        return;
+    }
+
+    const filtered = skins.value.filter((skin) => {
+        const name = (skin.market_hash_name ?? '').toLowerCase();
+
+        return qTokens.every((t) => name.includes(t));
+    });
+
+    displayedSkins.value = filtered.slice(0, 50);
+    }
+
+    function getAvailableConditions(skin: Skin): WearTier[] {
+        const allowedMin = clamp(skin.allowed_min_float ?? 0, 0, 1);
+        const allowedMax = clamp(skin.allowed_max_float ?? 1, 0, 1);
+
+        const minBound = Math.min(allowedMin, allowedMax);
+        const maxBound = Math.max(allowedMin, allowedMax);
+
+     // Tier is available if it overlaps the allowed range
+    return WEAR_TIERS.filter((t) => maxBound > t.min && minBound < t.max);
+}
+
+    function getTierForCondition(condition: Skin["condition"]) {
+    return WEAR_TIERS.find((t) => t.label === condition);
+    }
+
+    function getConditionBounds(skin: Skin): { min: number; max: number } {
+    const allowedMin = clamp(skin.allowed_min_float ?? 0, 0, 1);
+    const allowedMax = clamp(skin.allowed_max_float ?? 1, 0, 1);
+    const minBound = Math.min(allowedMin, allowedMax);
+    const maxBound = Math.max(allowedMin, allowedMax);
+
+    const tier = getTierForCondition(skin.condition);
+    if (!tier) return { min: minBound, max: maxBound };
+
+    return {
+        min: Math.max(minBound, tier.min),
+        max: Math.min(maxBound, tier.max),
+    };
+    }
+
+    function getMinBoundForCondition(skin: Skin): number {
+    return getConditionBounds(skin).min;
+    }
+
+    function getMaxBoundForCondition(skin: Skin): number {
+    return getConditionBounds(skin).max;
     }
 
     function updateFloats(skin: Skin): void {
-        const floatRanges: Record<string, { minFloat: number, maxFloat: number }> = {
-            "Factory new": { minFloat: 0, maxFloat: 0.07 },
-            "Minimal wear": { minFloat: 0.07, maxFloat: 0.15 },
-            "Field tested": { minFloat: 0.15, maxFloat: 0.38 },
-            "Well worn": { minFloat: 0.38, maxFloat: 0.45 },
-            "Battle scarred": { minFloat: 0.45, maxFloat: 1 },
-        };
+    const available = getAvailableConditions(skin);
 
-        const selectedCondition = floatRanges[skin.condition];
-        if (selectedCondition) {
-            skin.minFloat = selectedCondition.minFloat;
-            skin.maxFloat = selectedCondition.maxFloat;
-            skin.allowedMinFloat = selectedCondition.minFloat;
-            skin.allowedMaxFloat = selectedCondition.maxFloat;
-        }
+    if (!available.some((t) => t.label === skin.condition)) {
+        skin.condition = available[0]?.label ?? "Factory new";
     }
 
-    function validateFloatInput(skin: Skin, field: 'minFloat' | 'maxFloat'): void {
+    const bounds = getConditionBounds(skin);
+    skin.min_float = bounds.min;
+    skin.max_float = bounds.max;
+    }
+
+    function clamp(value: number, min: number, max: number): number {
+    if (!Number.isFinite(value)) return min;
+    return Math.min(max, Math.max(min, value));
+    }
+
+    function validateFloatInput(skin: Skin, field: "minFloat" | "maxFloat"): void {
+    const bounds = getConditionBounds(skin);
         if (field === "minFloat") {
-            if (skin.minFloat < skin.allowedMinFloat) skin.minFloat = skin.allowedMinFloat;
-            if (skin.minFloat > skin.allowedMaxFloat) skin.minFloat = skin.allowedMaxFloat;
-            if (skin.minFloat < 0) skin.minFloat = 0;
-            if (skin.minFloat > 1) skin.minFloat = 1;
-        } else if (field === "maxFloat") {
-            if (skin.maxFloat < skin.allowedMinFloat) skin.maxFloat = skin.allowedMinFloat;
-            if (skin.maxFloat > skin.allowedMaxFloat) skin.maxFloat = skin.allowedMaxFloat;
-            if (skin.maxFloat < 0) skin.maxFloat = 0;
-            if (skin.maxFloat > 1) skin.maxFloat = 1;
+            skin.min_float = clamp(skin.min_float, bounds.min, bounds.max);
+            if (skin.min_float > skin.max_float) {
+            skin.max_float = skin.min_float;
+            }
+            skin.max_float = clamp(skin.max_float, bounds.min, bounds.max);
+        } else {
+            skin.max_float = clamp(skin.max_float, bounds.min, bounds.max);
+            if (skin.max_float < skin.min_float) {
+            skin.min_float = skin.max_float;
+            }
+            skin.min_float = clamp(skin.min_float, bounds.min, bounds.max);
         }
     }
 
@@ -151,45 +241,32 @@ export function useSkinSelector() {
         clearErrorMessages();
     };
 
-    function applyAdvancedOptions(): void {
-        if (!selectedSkin.value) return;
+    function applyAdvancedOptions(skin: Skin): void {
+    if (!selectedSkin.value) return;
 
-        if (advancedOptions.value.statTrak && advancedOptions.value.souvenir) {
-            modalErrorMessage.value = "Cannot apply both Souvenir and StatTrak.";
-            clearErrorMessages();
-            return;
-        }
+    if (advancedOptions.value.statTrak && advancedOptions.value.souvenir) {
+        modalErrorMessage.value = "Cannot apply both Souvenir and StatTrak.";
+        clearErrorMessages();
+        return;
+    }
 
-        const restrictedSouvenirKeywords = ["gloves", "hand-wraps", "knife", "karambit", "bayonet", "m9-bayonet", "shadow-daggers", "m4a1-s-fade"];
-        const containsRestrictedSouvenirKeyword = restrictedSouvenirKeywords.some(keyword =>
-            selectedSkin.value?.itemName.toLowerCase().includes(keyword)
-        );
+    if (advancedOptions.value.souvenir && !skin.can_be_souvenir) {
+        modalErrorMessage.value = "Souvenir cannot be applied.";
+        clearErrorMessages();
+        return;
+    }
 
-        const restrictedStatTrakKeywords = ["heat-treated", "gloves", "dragon-lore", "medusa", "m4a1-s-fade", "hand-wraps"];
-        const containsRestrictedStatTrakKeyword = restrictedStatTrakKeywords.some(keyword =>
-            selectedSkin.value?.itemName.toLowerCase().includes(keyword)
-        );
+    if (advancedOptions.value.statTrak && !skin.can_be_stattrak) {
+        modalErrorMessage.value = "StatTrak cannot be applied to your selected skin.";
+        clearErrorMessages();
+        return;
+    }
 
-        if (advancedOptions.value.souvenir && containsRestrictedSouvenirKeyword) {
-            modalErrorMessage.value = "Souvenir cannot be applied to gloves, hand-wraps, or knives.";
-            clearErrorMessages();
-            return;
-        }
+    let advancedOption = "";
+    if (advancedOptions.value.souvenir) advancedOption = "souvenir";
+    else if (advancedOptions.value.statTrak) advancedOption = "stattrak";
 
-        if (advancedOptions.value.statTrak && containsRestrictedStatTrakKeyword) {
-            modalErrorMessage.value = "Stat trak cannot be applied to your selected skin";
-            clearErrorMessages();
-            return;
-        }
-
-        let advancedOption = "";
-        if (advancedOptions.value.souvenir) {
-            advancedOption = "souvenir";
-        } else if (advancedOptions.value.statTrak) {
-            advancedOption = "stattrak";
-        }
-
-        addSkin(selectedSkin.value, advancedOption);
+    addSkin(selectedSkin.value, advancedOption);
         closeMenu();
     }
 
@@ -218,17 +295,11 @@ export function useSkinSelector() {
     }
 
     function buildFinalSkinName(skin: Skin, advancedOption: string): string {
-        const conditionSlug = skin.condition.toLowerCase().replace(" ", "-");
 
-        let finalSkinName = skin.itemName
-            .replace("factory-new", conditionSlug)
-            .replace("minimal-wear", conditionSlug)
-            .replace("field-tested", conditionSlug)
-            .replace("battle-scarred", conditionSlug)
-            .replace("well-worn", conditionSlug);
+        let finalSkinName = skin.market_hash_name
 
         if (advancedOption) {
-            finalSkinName = `${advancedOption}-${finalSkinName}`;
+            finalSkinName = `${finalSkinName}`;
         }
 
         return finalSkinName;
@@ -238,16 +309,23 @@ export function useSkinSelector() {
         try {
             const finalSkinName = buildFinalSkinName(skin, advancedOption);
 
+            const bounds = getConditionBounds(skin);
+            skin.min_float = clamp(skin.min_float, bounds.min, bounds.max);
+            skin.max_float = clamp(skin.max_float, bounds.min, bounds.max);
+            if (skin.min_float > skin.max_float) skin.max_float = skin.min_float;
+
             const payload: AddSkinPayload = {
                 skinName: finalSkinName,
-                minFloat: skin.minFloat,
-                maxFloat: skin.maxFloat,
+                minFloat: skin.min_float,
+                maxFloat: skin.max_float,
                 minDiscount: advancedOptions.value.forceDiscount
                     ? advancedOptions.value.minDiscount
                     : false,
                 minFadePercentage: advancedOptions.value.forceFadePercentage
                     ? advancedOptions.value.minFadePercentage
                     : false,
+                isStattrak: advancedOption === "stattrak" || false,
+                isSouvenir: advancedOption === "souvenir" || false
             };
 
             const sendAddSkin = async (csrfToken: string) => {
@@ -307,13 +385,7 @@ export function useSkinSelector() {
     }
 
     function formattedSkinName(skin: Skin): string {
-        return skin.itemName
-            .replace(/-/g, ' ')
-            .replace(/factory new/g, '')
-            .replace(/minimal wear/g, '')
-            .replace(/field tested/g, '')
-            .replace(/battle scarred/g, '')
-            .replace(/well worn/g, '');
+        return skin.market_hash_name
     }
 
     return {
@@ -335,6 +407,10 @@ export function useSkinSelector() {
         applyAdvancedOptions,
         addSkin,
         clearErrorMessages,
-        formattedSkinName
+        formattedSkinName,
+        getAvailableConditions,
+        getTierForCondition,
+        getMaxBoundForCondition,
+        getMinBoundForCondition
     };
 }
