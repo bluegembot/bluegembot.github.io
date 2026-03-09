@@ -82,7 +82,7 @@ router.beforeEach(async (to, from, next) => {
     localStorage.setItem('subscriptionStatus', authData.subscriptionStatus)
     localStorage.setItem('subscriptionEndDate', authData.subscriptionEndDate)
     localStorage.setItem('wantedSources', authData.wantedSources)
-    if (to.path === '/register' || to.path === '/login' || to.path === '/') {
+    if (to.path === '/register' || to.path === '/login') {
       return next('/dashboard'); // Redirect if logged in
     }
   } else if (to.meta.requiresAuth) {
