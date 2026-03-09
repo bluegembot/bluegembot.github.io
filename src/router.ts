@@ -43,7 +43,7 @@ async function isAuthenticated() {
 
 // Define your routes
 const routes = [
-  { path: '/', component: RegisterPage, pathToRegexpOptions: { strict: true } },
+  { path: '/', component: LandingPage, pathToRegexpOptions: { strict: true }, meta: { requiresAuth: false } },
   { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true } },
   { path: '/TOS', component: TOS, meta: { requiresAuth: false } },
   { path: '/privacy', component: privacy, meta: { requiresAuth: false } },
