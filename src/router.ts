@@ -19,7 +19,7 @@ const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
 
 export const API_URL = isDevelopment
     ? 'http://localhost:3002'
-    : 'https://bluegembot.duckdns.org';
+    : 'https://api.bluegembot.com';
 
 // Your authentication function
 async function isAuthenticated() {
