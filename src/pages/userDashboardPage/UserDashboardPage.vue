@@ -70,9 +70,9 @@
                 <div class="skin-info">
                   <div class="skin-header">
                     <span class="skin-index">{{ index + 1 }}.</span>
-                    <span v-if="!isItemStattrak(skin) && !isItemSouvenir(skin)" class="skin-name">{{ skin.name }}</span>
-                    <span v-else-if="isItemSouvenir(skin)" class="skin-name">(Souvenir) {{ skin.name }}</span>
-                    <span v-else-if="isItemStattrak(skin)" class="skin-name">(StatTrak™) {{ skin.name }}</span>
+                    <span v-if="!isItemStattrak(skin) && !isItemSouvenir(skin)" class="skin-name">{{ skin.name + ' ' + skin.phase}}</span>
+                    <span v-else-if="isItemSouvenir(skin)" class="skin-name">(Souvenir) {{ skin.name + ' ' + skin.phase}}</span>
+                    <span v-else-if="isItemStattrak(skin)" class="skin-name">(StatTrak™) {{ skin.name + ' ' + skin.phase}}</span>
                   </div>
 
                   <div class="skin-details">

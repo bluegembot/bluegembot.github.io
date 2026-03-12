@@ -192,70 +192,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "★ Driver Gloves | Brocade Crane",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_brocade_crane_red_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Brocade Flowers",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_brocade_flower_red_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Dragon Fists",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_dragon_scale_red_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Garden",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_embroidered_flowers_teal_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Hand Sweaters",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_knit_argyle_green_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Plum Quill",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_ostrich_purple_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Seigaiha",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_scallop_metallic_blue_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Driver Gloves | Wave Chaser",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/slick_gloves_glove_driver_silk_dragon_white_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "★ Driver Gloves | Lunar Weave",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5T441rsfhr9kYDl7h1I4_utY5tvLPGQBVicyOl-pK8xTizrzER1t2rczNj9JSqRZg92CZZ2RrRetBi7kYDhZeLl7wDajo9C02yg2YX5gL0s",
     "min_float": 0.06,
@@ -352,62 +288,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "★ Specialist Gloves | Lime Polycam",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_abstract_green_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Specialist Gloves | Cloud Chaser",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_dragon_blue_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Specialist Gloves | Blackbook",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_graffiti_black_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Specialist Gloves | Chocolate Chesterfield",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_quilted_black_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Specialist Gloves | Pillow Punchers",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_quilted_white_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Specialist Gloves | Sunburst",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_sunburst_red_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Specialist Gloves | Big Swell",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/specialist_gloves_glove_specialist_wave_blue_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "★ Specialist Gloves | Forest DDPAT",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk71ruQBH4jYLf-i5U-fe9V7d9JfOaD2uZ0vpJtOV5Tj2Mkg8itjO6mY70LhTLN1F4TowkQrFYshHsxNKyPu_ntQfYid9By3j-ii9I6StqsOlUV6Aj-aCF2guTL_RjtifunYRS",
     "min_float": 0.06,
@@ -498,62 +378,6 @@
   {
     "market_hash_name": "★ Specialist Gloves | Mogul",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk71ruQBH4jYLf-i5U-fe9V7d9JfOaD2uZ0vpJp-hnWyyhnRg_jDGMnYftb3qWagQlX8EjF7YIuhK9m9XiNO2x7gOPjY5HzHj7iiwcv3xi4-pQAPc7uvqAbB4ER4o",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Violet Beadwork",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_beadwork_diamonds_purple_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Frosty",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_camo_winter_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Blaze",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_flames_orange_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Creme Pinstripe",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_pinstripe_black_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Red Racer",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_racer_red_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Ultra Violent",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_tech_gradient_bright_light_png.png",
-    "min_float": 0.06,
-    "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "★ Sport Gloves | Occult",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/sporty_gloves_glove_sport_velvet_red_light_png.png",
     "min_float": 0.06,
     "max_float": 0.8,
     "stattrak": false,
@@ -748,14 +572,6 @@
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tg_13jRBnOlo_k7yNk6P6hfqF-H_KfAWiUyeFjvuVWRzC3hxwYoDOEkYrqKiLJAVRiW9EzKrtT5Uj8jNOyZb_i5QHcg40Unyz-ji5LvX1v6-kEV_Ek8vCFjguUYOU_tJVWd6y5DUPZHBGjgbE",
     "min_float": 0.06,
     "max_float": 0.8,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "AK-47 | Crane Flight",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_ak47_crane_flight_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
     "stattrak": false,
     "souvenir": false
   },
@@ -1097,7 +913,7 @@
   },
   {
     "market_hash_name": "AK-47 | Aphrodite",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiVI7PqRaa9SJPqaB2mvzedxuPUnGCi3wktzt2rRn92pdXuXbA4iDcdxQOIMsBK4k9S2Zeiw4lTdjdhNyTK-0H1wmrL4zA",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_gsch_ak_djiin_light_png.png",
     "min_float": 0,
     "max_float": 1,
     "stattrak": false,
@@ -1169,7 +985,7 @@
   },
   {
     "market_hash_name": "AK-47 | Breakthrough",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wipC6s20baB-H_yaCW-Ej-olseI8Gyq1kBkh4GrVz4queXySPAd0XJEkQ7UMu0TrldaxYbzjsw3Ay9USrh0CgFA",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_hye_zeds_light_png.png",
     "min_float": 0,
     "max_float": 0.75,
     "stattrak": false,
@@ -1537,7 +1353,7 @@
   },
   {
     "market_hash_name": "AUG | Creep",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf7i1e0PO7b5tuMvWWHlicyOl-pK9oSnnnkRl34WqBwtavcH6TagRxWZR2E7FYuhm9wIblZr60slHXjYtM02yg2RFs1ez8",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_soe_aug_creep_light_png.png",
     "min_float": 0,
     "max_float": 0.8,
     "stattrak": false,
@@ -1653,14 +1469,6 @@
     "min_float": 0,
     "max_float": 1,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "AWP | Queen's Gambit",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_awp_queens_gambit_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -1945,7 +1753,7 @@
   },
   {
     "market_hash_name": "AWP | Exothermic",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf9Tte0PSneqF6L-KYMXeR1e1-tfJWQyC0nQlp4W7Xzd-qcH_DO1N0W5FzQuEP5kW8ltfnM-q24wzYgt0RmC_7jSlL5jErvbgX7dER8Q",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_hye_firework_patches_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -1953,7 +1761,7 @@
   },
   {
     "market_hash_name": "AWP | The End",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf7i1e0PC5V7BlJc-WAGOvwPlmj-1gSCGn20hytjzSy4r_cy_FZlB1DJdxE7QN50bql4LuNL7g4gTYj9lGnir9iyJXrnE8dWNkiOM",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_soe_bw_the_end_awp_light_png.png",
     "min_float": 0,
     "max_float": 1,
     "stattrak": false,
@@ -1989,8 +1797,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Doppler",
@@ -1998,8 +1805,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Doppler",
@@ -2007,8 +1813,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Doppler",
@@ -2016,8 +1821,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Doppler",
@@ -2025,8 +1829,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Gamma Doppler",
@@ -2034,8 +1837,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Gamma Doppler",
@@ -2043,8 +1845,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Gamma Doppler",
@@ -2052,8 +1853,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Gamma Doppler",
@@ -2061,8 +1861,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Gamma Doppler",
@@ -2070,8 +1869,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Marble Fade",
@@ -2095,8 +1893,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Doppler",
@@ -2104,8 +1901,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bayonet | Slaughter",
@@ -2300,14 +2096,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "PP-Bizon | RMX",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_bizon_rmx_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "PP-Bizon | Osiris",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzl4zv8x1Y-s2sYb5iLr2cHW6CyP1JvOhuRz39xUxx6jiBz42rIHjBbAcnWZcjROcJsxjtmoXmNe_k5QHajtlNyC2r3zQJsHh050JUDA",
     "min_float": 0,
@@ -2485,7 +2273,7 @@
   },
   {
     "market_hash_name": "PP-Bizon | Bizoom",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzl4zv8x1T9veRa6V_H-eBD3evw-dsv-9WQyC0nQlp6zzdzI6rIHOealMiCJolEOVb5EPrx9PuN7_i5lHW2d9NySj2jy9N6DErvbhOwQNAJg",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_hye_car_wrap_bizon_light_png.png",
     "min_float": 0,
     "max_float": 0.58,
     "stattrak": false,
@@ -2493,7 +2281,7 @@
   },
   {
     "market_hash_name": "PP-Bizon | Thermal Currents",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzl4zv8x1T9veRb6FiIvmBCnSv0vt4ouh6Sha_nBovp3PRmdysdHLCZwUjDsB1FOcJ4BW4mobhZu3q7wyKj4MTzCj2jHhJu30-_a9cBrr9UcuO",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_hye_geobirds_sunrise_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -2797,7 +2585,7 @@
   },
   {
     "market_hash_name": "CZ75-Auto | Honey Paisley",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1T9veReKVkM_yWF1iUxP13pN5lRi67gVN2tW3Sntuvd3OROFUoXsB2Q-9Zs0Hqlta0Pujr7waIiYJAxS-sjy0c8G81tBzzAWSY",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_hye_paisley_desat_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -3084,14 +2872,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "Desert Eagle | Firebreathing",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_deagle_firebreathing_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "Desert Eagle | Serpent Strike",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk6_evb6hoH-OdD2yV_v53pPVsXSeMmRQguynLzdmsIHOVPVciXMN3QuVeuxexmtHuP77m7gDd34kRxXj_3ChKvS9p5fFCD_SJMmxOXA",
     "min_float": 0,
@@ -3173,7 +2953,7 @@
   },
   {
     "market_hash_name": "Desert Eagle | The Daily Deagle",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk5-urV6dsMs-EHGaA_uJ_t-l9AXm3kxh162qHy9-pd3PEagMmDJMkRuEK4BG4x9zhZe-07gPdiotMyivgznQej0ovEM4",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_hye_car_wrap_light_png.png",
     "min_float": 0,
     "max_float": 0.58,
     "stattrak": false,
@@ -3501,7 +3281,7 @@
   },
   {
     "market_hash_name": "Dual Berettas | Silver Pour",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1I4PeRaad_OfyaDViWzeFh495lRi67gVN3tmnTn4yreXvFZgYjD8QlE-QK4EGxkda0Ze20tQbZ2Y9CyS_5iC1K8G81tJXDIHOE",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_soe_acrylic_flow3_light_png.png",
     "min_float": 0,
     "max_float": 0.678431,
     "stattrak": false,
@@ -3773,7 +3553,7 @@
   },
   {
     "market_hash_name": "FAMAS | Byproduct",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1T9veRbq1_JeecHGyv0e9is-lsXBa1lBAmoAKJk4jxNWWUaVN2DsB5Re4D4BLuxoDvP-PmsQffioJFnnqv3y1A7C9r5-tUUPd35OSJ2E5Oe0pX",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_hye_firework_patches_famas_light_png.png",
     "min_float": 0,
     "max_float": 0.55,
     "stattrak": false,
@@ -3797,7 +3577,7 @@
   },
   {
     "market_hash_name": "FAMAS | Vendetta",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1I4PeRarNSIvySHXOvzedxuPUnSS-3wEx362jWw9eodnLGaFMhCZUlQO5etBe_k9XlNuvkslDcg91FxDK-0H3uRMe02w",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_soe_bw_blast_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -4044,14 +3824,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "Five-SeveN | Dark Polymer",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_fiveseven_polymer_dark_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "Five-SeveN | Boost Protocol",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRb7dSJvmFC1iDxPhzvt5sSTygnBIpjDGMnYftby7FalV1D5QhE-EDthW8xtCyPu63tFPciYhBynn_jykfuCttte4CA6E7uvqAn_5lxU8",
     "min_float": 0,
@@ -4173,7 +3945,7 @@
   },
   {
     "market_hash_name": "Five-SeveN | Fraise Crane",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRe6toH-CaAGyvwvx3vuR6cCW6khUz_WmHno2ueSmRbFAmC8MjF7EPsBDtwdDkZe_n41fYithDzyWo2CwY6nx1o7FVHGyLYB0",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_soe_pink_cranes_light_png.png",
     "min_float": 0,
     "max_float": 0.65,
     "stattrak": false,
@@ -4564,14 +4336,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "Galil AR | Galigator",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_galil_galigator_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "Galil AR | Stone Cold",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0PW9V6NsLPmfMWmZxuZip-hnSBa_nBovp3PSnI2heXqXOwQjDpcmQ-UN5BjrmtexP-rgswDajotBxCz5iyhMui5u_a9cBuYTcBV8",
     "min_float": 0,
@@ -4677,7 +4441,7 @@
   },
   {
     "market_hash_name": "Galil AR | Sky Mandala",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0Pq3bZtoIeKHBlidwOByse1ocCW6khUz_WzSy42rcS3CbwMkD5Z0TOAOsBDswNfhZu3q5w3ajdpNzSj-ii9P7nl1o7FVbxi6bE4",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_hye_earth_mandala_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -4849,8 +4613,7 @@
     "min_float": 0,
     "max_float": 0.5,
     "stattrak": false,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "Glock-18 | Gamma Doppler",
@@ -4858,8 +4621,7 @@
     "min_float": 0,
     "max_float": 0.5,
     "stattrak": false,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "Glock-18 | Gamma Doppler",
@@ -4867,8 +4629,7 @@
     "min_float": 0,
     "max_float": 0.5,
     "stattrak": false,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "Glock-18 | Gamma Doppler",
@@ -4876,8 +4637,7 @@
     "min_float": 0,
     "max_float": 0.5,
     "stattrak": false,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "Glock-18 | Gamma Doppler",
@@ -4885,8 +4645,7 @@
     "min_float": 0,
     "max_float": 0.5,
     "stattrak": false,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "Glock-18 | Reactor",
@@ -5065,14 +4824,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "Glock-18 | Fully Tuned",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_glock_jdpeek_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "Glock-18 | Mirror Mosaic",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1c4_2tY5tgKeKBAXWvzO9std5_HRajkBw1vwKJk4jxNWXFP1UhDsYkRbUMsxC6lNSzNO7lsQaK2dpCyH2rjS5J5i054exUVqQi5OSJ2C0RseXl",
     "min_float": 0,
@@ -5146,7 +4897,7 @@
   },
   {
     "market_hash_name": "Glock-18 | Trace Lock",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1T-825YK15Jc-WCmCV0tF6ueZhW2fiw0Ujt2yGy4ysIHzEaQUlWJJyE-dbsBK5x4XjM7ix7gDeiYkUmy6okGoXubB2-hmv",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_ht_white_edges_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -5506,7 +5257,7 @@
   },
   {
     "market_hash_name": "P2000 | Grip Tape",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0OGhbZt9cqDDXliX0-dmo95lRi67gVMlsj7SmNiuIHmfaA4gDZEhQeBZuxa7m4CxYu-w7geL2osRxS6qiSIc8G81tBwotro2",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_soe_p2000_grips_light_png.png",
     "min_float": 0,
     "max_float": 0.75,
     "stattrak": false,
@@ -5558,8 +5309,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Doppler",
@@ -5567,8 +5317,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Doppler",
@@ -5576,8 +5325,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Doppler",
@@ -5585,8 +5333,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Doppler",
@@ -5594,8 +5341,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Gamma Doppler",
@@ -5603,8 +5349,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Gamma Doppler",
@@ -5612,8 +5357,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Gamma Doppler",
@@ -5621,8 +5365,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Gamma Doppler",
@@ -5630,8 +5373,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Gamma Doppler",
@@ -5639,8 +5381,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Marble Fade",
@@ -5664,8 +5405,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Doppler",
@@ -5673,8 +5413,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Butterfly Knife | Slaughter",
@@ -5842,8 +5581,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Doppler",
@@ -5851,8 +5589,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Doppler",
@@ -5860,8 +5597,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Doppler",
@@ -5869,8 +5605,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Doppler",
@@ -5878,8 +5613,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Marble Fade",
@@ -5895,8 +5629,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Doppler",
@@ -5904,8 +5637,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Survival Knife | Slaughter",
@@ -6041,8 +5773,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Doppler",
@@ -6050,8 +5781,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Doppler",
@@ -6059,8 +5789,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Doppler",
@@ -6068,8 +5797,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Doppler",
@@ -6077,8 +5805,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Marble Fade",
@@ -6094,8 +5821,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Doppler",
@@ -6103,8 +5829,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Paracord Knife | Slaughter",
@@ -6336,8 +6061,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Doppler",
@@ -6345,8 +6069,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Doppler",
@@ -6354,8 +6077,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Doppler",
@@ -6363,8 +6085,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Doppler",
@@ -6372,8 +6093,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Gamma Doppler",
@@ -6381,8 +6101,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Gamma Doppler",
@@ -6390,8 +6109,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Gamma Doppler",
@@ -6399,8 +6117,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Gamma Doppler",
@@ -6408,8 +6125,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Gamma Doppler",
@@ -6417,8 +6133,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Marble Fade",
@@ -6442,8 +6157,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Doppler",
@@ -6451,8 +6165,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Falchion Knife | Slaughter",
@@ -6620,8 +6333,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Doppler",
@@ -6629,8 +6341,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Doppler",
@@ -6638,8 +6349,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Doppler",
@@ -6647,8 +6357,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Doppler",
@@ -6656,8 +6365,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Gamma Doppler",
@@ -6665,8 +6373,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Gamma Doppler",
@@ -6674,8 +6381,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Gamma Doppler",
@@ -6683,8 +6389,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Gamma Doppler",
@@ -6692,8 +6397,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Gamma Doppler",
@@ -6701,8 +6405,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Marble Fade",
@@ -6726,8 +6429,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Doppler",
@@ -6735,8 +6437,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Flip Knife | Slaughter",
@@ -6904,8 +6605,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Doppler",
@@ -6913,8 +6613,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Doppler",
@@ -6922,8 +6621,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Doppler",
@@ -6931,8 +6629,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Doppler",
@@ -6940,8 +6637,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Gamma Doppler",
@@ -6949,8 +6645,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Gamma Doppler",
@@ -6958,8 +6653,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Gamma Doppler",
@@ -6967,8 +6661,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Gamma Doppler",
@@ -6976,8 +6669,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Gamma Doppler",
@@ -6985,8 +6677,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Marble Fade",
@@ -7010,8 +6701,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Doppler",
@@ -7019,8 +6709,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Gut Knife | Slaughter",
@@ -7188,8 +6877,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Doppler",
@@ -7197,8 +6885,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Doppler",
@@ -7206,8 +6893,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Doppler",
@@ -7215,8 +6901,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Doppler",
@@ -7224,8 +6909,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Marble Fade",
@@ -7241,8 +6925,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Doppler",
@@ -7250,8 +6933,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Navaja Knife | Slaughter",
@@ -7387,8 +7069,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Doppler",
@@ -7396,8 +7077,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Doppler",
@@ -7405,8 +7085,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Doppler",
@@ -7414,8 +7093,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Doppler",
@@ -7423,8 +7101,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Gamma Doppler",
@@ -7432,8 +7109,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Gamma Doppler",
@@ -7441,8 +7117,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Gamma Doppler",
@@ -7450,8 +7125,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Gamma Doppler",
@@ -7459,8 +7133,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Gamma Doppler",
@@ -7468,8 +7141,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Marble Fade",
@@ -7493,8 +7165,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Doppler",
@@ -7502,8 +7173,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Karambit | Slaughter",
@@ -7767,8 +7437,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Doppler",
@@ -7776,8 +7445,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Doppler",
@@ -7785,8 +7453,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Doppler",
@@ -7794,8 +7461,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Doppler",
@@ -7803,8 +7469,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Gamma Doppler",
@@ -7812,8 +7477,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Gamma Doppler",
@@ -7821,8 +7485,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Gamma Doppler",
@@ -7830,8 +7493,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Gamma Doppler",
@@ -7839,8 +7501,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Gamma Doppler",
@@ -7848,8 +7509,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Marble Fade",
@@ -7873,8 +7533,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Doppler",
@@ -7882,8 +7541,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ M9 Bayonet | Slaughter",
@@ -8051,8 +7709,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Doppler",
@@ -8060,8 +7717,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Doppler",
@@ -8069,8 +7725,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Doppler",
@@ -8078,8 +7733,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Doppler",
@@ -8087,8 +7741,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Marble Fade",
@@ -8104,8 +7757,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Doppler",
@@ -8113,8 +7765,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Nomad Knife | Slaughter",
@@ -8250,8 +7901,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Doppler",
@@ -8259,8 +7909,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Doppler",
@@ -8268,8 +7917,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Doppler",
@@ -8277,8 +7925,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Doppler",
@@ -8286,8 +7933,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Gamma Doppler",
@@ -8295,8 +7941,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Gamma Doppler",
@@ -8304,8 +7949,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Gamma Doppler",
@@ -8313,8 +7957,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Gamma Doppler",
@@ -8322,8 +7965,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Gamma Doppler",
@@ -8331,8 +7973,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Marble Fade",
@@ -8356,8 +7997,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Doppler",
@@ -8365,8 +8005,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Shadow Daggers | Slaughter",
@@ -8534,8 +8173,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Doppler",
@@ -8543,8 +8181,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Doppler",
@@ -8552,8 +8189,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Doppler",
@@ -8561,8 +8197,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Doppler",
@@ -8570,8 +8205,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Marble Fade",
@@ -8587,8 +8221,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Doppler",
@@ -8596,8 +8229,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Skeleton Knife | Slaughter",
@@ -8733,8 +8365,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Doppler",
@@ -8742,8 +8373,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Doppler",
@@ -8751,8 +8381,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Doppler",
@@ -8760,8 +8389,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Doppler",
@@ -8769,8 +8397,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Marble Fade",
@@ -8786,8 +8413,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Doppler",
@@ -8795,8 +8421,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Stiletto Knife | Slaughter",
@@ -8932,8 +8557,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Doppler",
@@ -8941,8 +8565,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Doppler",
@@ -8950,8 +8573,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Doppler",
@@ -8959,8 +8581,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Doppler",
@@ -8968,8 +8589,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Gamma Doppler",
@@ -8977,8 +8597,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Gamma Doppler",
@@ -8986,8 +8605,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Gamma Doppler",
@@ -8995,8 +8613,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Gamma Doppler",
@@ -9004,8 +8621,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Gamma Doppler",
@@ -9013,8 +8629,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Marble Fade",
@@ -9038,8 +8653,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Doppler",
@@ -9047,8 +8661,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Bowie Knife | Slaughter",
@@ -9216,8 +8829,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Doppler",
@@ -9225,8 +8837,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Doppler",
@@ -9234,8 +8845,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Doppler",
@@ -9243,8 +8853,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Doppler",
@@ -9252,8 +8861,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Gamma Doppler",
@@ -9261,8 +8869,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Emerald"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Gamma Doppler",
@@ -9270,8 +8877,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Gamma Doppler",
@@ -9279,8 +8885,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Gamma Doppler",
@@ -9288,8 +8893,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Gamma Doppler",
@@ -9297,8 +8901,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Marble Fade",
@@ -9322,8 +8925,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Doppler",
@@ -9331,8 +8933,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Huntsman Knife | Slaughter",
@@ -9500,8 +9101,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Doppler",
@@ -9509,8 +9109,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Doppler",
@@ -9518,8 +9117,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Doppler",
@@ -9527,8 +9125,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Doppler",
@@ -9536,8 +9133,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Marble Fade",
@@ -9553,8 +9149,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Doppler",
@@ -9562,8 +9157,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Ursus Knife | Slaughter",
@@ -9699,8 +9293,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Black Pearl"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Doppler",
@@ -9708,8 +9301,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 1"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Doppler",
@@ -9717,8 +9309,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 2"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Doppler",
@@ -9726,8 +9317,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 3"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Doppler",
@@ -9735,8 +9325,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Phase 4"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Marble Fade",
@@ -9752,8 +9341,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Ruby"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Doppler",
@@ -9761,8 +9349,7 @@
     "min_float": 0,
     "max_float": 0.08,
     "stattrak": true,
-    "souvenir": false,
-    "phase": "Sapphire"
+    "souvenir": false
   },
   {
     "market_hash_name": "★ Talon Knife | Slaughter",
@@ -9998,7 +9585,7 @@
   },
   {
     "market_hash_name": "M249 | Sleet",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8zMK5wipC6s2jOvA0H_OSHFiH0-9mj7JWQyC0nQlp6zzQwtiudHvCO1MlDJByQuIC4UO7lta0Zuy0swPZiNhDxSv33C0f6zErvbjSvv-GUg",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_hye_m249_car_wrap_3_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -10009,14 +9596,6 @@
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8zMK5wipC4M2kfapqLPWsCmKDwPpJvOhuRz39lkUisWTSmIz7I3uValQjXMEmE-AO4Ea9k9HvZLy27g2P3otEnnj8iDQJsHjxYKi7jg",
     "min_float": 0,
     "max_float": 0.6,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "M249 | Bock Blocks",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_m249_blocks_purple_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
     "stattrak": false,
     "souvenir": false
   },
@@ -10382,7 +9961,7 @@
   },
   {
     "market_hash_name": "M4A4 | Aeolian Dark",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwipC6s2vard5MvGQGlibz-Fij-w9cCW6khUz_TvQnt37cS_EaQAgDMciEbVb4EK4ktzvZb_ltlOI3o4RmHmt23xKvSh1o7FVNKLRyHM",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_hye_abstract_knot_m4_light_png.png",
     "min_float": 0,
     "max_float": 0.65,
     "stattrak": false,
@@ -10426,14 +10005,6 @@
     "min_float": 0,
     "max_float": 1,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "M4A4 | Zubastick",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_m4a4_zubastick_bw_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -10734,7 +10305,7 @@
   },
   {
     "market_hash_name": "M4A1-S | Party Animal",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_iKC1iRz-d7se1WXzu6mwkY6m2WpYPwJiPTcFNxDcMjEeUIuxK-wNWyPrzj4wePiIxGmCj5jngcuCpvt7wBAKFw-KbJz1aW-PVDUm8",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_silencer_hye_animal_print_90s_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -10746,14 +10317,6 @@
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "M4A1-S | Electrum",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_silencer_m4a1s_electrum_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -11166,7 +10729,7 @@
   },
   {
     "market_hash_name": "MAC-10 | Snow Splash",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1T9veRa6V_H-eBD3fE_uJ_t-l9ASrklhkk4Wrdm9msIy3DblVyA5cmQLMDtxS_ltPmYe_msgbeiY5EziTgznQeYbrm-7Y",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_hye_car_wrap4_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -11718,7 +11281,7 @@
   },
   {
     "market_hash_name": "MP5-SD | Snow Splash",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsPz-R1T9veRZbQ4H_OSHFiH0-9m5N5lRi67gVMk5WXQztarIHiVbQ8lApF2F7QN5xS_xtfnNujqswTWidhAnyr3jngc8G81tMzA05Bb",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_hye_mp5_car_wrap4_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -11750,7 +11313,7 @@
   },
   {
     "market_hash_name": "MP5-SD | Picnic",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsPz-R1I4PeReqFpH_yaCW-Ej7sk5OBtGnDmwE4i526Dm9msI3LBbldxWcAiF7ZftBG5kdWzNLzi5wbAy9US1mpPgEo",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_soe_red_light_png.png",
     "min_float": 0,
     "max_float": 0.75,
     "stattrak": false,
@@ -11974,17 +11537,9 @@
   },
   {
     "market_hash_name": "MP7 | Coral Paisley",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf9Tte0OKvYbdhJemsGWaCzNF6ueZhW2fklEV-sGvUzdigdX2WbgciCZQjRe9b50Xqm4bkMevj5gaMgo1AnCiskGoXuQsY-r8v",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_hye_paisley_warm_light_png.png",
     "min_float": 0,
     "max_float": 0.65,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "MP7 | Amberline",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_mp7_amberline_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
     "stattrak": false,
     "souvenir": false
   },
@@ -12365,14 +11920,6 @@
     "souvenir": false
   },
   {
-    "market_hash_name": "MP9 | Urban Sovereign",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_mp9_urban_sovereign_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
     "market_hash_name": "MP9 | Broken Record",
     "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f8DIC0OSnZr1hH_yaCW-Ej78gs7M_Hy-xxUUi4WWHyd6tJ33EOAAkXsckE-4M5Baxw9O2ZOO3sgzAy9USMhZdDpQ",
     "min_float": 0,
@@ -12406,7 +11953,7 @@
   },
   {
     "market_hash_name": "MP9 | Dizzy",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f7i1e0PaqeKV5H-OEB3Wc_uxhj-1gSCGn204k5mXQwoz4dnrDaQ92CMB3R7FZtxa4mtfkZuyx5gHb2YNNz336jyxXrnE8H46mzhg",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_soe_ddpat_swirl_bw_light_png.png",
     "min_float": 0,
     "max_float": 0.65,
     "stattrak": false,
@@ -12414,7 +11961,7 @@
   },
   {
     "market_hash_name": "MP9 | Bee-Tron",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f7i1e0OurZKhiN8-RB3OD_uJ_t-l9ASrhzRt062_Qm4n8cn-XbFQkCcMkTLQD5EW8m9TjM--34gXf2Y1Hzn_gznQepx3qArs",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_soe_yellow_bits_light_png.png",
     "min_float": 0,
     "max_float": 0.9,
     "stattrak": false,
@@ -12894,7 +12441,7 @@
   },
   {
     "market_hash_name": "Nova | Currents",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwipC6s2pbatvKeKXHVicyOl-pK87TSrqzBwisWXTz9qvJXnFOgcnW5J1RLEPuhe_mtHgPuqws1SPi4tA02yg2UgVtCWp",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_hye_geobirds_light_png.png",
     "min_float": 0,
     "max_float": 0.65,
     "stattrak": false,
@@ -13342,7 +12889,7 @@
   },
   {
     "market_hash_name": "P250 | Sleet",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwipC6s2tabZSN-KSHljD_uJ_t-l9AXCwxhwi6j_Syoysc36TbAAhXpYiRuIPshLsk4bnYemw7wCKiNoUyC7gznQekhpLnpY",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_hye_car_wrap_3_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -13370,14 +12917,6 @@
     "min_float": 0,
     "max_float": 0.8,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "P250 | Kintsugi",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_p250_kintsugi_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -13750,7 +13289,7 @@
   },
   {
     "market_hash_name": "P90 | Aeolian Light",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf9Tte0POse7B_IfOHMWyezvpJvOhuRz39zER2tWvVyd2qdXOeaVN2WJV3Qu9Z50GwxNa1NLji4gPfjINDziv8iDQJsHgxRzCSnw",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_hye_abstract_knot_light_png.png",
     "min_float": 0,
     "max_float": 0.65,
     "stattrak": false,
@@ -13778,14 +13317,6 @@
     "min_float": 0,
     "max_float": 0.950549,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "P90 | Deathgaze",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_p90_deathgaze_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -14054,7 +13585,7 @@
   },
   {
     "market_hash_name": "R8 Revolver | Mauve Aside",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLjm4Dv8TRe_c29Z6dlH_OcHneV09F3s-JsQT2MhxgxvDGTn53GLSLANkI-C5d5Q7EK4xLpxtDhY-vksleP3d1DzXn52itKvCxstewGVKosqPDTiRaBb-Oa78uGvw",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_soch_copper_accent_revolver_light_png.png",
     "min_float": 0,
     "max_float": 0.80339,
     "stattrak": false,
@@ -14070,7 +13601,7 @@
   },
   {
     "market_hash_name": "R8 Revolver | Dark Chamber",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLjm4Dv8TRe_c29Z6dlH-OeAWyV_ulkufF6cCW6khUz_WqGmNatdnzDbAR0CcR2FLQO4UKxxNfuM-rj4QzX3YsTziuqiHgf7351o7FV2A-FKGc",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_soch_smoke_grips_light_png.png",
     "min_float": 0,
     "max_float": 0.80339,
     "stattrak": false,
@@ -14318,17 +13849,9 @@
   },
   {
     "market_hash_name": "Sawed-Off | Crimson Batik",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2mcaFSIvGHB2yvxPdzo95lRi67gVNxsGjUzIz9ci7DblclD5d1Ee5esEO4mt3vN7_g5VeIj4xAzi2r23kb8G81tFlYllZq",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_hye_batik_eyes_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
-    "stattrak": false,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "Sawed-Off | Fusion",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_sawedoff_fusion_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
     "stattrak": false,
     "souvenir": false
   },
@@ -14542,7 +14065,7 @@
   },
   {
     "market_hash_name": "SCAR-20 | Zinc",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk5-urV6dlMv-eC1iCyP5mvORWQyC0nQlpsD7Qydr6dSjEO1MnD5RzRuUIskPpl9zmN-7i5FbYj49NmXj4jXhP6TErvbhHIJnnmg",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_hye_chrome_ripple_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -14822,7 +14345,7 @@
   },
   {
     "market_hash_name": "SG 553 | Safari Print",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1T9veRaapkLfGfMXeCyOBij-1qcCW6khUz_T_Rn9qoIn-Sb1MkX5B3RecL4EXsltXmP-u0tgbbj4tEyHn7334a6Ch1o7FVNpTVjWQ",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_hye_animal_print_lc_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -15094,7 +14617,7 @@
   },
   {
     "market_hash_name": "SSG 08 | Calligrafaux",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1T-828baBSJfSUC3Svx-d4te1gQSyMmRQguynLwov6JHmRagd0WcBxQuYItxWxlYLgM--z4gDXjthGnnmqjXxAvSpqtfFCD_S8UR_TMg",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_ht_red_edges_fineline_light_png.png",
     "min_float": 0,
     "max_float": 1,
     "stattrak": false,
@@ -15150,7 +14673,7 @@
   },
   {
     "market_hash_name": "SSG 08 | Sans Comic",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1T9veRa6tgKfOsHW-R0etlj-1gSCGn20wl5W3VmImqcCmWOlAjXpolR-MP50Wwl9DmMOix5QXZ2d5EzSWqi3tXrnE8nx7Jn58",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_hye_comic_shapes_light_png.png",
     "min_float": 0,
     "max_float": 0.5,
     "stattrak": false,
@@ -15286,7 +14809,7 @@
   },
   {
     "market_hash_name": "Zeus x27 | Earth Mandala",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLln4Xl7x1T9veRbaV_NPisA2aexe96sd5lTBa_nBovp3PWyYr_I3OXbQJxXJIkF7FY4BS_l4e0Ybnl4Vba2INGyy2tiXhAvHw9_a9cBgJStbOC",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_taser_hye_earth_mandala_lc_light_png.png",
     "min_float": 0,
     "max_float": 0.66,
     "stattrak": false,
@@ -15590,7 +15113,7 @@
   },
   {
     "market_hash_name": "Tec-9 | Banana Leaf",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wipC6s2sabBkK8-WF2KD_vpzs7hWQyC0nQlpsWnRz9atIH3Gag4oCpQjFucP4Rfux9PuNr7j7wDZ3tgTny3_h3xPvzErvbgFFfz3Tg",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_hye_batik_eyes_tec9_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,
@@ -15942,7 +15465,7 @@
   },
   {
     "market_hash_name": "UMP-45 | Warm Blooded",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1T9veRfKF-NM-SAG6dwOJJoPNgQT2MwUgYvzSCkpu3dnuUalN2X5IjRe5fsUa9xoeyN-rr7waMiINDnC7_jnlI6ixq5OpWWb1lpPMCclDonA",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_hye_test_animal_print_45_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -16034,14 +15557,6 @@
     "min_float": 0,
     "max_float": 1,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "UMP-45 | Fragment",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_ump_fragment_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -16326,7 +15841,7 @@
   },
   {
     "market_hash_name": "USP-S | Sleeping Potion",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSM_-WMXeF0_56td5lRi67gVMh4D-Gn4qheH6RPFIoCcAhELVf5kK-xNexMe_rtFfai45EnC_8iH9I8G81tAH9GDu2",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_soe_purple_light_png.png",
     "min_float": 0,
     "max_float": 0.7,
     "stattrak": false,
@@ -16394,14 +15909,6 @@
     "min_float": 0,
     "max_float": 1,
     "stattrak": true,
-    "souvenir": false
-  },
-  {
-    "market_hash_name": "USP-S | Silent Shot",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_usps_silent_boy_light_png.png",
-    "min_float": 0,
-    "max_float": 1,
-    "stattrak": false,
     "souvenir": false
   },
   {
@@ -16702,7 +16209,7 @@
   },
   {
     "market_hash_name": "XM1014 | XoooM",
-    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk_P2rV71oLPycGViIzNF6ueZhW2fhkEpz5T7dw9-tJ3-Rb1cpD8chR7JZuxXsloe0Ybux4VDY2N1CnH6vkGoXuebNu3Fx",
+    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_soe_yellow_xm_light_png.png",
     "min_float": 0,
     "max_float": 0.6,
     "stattrak": false,

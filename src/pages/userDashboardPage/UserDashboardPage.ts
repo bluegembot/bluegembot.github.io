@@ -10,12 +10,14 @@ interface TrackedSkin {
     maxWear: number;
     forcedDiscount: number;
     minFadePercentage: number;
+    phase: string | null;
     // Store original values for comparison
     _original?: {
         minWear: number;
         maxWear: number;
         forcedDiscount: number;
         minFadePercentage: number;
+        phase: string | null
     };
 }
 
@@ -245,7 +247,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
             if (!configResponse.ok) {
                 throw new Error("Failed to fetch user config");
-            }
+            }            
 
             interface ItemOfInterest {
                 item_of_interest: string;
@@ -255,7 +257,8 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 forced_fade_percentage: number;
                 is_stattrak: boolean;
                 is_souvenir: boolean;
-            }
+                phase: string | null;
+            }            
 
             interface ConfigData {
                 itemsOfInterest: ItemOfInterest[];
@@ -271,6 +274,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 minFadePercentage: item.forced_fade_percentage,
                 itemIsStattrak: item.is_stattrak,
                 itemIsSouvenir: item.is_souvenir,
+                phase: item.phase || null,
                 _original: {
                     minWear: item.min_wear,
                     maxWear: item.max_wear,
@@ -278,6 +282,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
                     minFadePercentage: item.forced_fade_percentage,
                     itemIsStattrak: item.is_stattrak,
                     itemIsSouvenir: item.is_souvenir,
+                    phase: item.phase || null
                 },
             }));
         } catch (error) {

@@ -14,7 +14,7 @@ interface Skin {
     allowed_max_float: number;
     can_be_stattrak: boolean;
     can_be_souvenir: boolean;
-    
+    phase: string;
 }
 
 interface AdvancedOptions {
@@ -34,6 +34,7 @@ interface AddSkinPayload {
     minFadePercentage: number | boolean;
     isStattrak: boolean;
     isSouvenir: boolean;
+    phase: string | null;
 }
 
 type WearTier = { label: Skin["condition"]; min: number; max: number };
@@ -93,6 +94,7 @@ export function useSkinSelector() {
         stattrak?: boolean;
         can_be_souvenir?: boolean;
         can_be_stattrak?: boolean;
+        phase?: string;
     };
 
     function initializeSkins(): void {
@@ -110,6 +112,7 @@ export function useSkinSelector() {
         allowed_max_float: allowedMax,
         can_be_souvenir: Boolean(s.can_be_souvenir ?? s.souvenir),
         can_be_stattrak: Boolean(s.can_be_stattrak ?? s.stattrak),
+        phase: String(s.phase ?? "").toLowerCase()
         };
     });
 }
@@ -241,8 +244,12 @@ export function useSkinSelector() {
         clearErrorMessages();
     };
 
-    function applyAdvancedOptions(skin: Skin): void {
-    if (!selectedSkin.value) return;
+function applyAdvancedOptions(): void {
+    const skin = selectedSkin.value;
+
+    if (!skin) {
+        return;
+    }
 
     if (advancedOptions.value.statTrak && advancedOptions.value.souvenir) {
         modalErrorMessage.value = "Cannot apply both Souvenir and StatTrak.";
@@ -257,18 +264,23 @@ export function useSkinSelector() {
     }
 
     if (advancedOptions.value.statTrak && !skin.can_be_stattrak) {
+        console.log(skin);
         modalErrorMessage.value = "StatTrak cannot be applied to your selected skin.";
         clearErrorMessages();
         return;
     }
 
     let advancedOption = "";
-    if (advancedOptions.value.souvenir) advancedOption = "souvenir";
-    else if (advancedOptions.value.statTrak) advancedOption = "stattrak";
 
-    addSkin(selectedSkin.value, advancedOption);
-        closeMenu();
+    if (advancedOptions.value.souvenir) {
+        advancedOption = "souvenir";
+    } else if (advancedOptions.value.statTrak) {
+        advancedOption = "stattrak";
     }
+
+    addSkin(skin, advancedOption);
+    closeMenu();
+}
 
     let cachedCsrfToken: string | null = null;
 
@@ -325,7 +337,8 @@ export function useSkinSelector() {
                     ? advancedOptions.value.minFadePercentage
                     : false,
                 isStattrak: advancedOption === "stattrak" || false,
-                isSouvenir: advancedOption === "souvenir" || false
+                isSouvenir: advancedOption === "souvenir" || false,
+                phase: skin.phase || null
             };
 
             const sendAddSkin = async (csrfToken: string) => {
@@ -350,8 +363,7 @@ export function useSkinSelector() {
             }
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(JSON.stringify(errorData));
+                console.error('Failed to add skin');
             }
 
             const data = await response.json();
@@ -385,6 +397,9 @@ export function useSkinSelector() {
     }
 
     function formattedSkinName(skin: Skin): string {
+        if(skin.phase !== "" || skin.phase !== undefined || skin.phase !== null) {
+            return skin.market_hash_name + ' ' + skin.phase
+        }
         return skin.market_hash_name
     }
 
