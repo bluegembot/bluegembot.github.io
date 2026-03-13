@@ -70,7 +70,15 @@
                 <div class="skin-info">
                   <div class="skin-header">
                     <span class="skin-index">{{ index + 1 }}.</span>
-                    <span class="skin-name">{{ skin.name }}</span>
+                    <span v-if="!isItemStattrak(skin) && !isItemSouvenir(skin)" class="skin-name">
+                      {{ skin.name + (skin.phase ? ' ' + skin.phase : '') }}
+                    </span>
+                    <span v-else-if="isItemSouvenir(skin)" class="skin-name">
+                      (Souvenir) {{ skin.name + (skin.phase ? ' ' + skin.phase : '') }}
+                    </span>
+                    <span v-else-if="isItemStattrak(skin)" class="skin-name">
+                      (StatTrak™) {{ skin.name + (skin.phase ? ' ' + skin.phase : '') }}
+                    </span>
                   </div>
 
                   <div class="skin-details">
@@ -87,7 +95,7 @@
                             max="1"
                             step="0.001"
                             placeholder="0.000"
-                        /> -
+                        />
                         <input
                             type="number"
                             v-model.number="skin.maxWear"
@@ -108,7 +116,7 @@
                         <label class="checkbox-container">
                           <input
                               type="checkbox"
-                              :checked="isForcedDiscountEnabled(skin)"
+                              :checked="minDiscountPercentage(skin) > 0"
                               @change="toggleForcedDiscount(skin)"
                           />
                           <span class="checkmark"></span>
@@ -137,7 +145,7 @@
                         <label class="checkbox-container">
                           <input
                               type="checkbox"
-                              :checked="isMinFadeEnabled(skin)"
+                              :checked="minFadePercentage(skin) > 0"
                               @change="toggleMinFade(skin)"
                           />
                           <span class="checkmark"></span>
@@ -231,6 +239,16 @@ export default defineComponent({
   setup() {
     const dashboard = useUserDashboard();
 
+    const minFadePercentage =(skin: unknown): number => {
+      const s = skin as { minFadePercentage: unknown };
+      return s.minFadePercentage;
+    };
+
+    const minDiscountPercentage =(skin: unknown): number => {
+      const s = skin as { forcedDiscount: unknown };
+      return s.forcedDiscount;
+    };
+
     const isForcedDiscountEnabled = (skin: unknown): boolean => {
       const s = skin as { forcedDiscount?: unknown };
       return s.forcedDiscount !== false && s.forcedDiscount !== null && s.forcedDiscount !== undefined;
@@ -241,10 +259,24 @@ export default defineComponent({
       return s.minFadePercentage !== false && s.minFadePercentage !== null && s.minFadePercentage !== undefined;
     };
 
+    const isItemStattrak = (skin: unknown): boolean => {
+      const s = skin as { itemIsStattrak?: unknown };
+      return s.itemIsStattrak;
+    };
+
+    const isItemSouvenir = (skin: unknown): boolean => {
+      const s = skin as { itemIsSouvenir?: unknown };
+      return s.itemIsSouvenir;
+    };
+
     return {
       ...dashboard,
       isForcedDiscountEnabled,
-      isMinFadeEnabled
+      isMinFadeEnabled,
+      isItemStattrak,
+      isItemSouvenir,
+      minDiscountPercentage,
+      minFadePercentage
     };
   }
 });
