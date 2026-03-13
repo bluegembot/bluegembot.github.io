@@ -231,6 +231,17 @@ import { defineComponent } from 'vue';
 import { useUserDashboard } from './UserDashboardPage';
 import SettingsModal from '../../components/UserDashboard/SettingsModal.vue';
 
+type DashboardSkin = {
+  name: string;
+  phase?: string | null;
+  minWear: number;
+  maxWear: number;
+  forcedDiscount?: number | null;
+  minFadePercentage?: number | null;
+  itemIsStattrak?: boolean | null;
+  itemIsSouvenir?: boolean | null;
+};
+
 export default defineComponent({
   name: 'UserDashboardPage',
   components: {
@@ -239,34 +250,28 @@ export default defineComponent({
   setup() {
     const dashboard = useUserDashboard();
 
-    const minFadePercentage =(skin: unknown): number => {
-      const s = skin as { minFadePercentage: unknown };
-      return s.minFadePercentage;
+    const minFadePercentage = (skin: DashboardSkin): number => {
+      return skin.minFadePercentage ?? 0;
     };
 
-    const minDiscountPercentage =(skin: unknown): number => {
-      const s = skin as { forcedDiscount: unknown };
-      return s.forcedDiscount;
+    const minDiscountPercentage = (skin: DashboardSkin): number => {
+      return skin.forcedDiscount ?? 0;
     };
 
-    const isForcedDiscountEnabled = (skin: unknown): boolean => {
-      const s = skin as { forcedDiscount?: unknown };
-      return s.forcedDiscount !== false && s.forcedDiscount !== null && s.forcedDiscount !== undefined;
+    const isForcedDiscountEnabled = (skin: DashboardSkin): boolean => {
+      return skin.forcedDiscount !== null && skin.forcedDiscount !== undefined;
     };
 
-    const isMinFadeEnabled = (skin: unknown): boolean => {
-      const s = skin as { minFadePercentage?: unknown };
-      return s.minFadePercentage !== false && s.minFadePercentage !== null && s.minFadePercentage !== undefined;
+    const isMinFadeEnabled = (skin: DashboardSkin): boolean => {
+      return skin.minFadePercentage !== null && skin.minFadePercentage !== undefined;
     };
 
-    const isItemStattrak = (skin: unknown): boolean => {
-      const s = skin as { itemIsStattrak?: unknown };
-      return s.itemIsStattrak;
+    const isItemStattrak = (skin: DashboardSkin): boolean => {
+      return skin.itemIsStattrak ?? false;
     };
 
-    const isItemSouvenir = (skin: unknown): boolean => {
-      const s = skin as { itemIsSouvenir?: unknown };
-      return s.itemIsSouvenir;
+    const isItemSouvenir = (skin: DashboardSkin): boolean => {
+      return skin.itemIsSouvenir ?? false;
     };
 
     return {
