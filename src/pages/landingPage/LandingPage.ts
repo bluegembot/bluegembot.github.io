@@ -1,7 +1,6 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faDiscord, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Add icons to library
 library.add(faDiscord, faYoutube);
