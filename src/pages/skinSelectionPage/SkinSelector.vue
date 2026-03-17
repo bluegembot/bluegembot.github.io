@@ -66,13 +66,14 @@
       </thead>
 
       <tbody>
-      <tr v-for="skin in displayedSkins" :key="`${skin.market_hash_name}-${skin.phase || 'no-phase'}`">          <td>
+        <tr v-for="skin in displayedSkins" :key="`${skin.market_hash_name}-${skin.phase || 'no-phase'}`">
+          <td data-label="Skin image">
             <img :src="skin.image_url" alt="Skin image" class="skin-image" />
           </td>
 
-          <td>{{ formattedSkinName(skin) }}</td>
+          <td data-label="Skin name">{{ formattedSkinName(skin) }}</td>
 
-          <td>
+          <td data-label="Select condition">
             <select v-model="skin.condition" @change="updateFloats(skin)">
               <option
                 v-for="tier in getAvailableConditions(skin)"
@@ -84,7 +85,7 @@
             </select>
           </td>
 
-          <td>
+          <td data-label="Minimum float">
             <input
               v-model.number="skin.min_float"
               :min="getMinBoundForCondition(skin)"
@@ -97,7 +98,7 @@
             />
           </td>
 
-          <td>
+          <td data-label="Maximum float">
             <input
               v-model.number="skin.max_float"
               :min="skin.min_float"
@@ -110,11 +111,11 @@
             />
           </td>
 
-          <td>
+          <td data-label="Advanced options">
             <button @click="openMenu(skin)">Advanced options</button>
           </td>
 
-          <td>
+          <td data-label="Add skin">
             <button @click="addSkin(skin)">Add Skin</button>
           </td>
         </tr>

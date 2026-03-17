@@ -310,7 +310,7 @@ button:hover {
 @media (max-width: 768px) {
     /* Container adjustments */
     body {
-        overflow-x: auto;
+        overflow-x: hidden;
     }
 
     /* Logo adjustments */
@@ -333,68 +333,136 @@ button:hover {
     .search-bar {
         width: 100%;
     }
-    /* Table wrapper to handle overflow */
+    /* Mobile table layout */
     table {
         width: 100%;
         font-size: 14px;
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        border: 1px solid #ddd;
+        border: none;
+        border-collapse: separate;
+        border-spacing: 0;
     }
 
-    table thead,
+    table,
     table tbody,
-    table tr {
-        display: table;
-        width: 100%;
-        table-layout: auto; /* CHANGED FROM fixed TO auto */
-    }
-
-    table tr {
+    table tr,
+    table td {
+        display: block;
         width: 100%;
     }
 
-    /* Adjust column widths for mobile */
-    th:nth-child(1), td:nth-child(1) { width: 60px; } /* Image */
-    th:nth-child(2), td:nth-child(2) {
-        min-width: 150px;
-        width: auto;
-        white-space: normal; /* CHANGED: Allow text wrapping */
-        word-wrap: break-word; /* ADDED: Break long words if needed */
-        overflow: visible;
-    } /* Skin name - FLEXIBLE WIDTH WITH WRAPPING */
-    th:nth-child(3), td:nth-child(3) { width: 100px; } /* Condition */
-    th:nth-child(4), td:nth-child(4) { width: 80px; } /* Min float */
-    th:nth-child(5), td:nth-child(5) { width: 80px; } /* Max float */
-    th:nth-child(6), td:nth-child(6) { width: 120px; } /* Advanced */
-    th:nth-child(7), td:nth-child(7) { width: 100px; } /* Add button */
+    table thead {
+        display: none;
+    }
+
+    table tbody {
+        display: grid;
+        gap: 16px;
+    }
+
+    table tbody tr {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 10px 14px;
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        background-color: #fff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
 
     /* Image adjustments */
     .skin-image {
-        width: 50px;
-        height: 50px;
+        width: 72px;
+        height: 72px;
         object-fit: cover;
     }
 
-    /* Button adjustments */
-    th button, td button {
-        padding: 8px 12px;
-        font-size: 12px;
-        white-space: nowrap;
+    td {
+        min-width: 0;
+        padding: 0;
+        border-bottom: 1px solid #eee;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
-    /* Input adjustments */
+    td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #666;
+    }
+
+    td:first-child {
+        grid-row: span 2;
+        align-self: start;
+        border-bottom: none;
+    }
+
+    td:first-child::before {
+        display: none;
+    }
+
+    td:nth-child(2) {
+        border-bottom: none;
+        font-weight: 600;
+        align-self: center;
+    }
+
+    td:nth-child(3),
+    td:nth-child(4),
+    td:nth-child(5) {
+        display: grid;
+        gap: 6px;
+        padding-top: 10px;
+    }
+
+    td:nth-child(4)::before,
+    td:nth-child(5)::before {
+        margin-bottom: 0;
+    }
+
+    td:nth-child(4),
+    td:nth-child(5),
+    td:nth-child(6),
+    td:nth-child(7) {
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+
+    td:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    td button {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 14px;
+        white-space: normal;
+    }
+
     .float-input {
-        width: 60px;
-        padding: 4px;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 8px;
         font-size: 16px !important;
     }
 
     select {
-        width: 90px;
-        padding: 4px;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 8px;
         font-size: 14px;
+    }
+
+    td:nth-child(3),
+    td:nth-child(6),
+    td:nth-child(7) {
+        grid-column: 1 / -1;
     }
 
     /* Modal responsive */
@@ -475,42 +543,29 @@ button:hover {
         font-size: 12px;
     }
 
-    th, td {
-        padding: 6px 4px;
+    table tbody {
+        gap: 12px;
     }
 
-    /* Stack table vertically for very small screens */
-    th:nth-child(1), td:nth-child(1) { width: 50px; }
-    th:nth-child(2), td:nth-child(2) {
-        min-width: 120px;
-        width: auto;
-        white-space: normal; /* CHANGED: Allow text wrapping */
-        word-wrap: break-word; /* ADDED: Break long words if needed */
-        overflow: visible;
-    } /* FLEXIBLE SKIN NAME WITH WRAPPING */
-    th:nth-child(3), td:nth-child(3) { width: 80px; }
-    th:nth-child(4), td:nth-child(4) { width: 70px; }
-    th:nth-child(5), td:nth-child(5) { width: 70px; }
-    th:nth-child(6), td:nth-child(6) { width: 100px; }
-    th:nth-child(7), td:nth-child(7) { width: 80px; }
+    table tbody tr {
+        grid-template-columns: 60px minmax(0, 1fr);
+        padding: 12px;
+    }
 
     .skin-image {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
     }
 
     .float-input {
-        width: 50px;
         font-size: 16px !important;
     }
 
     select {
-        width: 75px;
         font-size: 12px;
     }
 
-    button {
-        padding: 6px 8px;
-        font-size: 11px;
+    td button {
+        font-size: 13px;
     }
 }
