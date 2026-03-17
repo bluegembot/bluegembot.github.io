@@ -32,6 +32,72 @@
       </div>
     </section>
 
+    <section ref="video" class="fade-section top-deals-section">      
+      <div class="top-deals-heading">
+        <h2 class="top-deals-title">Today's top 10 deals</h2>
+        <p class="top-deals-subtitle">Powered by BlueGemBot™</p>
+      </div>
+
+      <div class="content-wrapper" id="top-ten-deals-wrapper">
+        <table id="top-ten-deals-table">
+
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th> </th>
+            <th>CONDITION</th>
+            <th>BASE PRICE</th>
+            <th>DEAL PRICE</th>
+            <th>DISCOUNT %</th>
+            <th></th>
+          </tr>
+        </thead>
+
+          <tbody>
+            <tr
+              v-for="(deal, index) in topDeals"
+              :key="`${deal.source}-${deal.externalId}`"
+              class="top-deal-row"
+              role="link"
+              tabindex="0"
+              @click="openDeal(deal.itemUrl)"
+              @keydown.enter.prevent="openDeal(deal.itemUrl)"
+              @keydown.space.prevent="openDeal(deal.itemUrl)"
+            >
+              <td data-label="Rank">#{{ index + 1 }}</td>
+
+              <td data-label="Item">
+                <a :href="deal.itemUrl" target="_blank" rel="noopener noreferrer">
+                  <img
+                    :src="deal.imageUrl"
+                    :alt="deal.name"
+                    class="top-ten-deal-item-image"
+                  >
+                </a>
+              </td>
+
+              <td data-label="Skin">
+                <a :href="deal.itemUrl" target="_blank" rel="noopener noreferrer">
+                  {{ deal.name }}
+                </a>
+              </td>
+
+              <td data-label="Condition">{{ getConditionFromFloat(deal.float) }}</td>
+              <td data-label="Base Price">{{ formatPrice(deal.itemPrice) }}</td>
+              <td data-label="Deal Price">{{ formatPrice(deal.salePrice) }}</td>
+              <td data-label="Discount">{{ formatDiscount(deal.discountPercentage) }}</td>
+              <td data-label="Date">{{ formatDealDate(deal.timestamp) }}</td>
+            </tr>
+
+            <tr v-if="topDeals.length === 0">
+              <td colspan="8">No deals available right now.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="testimonials" ref="testimonials" class="fade-section">
       <div class="content-wrapper">
         <h1 class="testimonial-title">Words from our subscribers</h1>
