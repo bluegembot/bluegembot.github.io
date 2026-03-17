@@ -42,6 +42,14 @@ interface SkinDatasetItem {
   phase?: string
 }
 
+const getImageLookupName = (itemName: string): string => {
+  return itemName
+    .trim()
+    .replace(/^StatTrak™\s+/i, '')
+    .replace(/^Souvenir\s+/i, '')
+    .toLowerCase()
+}
+
 export function initLandingPage() {
   const hero = ref<HTMLElement | null>(null)
   const features = ref<HTMLElement | null>(null)
@@ -59,12 +67,12 @@ export function initLandingPage() {
 
   const skinImageMap = new Map<string, string>(
     (skinsJson as SkinDatasetItem[]).map((skin) => {
-      return [skin.market_hash_name.trim().toLowerCase(), skin.image_url]
+      return [getImageLookupName(skin.market_hash_name), skin.image_url]
     })
   )
 
   const getImageFromDataset = (itemName: string, fallbackImageUrl: string): string => {
-    const datasetImage = skinImageMap.get(itemName.trim().toLowerCase())
+    const datasetImage = skinImageMap.get(getImageLookupName(itemName))
 
     if (datasetImage) {
       return datasetImage
