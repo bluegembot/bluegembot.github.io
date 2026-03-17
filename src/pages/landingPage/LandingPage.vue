@@ -68,7 +68,12 @@
               <td data-label="Rank">#{{ index + 1 }}</td>
 
               <td data-label="Item">
-                <a :href="deal.itemUrl" target="_blank" rel="noopener noreferrer">
+                <a
+                  :href="deal.itemUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.prevent.stop="openDeal(deal.itemUrl)"
+                >
                   <img
                     :src="deal.imageUrl"
                     :alt="deal.name"
@@ -78,7 +83,12 @@
               </td>
 
               <td data-label="Skin">
-                <a :href="deal.itemUrl" target="_blank" rel="noopener noreferrer">
+                <a
+                  :href="deal.itemUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.prevent.stop="openDeal(deal.itemUrl)"
+                >
                   {{ deal.name }}
                 </a>
               </td>
