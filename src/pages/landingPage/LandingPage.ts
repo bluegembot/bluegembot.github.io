@@ -45,6 +45,7 @@ interface SkinDatasetItem {
 const getImageLookupName = (itemName: string): string => {
   return itemName
     .trim()
+    .replace(/^★\s*StatTrak™\s+/i, '★ ')
     .replace(/^StatTrak™\s+/i, '')
     .replace(/^Souvenir\s+/i, '')
     .toLowerCase()
