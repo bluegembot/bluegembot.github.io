@@ -23,7 +23,7 @@ interface TopDeal {
   source: string
   externalId: string
   name: string
-  imageUrl: string
+  imageUrl: string | null
   itemUrl: string
   float: number | null
   salePrice: number
@@ -48,7 +48,11 @@ const getImageLookupName = (itemName: string): string => {
     .replace(/\s*★ StatTrak™$/i, '')
     .replace(/\s*StatTrak™$/i, '')
     .replace(/\s*Souvenir$/i, '')
-    .trim()
+    .toLowerCase()
+}
+
+const getImageFromDataset = (skinImageMap: Map<string, string>, itemName: string): string | null => {
+  return skinImageMap.get(getImageLookupName(itemName)) ?? null
 }
 
 export function initLandingPage() {
@@ -71,16 +75,6 @@ export function initLandingPage() {
       return [getImageLookupName(skin.market_hash_name), skin.image_url]
     })
   )
-
-  const getImageFromDataset = (itemName: string, fallbackImageUrl: string): string => {
-    const datasetImage = skinImageMap.get(getImageLookupName(itemName))
-
-    if (datasetImage) {
-      return datasetImage
-    }
-
-    return fallbackImageUrl
-  }
 
   const formatDiscount = (discount: number): string => {
     return `${discount.toFixed(2)}%`
@@ -150,7 +144,7 @@ export function initLandingPage() {
           source: deal.source,
           externalId: deal.external_id,
           name: deal.item_name,
-          imageUrl: getImageFromDataset(deal.item_name, deal.item_image_url),
+          imageUrl: getImageFromDataset(skinImageMap, deal.item_name),
           itemUrl: deal.item_url,
           float: deal.float,
           salePrice: deal.sale_price,

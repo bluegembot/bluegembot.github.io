@@ -75,10 +75,14 @@
                   @click.prevent.stop="openDeal(deal.itemUrl)"
                 >
                   <img
+                    v-if="deal.imageUrl"
                     :src="deal.imageUrl"
                     :alt="deal.name"
                     class="top-ten-deal-item-image"
                   >
+                  <span v-else class="top-ten-deal-item-image top-ten-deal-item-icon" aria-hidden="true">
+                    <i class="fa-solid fa-image"></i>
+                  </span>
                 </a>
               </td>
 

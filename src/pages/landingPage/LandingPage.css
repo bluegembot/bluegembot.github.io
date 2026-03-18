@@ -176,6 +176,19 @@ section {
     border-radius: 4px;
 }
 
+.top-ten-deal-item-icon {
+    width: 4rem;
+    height: 4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: var(--text-gray-light);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-background-mute);
+    font-size: 1.5rem;
+}
+
 .top-deals-section {
     display: flex;
     flex-direction: column;
