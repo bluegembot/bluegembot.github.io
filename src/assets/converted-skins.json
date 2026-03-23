@@ -13782,7 +13782,7 @@
   },
   {
     "market_hash_name": "P90 | Deathgaze",
-    "image_url": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_p90_deathgaze_light_png.png",
+    "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf7XsL0ParabBlJ_GJC1icyOl-pK85GHy1kEh3627Tntn6dC-SOgFyXJR3RO8Jt0a7lIG1M-PksgLZjNoT02yg2XMB6aCz/280x210",
     "min_float": 0,
     "max_float": 1,
     "stattrak": false,
