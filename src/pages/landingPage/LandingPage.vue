@@ -132,7 +132,6 @@
     <section id="socials" ref="socials" class="fade-section">
       <div class="content-wrapper">
         <h2>Get started with BlueGemBot for free</h2>
-        <p>Join the BlueGemBot community to track Skinport and CSFloat deals, learn the setup, and start monitoring CS2 skins.</p>
         <div class="social-links">
           <a href="https://discord.com/invite/kWGfK6St4m" class="social-link discord" target="_blank" rel="noopener noreferrer">
             <font-awesome-icon :icon="['fab', 'discord']" class="social-icon" />
