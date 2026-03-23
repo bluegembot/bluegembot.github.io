@@ -2,12 +2,79 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-      <link rel="icon" href="./src/assets/BGBLogo.jpg">
+    <link rel="icon" type="image/jpeg" href="/BGBLogo.jpg">
+    <link rel="apple-touch-icon" href="/BGBLogo.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlueGemBot</title>
+    <title>BlueGemBot | CS2 Skinport & CSFloat Listing Tracker</title>
+    <meta
+      name="description"
+      content="BlueGemBot is a CS2 skin deal tracker for Skinport and CSFloat. Track blue gem, pattern, and discount opportunities with Discord alerts and fast listing monitoring."
+    >
+    <meta
+      name="keywords"
+      content="BlueGemBot, bluegembot, blue gem bot, CS2 skin tracker, Skinport tracker, CSFloat tracker, CS2 deals, blue gem skins, sniping bot, skin sniper, skin listing tracker, CS2 skin deals, CS2 market monitor, CS2 skin alerts, blue gem opportunities, pattern tracking, discount tracking"
+    >
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1220">
+    <link rel="canonical" href="https://bluegembot.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BlueGemBot">
+    <meta property="og:title" content="BlueGemBot | CS2 Skinport & CSFloat Listing Tracker">
+    <meta
+      property="og:description"
+      content="Track CS2 skin listings, blue gem opportunities, and discounts from Skinport and CSFloat with BlueGemBot."
+    >
+    <meta property="og:url" content="https://bluegembot.com/">
+    <meta property="og:image" content="https://bluegembot.com/BGBLogo.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="BlueGemBot | CS2 Skinport & CSFloat Listing Tracker">
+    <meta
+      name="twitter:description"
+      content="BlueGemBot tracks CS2 skin listings, discounts, and blue gem opportunities from Skinport and CSFloat."
+    >
+    <meta name="twitter:image" content="https://bluegembot.com/BGBLogo.jpg">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "BlueGemBot",
+            "url": "https://bluegembot.com/",
+            "logo": "https://bluegembot.com/BGBLogo.jpg",
+            "sameAs": [
+              "https://discord.com/invite/kWGfK6St4m",
+              "https://www.youtube.com/@muxeyy"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "BlueGemBot",
+            "url": "https://bluegembot.com/"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "BlueGemBot",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://bluegembot.com/",
+            "description": "BlueGemBot is a CS2 skin listing tracker for Skinport and CSFloat with Discord alerts and market monitoring."
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>
+    <noscript>
+      BlueGemBot is a CS2 skin listing tracker for Skinport and CSFloat. Enable JavaScript to use the dashboard, alerts, and live deal monitoring.
+    </noscript>
+    <script>
+      if (window.location.hash.startsWith('#/')) {
+        const normalizedPath = window.location.hash.slice(1)
+        window.history.replaceState(null, '', normalizedPath)
+      }
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

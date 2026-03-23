@@ -8,25 +8,26 @@
     />
     <section id="hero" ref="hero">
       <div class="content-wrapper hero-content">
-        <h1>Transform the way you snipe CS skins</h1>
-        <p>BlueGemBot: the free, instant and customizable Skinport & CSFloat listing tracker</p>
+        <h1>BlueGemBot tracks CS2 skin listings in real time</h1>
+        <p>BlueGemBot is a free, instant, and customizable Skinport and CSFloat listing tracker for blue gem hunters, skin traders, and deal snipers.</p>
       </div>
     </section>
 
     <section id="features" ref="features" class="fade-section">
       <div class="content-wrapper">
+        <h2 class="sr-only">Why traders use BlueGemBot</h2>
         <div class="features">
           <div class="feature-card fast">
             <div class="feature-icon">⚡ Lightning Fast</div>
-            <p>Experience unprecedented speed and efficiency with our discord bot, and automatically open listings instantly with the integrated auto-opener.</p>
+            <p>Track new CS2 listings with Discord alerts and an integrated auto-opener built for fast reactions when profitable deals appear.</p>
           </div>
           <div class="feature-card secure">
             <div class="feature-icon">🛡️ Secure by Design</div>
-            <p>Login and registration tokens are all managed through your discord DM's with BlueGemBot, eliminating the need for passwords and 3rd party logins.</p>
+            <p>Login and registration tokens are managed through your Discord DMs with BlueGemBot, so you can avoid passwords and third-party logins.</p>
           </div>
           <div class="feature-card profitable">
             <div class="feature-icon">💰 Profitable</div>
-            <p>Combine the speed of BlueGemBot with your skin knowledge to cherry pick profitable deals!</p>
+            <p>Use float, pattern, pricing, and discount signals to spot blue gem and other underpriced CS2 skin opportunities faster.</p>
           </div>
         </div>
       </div>
@@ -131,6 +132,7 @@
     <section id="socials" ref="socials" class="fade-section">
       <div class="content-wrapper">
         <h2>Get started with BlueGemBot for free</h2>
+        <p>Join the BlueGemBot community to track Skinport and CSFloat deals, learn the setup, and start monitoring CS2 skins.</p>
         <div class="social-links">
           <a href="https://discord.com/invite/kWGfK6St4m" class="social-link discord" target="_blank" rel="noopener noreferrer">
             <font-awesome-icon :icon="['fab', 'discord']" class="social-icon" />
@@ -150,7 +152,7 @@
       <div class="footer-content">
         <div class="footer-column">
           <h4>BlueGemBot</h4>
-          <p>Transform the way you snipe CS skins with our free, instant and customizable listing tracker.</p>
+          <p>BlueGemBot is a CS2 skin listing tracker for Skinport and CSFloat, built for blue gem searches, fast alerts, and profitable deal discovery.</p>
           <p class="api-disclaimer">🔗 Connects to publicly available APIs - no scraping or automated website actions</p>
         </div>
 

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 
 import UserDashboard from './pages/userDashboardPage/UserDashboardPage.vue';
 import RegisterPage from '@/pages/userRegisterPage/RegisterPage.vue';
@@ -43,27 +43,45 @@ async function isAuthenticated() {
 
 // Define your routes
 const routes = [
-  { path: '/', component: LandingPage, pathToRegexpOptions: { strict: true }, meta: { requiresAuth: false } },
-  { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true } },
-  { path: '/TOS', component: TOS, meta: { requiresAuth: false } },
-  { path: '/privacy', component: privacy, meta: { requiresAuth: false } },
-  { path: '/refunds', component: refunds, meta: { requiresAuth: false } },
-  { path: '/cancellation', component: cancellationpolicy, meta:{requiresAuth: false}},
-  { path: '/register', component: RegisterPage },
-  { path: '/login', component: UserLoginPage },
-  { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true } },
-  { path: '/account', component: AccountPage, meta:{requiresAuth: true}},
-  { path: '/autoOpen', component: AutoOpenPage, meta:{requiresAuth: true}},
-  { path: '/about', component: LandingPage, meta:{requiresAuth: false}},
-  { path: '/subscriptions', component: SubscriptionsPage, meta:{requiresAuth: true}},
-  { path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{requiresAuth: true}},
-  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{requiresAuth: true}}
+  {
+    path: '/',
+    component: LandingPage,
+    pathToRegexpOptions: { strict: true },
+    meta: {
+      requiresAuth: false,
+      title: 'BlueGemBot | CS2 Skinport & CSFloat Listing Tracker',
+      description: 'BlueGemBot tracks CS2 skin listings from Skinport and CSFloat with fast alerts, blue gem monitoring, and deal discovery.',
+      canonical: 'https://bluegembot.com/'
+    }
+  },
+  { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true, title: 'Dashboard | BlueGemBot', description: 'BlueGemBot user dashboard.' } },
+  { path: '/TOS', component: TOS, meta: { requiresAuth: false, title: 'Terms of Service | BlueGemBot', description: 'Terms of Service for BlueGemBot.', canonical: 'https://bluegembot.com/TOS' } },
+  { path: '/privacy', component: privacy, meta: { requiresAuth: false, title: 'Privacy Policy | BlueGemBot', description: 'Privacy Policy for BlueGemBot.', canonical: 'https://bluegembot.com/privacy' } },
+  { path: '/refunds', component: refunds, meta: { requiresAuth: false, title: 'Refund Policy | BlueGemBot', description: 'Refund Policy for BlueGemBot.', canonical: 'https://bluegembot.com/refunds' } },
+  { path: '/cancellation', component: cancellationpolicy, meta:{ requiresAuth: false, title: 'Cancellation Policy | BlueGemBot', description: 'Cancellation Policy for BlueGemBot.', canonical: 'https://bluegembot.com/cancellation' }},
+  { path: '/register', component: RegisterPage, meta: { title: 'Register | BlueGemBot', description: 'Create a BlueGemBot account.' } },
+  { path: '/login', component: UserLoginPage, meta: { title: 'Login | BlueGemBot', description: 'Log in to BlueGemBot.' } },
+  { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true, title: 'Skin Selector | BlueGemBot', description: 'Configure tracked skins in BlueGemBot.' } },
+  { path: '/account', component: AccountPage, meta:{ requiresAuth: true, title: 'Account | BlueGemBot', description: 'Manage your BlueGemBot account.' }},
+  { path: '/autoOpen', component: AutoOpenPage, meta:{ requiresAuth: true, title: 'Auto Open | BlueGemBot', description: 'Configure BlueGemBot auto-open settings.' }},
+  {
+    path: '/about',
+    component: LandingPage,
+    meta:{
+      requiresAuth: false,
+      title: 'About BlueGemBot | CS2 Listing Tracker',
+      description: 'Learn how BlueGemBot tracks CS2 listings, discounts, and blue gem opportunities.',
+      canonical: 'https://bluegembot.com/about'
+    }
+  },
+  { path: '/subscriptions', component: SubscriptionsPage, meta:{ requiresAuth: true, title: 'Subscriptions | BlueGemBot', description: 'Manage your BlueGemBot subscription.' }},
+  { path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{ requiresAuth: true, title: 'Basic Checkout | BlueGemBot', description: 'BlueGemBot basic plan checkout.' }},
+  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{ requiresAuth: true, title: 'Gold Checkout | BlueGemBot', description: 'BlueGemBot gold plan checkout.' }}
 
 ];
 
-// Create the router instance using hash mode
 const router = createRouter({
-  history: createWebHashHistory('/'), // Switch to hash mode
+  history: createWebHistory('/'),
   routes,
 });
 
@@ -101,9 +119,8 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach((to) => {
   const gtag = (window as any).gtag;
   if (gtag) {
-    // Send explicit pageview event instead of config
     gtag('event', 'page_view', {
-      page_path: '/#' + to.fullPath,
+      page_path: to.fullPath,
       page_location: window.location.href
     });
   }
