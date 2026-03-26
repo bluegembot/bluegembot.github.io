@@ -4,6 +4,9 @@ import { WS_URL } from '@/config/environment';
 import PermissionNotice from "@/components/AutoOpenPage/PermissionNotice.vue";
 import NotificationSettings from "@/components/AutoOpenPage/NotificationSettings.vue";
 
+const SKINPORT_POPUP_TEST_URL = "https://skinport.com/?r=bgb";
+const POPUP_TEST_CLOSE_DELAY_MS = 300;
+
 export default {
     components: {
         PermissionNotice,
@@ -92,6 +95,26 @@ export default {
             showConsole.value = !showConsole.value;
         }
 
+        function navigatePopupToTestUrl(popup: Window) {
+            try {
+                popup.location.href = SKINPORT_POPUP_TEST_URL;
+                window.setTimeout(() => {
+                    try {
+                        popup.close();
+                    } catch (error) {
+                        // Ignore close errors
+                    }
+                }, POPUP_TEST_CLOSE_DELAY_MS);
+            } catch (error) {
+                console.log('Failed to navigate popup to test URL:', error);
+                try {
+                    popup.close();
+                } catch (closeError) {
+                    // Ignore close errors
+                }
+            }
+        }
+
         // Advanced popup permission detection methods
         function testPopupPermissionFeatureDetection(): boolean {
             console.log('Testing popup permissions (feature detection)...');
@@ -131,17 +154,17 @@ export default {
                 }
 
                 // Clean up
-                try {
-                    popup.close();
-                } catch (error) {
-                    // Ignore close errors
-                }
-
                 if (isBlocked) {
+                    try {
+                        popup.close();
+                    } catch (error) {
+                        // Ignore close errors
+                    }
                     console.log('No permission (feature detection failed)');
                     window.close()
                     return false;
                 } else {
+                    navigatePopupToTestUrl(popup);
                     console.log('Has permission (feature detection passed)');
                     window.close()
                     return true;
@@ -158,7 +181,7 @@ export default {
 
             return new Promise<boolean>((resolve) => {
                 try {
-                    const testWindow = window.open('about:blank', '_blank', 'width=1,height=1,left=-10000,top=-10000,menubar=no,toolbar=no');
+                    const testWindow = window.open('', '_blank', 'width=1,height=1,left=-10000,top=-10000,menubar=no,toolbar=no');
 
                     if (!testWindow || testWindow.closed || typeof testWindow.closed === 'undefined') {
                         console.log('No permission (immediate detection)');
@@ -173,12 +196,12 @@ export default {
                                 testWindow.outerHeight === 0 ||
                                 testWindow.outerWidth === 0;
 
-                            testWindow.close();
-
                             if (isBlocked) {
+                                testWindow.close();
                                 console.log('No permission (timeout verification failed)');
                                 resolve(false);
                             } else {
+                                navigatePopupToTestUrl(testWindow);
                                 console.log('Has permission (timeout verification passed)');
                                 resolve(true);
                             }

@@ -42,6 +42,8 @@ interface SkinDatasetItem {
   phase?: string
 }
 
+const SKINPORT_AFFILIATE_CODE = 'BGB'
+
 const getImageLookupName = (itemName: string): string => {
   return itemName
     .trim()
@@ -53,6 +55,21 @@ const getImageLookupName = (itemName: string): string => {
 
 const getImageFromDataset = (skinImageMap: Map<string, string>, itemName: string): string | null => {
   return skinImageMap.get(getImageLookupName(itemName)) ?? null
+}
+
+const withSkinportAffiliate = (itemUrl: string): string => {
+  try {
+    const parsedUrl = new URL(itemUrl)
+
+    if (parsedUrl.hostname !== 'skinport.com' && parsedUrl.hostname !== 'www.skinport.com') {
+      return itemUrl
+    }
+
+    parsedUrl.searchParams.set('r', SKINPORT_AFFILIATE_CODE)
+    return parsedUrl.toString()
+  } catch (error) {
+    return itemUrl
+  }
 }
 
 export function initLandingPage() {
@@ -145,7 +162,7 @@ export function initLandingPage() {
           externalId: deal.external_id,
           name: deal.item_name,
           imageUrl: getImageFromDataset(skinImageMap, deal.item_name),
-          itemUrl: deal.item_url,
+          itemUrl: withSkinportAffiliate(deal.item_url),
           float: deal.float,
           salePrice: deal.sale_price,
           itemPrice: deal.item_price,
