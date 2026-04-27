@@ -8,8 +8,8 @@
     />
     <section id="hero" ref="hero">
       <div class="content-wrapper hero-content">
-        <h1>BlueGemBot tracks CS2 skin listings in real time</h1>
-        <p>BlueGemBot is a free, instant, and customizable Skinport and CSFloat listing tracker for blue gem hunters, skin traders, and deal snipers.</p>
+        <h1>BlueGemBot - Let CS2 skin listings come to you</h1>
+        <p>BlueGemBot is a free, instant, and customizable Skinport and CSFloat listing tracker made for traders, collectors, and deal snipers.</p>
       </div>
     </section>
 
