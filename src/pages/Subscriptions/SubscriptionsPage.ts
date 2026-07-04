@@ -1,4 +1,5 @@
 import { defineComponent, onMounted, ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { API_URL } from '@/config/environment';
 
 interface Subscription {
@@ -19,6 +20,10 @@ export default defineComponent({
         const messageType = ref(""); // Added missing messageType ref
         const popupVisible = ref(false);
         const selectedSubscription = ref('');
+        const showCancelledMessage = ref(false);
+
+        const route = useRoute();
+        const router = useRouter();
 
         const clearErrorMessages = () => {
             setTimeout(() => {
@@ -26,10 +31,22 @@ export default defineComponent({
             }, 2500);
         };
 
+        const dismissCancelledMessage = () => {
+            showCancelledMessage.value = false;
+        };
+
         onMounted(() => {
             username.value = localStorage.getItem("username") || "";
             chatId.value = localStorage.getItem("chatId") || "";
             subscriptionStatus.value = localStorage.getItem("subscriptionStatus") || "";
+
+            // Returning from a cancelled Stripe checkout: show the "order cancelled" popup
+            // then strip the flag from the URL so it doesn't re-trigger on refresh.
+            if (route.query.cancelled === 'true') {
+                showCancelledMessage.value = true;
+                const { cancelled, ...rest } = route.query;
+                router.replace({ path: '/subscriptions', query: rest });
+            }
         });
 
         return {
@@ -40,7 +57,9 @@ export default defineComponent({
             messageType,
             clearErrorMessages,
             popupVisible,
-            selectedSubscription
+            selectedSubscription,
+            showCancelledMessage,
+            dismissCancelledMessage
         };
     },
     data() {

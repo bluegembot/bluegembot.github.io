@@ -14,7 +14,7 @@ function dismiss() {
 <template>
   <div v-if="isVisible" class="site-notification-banner" role="alert">
     <span class="site-notification-text">
-      Due to recent Skinport changes, the Skinport links are no longer functional. We are trying to resolve this as quickly as possible. <br> Unfortunately this is outside of our control. <br> Last update: 1 jul 2026.
+      Everyone now has free CSfloat tracking!
     </span>
     <button
         class="site-notification-close"

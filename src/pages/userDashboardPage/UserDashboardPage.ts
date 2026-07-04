@@ -206,36 +206,12 @@ export function useUserDashboard(): UseUserDashboardReturn {
         }
     };
 
-    // Function to apply wantedSources preferences
+    // Function to apply wantedSources preferences.
+    // Skinport tracking has been retired, so CSFloat is now the only source.
+    // Any stored value (including legacy 1/2 that enabled Skinport) is normalized to CSFloat-only.
     const applyWantedSourcesPreferences = (): void => {
-        const wantedSources = localStorage.getItem('wantedSources');
-
-        if (wantedSources) {
-            const sourceValue = parseInt(wantedSources, 10);
-
-            switch (sourceValue) {
-                case 2:
-                    // Only skinport tracking enabled selected
-                    userSettings.value.csfloatTracking = false;
-                    userSettings.value.skinportTracking = true;
-                    break;
-                case 3:
-                    // Only csfloat tracking enabled selected
-                    userSettings.value.csfloatTracking = true;
-                    userSettings.value.skinportTracking = false;
-                    break;
-                case 1:
-                    // Both options enabled
-                    userSettings.value.csfloatTracking = true;
-                    userSettings.value.skinportTracking = true;
-                    break;
-                default:
-                    // Default case - only skinportTracking
-                    userSettings.value.csfloatTracking = false;
-                    userSettings.value.skinportTracking = true;
-                    break;
-            }
-        }
+        userSettings.value.csfloatTracking = true;
+        userSettings.value.skinportTracking = false;
     };
 
     const fetchCsrfTokenAndUserConfig = async (): Promise<void> => {
@@ -377,14 +353,8 @@ export function useUserDashboard(): UseUserDashboardReturn {
         isSettingsLoading.value = true;
 
         try {
-            const wantedSources =
-                newSettings.csfloatTracking && newSettings.skinportTracking
-                    ? 1
-                    : newSettings.csfloatTracking && !newSettings.skinportTracking
-                        ? 3
-                        : !newSettings.csfloatTracking && newSettings.skinportTracking
-                            ? 2
-                            : 2;
+            // Skinport tracking has been retired; CSFloat (value 3) is the only supported source.
+            const wantedSources = 3;
 
             const settingsResponse = await csrfFetch(`${API_URL}/skins/updateWantedSources`, {
                 method: "POST",
@@ -411,7 +381,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 return;
             }
 
-            userSettings.value = { ...newSettings };
+            userSettings.value = { ...newSettings, csfloatTracking: true, skinportTracking: false };
             errorMessage.value = "Settings saved successfully!";
             messageType.value = "success";
             closeSettingsModal();

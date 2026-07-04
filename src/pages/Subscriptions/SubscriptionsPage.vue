@@ -7,6 +7,18 @@
     {{ errorMessage }}
   </p>
 
+  <!-- Order cancelled banner (shown when returning from a cancelled Stripe checkout) -->
+  <div v-if="showCancelledMessage" class="order-cancelled-message">
+    <div class="order-cancelled-content">
+      <div class="cancelled-icon">🛈</div>
+      <div class="cancelled-text">
+        <p><strong>Order cancelled</strong></p>
+        <p>Order cancelled, you have not been charged.</p>
+      </div>
+      <button class="cancelled-close-button" @click="dismissCancelledMessage" aria-label="Dismiss">&times;</button>
+    </div>
+  </div>
+
   <main>
     <Navbar
         :rightItems="[

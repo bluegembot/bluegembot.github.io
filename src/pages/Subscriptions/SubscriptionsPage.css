@@ -66,6 +66,88 @@ main {
 }
 
 /* =========================
+   Order cancelled banner
+   (same shape as the "Subscription Required" popup, different color)
+========================= */
+
+.order-cancelled-message {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
+  z-index: 9999;
+  max-width: 500px;
+  width: 90%;
+  animation: slideInDown 0.3s ease-out;
+}
+
+.order-cancelled-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  position: relative;
+}
+
+.cancelled-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.cancelled-text {
+  flex: 1;
+}
+
+.cancelled-text p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cancelled-text p:first-child {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.cancelled-text p:last-child {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.cancelled-close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.cancelled-close-button:hover {
+  opacity: 1;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* =========================
    Popup
 ========================= */
 

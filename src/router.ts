@@ -14,6 +14,7 @@ import refunds from "@/pages/LegalInfo/refunds.vue"
 import cancellationpolicy from "@/pages/LegalInfo/Cancellation.vue"
 import StripeCheckoutBasic from "@/components/Stripe/StripeCheckoutBasic.vue";
 import StripeCheckoutGold from "@/components/Stripe/StripeCheckoutGold.vue";
+import PaymentSuccess from "@/components/Stripe/PaymentSuccess.vue";
 
 const isDevelopment = import.meta.env.VITE_ENVIRONMENT === 'development';
 
@@ -76,7 +77,12 @@ const routes = [
   },
   { path: '/subscriptions', component: SubscriptionsPage, meta:{ requiresAuth: true, title: 'Subscriptions | BlueGemBot', description: 'Manage your BlueGemBot subscription.' }},
   { path: '/checkoutBasic', component: StripeCheckoutBasic, meta:{ requiresAuth: true, title: 'Basic Checkout | BlueGemBot', description: 'BlueGemBot basic plan checkout.' }},
-  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{ requiresAuth: true, title: 'Gold Checkout | BlueGemBot', description: 'BlueGemBot gold plan checkout.' }}
+  { path: '/checkoutGold', component: StripeCheckoutGold, meta:{ requiresAuth: true, title: 'Gold Checkout | BlueGemBot', description: 'BlueGemBot gold plan checkout.' }},
+  // Stripe cancel_url lands here (e.g. /checkout?cancelled=true) when a user backs out of checkout.
+  // Route them back to the subscriptions page, preserving the flag so we can show the "order cancelled" popup.
+  { path: '/checkout', redirect: { path: '/subscriptions', query: { cancelled: 'true' } } },
+  // Stripe success_url lands here (e.g. /payment-success?session_id=...) after a completed checkout.
+  { path: '/payment-success', component: PaymentSuccess, meta:{ requiresAuth: true, title: 'Payment Successful | BlueGemBot', description: 'Your BlueGemBot subscription is active.' }}
 
 ];
 

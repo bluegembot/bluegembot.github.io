@@ -21,18 +21,23 @@
             </label>
           </div>
           <div class="setting-item">
-            <label class="checkbox-container">
+            <label class="checkbox-container disabled">
               <input
                   type="checkbox"
-                  v-model="localSettings.skinportTracking"
+                  :checked="false"
+                  disabled
                   class="setting-checkbox"
               >
               <span class="checkmark"></span>
               <span class="setting-label">Enable Skinport tracking</span>
             </label>
-          </div>
-          <div class="setting-item">
-            <label class="checkbox-container"></label>
+            <span
+                class="info-icon"
+                tabindex="0"
+                role="img"
+                aria-label="Skinport currently unavailable"
+                data-tooltip="Skinport currently unavailable"
+            >i</span>
           </div>
         </div>
       </div>
@@ -69,8 +74,8 @@ export default {
     settings: {
       type: Object,
       default: () => ({
-        csfloatTracking: false,
-        skinportTracking: true,
+        csfloatTracking: true,
+        skinportTracking: false,
       })
     },
     isLoading: {
@@ -263,6 +268,71 @@ export default {
 .setting-label {
   margin-left: 8px;
   font-weight: 400;
+}
+
+/* Disabled (unavailable) tracking option */
+.checkbox-container.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.checkbox-container.disabled .checkmark {
+  border-color: #6c757d;
+}
+
+.checkbox-container.disabled:hover .checkmark {
+  background-color: transparent;
+}
+
+/* Info icon + hover tooltip */
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--accent-color);
+  color: var(--text-light);
+  font-size: 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  line-height: 1;
+  cursor: help;
+  user-select: none;
+  position: relative;
+}
+
+.info-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #1f1f1f;
+  color: #fff;
+  font-family: inherit;
+  font-style: normal;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.info-icon:hover::after,
+.info-icon:focus-visible::after {
+  opacity: 1;
+}
+
+.info-icon:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .modal-footer {
