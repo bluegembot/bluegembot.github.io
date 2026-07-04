@@ -25,7 +25,6 @@
           <div class="error-icon">🔒</div>
           <div class="error-text">
             <p><strong>Subscription Required</strong></p>
-            <p>Subscribe to access csfloat tracking!</p>
           </div>
           <router-link to="subscriptions">
             <button class="upgrade-button">

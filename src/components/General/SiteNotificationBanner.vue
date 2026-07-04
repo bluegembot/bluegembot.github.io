@@ -15,6 +15,13 @@ function dismiss() {
   <div v-if="isVisible" class="site-notification-banner" role="alert">
     <span class="site-notification-text">
       Everyone now has free CSfloat tracking!
+      <br />
+      <a
+          class="site-notification-link"
+          href="https://www.youtube.com/watch?v=gY0V50BC3ok"
+          target="_blank"
+          rel="noopener noreferrer"
+      >Check out the update -></a>
     </span>
     <button
         class="site-notification-close"
@@ -45,6 +52,18 @@ function dismiss() {
 
 .site-notification-text {
   max-width: 60ch;
+}
+
+.site-notification-link {
+  display: inline-block;
+  margin-top: 0.25rem;
+  color: #fde047;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.site-notification-link:hover {
+  opacity: 0.8;
 }
 
 .site-notification-close {
