@@ -278,11 +278,18 @@ export default {
   cursor: pointer;
   width: 16px;
   height: 16px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: #4CAF50;
 }
 
 .toggle-checkbox label {
   cursor: pointer;
   user-select: none;
+  margin: 0;
+  line-height: 16px;
+  font-weight: 500;
+  color: #334155;
 }
 
 .input-controls {
@@ -338,7 +345,7 @@ export default {
 .slider-fill {
   position: absolute;
   height: 4px;
-  background-color: #3b82f6;
+  background-color: #4CAF50;
   border-radius: 2px;
   transition: opacity 0.2s ease;
 }
@@ -348,7 +355,7 @@ export default {
   width: 20px;
   height: 20px;
   background: white;
-  border: 2px solid #3b82f6;
+  border: 2px solid #4CAF50;
   border-radius: 50%;
   transform: translate(-50%, -8px);
   z-index: 2;

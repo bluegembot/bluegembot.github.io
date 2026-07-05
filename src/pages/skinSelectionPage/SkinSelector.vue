@@ -142,8 +142,8 @@
               inputLabel="Minimum discount in %"
               min="0"
               max="100"
-              minLabel="-100%"
-              maxLabel="-1%"
+              minLabel="1%"
+              maxLabel="100%"
               tooltipSuffix="%"
               sliderType="discount"
             />
@@ -175,8 +175,8 @@
         </div>
 
         <div class="modal-actions">
-          <button @click="closeMenu">Close</button>
-          <button @click="applyAdvancedOptions">Add skin with options</button>
+          <button class="modal-btn modal-btn-secondary" @click="closeMenu">Close</button>
+          <button class="modal-btn modal-btn-primary" @click="applyAdvancedOptions">Add skin with options</button>
         </div>
       </div>
     </div>
