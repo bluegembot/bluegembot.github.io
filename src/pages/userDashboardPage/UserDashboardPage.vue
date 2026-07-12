@@ -1,6 +1,11 @@
 <template>
-  <div>
+  <div class="dashboard-page">
     <Navbar
+        :leftItems="[
+        { name: 'Track new skin', path: '/skinSelector' },
+        { name: 'Account', path: '/account' },
+        { name: 'Auto Opener', path: '/autoOpen' }
+      ]"
         :rightItems="[
         { name: 'Upgrade', path: '/subscriptions' }
       ]"
@@ -40,6 +45,7 @@
         <div class="tracked-skins-container">
           <h2>
             Tracked skins
+            <span v-if="!isLoadingSkins" class="skin-count">({{ trackedSkins.length }})</span>
             <button
                 @click="openSettingsModal"
                 class="settings-btn"
@@ -63,20 +69,61 @@
             </button>
           </h2>
 
+          <div v-if="!isLoadingSkins && trackedSkins.length > 2" class="skin-search-container">
+            <input
+                v-model="skinSearchQuery"
+                type="text"
+                class="skin-search-input"
+                placeholder="Search your tracked skins..."
+            />
+          </div>
+
           <ul class="tracked-skins-unordered-list">
-            <template v-if="trackedSkins.length > 0">
-              <li v-for="(skin, index) in trackedSkins" :key="skin.name" class="tracked-skin-item">
+            <!-- Loading skeletons -->
+            <template v-if="isLoadingSkins">
+              <li v-for="n in 3" :key="`skeleton-${n}`" class="tracked-skin-item skeleton-item">
+                <div class="skeleton-header">
+                  <div class="skeleton skeleton-image"></div>
+                  <div class="skeleton skeleton-title"></div>
+                </div>
+                <div class="skeleton skeleton-line"></div>
+                <div class="skeleton skeleton-line skeleton-line-short"></div>
+              </li>
+            </template>
+
+            <template v-else-if="trackedSkins.length > 0">
+              <li
+                  v-for="skin in filteredTrackedSkins"
+                  :key="`${skin.name}-${skin.phase || ''}-${skin.minWear}-${skin.maxWear}`"
+                  class="tracked-skin-item"
+              >
                 <div class="skin-info">
                   <div class="skin-header">
-                    <span class="skin-index">{{ index + 1 }}.</span>
+                    <img
+                        :src="skin.imageUrl || skinPlaceholder"
+                        @error="onImageError"
+                        :alt="getDisplayName(skin)"
+                        class="skin-image"
+                        loading="lazy"
+                    />
                     <span v-if="!isItemStattrak(skin) && !isItemSouvenir(skin)" class="skin-name">
-                      {{ skin.name + (skin.phase ? ' ' + skin.phase : '') }}
+                      {{ getDisplayName(skin) + (skin.phase ? ' ' + skin.phase : '') }}
                     </span>
                     <span v-else-if="isItemSouvenir(skin)" class="skin-name">
-                      (Souvenir) {{ skin.name + (skin.phase ? ' ' + skin.phase : '') }}
+                      (Souvenir) {{ getDisplayName(skin) + (skin.phase ? ' ' + skin.phase : '') }}
                     </span>
                     <span v-else-if="isItemStattrak(skin)" class="skin-name">
-                      (StatTrak™) {{ skin.name + (skin.phase ? ' ' + skin.phase : '') }}
+                      (StatTrak™) {{ getDisplayName(skin) + (skin.phase ? ' ' + skin.phase : '') }}
+                    </span>
+                    <span
+                        v-if="getWearBadge(skin.minWear, skin.maxWear)"
+                        class="wear-badge"
+                        :style="{
+                          color: getWearBadge(skin.minWear, skin.maxWear)!.color,
+                          borderColor: getWearBadge(skin.minWear, skin.maxWear)!.color
+                        }"
+                    >
+                      {{ getWearBadge(skin.minWear, skin.maxWear)!.label }}
                     </span>
                   </div>
 
@@ -85,25 +132,12 @@
                     <div class="detail-row">
                       <span class="detail-label">Float Range:</span>
                       <div class="editable-field">
-                        <input
-                            type="number"
-                            v-model.number="skin.minWear"
-                            @input="markSkinAsChanged(skin)"
-                            class="float-input"
-                            min="0"
-                            max="1"
-                            step="0.001"
-                            placeholder="0.000"
-                        />
-                        <input
-                            type="number"
-                            v-model.number="skin.maxWear"
-                            @input="markSkinAsChanged(skin)"
-                            class="float-input"
-                            min="0"
-                            max="1"
-                            step="0.001"
-                            placeholder="1.000"
+                        <FloatRangeSlider
+                            v-model:minValue="skin.minWear"
+                            v-model:maxValue="skin.maxWear"
+                            :boundMin="skin.allowedMinFloat ?? 0"
+                            :boundMax="skin.allowedMaxFloat ?? 1"
+                            @change="markSkinAsChanged(skin)"
                         />
                       </div>
                     </div>
@@ -191,23 +225,28 @@
                   </button>
                 </div>
               </li>
+
+              <li v-if="filteredTrackedSkins.length === 0" class="no-tracking-message">
+                No tracked skins match "{{ skinSearchQuery }}".
+              </li>
             </template>
 
             <template v-else>
-              <li class="no-tracking-message">
-                Not tracking any skins at this time, add a skin to start tracking.
+              <li class="empty-state">
+                <div class="empty-state-icon">🎯</div>
+                <p class="empty-state-title">No tracked skins yet</p>
+                <p class="empty-state-text">
+                  Pick a skin to track and BGB will notify you when a matching deal shows up.
+                </p>
+                <router-link to="/skinSelector">
+                  <button class="empty-state-button">Track your first skin</button>
+                </router-link>
               </li>
             </template>
           </ul>
         </div>
       </div>
 
-      <!-- Grid section -->
-      <div class="grid-container-dashboard">
-        <router-link to="/skinSelector" class="grid-item">Track new skin</router-link>
-        <router-link to="/account" class="grid-item">Account</router-link>
-        <router-link to="/autoOpen" class="grid-item">Auto Opener</router-link>
-      </div>
     </main>
 
     <!-- Settings Modal -->
@@ -229,9 +268,13 @@
 import { defineComponent } from 'vue';
 import { useUserDashboard } from './UserDashboardPage';
 import SettingsModal from '../../components/UserDashboard/SettingsModal.vue';
+import FloatRangeSlider from '../../components/UserDashboard/FloatRangeSlider.vue';
 
 type DashboardSkin = {
   name: string;
+  imageUrl?: string | null;
+  allowedMinFloat?: number;
+  allowedMaxFloat?: number;
   phase?: string | null;
   minWear: number;
   maxWear: number;
@@ -244,7 +287,8 @@ type DashboardSkin = {
 export default defineComponent({
   name: 'UserDashboardPage',
   components: {
-    SettingsModal
+    SettingsModal,
+    FloatRangeSlider
   },
   setup() {
     const dashboard = useUserDashboard();

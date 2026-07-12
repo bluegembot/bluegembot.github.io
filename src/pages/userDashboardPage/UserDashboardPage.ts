@@ -1,11 +1,109 @@
 //UserDashboardPage.ts
-import {nextTick, onMounted, ref} from "vue";
-import type { Ref } from "vue";
+import {computed, nextTick, onMounted, ref} from "vue";
+import type { ComputedRef, Ref } from "vue";
 import { API_URL } from '@/config/environment';
 import { csrfFetch } from "@/api/csrf";
+import skinsJson from "@/assets/converted-skins.json";
+import skinPlaceholder from "@/assets/SkinPlaceholder.svg";
+
+interface SkinDatasetItem {
+    market_hash_name: string;
+    image_url: string;
+    min_float?: number;
+    max_float?: number;
+    phase?: string;
+}
+
+const stripVariantPrefix = (itemName: string): string => {
+    return itemName
+        .trim()
+        .replace(/^★\s*StatTrak™\s+/i, '★ ')
+        .replace(/^StatTrak™\s+/i, '')
+        .replace(/^Souvenir\s+/i, '');
+};
+
+const getImageLookupName = (itemName: string): string => {
+    return stripVariantPrefix(itemName).toLowerCase();
+};
+
+// item_of_interest is the only field the backend reliably persists as typed by the
+// user, so StatTrak/Souvenir status is derived from its "StatTrak™ "/"Souvenir "
+// prefix rather than trusted from the (currently unset) is_stattrak/is_souvenir columns.
+const detectVariantFromName = (itemName: string): { isStattrak: boolean; isSouvenir: boolean } => {
+    const trimmed = itemName.trim();
+
+    if (/^(★\s*)?StatTrak™\s+/i.test(trimmed)) {
+        return { isStattrak: true, isSouvenir: false };
+    }
+
+    if (/^Souvenir\s+/i.test(trimmed)) {
+        return { isStattrak: false, isSouvenir: true };
+    }
+
+    return { isStattrak: false, isSouvenir: false };
+};
+
+// Doppler-style skins share a market_hash_name and differ by phase, so the
+// map is keyed on "name|phase" with a phaseless fallback per name.
+const skinDataMap = new Map<string, SkinDatasetItem>();
+for (const skin of skinsJson as SkinDatasetItem[]) {
+    const name = getImageLookupName(skin.market_hash_name);
+    const phase = (skin.phase ?? '').toLowerCase();
+    skinDataMap.set(`${name}|${phase}`, skin);
+    if (!skinDataMap.has(`${name}|`)) {
+        skinDataMap.set(`${name}|`, skin);
+    }
+}
+
+const getSkinDatasetEntry = (name: string, phase: string | null): SkinDatasetItem | null => {
+    const lookupName = getImageLookupName(name);
+    const lookupPhase = (phase ?? '').toLowerCase();
+    return skinDataMap.get(`${lookupName}|${lookupPhase}`)
+        ?? skinDataMap.get(`${lookupName}|`)
+        ?? null;
+};
+
+interface WearBadge {
+    label: string;
+    color: string;
+}
+
+const WEAR_BADGE_TIERS: Array<{ name: string; short: string; min: number; max: number; color: string }> = [
+    { name: "Factory New", short: "FN", min: 0, max: 0.07, color: "#22c55e" },
+    { name: "Minimal Wear", short: "MW", min: 0.07, max: 0.15, color: "#84cc16" },
+    { name: "Field-Tested", short: "FT", min: 0.15, max: 0.38, color: "#eab308" },
+    { name: "Well-Worn", short: "WW", min: 0.38, max: 0.45, color: "#f97316" },
+    { name: "Battle-Scarred", short: "BS", min: 0.45, max: 1, color: "#ef4444" },
+];
+
+// A tracked range usually sits inside one wear tier (the selector bounds it
+// that way), but hand-edited ranges can span several — show the span then.
+const getWearBadge = (minWear: number, maxWear: number): WearBadge | null => {
+    if (!Number.isFinite(minWear) || !Number.isFinite(maxWear) || minWear > maxWear) {
+        return null;
+    }
+
+    const overlapping = WEAR_BADGE_TIERS.filter(
+        (tier) => maxWear > tier.min && minWear < tier.max
+    );
+
+    if (overlapping.length === 0) return null;
+
+    if (overlapping.length === 1) {
+        return { label: overlapping[0].name, color: overlapping[0].color };
+    }
+
+    return {
+        label: `${overlapping[0].short} – ${overlapping[overlapping.length - 1].short}`,
+        color: overlapping[0].color,
+    };
+};
 
 interface TrackedSkin {
     name: string;
+    imageUrl: string | null;
+    allowedMinFloat: number;
+    allowedMaxFloat: number;
     minWear: number;
     maxWear: number;
     forcedDiscount: number;
@@ -28,6 +126,10 @@ interface UserSettings {
 
 interface UseUserDashboardReturn {
     trackedSkins: Ref<TrackedSkin[]>;
+    filteredTrackedSkins: ComputedRef<TrackedSkin[]>;
+    skinSearchQuery: Ref<string>;
+    isLoadingSkins: Ref<boolean>;
+    getWearBadge: (minWear: number, maxWear: number) => WearBadge | null;
     errorMessage: Ref<string>;
     messageType: Ref<'success' | 'error'>;
     stopTracking: (skin: TrackedSkin) => Promise<void>;
@@ -54,6 +156,9 @@ interface UseUserDashboardReturn {
     validateFloatInput: (skin: TrackedSkin, field: 'minWear' | 'maxWear') => void;
     validateSkinInputs: (skin: TrackedSkin) => void;
     getAllowedFloatRange: (skinName: string) => { minFloat: number, maxFloat: number } | null;
+    getDisplayName: (skin: TrackedSkin) => string;
+    skinPlaceholder: string;
+    onImageError: (event: Event) => void;
 }
 
 // Validate skin inputs
@@ -81,6 +186,8 @@ const validateSkinInputs = (skin: TrackedSkin): void => {
 
 export function useUserDashboard(): UseUserDashboardReturn {
     const trackedSkins: Ref<TrackedSkin[]> = ref([]);
+    const skinSearchQuery: Ref<string> = ref("");
+    const isLoadingSkins: Ref<boolean> = ref(true);
     const errorMessage: Ref<string> = ref(""); // Reactive variable for error messages
     const username: Ref<string> = ref("");
     const messageType: Ref<'success' | 'error'> = ref('error');
@@ -92,6 +199,17 @@ export function useUserDashboard(): UseUserDashboardReturn {
     const userSettings: Ref<UserSettings> = ref({
         csfloatTracking: false,
         skinportTracking: false,
+    });
+
+    const filteredTrackedSkins: ComputedRef<TrackedSkin[]> = computed(() => {
+        const query = skinSearchQuery.value.trim().toLowerCase();
+        if (query === "") return trackedSkins.value;
+
+        const tokens = query.split(/\s+/).filter(Boolean);
+        return trackedSkins.value.filter((skin) => {
+            const haystack = `${skin.name} ${skin.phase ?? ''}`.toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+        });
     });
 
     // Float ranges for different wear conditions
@@ -120,6 +238,18 @@ export function useUserDashboard(): UseUserDashboardReturn {
     const getAllowedFloatRange = (skinName: string): { minFloat: number, maxFloat: number } | null => {
         const condition = getConditionFromSkinName(skinName);
         return condition ? floatRanges[condition] : null;
+    };
+
+    // skin.name keeps the raw StatTrak™/Souvenir prefix (it's what's sent back to the
+    // backend to identify the row), so strip it only for what's shown on screen.
+    const getDisplayName = (skin: TrackedSkin): string => {
+        return stripVariantPrefix(skin.name);
+    };
+
+    const onImageError = (event: Event): void => {
+        const img = event.target as HTMLImageElement;
+        img.onerror = null;
+        img.src = skinPlaceholder;
     };
 
     // Validation function for float inputs (similar to skin selector)
@@ -215,6 +345,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
     };
 
     const fetchCsrfTokenAndUserConfig = async (): Promise<void> => {
+        isLoadingSkins.value = true;
         try {
             const configResponse = await fetch(`${API_URL}/getUserConfig`, {
                 method: "GET",
@@ -242,29 +373,41 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
             const configData: ConfigData = await configResponse.json();
 
-            trackedSkins.value = configData.itemsOfInterest.map((item) => ({
-                name: item.item_of_interest,
-                minWear: item.min_wear,
-                maxWear: item.max_wear,
-                forcedDiscount: item.forced_discount,
-                minFadePercentage: item.forced_fade_percentage,
-                itemIsStattrak: item.is_stattrak,
-                itemIsSouvenir: item.is_souvenir,
-                phase: item.phase || null,
-                _original: {
+            trackedSkins.value = configData.itemsOfInterest.map((item) => {
+                const datasetEntry = getSkinDatasetEntry(item.item_of_interest, item.phase || null);
+                const variant = detectVariantFromName(item.item_of_interest);
+                const itemIsStattrak = Boolean(item.is_stattrak) || variant.isStattrak;
+                const itemIsSouvenir = Boolean(item.is_souvenir) || variant.isSouvenir;
+
+                return {
+                    name: item.item_of_interest,
+                    imageUrl: datasetEntry?.image_url ?? null,
+                    allowedMinFloat: datasetEntry?.min_float ?? 0,
+                    allowedMaxFloat: datasetEntry?.max_float ?? 1,
                     minWear: item.min_wear,
                     maxWear: item.max_wear,
                     forcedDiscount: item.forced_discount,
                     minFadePercentage: item.forced_fade_percentage,
-                    itemIsStattrak: item.is_stattrak,
-                    itemIsSouvenir: item.is_souvenir,
-                    phase: item.phase || null
-                },
-            }));
+                    itemIsStattrak,
+                    itemIsSouvenir,
+                    phase: item.phase || null,
+                    _original: {
+                        minWear: item.min_wear,
+                        maxWear: item.max_wear,
+                        forcedDiscount: item.forced_discount,
+                        minFadePercentage: item.forced_fade_percentage,
+                        itemIsStattrak,
+                        itemIsSouvenir,
+                        phase: item.phase || null
+                    },
+                };
+            });
         } catch (error) {
             console.error("Error fetching user config:", error);
             errorMessage.value = "Failed to load tracked skins. Please try again later.";
             messageType.value = "error";
+        } finally {
+            isLoadingSkins.value = false;
         }
     };
 
@@ -287,11 +430,19 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 throw new Error(errorData.message || "Failed to delete skin");
             }
 
+            // Match the same (name, minWear, maxWear) triple the backend used to find
+            // the row to delete — filtering on name alone would also drop other tracked
+            // items that happen to share the same name but different float ranges.
             trackedSkins.value = trackedSkins.value.filter(
-                (trackedSkin) => trackedSkin.name !== skin.name
+                (trackedSkin) =>
+                    !(
+                        trackedSkin.name === skin.name &&
+                        trackedSkin.minWear === skin.minWear &&
+                        trackedSkin.maxWear === skin.maxWear
+                    )
             );
 
-            errorMessage.value = `Stopped tracking skin: ${skin.name}`;
+            errorMessage.value = `Stopped tracking skin: ${getDisplayName(skin)}`;
             messageType.value = "success";
             clearErrorMessages();
         } catch (error) {
@@ -495,7 +646,7 @@ export function useUserDashboard(): UseUserDashboardReturn {
                 throw new Error(errorData.message || "Failed to update skin settings");
             }
 
-            errorMessage.value = `Updated settings for ${skin.name}`;
+            errorMessage.value = `Updated settings for ${getDisplayName(skin)}`;
             messageType.value = "success";
             clearErrorMessages();
         } catch (error) {
@@ -514,6 +665,10 @@ export function useUserDashboard(): UseUserDashboardReturn {
 
     return {
         trackedSkins,
+        filteredTrackedSkins,
+        skinSearchQuery,
+        isLoadingSkins,
+        getWearBadge,
         errorMessage,
         messageType,
         stopTracking,
@@ -538,6 +693,9 @@ export function useUserDashboard(): UseUserDashboardReturn {
         isUpdating,
         validateFloatInput,
         validateSkinInputs,
-        getAllowedFloatRange
+        getAllowedFloatRange,
+        getDisplayName,
+        skinPlaceholder,
+        onImageError
     };
 }

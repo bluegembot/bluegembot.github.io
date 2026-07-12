@@ -19,8 +19,13 @@
     </div>
   </div>
 
-  <main>
+  <main class="subscriptions-page">
     <Navbar
+        :leftItems="[
+          { name: 'Track new skin', path: '/skinSelector' },
+          { name: 'Account', path: '/account' },
+          { name: 'Auto Opener', path: '/autoOpen' }
+        ]"
         :rightItems="[
           { name: 'Dashboard', path: '/dashboard' }
         ]"

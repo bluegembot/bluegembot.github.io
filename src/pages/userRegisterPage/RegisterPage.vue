@@ -1,13 +1,17 @@
 <template>
-  <section>
-    <!-- Main content with registration form -->
+  <section class="auth-page">
+    <Navbar
+        :rightItems="[
+        { name: 'Login', path: '/login' }
+      ]"
+    />
     <main>
-      <h2 class="main-title">Register yourself</h2>
       <div class="logo-container">
         <div class="logo-circle">
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
         </div>
       </div>
+      <h2 class="main-title">Register yourself</h2>
 
       <form class="registration-form" @submit.prevent="handleSubmit">
         <fieldset>
@@ -38,7 +42,7 @@
           </div>
 
           <button type="submit" class="register-button">Register</button>
-          <p>Send "/register" to <a href="https://discord.gg/kWGfK6St4m">the BGB discord bot</a> for your one time password.</p>
+          <p>Send "/register" to <a href="https://discord.gg/kWGfK6St4m" target="_blank" rel="noopener noreferrer">the BGB discord bot</a> for your one time password.</p>
           <p>Already have an account? <router-link to="/login">Login</router-link></p>
 
           <!-- Alert message for password mismatch -->

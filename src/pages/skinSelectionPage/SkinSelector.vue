@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <div class="logo-container">
-      <div class="logo-circle">
-        <img alt="BGB Logo" class="logo-img" src="@/assets/BGBLogo.jpg" />
-      </div>
-    </div>
-
+  <div class="skin-selector-page">
+    <Navbar
+        :leftItems="[
+          { name: 'Track new skin', path: '/skinSelector' },
+          { name: 'Account', path: '/account' },
+          { name: 'Auto Opener', path: '/autoOpen' }
+        ]"
+        :rightItems="[
+          { name: 'Dashboard', path: '/dashboard' }
+        ]"
+    />
+    <main>
     <h2 class="main-title">Skin search</h2>
 
     <div class="search-container">
@@ -15,9 +20,6 @@
         placeholder="Search skins by name"
         type="text"
       />
-      <router-link to="/dashboard">
-        <button class="dashboard-button">Dashboard</button>
-      </router-link>
     </div>
 
     <h3
@@ -68,10 +70,15 @@
       <tbody>
         <tr v-for="skin in displayedSkins" :key="`${skin.market_hash_name}-${skin.phase || 'no-phase'}`">
           <td data-label="Skin image">
-            <img :src="skin.image_url" alt="Skin image" class="skin-image" />
+            <img :src="skin.image_url || skinPlaceholder" @error="onImageError" alt="Skin image" class="skin-image" />
           </td>
 
-          <td data-label="Skin name">{{ formattedSkinName(skin) }}</td>
+          <td data-label="Skin name">
+            {{ formattedSkinName(skin) }}
+            <span v-if="isAlreadyTracked(skin)" class="tracking-badge" title="You are already tracking this skin">
+              ✓ Tracking
+            </span>
+          </td>
 
           <td data-label="Select condition">
             <select v-model="skin.condition" @change="updateFloats(skin)">
@@ -180,6 +187,7 @@
         </div>
       </div>
     </div>
+    </main>
   </div>
 </template>
 

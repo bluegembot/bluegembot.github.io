@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import Navbar from "@/components/General/Navbar.vue"
-import './assets/style/main.css'
 import './assets/style/dark-mode.css'
 import VueGtag from 'vue-gtag-next'
 import { applyRouteSeo } from './seo'

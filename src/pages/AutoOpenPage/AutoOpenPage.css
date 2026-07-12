@@ -1,10 +1,16 @@
 /* Main Page Styling */
 .auto-opener-page {
     text-align: center;
-    margin: 20px;
-    font-family: Arial, sans-serif;
     max-width: 1000px;
     margin: 20px auto;
+    padding: 0 1rem;
+}
+
+.auto-opener-page h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 1rem;
 }
 
 /* Status Grid */
@@ -54,14 +60,16 @@
     font-weight: 500;
 }
 
-/* Console Section */
+/* Console Section — intentionally dark in both themes */
 .console-section {
-    width: fit-content;
-    margin: 30px 0;
-    border: 2px solid #343a40;
-    border-radius: 8px;
-    background: #212529;
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: #14181d;
     overflow: hidden;
+    box-shadow: var(--shadow-md);
 }
 
 .console-header {
@@ -298,11 +306,11 @@
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: var(--accent-color);
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 input:checked + .slider:before {

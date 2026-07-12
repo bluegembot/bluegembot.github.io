@@ -36,15 +36,14 @@ function dismiss() {
 
 <style scoped>
 .site-notification-banner {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   padding: 0.75rem 2.5rem;
-  background-color: #b45309;
+  background: linear-gradient(90deg, #92400e, #b45309 40%, #92400e);
   color: #fff;
   text-align: center;
   font-size: 0.95rem;

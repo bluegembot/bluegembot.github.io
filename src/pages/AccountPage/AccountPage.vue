@@ -1,6 +1,11 @@
 <template>
   <div>
     <Navbar
+        :leftItems="[
+        { name: 'Track new skin', path: '/skinSelector' },
+        { name: 'Account', path: '/account' },
+        { name: 'Auto Opener', path: '/autoOpen' }
+      ]"
         :rightItems="[
         { name: 'Dashboard', path: '/dashboard' }
       ]"
@@ -24,7 +29,13 @@
           <div class="account-header">
             <h2>{{ username }}'s info</h2>
 
-            <button @click="openSubscriptionModal">
+            <div class="button-group">
+            <button
+                @click="openSubscriptionModal"
+                class="gear-btn"
+                title="Manage subscription"
+                aria-label="Manage subscription"
+            >
               <svg
                   width="20"
                   height="20"
@@ -42,7 +53,6 @@
               </svg>
             </button>
 
-            <div class="button-group">
               <button
                   @click="openImportModal"
                   class="import-btn"

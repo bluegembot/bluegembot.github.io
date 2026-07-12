@@ -1,13 +1,17 @@
 <template>
-  <section>
-    <!-- Main content with registration form -->
+  <section class="auth-page">
+    <Navbar
+        :rightItems="[
+        { name: 'Register', path: '/register' }
+      ]"
+    />
     <main>
-      <h2 class="main-title">Login to BlueGemBot</h2>
       <div class="logo-container">
         <div class="logo-circle">
           <img src="@/assets/BGBLogo.jpg" alt="BGB Logo" class="logo-img" />
         </div>
       </div>
+      <h2 class="main-title">Login to BlueGemBot</h2>
 
       <form class="registration-form" @submit.prevent="handleSubmit">
         <fieldset>
@@ -27,8 +31,8 @@
           </div>
 
           <button type="submit" class="register-button">Login</button>
-          <p>Send "/login" to <a href="https://discord.gg/kWGfK6St4m">the BGB discord bot</a> for your login token.</p>
-          <p>Dont have an account?  <a><router-link to="/register">Register</router-link></a></p>
+          <p>Send "/login" to <a href="https://discord.gg/kWGfK6St4m" target="_blank" rel="noopener noreferrer">the BGB discord bot</a> for your login token.</p>
+          <p>Dont have an account? <router-link to="/register">Register</router-link></p>
 
 
           <!-- Alert message for password mismatch -->

@@ -1,12 +1,8 @@
-/* dark-mode.css - Simplified and focused */
+/* dark-mode.css — targeted overrides for components that hardcode light styles.
+   Most theming now flows from the CSS variables in base.css; only add rules
+   here when a component can't pick the right color from tokens alone. */
 
-/* Main dark mode styles - leveraging CSS variables from base.css */
-body.dark-mode {
-    background-color: var(--color-background);
-    color: var(--color-text);
-}
-
-/* Exclude legal documents from dark mode - keep these overrides */
+/* Legal documents intentionally stay light in both modes */
 body.dark-mode .legal-document,
 body.dark-mode .legal-document * {
     background-color: #ffffff !important;
@@ -22,59 +18,13 @@ body.dark-mode .legal-document a:hover {
     color: #0056b3 !important;
 }
 
-/* Dashboard specific dark mode styles */
-body.dark-mode .main-title,
-body.dark-mode .subscription-tiers-title2 {
-    color: var(--color-text);
-}
-
-body.dark-mode .tracked-skins-container,
-body.dark-mode .announcements,
-body.dark-mode .user-information-container {
-    background-color: var(--color-background-mute);
-    border-color: var(--accent-color);
-}
-
-body.dark-mode .tracked-skins-container h2,
-body.dark-mode .announcements h2,
-body.dark-mode .user-information-container h2 {
-    background-color: var(--color-background-mute);
-    color: var(--color-text);
-    border-bottom-color: var(--color-border);
-}
-
-/* List items */
-body.dark-mode .tracked-skins-unordered-list li:nth-child(odd),
-body.dark-mode .announcement-list li:nth-child(odd),
-body.dark-mode .user-information-unordered-list li:nth-child(odd) {
-    background-color: var(--color-background-soft);
-    color: var(--color-text);
-}
-
-body.dark-mode .tracked-skins-unordered-list li:nth-child(even),
-body.dark-mode .announcement-list li:nth-child(even),
-body.dark-mode .user-information-unordered-list li:nth-child(even) {
-    background-color: var(--color-background-mute);
-    color: var(--color-text);
-}
-
-/* Grid items */
-body.dark-mode .grid-item {
-    background-color: var(--color-background-mute);
-    color: var(--color-text);
-    border-color: var(--accent-color);
-}
-
-body.dark-mode .grid-item:hover {
-    background-color: var(--color-background-soft);
-}
-
-/* Forms and inputs */
+/* Forms and inputs that still use light defaults */
 body.dark-mode .search-bar,
 body.dark-mode .float-input,
+body.dark-mode .percentage-input,
 body.dark-mode .form-group input,
 body.dark-mode select {
-    background-color: var(--color-background-mute);
+    background-color: var(--color-background);
     color: var(--color-text);
     border-color: var(--color-border);
 }
@@ -84,65 +34,7 @@ body.dark-mode .form-group input::placeholder {
     color: var(--text-gray-light);
 }
 
-body.dark-mode .form-group label {
-    color: var(--color-text);
-}
-
-/* Tables */
-body.dark-mode table {
-    background-color: var(--color-background-mute);
-    color: var(--color-text);
-    border-color: var(--color-border);
-}
-
-body.dark-mode th {
-    background-color: var(--color-background-soft);
-    color: var(--color-text);
-    border-color: var(--color-border);
-}
-
-body.dark-mode td {
-    border-color: var(--color-border);
-    color: var(--color-text);
-}
-
-body.dark-mode tr:nth-child(even) {
-    background-color: var(--color-background-soft);
-}
-
-body.dark-mode tr:nth-child(odd) {
-    background-color: var(--color-background-soft);
-}
-
-/* Buttons */
-body.dark-mode button:not(.legal-document button) {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-}
-
-body.dark-mode button:not(.legal-document button):hover {
-    background-color: #29bbc9;
-}
-
-body.dark-mode .dashboard-button {
-    background-color: #4CAF50;
-}
-
-body.dark-mode .dashboard-button:hover {
-    background-color: #45a049;
-}
-
-body.dark-mode .stop-tracking-button {
-    background-color: #dc3545;
-    color: white;
-}
-
-body.dark-mode .stop-tracking-button:hover {
-    background-color: #c82333;
-}
-
-/* Modal */
+/* Advanced-options modal (SkinSelector) — light-styled internals */
 body.dark-mode .modal-content,
 body.dark-mode .popup-content {
     background-color: var(--color-background-mute);
@@ -150,21 +42,19 @@ body.dark-mode .popup-content {
     border-color: var(--color-border);
 }
 
-/* Advanced Options modal - dark mode */
 body.dark-mode .modal-content h3 {
-    color: var(--color-text);
+    color: var(--color-heading);
     border-bottom-color: var(--color-border);
 }
 
-/* Slider cards + StatTrak/Souvenir rows */
 body.dark-mode .modal-checkbox-container > .multi-range > .multi-range,
 body.dark-mode .modal-checkbox {
-    background: #333333;
+    background: var(--color-background-soft);
     border-color: var(--color-border);
 }
 
 body.dark-mode .modal-checkbox:hover {
-    background: #3d3d3d;
+    background: var(--color-background);
     border-color: var(--color-border-hover);
 }
 
@@ -174,150 +64,48 @@ body.dark-mode .toggle-checkbox label {
 }
 
 body.dark-mode .range-labels,
-body.dark-mode .input-group label,
+body.dark-mode .input-group label {
+    color: var(--text-gray-light);
+}
+
 body.dark-mode .number-input {
+    background-color: var(--color-background);
+    border-color: var(--color-border);
     color: var(--color-text);
 }
 
-body.dark-mode .number-input {
+body.dark-mode .number-input:disabled {
     background-color: var(--color-background-soft);
-    border-color: var(--color-border);
 }
 
-/* Action buttons - keep primary/secondary distinction in dark mode */
-body.dark-mode .modal-actions .modal-btn-primary {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-body.dark-mode .modal-actions .modal-btn-primary:hover {
-    background-color: #43a047;
+body.dark-mode .slider-track {
+    background-color: var(--color-border-hover);
 }
 
 body.dark-mode .modal-actions .modal-btn-secondary {
-    background-color: #3a3a3a;
+    background-color: var(--color-background-soft);
     color: var(--color-text);
 }
 
 body.dark-mode .modal-actions .modal-btn-secondary:hover {
-    background-color: #4a4a4a;
+    background-color: var(--color-background);
 }
 
-/* Registration forms */
-body.dark-mode .registration-form {
+/* Skin cards in the mobile skin-selector table */
+body.dark-mode .skin-selector-page table tbody tr {
     background-color: var(--color-background-mute);
-    color: var(--color-text);
-}
-
-body.dark-mode .registration-form fieldset {
     border-color: var(--color-border);
 }
 
-body.dark-mode .registration-form a {
-    color: var(--accent-color);
-}
-
-body.dark-mode .registration-form a:hover {
-    color: #29bbc9;
-}
-
-body.dark-mode .registration-form p {
-    color: var(--text-gray-light);
-}
-
-/* Subscription tiers */
+/* Subscription tier accents */
 body.dark-mode .basicText {
     color: var(--accent-color);
 }
 
 body.dark-mode .goldText {
-    color: #FFD700;
+    color: #ffd700;
 }
 
 body.dark-mode .eliteText {
-    color: #dd2524;
-}
-
-body.dark-mode .basicBorder {
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 0 15px var(--accent-color);
-}
-
-body.dark-mode .goldBorder {
-    border: 2px solid #e1be18;
-    box-shadow: 0 0 15px #e1be18;
-}
-
-body.dark-mode .eliteBorder {
-    border: 2px solid #dd2524;
-    box-shadow: 0 0 15px #dd2524;
-}
-
-/* Skin tracking components */
-body.dark-mode .tracked-skin-item {
-    background-color: var(--color-background-soft);
-    border-color: var(--color-border);
-    color: var(--color-text);
-}
-
-body.dark-mode .skin-info,
-body.dark-mode .skin-name {
-    color: var(--color-text);
-}
-
-body.dark-mode .skin-header .skin-index,
-body.dark-mode .detail-label {
-    color: var(--text-gray-light);
-}
-
-body.dark-mode .detail-value {
-    color: var(--color-text);
-}
-
-/* Feature cards - lighter background in dark mode */
-body.dark-mode .feature-card {
-    background-color: #333333; /* Lighter than the main background */
-}
-
-/* Feature cards text override */
-body.dark-mode .feature-card h3 {
-    color: var(--color-text) !important;
-}
-
-/* Miscellaneous */
-body.dark-mode .range-labels {
-    color: var(--color-text);
-}
-
-body.dark-mode .error-message,
-body.dark-mode .success-message {
-    background-color: var(--color-background-mute);
-    color: var(--color-text);
-}
-
-body.dark-mode .no-tracking-message {
-    color: var(--text-gray-light);
-}
-
-body.dark-mode .popup-overlay {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-body.dark-mode .subscription-perks {
-    color: var(--text-gray-light);
-}
-
-body.dark-mode .subscription-perks li {
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-text);
-}
-
-body.dark-mode .close-btn {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-}
-
-body.dark-mode .close-btn:hover {
-    background-color: #29bbc9;
+    color: var(--elite);
 }

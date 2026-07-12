@@ -3,6 +3,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faDiscord, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { API_URL } from '@/config/environment'
 import skinsJson from '@/assets/converted-skins.json'
+import skinPlaceholder from '@/assets/SkinPlaceholder.svg'
 
 library.add(faDiscord, faYoutube)
 
@@ -19,7 +20,7 @@ interface ApiTopDeal {
   timestamp?: string
 }
 
-interface TopDeal {
+export interface TopDeal {
   source: string
   externalId: string
   name: string
@@ -73,6 +74,7 @@ const withSkinportAffiliate = (itemUrl: string): string => {
 }
 
 export function initLandingPage() {
+  const pageRoot = ref<HTMLElement | null>(null)
   const hero = ref<HTMLElement | null>(null)
   const features = ref<HTMLElement | null>(null)
   const video = ref<HTMLElement | null>(null)
@@ -80,6 +82,7 @@ export function initLandingPage() {
   const socials = ref<HTMLElement | null>(null)
   const observers = ref<IntersectionObserver[]>([])
   const topDeals = ref<TopDeal[]>([])
+  const isLoadingDeals = ref(true)
 
   const formData = ref({
     name: '',
@@ -94,7 +97,35 @@ export function initLandingPage() {
   )
 
   const formatDiscount = (discount: number): string => {
-    return `${discount.toFixed(2)}%`
+    return `-${Math.abs(discount).toFixed(1)}%`
+  }
+
+  const getDiscountHeatClass = (discount: number): string => {
+    const value = Math.abs(discount)
+
+    if (value >= 30) {
+      return 'heat-blazing'
+    }
+
+    if (value >= 20) {
+      return 'heat-hot'
+    }
+
+    if (value >= 10) {
+      return 'heat-warm'
+    }
+
+    return 'heat-mild'
+  }
+
+  const formatSavings = (deal: TopDeal): string => {
+    const savings = deal.itemPrice - deal.salePrice
+
+    if (savings <= 0) {
+      return ''
+    }
+
+    return `Save €${savings.toFixed(2)}`
   }
 
   const formatDealDate = (timestamp: string | null): string => {
@@ -143,6 +174,12 @@ export function initLandingPage() {
     window.open(itemUrl, '_blank', 'noopener,noreferrer')
   }
 
+  const onImageError = (event: Event): void => {
+    const img = event.target as HTMLImageElement
+    img.onerror = null
+    img.src = skinPlaceholder
+  }
+
   const fetchTopDeals = async (): Promise<void> => {
     try {
       const response = await fetch(`${API_URL}/getTopDeals`, {
@@ -174,41 +211,58 @@ export function initLandingPage() {
       window.localStorage.setItem('topDeals', JSON.stringify(topDeals.value))
     } catch (error) {
       console.error('Error fetching top deals:', error)
+    } finally {
+      isLoadingDeals.value = false
     }
   }
 
+  let scrollRafId: number | null = null
+
+  const handleScroll = (): void => {
+    if (scrollRafId !== null) {
+      return
+    }
+
+    scrollRafId = window.requestAnimationFrame(() => {
+      scrollRafId = null
+
+      const doc = document.documentElement
+      const maxScroll = doc.scrollHeight - doc.clientHeight
+      const progress = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0
+
+      pageRoot.value?.style.setProperty('--scroll-progress', progress.toFixed(4))
+      hero.value?.style.setProperty('--hero-parallax', `${(window.scrollY * 0.3).toFixed(1)}px`)
+    })
+  }
+
   onMounted(() => {
-    const sections = ['features', 'video', 'testimonials', 'socials']
+    const sectionRefs = [features.value, video.value, testimonials.value, socials.value]
 
     const observerOptions: IntersectionObserverInit = {
       root: null,
-      rootMargin: '0px',
+      rootMargin: '0px 0px -40px 0px',
       threshold: 0.1
     }
 
-    sections.forEach((sectionId) => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in')
-          } else {
-            entry.target.classList.remove('fade-in')
-          }
-        })
-      }, observerOptions)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, observerOptions)
 
-      const sectionRef = {
-        features: features.value,
-        video: video.value,
-        testimonials: testimonials.value,
-        socials: socials.value
-      }[sectionId]
-
+    sectionRefs.forEach((sectionRef) => {
       if (sectionRef) {
         observer.observe(sectionRef)
-        observers.value.push(observer)
       }
     })
+
+    observers.value.push(observer)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
 
     fetchTopDeals()
   })
@@ -217,9 +271,16 @@ export function initLandingPage() {
     observers.value.forEach((observer) => {
       observer.disconnect()
     })
+
+    window.removeEventListener('scroll', handleScroll)
+
+    if (scrollRafId !== null) {
+      window.cancelAnimationFrame(scrollRafId)
+    }
   })
 
   return {
+    pageRoot,
     hero,
     features,
     video,
@@ -228,11 +289,16 @@ export function initLandingPage() {
     formData,
     observers,
     topDeals,
+    isLoadingDeals,
     fetchTopDeals,
     formatPrice,
     formatDiscount,
+    formatSavings,
+    getDiscountHeatClass,
     formatDealDate,
     getConditionFromFloat,
-    openDeal
+    openDeal,
+    skinPlaceholder,
+    onImageError
   }
 }

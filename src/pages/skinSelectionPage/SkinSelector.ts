@@ -2,6 +2,7 @@
 import { ref, computed, watch, nextTick } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
 import skinsJson from "@/assets/converted-skins.json";
+import skinPlaceholder from "@/assets/SkinPlaceholder.svg";
 import { API_URL } from '@/config/environment';
 
 interface Skin {
@@ -58,6 +59,49 @@ export function useSkinSelector() {
     const showSubscriptionError: Ref<boolean> = ref(false);
     const selectedSkin: Ref<Skin | null> = ref(null);
 
+    const trackedSkinKeys: Ref<Set<string>> = ref(new Set());
+
+    // Stored item names may carry a "StatTrak™ "/"Souvenir " prefix (see buildFinalSkinName),
+    // but skin.market_hash_name never does — strip it so both sides of the "already
+    // tracked" comparison key off the same base name.
+    const stripVariantPrefix = (name: string): string => {
+        return name
+            .trim()
+            .replace(/^★\s*StatTrak™\s+/i, '★ ')
+            .replace(/^StatTrak™\s+/i, '')
+            .replace(/^Souvenir\s+/i, '');
+    };
+
+    const getTrackedKey = (name: string, phase: string | null | undefined): string => {
+        return `${stripVariantPrefix(name).toLowerCase()}|${(phase ?? '').toLowerCase()}`;
+    };
+
+    async function fetchTrackedSkins(): Promise<void> {
+        try {
+            const response = await fetch(`${API_URL}/getUserConfig`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if (!response.ok) return;
+
+            const data: { itemsOfInterest?: Array<{ item_of_interest: string; phase: string | null }> } =
+                await response.json();
+
+            trackedSkinKeys.value = new Set(
+                (data.itemsOfInterest ?? []).map((item) =>
+                    getTrackedKey(item.item_of_interest, item.phase)
+                )
+            );
+        } catch {
+            // Not logged in or request failed, the indicator just stays hidden
+        }
+    }
+
+    function isAlreadyTracked(skin: Skin): boolean {
+        return trackedSkinKeys.value.has(getTrackedKey(skin.market_hash_name, skin.phase || null));
+    }
+
     const advancedOptions: Ref<AdvancedOptions> = ref({
         statTrak: false,
         souvenir: false,
@@ -102,7 +146,7 @@ export function useSkinSelector() {
         const allowedMin = s.min_float ?? 0;
         const allowedMax = s.max_float ?? 1;
 
-        return {
+        const skin: Skin = {
         market_hash_name: s.market_hash_name,
         image_url: s.image_url,
         condition: "Factory new",
@@ -114,10 +158,18 @@ export function useSkinSelector() {
         can_be_stattrak: Boolean(s.can_be_stattrak ?? s.stattrak),
         phase: String(s.phase ?? "").toLowerCase()
         };
+
+        // Some skins (e.g. many "Rust Coat" finishes) can't drop below Well-Worn,
+        // so the "Factory new" default above wouldn't be a valid <select> option —
+        // normalize to the best condition the skin's float range actually allows.
+        updateFloats(skin);
+
+        return skin;
     });
 }
 
     initializeSkins();
+    fetchTrackedSkins();
 
     function normalizeTokens(s: string): string[] {
     return s
@@ -197,6 +249,12 @@ export function useSkinSelector() {
     function clamp(value: number, min: number, max: number): number {
     if (!Number.isFinite(value)) return min;
     return Math.min(max, Math.max(min, value));
+    }
+
+    function onImageError(event: Event): void {
+        const img = event.target as HTMLImageElement;
+        img.onerror = null;
+        img.src = skinPlaceholder;
     }
 
     function validateFloatInput(skin: Skin, field: "minFloat" | "maxFloat"): void {
@@ -308,13 +366,19 @@ function applyAdvancedOptions(): void {
 
     function buildFinalSkinName(skin: Skin, advancedOption: string): string {
 
-        let finalSkinName = skin.market_hash_name
+        const baseName = skin.market_hash_name;
 
-        if (advancedOption) {
-            finalSkinName = `${finalSkinName}`;
+        if (advancedOption === "souvenir") {
+            return `Souvenir ${baseName}`;
         }
 
-        return finalSkinName;
+        if (advancedOption === "stattrak") {
+            return baseName.startsWith("★")
+                ? baseName.replace(/^★\s*/, "★ StatTrak™ ")
+                : `StatTrak™ ${baseName}`;
+        }
+
+        return baseName;
     }
 
     async function addSkin(skin: Skin, advancedOption: string = ""): Promise<void> {
@@ -364,6 +428,8 @@ function applyAdvancedOptions(): void {
 
             if (!response.ok) {
                 console.error('Failed to add skin');
+            } else {
+                trackedSkinKeys.value.add(getTrackedKey(finalSkinName, skin.phase || null));
             }
 
             const data = await response.json();
@@ -414,6 +480,7 @@ function applyAdvancedOptions(): void {
         messageType,
         shouldShowFadeSlider,
         showSubscriptionError,
+        isAlreadyTracked,
         filterSkins,
         updateFloats,
         validateFloatInput,
@@ -426,6 +493,8 @@ function applyAdvancedOptions(): void {
         getAvailableConditions,
         getTierForCondition,
         getMaxBoundForCondition,
-        getMinBoundForCondition
+        getMinBoundForCondition,
+        skinPlaceholder,
+        onImageError
     };
 }

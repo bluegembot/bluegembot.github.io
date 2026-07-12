@@ -1,78 +1,167 @@
-/* General reset */
-* {
-  margin: 0;
+/* Auth pages (login + register) — scoped under .auth-page, themed via tokens */
+
+.auth-page {
+  min-height: 100svh;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% -10%, var(--accent-glow), transparent 70%),
+    var(--color-background);
+}
+
+.auth-page main {
+  padding: 3rem 1rem 4rem;
+}
+
+.auth-page .logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.auth-page .logo-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--accent-soft);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.auth-page .logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-page .main-title {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+/* Form card */
+.auth-page .registration-form {
+  max-width: 440px;
+  margin: 2rem auto 0;
+  background-color: var(--color-background-mute);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--accent-color);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-page fieldset {
+  border: none;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
+.auth-page .form-group {
+  margin-bottom: 1.25rem;
 }
 
-.main-title {
-  text-align: center;
-  margin-top: 50px;
-  font-size: 36px;
-  color: #333;
-}
-
-/* Form styles */
-.registration-form {
-  max-width: 600px;
-  margin: 50px auto;
-  background-color: #f4f4f4;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
+.auth-page label {
   display: block;
-  margin-bottom: 10px;
-  font-size: 18px;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-heading);
 }
 
-input {
+.auth-page input {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 0.8rem 1rem;
+  font-size: 16px; /* prevents iOS auto-zoom */
+  border: 1px solid var(--color-border-hover);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-input:focus {
-  border-color: #333;
+.auth-page input::placeholder {
+  color: var(--text-gray-light);
 }
 
-.register-button {
+.auth-page input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.auth-page .register-button {
   width: 100%;
-  padding: 15px;
-  background-color: #333;
-  color: white;
-  font-size: 18px;
+  padding: 0.9rem;
+  margin-top: 0.25rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-strong));
+  color: #06222a;
+  font-size: 1.05rem;
+  font-weight: 700;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
-.register-button:hover {
-  background-color: #555;
+.auth-page .register-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px var(--accent-glow);
 }
 
-.error-message {
-  color: red;
+.auth-page .register-button:active {
+  transform: translateY(0);
 }
 
-/* Remove border from fieldset */
-fieldset {
-  border: none;
+.auth-page fieldset p {
+  margin-top: 1rem;
+  color: var(--text-gray-light);
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
-form {
-  border: 5px solid #2ed1e1;
-  border-radius: 10px;
+.auth-page fieldset a {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-page fieldset a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.auth-page .error-message {
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(220, 53, 69, 0.12);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #f87171;
+  font-weight: 600;
+}
+
+body.light-mode .auth-page .error-message,
+body:not(.dark-mode) .auth-page .error-message {
+  color: var(--danger);
+}
+
+@media (max-width: 480px) {
+  .auth-page main {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .auth-page .logo-circle {
+    width: 72px;
+    height: 72px;
+  }
+
+  .auth-page .main-title {
+    font-size: 1.6rem;
+  }
+
+  .auth-page .registration-form {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
 }

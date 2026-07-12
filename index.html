@@ -6,6 +6,9 @@
     <link rel="icon" type="image/jpeg" href="/BGBLogo.jpg">
     <link rel="apple-touch-icon" href="/BGBLogo.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <title>BlueGemBot | CS2 Skinport & CSFloat Listing Tracker</title>
     <meta
       name="description"
@@ -75,17 +78,25 @@
         const normalizedPath = window.location.hash.slice(1)
         window.history.replaceState(null, '', normalizedPath)
       }
+      // Apply the saved theme before the app mounts to avoid a flash of the wrong mode.
+      // Dark mode is the default when no preference is stored.
+      (function () {
+        var saved = localStorage.getItem('darkMode')
+        var isDark = saved === null ? true : saved === 'true'
+        document.body.classList.toggle('dark-mode', isDark)
+        document.body.classList.toggle('light-mode', !isDark)
+      })()
     </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
 
 <style>
-  * {
-    font-family: 'Inter', sans-serif;
+  body {
+    background-color: #f4f7fb;
   }
 
-  body {
-    background-color: #F9F9F9;
+  body.dark-mode {
+    background-color: #0b1220;
   }
 </style>

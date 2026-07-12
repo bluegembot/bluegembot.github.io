@@ -33,7 +33,7 @@ main {
 .main-title {
     text-align: center;
     font-size: 36px !important;
-    color: white;
+    color: var(--color-heading);
     margin-top: 10px;
     margin-bottom: 20px;
     align-items: center;
@@ -64,19 +64,20 @@ main {
     flex: 1;
     min-width: 300px;
     padding: 20px;
-    background-color: var(--color-background-mute);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 3px solid var(--accent-color);
+    background-color: var(--color-background-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--accent-color);
 }
 
 .upcoming h2 {
     font-size: 22px !important;
-    color: var(--text-light);
+    color: var(--color-heading);
     margin-top: 0;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .upcoming-list {
@@ -86,9 +87,9 @@ main {
 }
 
 .upcoming-list li {
-    padding: 10px 0;
-    color: var(--text-light);
-    border-bottom: 1px solid var(--accent-color);
+    padding: 12px 0;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
     font-size: 16px !important;
     line-height: 1.5;
     word-wrap: break-word;
@@ -114,6 +115,35 @@ main {
     margin-bottom: 20px;
     gap: 15px;
     flex-wrap: wrap;
+}
+
+/* Action buttons next to the title */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Gear (subscription settings) button */
+.gear-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px; /* matches .import-btn touch target */
+    min-width: 44px;
+    padding: 8px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--text-gray-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gear-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    background-color: var(--accent-soft);
 }
 
 .import-btn {
@@ -224,12 +254,21 @@ main {
         font-size: 20px !important;
     }
 
-    .import-btn {
+    .button-group {
         width: 100%;
+    }
+
+    .import-btn {
+        flex: 1;
         justify-content: center;
         padding: 12px 16px;
         font-size: 16px !important;
         min-height: 48px;
+    }
+
+    .gear-btn {
+        min-height: 48px;
+        min-width: 48px;
     }
 
     .upcoming-list li {

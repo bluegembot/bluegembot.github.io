@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="landing-page" ref="pageRoot">
+    <div class="scroll-progress" aria-hidden="true"></div>
     <Navbar
         :rightItems="[
         { name: 'Login', path: '/login' },
@@ -7,35 +8,54 @@
       ]"
     />
     <section id="hero" ref="hero">
-      <div class="content-wrapper hero-content">
-        <h1>BlueGemBot - Let CS2 skin listings come to you</h1>
-        <p>BlueGemBot is a free, instant, and customizable Skinport and CSFloat listing tracker made for traders, collectors, and deal snipers.</p>
+      <div class="hero-backdrop" aria-hidden="true">
+        <span class="hero-orb hero-orb-1"></span>
+        <span class="hero-orb hero-orb-2"></span>
+        <span class="hero-orb hero-orb-3"></span>
       </div>
+      <div class="content-wrapper hero-content">
+        <h1>Let CS2 skin listings <span class="hero-accent">come to you</span></h1>
+        <p>BlueGemBot is a free, instant, and customizable Skinport and CSFloat listing tracker made for traders, collectors, and deal snipers.</p>
+        <div class="hero-actions">
+          <router-link to="/register" class="hero-btn hero-btn-primary">Get started free</router-link>
+          <a href="#top-deals" class="hero-btn hero-btn-secondary">See today's top deals</a>
+        </div>
+        <p class="hero-hint">No password needed: register through Discord in under a minute.</p>
+      </div>
+      <a href="#features" class="scroll-cue" aria-label="Scroll down to features">
+        <span class="scroll-cue-chevron" aria-hidden="true"></span>
+      </a>
     </section>
 
     <section id="features" ref="features" class="fade-section">
       <div class="content-wrapper">
         <h2 class="sr-only">Why traders use BlueGemBot</h2>
         <div class="features">
-          <div class="feature-card fast">
-            <div class="feature-icon">⚡ Lightning Fast</div>
+          <div class="feature-card fast stagger-item" style="--reveal-index: 0">
+            <span class="feature-emoji" aria-hidden="true">⚡</span>
+            <h3 class="feature-title">Lightning Fast</h3>
             <p>Track new CS2 listings with Discord alerts and an integrated auto-opener built for fast reactions when profitable deals appear.</p>
           </div>
-          <div class="feature-card secure">
-            <div class="feature-icon">🛡️ Secure by Design</div>
+          <div class="feature-card secure stagger-item" style="--reveal-index: 1">
+            <span class="feature-emoji" aria-hidden="true">🛡️</span>
+            <h3 class="feature-title">Secure by Design</h3>
             <p>Login and registration tokens are managed through your Discord DMs with BlueGemBot, so you can avoid passwords and third-party logins.</p>
           </div>
-          <div class="feature-card profitable">
-            <div class="feature-icon">💰 Profitable</div>
+          <div class="feature-card profitable stagger-item" style="--reveal-index: 2">
+            <span class="feature-emoji" aria-hidden="true">💰</span>
+            <h3 class="feature-title">Profitable</h3>
             <p>Use float, pattern, pricing, and discount signals to spot blue gem and other underpriced CS2 skin opportunities faster.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section ref="video" class="fade-section top-deals-section">      
+    <section id="top-deals" ref="video" class="fade-section top-deals-section">
       <div class="top-deals-heading">
-        <h2 class="top-deals-title">Today's top 10 deals</h2>
+        <div class="top-deals-title-row">
+          <h2 class="top-deals-title">Today's top 10 deals</h2>
+          <span class="live-pill"><span class="live-dot" aria-hidden="true"></span>Live</span>
+        </div>
         <p class="top-deals-subtitle">Powered by BlueGemBot™</p>
       </div>
 
@@ -44,70 +64,99 @@
 
         <thead>
           <tr>
+            <th>#</th>
             <th></th>
-            <th></th>
-            <th> </th>
-            <th>CONDITION</th>
-            <th>BASE PRICE</th>
-            <th>DEAL PRICE</th>
-            <th>DISCOUNT %</th>
-            <th></th>
+            <th>Item</th>
+            <th>Condition</th>
+            <th>Base price</th>
+            <th>Deal price</th>
+            <th>Discount</th>
+            <th>Spotted</th>
           </tr>
         </thead>
 
           <tbody>
-            <tr
-              v-for="(deal, index) in topDeals"
-              :key="`${deal.source}-${deal.externalId}`"
-              class="top-deal-row"
-              role="link"
-              tabindex="0"
-              @click="openDeal(deal.itemUrl)"
-              @keydown.enter.prevent="openDeal(deal.itemUrl)"
-              @keydown.space.prevent="openDeal(deal.itemUrl)"
-            >
-              <td data-label="Rank">#{{ index + 1 }}</td>
+            <template v-if="isLoadingDeals">
+              <tr v-for="n in 10" :key="`skeleton-${n}`" class="skeleton-row" aria-hidden="true">
+                <td v-for="cell in 8" :key="cell"><span class="skeleton-bar"></span></td>
+              </tr>
+            </template>
 
-              <td data-label="Item">
-                <a
-                  :href="deal.itemUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  @click.prevent.stop="openDeal(deal.itemUrl)"
-                >
-                  <img
-                    v-if="deal.imageUrl"
-                    :src="deal.imageUrl"
-                    :alt="deal.name"
-                    class="top-ten-deal-item-image"
+            <template v-else>
+              <tr
+                v-for="(deal, index) in topDeals"
+                :key="`${deal.source}-${deal.externalId}`"
+                class="top-deal-row stagger-item"
+                :style="{ '--reveal-index': index }"
+                role="link"
+                tabindex="0"
+                @click="openDeal(deal.itemUrl)"
+                @keydown.enter.prevent="openDeal(deal.itemUrl)"
+                @keydown.space.prevent="openDeal(deal.itemUrl)"
+              >
+                <td data-label="Rank">
+                  <span class="rank-badge" :class="`rank-${index + 1}`">{{ index + 1 }}</span>
+                </td>
+
+                <td data-label="Item">
+                  <a
+                    :href="deal.itemUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.prevent.stop="openDeal(deal.itemUrl)"
                   >
-                  <span v-else class="top-ten-deal-item-image top-ten-deal-item-icon" aria-hidden="true">
-                    <i class="fa-solid fa-image"></i>
+                    <img
+                      :src="deal.imageUrl || skinPlaceholder"
+                      @error="onImageError"
+                      :alt="deal.name"
+                      class="top-ten-deal-item-image"
+                    >
+                  </a>
+                </td>
+
+                <td data-label="Skin">
+                  <a
+                    :href="deal.itemUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.prevent.stop="openDeal(deal.itemUrl)"
+                  >
+                    {{ deal.name }}
+                  </a>
+                  <span class="deal-source" :class="deal.source.toLowerCase()">{{ deal.source }}</span>
+                </td>
+
+                <td data-label="Condition">
+                  <span class="condition-chip">{{ getConditionFromFloat(deal.float) }}</span>
+                </td>
+
+                <td data-label="Base Price">
+                  <span class="base-price">{{ formatPrice(deal.itemPrice) }}</span>
+                </td>
+
+                <td data-label="Deal Price">
+                  <span class="deal-price-stack">
+                    <span class="deal-price">{{ formatPrice(deal.salePrice) }}</span>
+                    <span v-if="formatSavings(deal)" class="deal-savings">{{ formatSavings(deal) }}</span>
                   </span>
-                </a>
-              </td>
+                </td>
 
-              <td data-label="Skin">
-                <a
-                  :href="deal.itemUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  @click.prevent.stop="openDeal(deal.itemUrl)"
-                >
-                  {{ deal.name }}
-                </a>
-              </td>
+                <td data-label="Discount">
+                  <span class="discount-pill" :class="getDiscountHeatClass(deal.discountPercentage)">
+                    <span v-if="getDiscountHeatClass(deal.discountPercentage) === 'heat-blazing'" aria-hidden="true">🔥</span>
+                    {{ formatDiscount(deal.discountPercentage) }}
+                  </span>
+                </td>
 
-              <td data-label="Condition">{{ getConditionFromFloat(deal.float) }}</td>
-              <td data-label="Base Price">{{ formatPrice(deal.itemPrice) }}</td>
-              <td data-label="Deal Price">{{ formatPrice(deal.salePrice) }}</td>
-              <td data-label="Discount">{{ formatDiscount(deal.discountPercentage) }}</td>
-              <td data-label="Date">{{ formatDealDate(deal.timestamp) }}</td>
-            </tr>
+                <td data-label="Date">{{ formatDealDate(deal.timestamp) }}</td>
+              </tr>
 
-            <tr v-if="topDeals.length === 0">
-              <td colspan="8">No deals available right now.</td>
-            </tr>
+              <tr v-if="topDeals.length === 0" class="empty-deals-row">
+                <td colspan="8">
+                  <span class="empty-deals-message">💤 No deals available right now — check back soon.</span>
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
@@ -115,13 +164,13 @@
 
     <section id="testimonials" ref="testimonials" class="fade-section">
       <div class="content-wrapper">
-        <h1 class="testimonial-title">Words from our subscribers</h1>
+        <h2 class="testimonial-title">Words from our subscribers</h2>
         <div class="testimonial-grid">
-          <div class="testimonial-card">
+          <div class="testimonial-card stagger-item" style="--reveal-index: 0">
             <p class="testimonial-text">"This service has completely transformed the way I snipe deals. <br> The efficiency gains are remarkable."</p>
             <p class="testimonial-author">- @OG_MUDBONE69_ | BlueGemBot subscriber</p>
           </div>
-          <div class="testimonial-card">
+          <div class="testimonial-card stagger-item" style="--reveal-index: 1">
             <p class="testimonial-text">"Setting up my account was smooth, and the notifications are immediate. Highly recommended!"</p>
             <p class="testimonial-author">- @lars2786 | BlueGemBot subscriber</p>
           </div>
@@ -133,6 +182,9 @@
       <div class="content-wrapper">
         <h2>Get started with BlueGemBot for free</h2>
         <div class="social-links">
+          <router-link to="/register" class="social-link register-cta">
+            <span>Create your account</span>
+          </router-link>
           <a href="https://discord.com/invite/kWGfK6St4m" class="social-link discord" target="_blank" rel="noopener noreferrer">
             <font-awesome-icon :icon="['fab', 'discord']" class="social-icon" />
             <span>Join our Discord</span>
