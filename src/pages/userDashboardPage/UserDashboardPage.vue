@@ -94,7 +94,7 @@
             <template v-else-if="trackedSkins.length > 0">
               <li
                   v-for="skin in filteredTrackedSkins"
-                  :key="`${skin.name}-${skin.phase || ''}-${skin.minWear}-${skin.maxWear}`"
+                  :key="`${skin.name}-${skin.phase || ''}-${skin._original?.minWear}-${skin._original?.maxWear}`"
                   class="tracked-skin-item"
               >
                 <div class="skin-info">
