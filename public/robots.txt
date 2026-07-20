@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bluegembot.com/sitemap.xml
+Sitemap: https://www.bluegembot.com/sitemap.xml

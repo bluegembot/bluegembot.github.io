@@ -52,14 +52,14 @@ const routes = [
       requiresAuth: false,
       title: 'BlueGemBot | CS2 Skinport & CSFloat Listing Tracker',
       description: 'BlueGemBot tracks CS2 skin listings from Skinport and CSFloat with fast alerts, blue gem monitoring, and deal discovery.',
-      canonical: 'https://bluegembot.com/'
+      canonical: 'https://www.bluegembot.com/'
     }
   },
   { path: '/dashboard', component: UserDashboard, meta: { requiresAuth: true, title: 'Dashboard | BlueGemBot', description: 'BlueGemBot user dashboard.' } },
-  { path: '/TOS', component: TOS, meta: { requiresAuth: false, title: 'Terms of Service | BlueGemBot', description: 'Terms of Service for BlueGemBot.', canonical: 'https://bluegembot.com/TOS' } },
-  { path: '/privacy', component: privacy, meta: { requiresAuth: false, title: 'Privacy Policy | BlueGemBot', description: 'Privacy Policy for BlueGemBot.', canonical: 'https://bluegembot.com/privacy' } },
-  { path: '/refunds', component: refunds, meta: { requiresAuth: false, title: 'Refund Policy | BlueGemBot', description: 'Refund Policy for BlueGemBot.', canonical: 'https://bluegembot.com/refunds' } },
-  { path: '/cancellation', component: cancellationpolicy, meta:{ requiresAuth: false, title: 'Cancellation Policy | BlueGemBot', description: 'Cancellation Policy for BlueGemBot.', canonical: 'https://bluegembot.com/cancellation' }},
+  { path: '/TOS', component: TOS, meta: { requiresAuth: false, title: 'Terms of Service | BlueGemBot', description: 'Terms of Service for BlueGemBot.', canonical: 'https://www.bluegembot.com/TOS' } },
+  { path: '/privacy', component: privacy, meta: { requiresAuth: false, title: 'Privacy Policy | BlueGemBot', description: 'Privacy Policy for BlueGemBot.', canonical: 'https://www.bluegembot.com/privacy' } },
+  { path: '/refunds', component: refunds, meta: { requiresAuth: false, title: 'Refund Policy | BlueGemBot', description: 'Refund Policy for BlueGemBot.', canonical: 'https://www.bluegembot.com/refunds' } },
+  { path: '/cancellation', component: cancellationpolicy, meta:{ requiresAuth: false, title: 'Cancellation Policy | BlueGemBot', description: 'Cancellation Policy for BlueGemBot.', canonical: 'https://www.bluegembot.com/cancellation' }},
   { path: '/register', component: RegisterPage, meta: { title: 'Register | BlueGemBot', description: 'Create a BlueGemBot account.' } },
   { path: '/login', component: UserLoginPage, meta: { title: 'Login | BlueGemBot', description: 'Log in to BlueGemBot.' } },
   { path: '/skinSelector', component: SkinSelector, meta: { requiresAuth: true, title: 'Skin Selector | BlueGemBot', description: 'Configure tracked skins in BlueGemBot.' } },
@@ -72,7 +72,7 @@ const routes = [
       requiresAuth: false,
       title: 'About BlueGemBot | CS2 Listing Tracker',
       description: 'Learn how BlueGemBot tracks CS2 listings, discounts, and blue gem opportunities.',
-      canonical: 'https://bluegembot.com/about'
+      canonical: 'https://www.bluegembot.com/about'
     }
   },
   { path: '/subscriptions', component: SubscriptionsPage, meta:{ requiresAuth: true, title: 'Subscriptions | BlueGemBot', description: 'Manage your BlueGemBot subscription.' }},

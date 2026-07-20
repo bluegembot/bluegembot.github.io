@@ -3,7 +3,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 const DEFAULT_TITLE = 'BlueGemBot | CS2 Skinport & CSFloat Listing Tracker'
 const DEFAULT_DESCRIPTION =
   'BlueGemBot is a CS2 skin listing tracker for Skinport and CSFloat with Discord alerts, blue gem monitoring, and fast deal discovery.'
-const SITE_URL = 'https://bluegembot.com'
+const SITE_URL = 'https://www.bluegembot.com'
 const DEFAULT_IMAGE = `${SITE_URL}/BGBLogo.jpg`
 
 type SeoRouteMeta = {
