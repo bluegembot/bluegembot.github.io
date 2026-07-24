@@ -231,7 +231,6 @@ export function initLandingPage() {
       const progress = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0
 
       pageRoot.value?.style.setProperty('--scroll-progress', progress.toFixed(4))
-      hero.value?.style.setProperty('--hero-parallax', `${(window.scrollY * 0.3).toFixed(1)}px`)
     })
   }
 

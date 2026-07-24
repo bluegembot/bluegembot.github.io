@@ -344,7 +344,6 @@
 
 .basicBorder {
   border: 2px solid var(--accent-color);
-  box-shadow: 0 0 22px var(--accent-glow);
   border-radius: var(--radius-lg);
 }
 
@@ -354,7 +353,6 @@
 
 .goldBorder {
   border: 2px solid var(--gold);
-  box-shadow: 0 0 22px rgba(225, 190, 24, 0.35);
   border-radius: var(--radius-lg);
 }
 
@@ -364,7 +362,6 @@
 
 .eliteBorder {
   border: 2px solid var(--elite);
-  box-shadow: 0 0 22px rgba(221, 37, 36, 0.3);
   border-radius: var(--radius-lg);
 }
 
@@ -374,17 +371,6 @@
 .get-subscription-button-in-popup.basicBorder,
 .get-subscription-button-in-popup.goldBorder {
   border-radius: 999px;
-  box-shadow: none;
-}
-
-.get-subscription-button.basicBorder:hover,
-.get-subscription-button-in-popup.basicBorder:hover {
-  box-shadow: 0 6px 18px var(--accent-glow);
-}
-
-.get-subscription-button.goldBorder:hover,
-.get-subscription-button-in-popup.goldBorder:hover {
-  box-shadow: 0 6px 18px rgba(225, 190, 24, 0.35);
 }
 
 /* =========================

@@ -2,9 +2,7 @@
 
 .auth-page {
   min-height: 100svh;
-  background:
-    radial-gradient(ellipse 60% 45% at 50% -10%, var(--accent-glow), transparent 70%),
-    var(--color-background);
+  background: var(--color-background);
 }
 
 .auth-page main {
@@ -26,7 +24,6 @@
   justify-content: center;
   align-items: center;
   border: 3px solid var(--accent-soft);
-  box-shadow: 0 0 30px var(--accent-glow);
 }
 
 .auth-page .logo-img {
@@ -106,7 +103,6 @@
 
 .auth-page .register-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px var(--accent-glow);
 }
 
 .auth-page .register-button:active {

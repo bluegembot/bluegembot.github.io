@@ -37,57 +37,7 @@
     min-height: 62vh;
     text-align: center;
     overflow: hidden;
-    background:
-        radial-gradient(ellipse 60% 50% at 50% -10%, var(--accent-glow), transparent 70%),
-        var(--color-background);
-}
-
-/* Floating ambient orbs behind the hero, gently parallaxed on scroll */
-.hero-backdrop {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    transform: translateY(calc(var(--hero-parallax, 0px) * 0.6));
-}
-
-.hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(64px);
-    background: radial-gradient(circle, var(--accent-glow), transparent 70%);
-    opacity: 0.55;
-}
-
-.hero-orb-1 {
-    width: 420px;
-    height: 420px;
-    top: -140px;
-    left: 6%;
-    animation: orb-drift 16s ease-in-out infinite alternate;
-}
-
-.hero-orb-2 {
-    width: 320px;
-    height: 320px;
-    bottom: -100px;
-    right: 8%;
-    background: radial-gradient(circle, rgba(125, 211, 252, 0.3), transparent 70%);
-    animation: orb-drift 20s ease-in-out infinite alternate-reverse;
-}
-
-.hero-orb-3 {
-    width: 220px;
-    height: 220px;
-    top: 32%;
-    right: 26%;
-    opacity: 0.35;
-    animation: orb-drift 12s ease-in-out infinite alternate;
-}
-
-@keyframes orb-drift {
-    from { transform: translate3d(0, 0, 0) scale(1); }
-    to { transform: translate3d(45px, 30px, 0) scale(1.15); }
+    background: var(--color-background);
 }
 
 .hero-content {
@@ -188,20 +138,6 @@
     color: var(--color-heading);
 }
 
-.hero-accent {
-    background: linear-gradient(90deg, var(--accent-strong), #0ea5e9);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-}
-
-body.dark-mode .hero-accent {
-    background: linear-gradient(90deg, var(--accent-color), #7dd3fc);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
 .hero-content > p:not(.hero-badge):not(.hero-hint) {
     max-width: 720px;
     margin: 0 auto 2.25rem;
@@ -233,12 +169,10 @@ body.dark-mode .hero-accent {
 .hero-btn-primary {
     background: linear-gradient(135deg, var(--accent-color), var(--accent-strong));
     color: #06222a;
-    box-shadow: 0 10px 30px var(--accent-glow);
 }
 
 .hero-btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px var(--accent-glow);
 }
 
 .hero-btn-secondary {
@@ -765,9 +699,7 @@ body.dark-mode .discount-pill.heat-blazing { color: #f87171; }
 ========================= */
 
 .landing-page #socials {
-    background:
-        radial-gradient(ellipse 55% 70% at 50% 110%, var(--accent-glow), transparent 70%),
-        var(--color-background);
+    background: var(--color-background);
 }
 
 .landing-page #socials h2 {
@@ -803,7 +735,6 @@ body.dark-mode .discount-pill.heat-blazing { color: #f87171; }
     overflow: hidden;
     background: linear-gradient(135deg, var(--accent-color), var(--accent-strong));
     color: #06222a;
-    box-shadow: 0 8px 24px var(--accent-glow);
 }
 
 /* Periodic sheen sweeping across the primary CTA */
@@ -888,15 +819,10 @@ body.dark-mode .discount-pill.heat-blazing { color: #f87171; }
     }
 
     .hero-content > *,
-    .hero-orb,
     .scroll-cue,
     .register-cta::after,
     .live-dot {
         animation: none;
-    }
-
-    .hero-backdrop {
-        transform: none;
     }
 }
 
@@ -1105,10 +1031,6 @@ body.dark-mode .discount-pill.heat-blazing { color: #f87171; }
     .scroll-cue {
         display: none;
     }
-
-    .hero-orb-1 { width: 260px; height: 260px; }
-    .hero-orb-2 { width: 200px; height: 200px; }
-    .hero-orb-3 { display: none; }
 
     .hero-content h1 {
         font-size: 2.4rem;

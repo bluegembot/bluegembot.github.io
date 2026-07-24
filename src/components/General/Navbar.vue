@@ -247,14 +247,12 @@ export default {
   color: #06222a;
   border: 1px solid transparent;
   font-weight: 700;
-  box-shadow: 0 4px 14px var(--accent-glow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .cta-button:hover {
   color: #06222a;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px var(--accent-glow);
 }
 
 /* Secondary action (Login) */

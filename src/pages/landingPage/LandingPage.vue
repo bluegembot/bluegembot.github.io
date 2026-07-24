@@ -8,13 +8,8 @@
       ]"
     />
     <section id="hero" ref="hero">
-      <div class="hero-backdrop" aria-hidden="true">
-        <span class="hero-orb hero-orb-1"></span>
-        <span class="hero-orb hero-orb-2"></span>
-        <span class="hero-orb hero-orb-3"></span>
-      </div>
       <div class="content-wrapper hero-content">
-        <h1>Let CS2 skin listings <span class="hero-accent">come to you</span></h1>
+        <h1>Let CS2 skin listings come to you</h1>
         <p>BlueGemBot is a free, instant, and customizable Skinport and CSFloat listing tracker made for traders, collectors, and deal snipers.</p>
         <div class="hero-actions">
           <router-link to="/register" class="hero-btn hero-btn-primary">Get started free</router-link>
